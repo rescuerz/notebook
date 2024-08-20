@@ -1,0 +1,1159 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>十四. Parallel Algorithm - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#十四-parallel-algorithm" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              十四. Parallel Algorithm
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Readme/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CV/Lecture1_Introduction/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Readme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Readme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture2_Image_Classification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#141-并行算法基本模型" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.1 并行算法基本模型
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#142-the-summation-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.2 The Summation Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#143-prefix-sums" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.3 Prefix-Sums
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#144-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.4 Merge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#145-maximum-finding" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.5 Maximum Finding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#146-习题集" class="md-nav__link">
+    <span class="md-ellipsis">
+      14.6 习题集
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/Blog/blob/main/docs/ADS/14. Parallel Algorithm.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/Blog/raw/main/docs/ADS/14. Parallel Algorithm.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="十四-parallel-algorithm">十四. Parallel Algorithm<a class="headerlink" href="#十四-parallel-algorithm" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 3857 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 17 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 19 分钟</p>
+</div>
+<ol>
+<li>
+<p>指令级并行（Instruction-Level Parallelism，ILP）：在一个CPU 内部，多条指令可以同时执行；例如大家现在就已经学过的流水线CPU，以及将来可能会学到的乱序、多发射以及超长指令字（VLIW，即把不相关的指令封装到一条超长的指令字中、超标量（例如有多个ALU，可以同时运行没有相关性的多条指令）等；</p>
+</li>
+<li>
+<p>数据级并行（Data-Level Parallelism，DLP）：即将相同的操作同时应用于一些数据项的编程模型，例如经典的SIMD（Single Instruction, Multiple Data）架构，即一条指令同时作用于多个数据，例如用一条指令实现向量加法，两个向量中每对对应的元素相加互不干扰，所以可以同时进行所有的加法；</p>
+</li>
+<li>线程级并行（Thread-Level Parallelism，TLP）：一种显式并行，程序员要设计并行算法，写多线程程序，这也是本讲将要讨论的内容。线程级并行主要指同时多线程（SMT，是一种指令级并行的基础上的扩展，可以在一个核上运行多个线程，多个线程共享执行单元，以便提高部件的利用率，提高吞吐量）/超线程（HT，一个物理CPU 核心被伪装成两个以上的逻辑CPU 核心，看起来就像多个CPU 在同时执行任务，是通过在一个物理核心中创建多个线程实现的）以及多核和多处理器。</li>
+</ol>
+<h2 id="141-并行算法基本模型">14.1 并行算法基本模型<a class="headerlink" href="#141-并行算法基本模型" title="Permanent link">&para;</a></h2>
+<p><strong><code>定义</code></strong> 加速比（Speedup）是指在并行计算中，使用p 个处理器时相对于使用一个处理器时的性能提升比例，即
+$$
+S(p) = \dfrac{T_1}{T_p}
+$$
+其中<span class="arithmatex">\(T1\)</span> 是使用一个处理器时的运行时间，$Tp <span class="arithmatex">\(是使用\)</span>p $个处理器时的运行时间。</p>
+<p>显然最理想的情况下，加速比应当是p，即使用p 个处理器时的运行时间是使用一个处理器时的1/p。然而实际情况中，由于并行算法的设计和实现都有一定的困难：</p>
+<ul>
+<li>首先，使用多个处理器意味着额外的通信开销；</li>
+<li>其次，如果处理器并未分配到完全相同的工作量，则会产生一部分的闲置，就会造成负载不均衡（load unbalance），再次降低实际速度；</li>
+<li>最后，代码运行可能依赖其原有顺序，不能完全并行。</li>
+</ul>
+<p>上述矩阵相乘并行算法可能有很多个CPU 同时访问了原始矩阵的同一个元素，比如同时得到C 的第一行的所有元素需要同时访问A 的第一行的所有元素。事实上，<strong><code>这种算法模型被称为PRAM 模型（Parallel Random Access Machine），是RAM 模型（Random Access Machine）在共享内存系统上的扩展</code></strong>。该模型假设所有处理器共享一个连续的内存空间。此外，模型还允许同一位置上同时进行多个访问。这在实际应用中，特别是在扩大问题规模和处理器数量的情况下是不可能的。对PRAM 模型的另一个反对意见是，即使在单个处理器上，它也忽略了内存的层次结构（即忽略了cache 等）。但在我们接下来的理论讨论中，我们忽略这些问题，因为我们的目的是讨论并行算法的基本思想。我们使用PRAM 模型，这一模型有规定如下三种内存共享方式：
+1. EREW（Exclusive Read Exclusive Write）：<strong>每个内存位置在任意时刻只能被一个处理器读取或写入</strong>；
+2. CREW（Concurrent Read Exclusive Write）：<strong>每个内存位置在任意时刻可以被多个处理器读取，但只能被一个处理器写入</strong>；
+3. CRCW（Concurrent Read Concurrent Write）：<strong>每个内存位置在任意时刻可以被多个处理器读取或写入</strong>，因为写入涉及到同时写入不同值可能造成的冲突，因此写入策略又可以分为如下三种：
+(a) <code>CRCW-C（Common）</code>：所有处理器写入的值相同时才会写入；
+(b) <code>CRCW-A（Arbitrary）</code>：所有处理器写入的值可以不同，任意选取其中一个写入即可；
+(c)<code>CRCW-P（Priority）</code>：所有处理器写入的值可以不同，但是有一个优先级，只有优先级最高的写入才会生效。</p>
+<h2 id="142-the-summation-problem">14.2 The Summation Problem<a class="headerlink" href="#142-the-summation-problem" title="Permanent link">&para;</a></h2>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271023410.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527102310349" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271023410.png" /></a></p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">s</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">s</span><span class="o">*=</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">-</span><span class="n">s</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">+=</span><span class="n">s</span><span class="p">)</span>
+<span class="w">        </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">s</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271025980.webp" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271025980.webp" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271026883.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527102615828" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271026883.png" /></a></p>
+<p><strong><code>随着h的增加，需要使用的处理器的数量逐渐减少。但是又为每一个processor分配了任务（stay idle），这是不必要的</code></strong></p>
+<blockquote>
+<p><strong><code>改进</code></strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271032183.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527103209122" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271032183.png" /></a></p>
+<p><code>pardo</code>表示不指定运行的processor，由编译器自行决定任务的分配。使用的寄存器的数量也随之减少</p>
+<blockquote>
+<p><strong><code>Measuring the performance</code></strong></p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Work load – total number of operations: W(n)</strong></p>
+</li>
+<li>
+<p><strong>Worst-case running time: T(n)</strong></p>
+</li>
+<li><strong>W(n) operations and T(n) time</strong></li>
+<li><strong>P(n) = W(n)/T(n) processors and T(n) time (on a PRAM)</strong></li>
+<li><strong>W(n)/p time using any number of p ≤ W(n)/T(n) processors (on a PRAM)</strong></li>
+<li><strong>W(n)/p + T(n) time using any number of p processors (on a PRAM)</strong></li>
+</ul>
+<p><strong><code>计算n个数的和问题中，时间复杂度是O(log N),如果给定的处理器数量为n/2，会使得最底层的运算次数加一，于是T'(n) = T(n) + 1</code></strong></p>
+<blockquote>
+<p><strong><code>定理：设一个并行计算问题的工作量为W，关键路径长度为D，那么使用p个处理器的并行时间具有如下上下界：</code></strong>
+$$
+\dfrac{W}{p} \leq T_p \leq \dfrac{W-D}{p} + D
+$$
+下界是显然的，受到理想加速比的限制</p>
+<p>对于上界，因为关键路径的长度为D，算法的执行可以分为D个内部并行，互相之间串行的阶段，每一个阶段的工作量为<span class="arithmatex">\(W_i\)</span>,<span class="arithmatex">\(W = \underset{i = 1}{\sum}W_i\)</span></p>
+<p>使用p 个处理器时，每一个阶段所需的时间为dWi/pe，向上取整的原因在于，每个阶段的工作量可能不能被p 整除，比如大任务被分成了7 个子任务，7 个任务分配给3 个处理器，那么每个处理器分配到的任务数应当是2，2，3。</p>
+<p>需要的总时间为：
+$$
+T_p = \sum_{i=1}^D \lceil \dfrac{W_i}{p}\rceil= \sum_{i=1}^D \lceil \dfrac{W_i - 1}{p}\rceil + 1 \leq \sum_{i=1}^D  \dfrac{W_i - 1}{p} + 1 =\dfrac{W-D}{p}+D
+$$
+</p>
+</blockquote>
+<p><strong>临界状态，处理器的数目变为n/log n</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271046184.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527104620123" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271046184.png" /></a></p>
+<blockquote>
+<p><strong>矩阵乘法：两个n阶方阵A和B相乘得到矩阵C，显然总的操作数是2<span class="arithmatex">\(n^3\)</span>(乘法和加法)，如果我们有<span class="arithmatex">\(n^2\)</span>个处理器，可以让每一个处理器负责结果矩阵C的一个元素的计算。这样并行计算需要的时间就是计算一个元素的时间，也就是<span class="arithmatex">\(2n\)</span></strong></p>
+<p><strong>现在提供更多的处理器，用于加速n个对应元素乘法的和，利用上面提到的算法，额外提供n/2个处理器，加法的时间复杂度会从O(n)下降到O(logN)</strong></p>
+</blockquote>
+<hr />
+<h2 id="143-prefix-sums">14.3 Prefix-Sums<a class="headerlink" href="#143-prefix-sums" title="Permanent link">&para;</a></h2>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271102989.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527110214946" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271102989.png" /></a></p>
+<p>我们可以从上往下计算这个C，每一层计算都可以并行，直到算完C(0, i) 实际上就是1 到i 的前缀和。因此关键就是怎么从上往下计算，并且保证每一层都能并行</p>
+<p><strong><code>B(h,i)记录的是summation problem记录的值，与前缀和问题存在着重合之处</code></strong></p>
+<blockquote>
+<p><strong><code>C(h,i)表示前2^h * i个点的和</code></strong></p>
+</blockquote>
+<ul>
+<li><strong><code>如果i=1，那么C(h,i) = B(h,i).因为i=1时，根据定义，C(h,i)等于从第一个元素开始加到该点为根结点的右子树的右下角叶子。所以两者相等</code></strong></li>
+<li><strong><code>如果i是偶数，这表明这一点是某个点的右儿子，因此它和它的父亲的最右下角的叶子是同一个，因此有C(h,i) = C(h+1,i/2)</code></strong></li>
+<li><strong><code>如果i是奇数且不是1，这表明该点是某一个点的左儿子，首先它自己的值B(h, i) 不是从1 开始加的，所以我们要选一个左边的点，把从1开始加到这个点对应的之前的部分补上。所以C(h,i) = C(h+1,(i-1)/2) + B(h,i).</code></strong></li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271102028.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527110234942" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271102028.png" /></a></p>
+<p>显然这一并行算法的<strong>深度是O(log n)，总工作量是O(n)</strong>，因为无非就是在完全二叉树上先从下往上，然后再从上往下分层遍历了两轮。</p>
+<h2 id="144-merge">14.4 Merge<a class="headerlink" href="#144-merge" title="Permanent link">&para;</a></h2>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271115117.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527111556042" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271115117.png" /></a></p>
+<p><strong><code>关键在于求出A元素在B中的排序或者B元素在A中的排序</code></strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271117017.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527111701941" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271117017.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271119925.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527111917893" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271119925.png" /></a></p>
+<p>Binary Search:<strong><code>在n个处理器的基础上，计算排序所需的时间复杂度为O(log n),如果是单个处理器，所需的时间复杂度为O(nlog n)</code></strong></p>
+<p><strong>使用二分查找找到一个元素在另一个数组中的位置只需要O(logN)的时间，即深度D=O(logN),总工作量为O(nlogn),然后我们需要将元素放到正确的位置上，这一深度为O(1),总工作量为O(n),两步合在一起深度就是O(logn),总工作量为O(nlogn)</strong></p>
+<p>Serial Ranking: </p>
+<p>两个数组的元素从头依次向后比较</p>
+<blockquote>
+<p>Binary Search所需的时间更少，Serial Ranking所需的操作数量更小</p>
+<p><strong><code>改进：Parallel Ranking 使用划分范式的方法</code></strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271129791.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527112958744" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271129791.png" /></a></p>
+<p>假设每一段的长度为log n，那么能够分成 n/log n段</p>
+<p>先对每一段的段头进行排序</p>
+<p>再只需要保证段头之间的结点是有序的，那么C就是有序的</p>
+<ol>
+<li>
+<p><strong><code>划分：我们将数组划分为p份（此时p未知，需要经过分析选取到最优的p）。我们首先对每一个子问题的第一个元素求出它在另一个数组中的位置，使用二分查找而非线性搜索，深度为O(logn),总工作量为O(plogn)</code></strong></p>
+</li>
+<li>
+<p><strong><code>真实工作：剩下的工作就是相邻两个箭头之间的部分需要在最终数组中确定相对位置。相邻的两个箭头的距离不会超过n/p，并且一个数组上有p个出发的位置和p 个到达的位置，所以在任意一个数组上，出发点和到达点一共最多有2p个。对应的还剩下2p个大小为O(n/p)的子问题。</code></strong></p>
+</li>
+</ol>
+<p><strong><code>如果采用线性查找，深度就是O(n/p),总工作量为2p*O(n/p) = O(n),如果采用二分查找，总工作量就是</code><span class="arithmatex">\(2p \times \frac{n}{p}O(log \frac{n}{p}) = 2n log \frac{n}{p}\)</span></strong></p>
+<ol>
+<li><strong>接下来希望找到一个最优的p，使得第一步的总工作量为O(n),第二步的深度为O(log n),<code>也就是集成之前Binary Search和serial Ranking的优点。</code>于是得到<span class="arithmatex">\(p=n/logn\)</span></strong></li>
+</ol>
+<h2 id="145-maximum-finding">14.5 Maximum Finding<a class="headerlink" href="#145-maximum-finding" title="Permanent link">&para;</a></h2>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271135119.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527113513059" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271135119.png" /></a></p>
+<p><strong><code>第一种最简单的想法就是类似于前面求和问题的做法，构造一棵二叉树，初始元素两两分组比较，然后逐层上递，最终得到最大值。这样的算法深度为O(log n)，总工作量为O(n)。</code></strong></p>
+<p><strong><code>第二种方法是并行比较每一对元素的值。只要A[i]&lt;A[j],就往B[i]中写1，最后只有最大的数不会被写1。在并行比较每一对元素时，我们可能会有多个线程同时往数组B 中进行写入，实际上我们只需要使用前面提到的CRCW 策略允许同时写入，然后按common rule 写入即可，因为这里所有线程往任意一个B[i] 只会写入1 这个数字，所以写入的内容都是一样的。</code></strong></p>
+<p><strong>最后得到深度为O(1),总工作量为O(n^2)</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271144519.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527114430453" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271144519.png" /></a></p>
+<blockquote>
+<p><strong>双对数范式</strong></p>
+<p><strong>双对数范式是一种可以二叉树的扩展。在完全二叉树中，设叶子的数量为n，那么树高是log n 级别的，这里双对数则是希望构造一棵树，使得树高是log log n 级别的。为了构造这样一棵树，我们首先设树中每个节点的level 为从根到该节点的距离（需要经过的边数），根的level 为0。接下来我们构造这棵树如下：</strong></p>
+<ol>
+<li><strong>设某个结点的level为s，当<span class="arithmatex">\(s \leq loglogn-1\)</span>时，则它有<span class="arithmatex">\(2^{2^{h-s-1}}个孩子\)</span></strong></li>
+<li><strong>当<span class="arithmatex">\(s = loglogn\)</span>时，它有2个孩子作为树的叶子</strong></li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405301950972.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240530195027929" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405301950972.png" /></a></p>
+</blockquote>
+<p>每一段的长度为<span class="arithmatex">\(\sqrt n\)</span>,一共有<span class="arithmatex">\(\sqrt n\)</span>段</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271148889.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527114830853" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271148889.png" /></a></p>
+<p>把数据划分成更小段，每一段的长度为loglog n</p>
+<ol>
+<li>将数组分为<span class="arithmatex">\(n/ log log n <span class="arithmatex">\(份，即每一份的大小为\)</span>log log n\)</span>，如PPT 第20 页；实际上每一份的大小都很小了，所以我们可以直接利用线性查找的方式找到每一份的最大值，则每一份的深度和工作量都是$O(log log n) $的；</li>
+<li>然后我们对上面求出的<span class="arithmatex">\(n/ log log n\)</span> 个最大值使用双对数范式的算法。</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271206796.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527120646764" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271206796.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271207434.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240527120703385" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271207434.png" /></a></p>
+<h2 id="146-习题集">14.6 习题集<a class="headerlink" href="#146-习题集" title="Permanent link">&para;</a></h2>
+<ol>
+<li>While comparing a serial algorithm with its parallel counterpart, we just concentrate on reducing the work load.</li>
+</ol>
+<p><strong><code>F，除了work load还需要关注时间复杂度。分别对应W和T</code></strong></p>
+<ol>
+<li>To evaluate the Prefix-Sums of a sequence of 16 numbers by the parallel algorithm with Balanced Binary Trees, C(4,1) is found before C(2,2).</li>
+</ol>
+<p><strong><code>计算前缀和时，从上往下计算。对于summation问题，B[]是从下往上计算的</code></strong></p>
+<ol>
+<li>To evaluate the sum of a sequence of 16 numbers by the parallel algorithm with Balanced Binary Trees, B(1,6) is found before B(2,1).</li>
+</ol>
+<p><strong><code>B[]从下往上计算</code></strong></p>
+<ol>
+<li>In order to solve the maximum finding problem by a parallel algorithm with <span class="arithmatex">\(T(n)=O(1)\)</span> , we need work load $W(n)=Ω(n^2) $in return.</li>
+</ol>
+<p><strong><code>F.采用 Random Sampling，就可以在$ 𝑊(𝑛)=𝑂(𝑛)$ 下得到结果。</code></strong></p>
+<ol>
+<li>To solve the Maximum Finding problem with parallel Random Sampling method, $O(n) $processors are required to get <span class="arithmatex">\(T(n)=O(1)\)</span> and <span class="arithmatex">\(W(n)=O(n)\)</span> with very high probability</li>
+</ol>
+<p><strong><code>T</code></strong></p>
+<ol>
+<li>The prefix-min problem is to find for each <em>i</em>, 1≤<em>i</em>≤<em>n</em>, the smallest element among <em>A</em>(1), <em>A</em>(2), ⋯, <em>A</em>(<em>i</em>). What is the run time and work load for the following algorithm?</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="err">≤</span><span class="n">i</span><span class="err">≤</span><span class="n">n</span><span class="w"> </span><span class="n">pardo</span>
+<span class="w">  </span><span class="n">B</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="err">≤</span><span class="n">i</span><span class="err">≤</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">^</span><span class="n">h</span><span class="w"> </span><span class="n">pardo</span>
+<span class="w">    </span><span class="n">B</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="p">{</span><span class="n">B</span><span class="p">(</span><span class="n">h</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">i</span><span class="mi">-1</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">h</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">i</span><span class="p">)}</span>
+<span class="k">for</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">even</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="err">≤</span><span class="n">i</span><span class="err">≤</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">^</span><span class="n">h</span><span class="w"> </span><span class="n">pardo</span>
+<span class="w">    </span><span class="n">C</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">(</span><span class="n">h</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="n">pardo</span>
+<span class="w">    </span><span class="n">C</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">odd</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="err">≤</span><span class="n">i</span><span class="err">≤</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">^</span><span class="n">h</span><span class="w"> </span><span class="n">pardo</span>
+<span class="w">    </span><span class="n">C</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="p">{</span><span class="n">C</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">B</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)}</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="err">≤</span><span class="n">i</span><span class="err">≤</span><span class="n">n</span><span class="w"> </span><span class="n">pardo</span>
+<span class="w">  </span><span class="n">Output</span><span class="w"> </span><span class="n">C</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span>
+</code></pre></div>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405302004633.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240530200435587" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405302004633.png" /></a></p>
+<p><strong><code>参照求前缀和问题，层数为logn,对应的时间复杂度是O(logn),每一个结点的值都需要计算，对应的也就是n+n/2+n/4+...+1 = 2n,work load就是O(n)</code></strong></p>
+<ol>
+<li>Which one of the following statements about the Maximum Finding problem is true?</li>
+</ol>
+<p>A.There exists a<code>serial algorithm</code> with time complexity being <span class="arithmatex">\(O(logN)\)</span>.</p>
+<p>B.<code>No parallel algorithm</code>can solve the problem in <em>O</em>(1) time.</p>
+<p>C.When partitioning the problem into sub-problems and solving them in parallel, compared with <span class="arithmatex">\(\sqrt N\)</span>, choosing <span class="arithmatex">\(loglogN\)</span> as the size of each sub-problem can reduce the work load and the worst-case time complexity.</p>
+<p><strong>D.Parallel random sampling algorithm can run in <em>O</em>(1) time and <em>O</em>(<em>N</em>) work with very high probability.</strong></p>
+<p><strong><code>D√</code></strong></p>
+<p><strong><code>关于C选项，partition by</code><span class="arithmatex">\(\sqrt N\)</span>,对应的时间复杂为<span class="arithmatex">\(T(N) = O(loglogN)\)</span>,对应的work load为<span class="arithmatex">\(O(NloglogN)\)</span></strong></p>
+<p><strong>partition by <span class="arithmatex">\(loglogN\)</span>,对应的时间复杂度为<span class="arithmatex">\(T(N) = loglogN\)</span>,对应的work load为<span class="arithmatex">\(O(N)\)</span></strong></p>
+<p><strong><code>所以时间复杂度不变，但是work load变小</code></strong></p>
+<ol>
+<li>Sorting-by-merging is a classic serial algorithm. It can be translated directly into a reasonably efficient parallel algorithm. A recursive description follows.</li>
+</ol>
+<p><span class="arithmatex">\(MERGE−SORT( A(1), A(2), ..., A(n); B(1), B(2), ..., B(n) )\)</span></p>
+<p>Assume that <span class="arithmatex">\(n=2^l\)</span> for some integer <span class="arithmatex">\(l≥0\)</span></p>
+<p>if n = 1 then return B(1) := A(1)</p>
+<p>else call, in parallel, <span class="arithmatex">\(MERGE−SORT( A(1), ..., A(n/2); C(1), ..., C(n/2) )\)</span> and</p>
+<ul>
+<li><span class="arithmatex">\(MERGE−SORT(A(n/2+1), ..., A(n); C(n/2+1), ..., C(n) )\)</span></li>
+<li><span class="arithmatex">\(Merge (C(1),...C(n/2)) \ and \ (C(n/2 + 1),...,C(n))\)</span> into $(B(1), B(2), ..., B(n)) $with time O(n)</li>
+</ul>
+<p>Then the MERGE−SORT runs in __ .</p>
+<p>A.$O(nlogn) $work and <span class="arithmatex">\(O(log^2n)\)</span> time</p>
+<p>B$O(nlogn) $work and  <span class="arithmatex">\(O(logn)\)</span>time</p>
+<p>C.$O(nlog^2n) $ work and  <span class="arithmatex">\(O(log^2n)\)</span>time</p>
+<p>D.$O(nlog^2n) $) work and  <span class="arithmatex">\(O(logn)\)</span>time</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405302017896.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240530201752836" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405302017896.png" /></a></p>
+<ol>
+<li>Which one of the following statements about the <strong><code>Ranking problem</code></strong> is true? (Assume that both arrays contain <em>N</em> elements.)</li>
+</ol>
+<p>A.There exists a serial algorithm with time complexity being <span class="arithmatex">\(O(logN)\)</span>.</p>
+<p><strong><code>serial algorithm对应的时间复杂度和work load都是O(n)</code></strong></p>
+<p>B.Parallel binary search algorithm can solve the problem in <span class="arithmatex">\(O(1)\)</span> time.</p>
+<p><strong><code>binary search对应的时间复杂度是O(logN)</code></strong></p>
+<p>C.When partitioning the problem into sub-problems and solving them in parallel, choosing <span class="arithmatex">\(O(loglogN)\)</span> as the size of each sub-problem can reduce the work load and the worst-case time complexity to <span class="arithmatex">\(O(logN)\)</span>.</p>
+<p><strong><code>在Maximum Finding问题中，双对数范式分割，对应的时间复杂度是O(loglogN)</code></strong></p>
+<p><strong>D.There is a parallel algorithm that can run in <span class="arithmatex">\(O(logN)\)</span> time and <span class="arithmatex">\(O(N)\)</span> work.</strong></p>
+<p><strong><code>D选项，parallel ranking集成二分搜索的时间复杂度O(logN)和顺序查找的work load O(n)</code></strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405302021420.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240530202139378" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405302021420.png" /></a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

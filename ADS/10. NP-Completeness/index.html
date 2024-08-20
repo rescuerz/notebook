@@ -1,0 +1,1328 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>十. NP-Completeness - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#十-np-completeness" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              十. NP-Completeness
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Readme/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CV/Lecture1_Introduction/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Readme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Readme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture2_Image_Classification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#101-概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.1 概述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-undecidable-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.2 Undecidable Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103-p-问题-和-np-问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3 P 问题 和 NP 问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3 P 问题 和 NP 问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1031-图灵机" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3.1 图灵机
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1032-p--np" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3.2 P &amp; NP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104-npc-问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.4 NPC 问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 NPC 问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1041-多项式时间归约" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.4.1 多项式时间归约
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105-形式化语言" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.5 形式化语言
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5 形式化语言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1051-abstract-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.5.1 Abstract Problem
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#106-习题集" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.6 习题集
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/Blog/blob/main/docs/ADS/10. NP-Completeness.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/Blog/raw/main/docs/ADS/10. NP-Completeness.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="十-np-completeness">十. NP-Completeness<a class="headerlink" href="#十-np-completeness" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 4423 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 2 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 22 分钟</p>
+</div>
+<h2 id="101-概述">10.1 概述<a class="headerlink" href="#101-概述" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>根据问题的难度，由不同的定义划分，问题可以分为：</p>
+<p><strong>P</strong> 问题(polynomial time)、<strong>NP</strong> 问题(nondeterministic polynomial time)、<strong>NPC</strong> 问题(NP complete)、<strong>NPH</strong> 问题(NP hard)。除此之外 ，我们还需要额外了解不可计算问题(undecidable)。</p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404290951530.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404290951530.png" /></a></p>
+<ul>
+<li>P 取自 polynomial time，指的是可以用<strong>确定型图灵机（指某一指令执行完成之后，下一条指令是唯一确定的）🔍</strong>在<strong>多项式</strong>时间内<strong>解决</strong>的问题。</li>
+</ul>
+<p>也就是我们通常意义下所说的，<strong><code>可以在多项式时间内解决的问题</code></strong>。</p>
+<ul>
+<li>NP 即 nondeterministic polynomial time，指的是可以用<strong>[非确定型图灵机（在某一条指令执行完成之后，下一条指令可以有若干个，机器总能选出正确的一条）🔍]</strong>在<strong>多项式</strong>时间内<strong>解决</strong>的问题。这个说法等价于可以用<strong>[确定型图灵机🔍]</strong>在<strong>多项式</strong>时间内<strong>验证</strong>（判断答案是否正确）。</li>
+</ul>
+<p>也就是我们通常意义下所说的，<strong><code>可以在多项式时间内验证的问题</code></strong>。</p>
+<ul>
+<li>
+<p>NPC 即 NP complete，NP 完全，是 NP 中最难的<strong>决定性</strong>问题（并不是无限定词的最难的问题！）。而我们称满足如下条件的问题为 NPC 问题：</p>
+</li>
+<li>
+<p>是一个 NP 问题；</p>
+</li>
+<li>所有 NP 问题都可以<strong>[多项式时间归约🔍]</strong>为该问题；</li>
+</ul>
+<blockquote>
+<p><strong>由 2 可以有结论，所有的 NPC 问题难度相同——一旦有一个 NPC 问题被解决，那么所有 NPC 问题，乃至所有 NP 问题都能被解决。</strong></p>
+</blockquote>
+<p>如果我们试图证明一个问题是 NPC 问题，我们可以通过这种手段：</p>
+<ol>
+<li>
+<p>判定该问题是一个 NP 问题；</p>
+</li>
+<li>
+<p>判定一个已知的 NPC 问题可以<strong>[多项式时间归约🔍]</strong>为该问题，或判定该问题是 NPH（在下面）问题；</p>
+<p><strong><code>NPC问题难度相同，NPC问题能够归约到另一个NPC故事。或者利用</code><span class="arithmatex">\(NPC = NP \cap NPH\)</span>,<code>如果一个既是NP问题，又是NPH问题，那么它也是NPC问题</code></strong></p>
+</li>
+</ol>
+<blockquote>
+<p>第一个被证明是 NPC 的问题是 <strong>[Circuit-SAT🔍]</strong> 问题。</p>
+</blockquote>
+<ul>
+<li>NPH 即 NP hard，NP 困难，它不一定需要是 NP 问题。而所有 NP 问题都可以<strong>[多项式时间归约🔍]</strong>为 NPH 问题。</li>
+</ul>
+<blockquote>
+<p><strong>NPH问题无法通过不确定图灵机进行验证</strong></p>
+<p><code>all the language can be decided by a non-deterministic machine。 F</code></p>
+</blockquote>
+<p>$$
+  NPC = NP \cap NPH
+  $$</p>
+<h2 id="102-undecidable-problem">10.2 Undecidable Problem<a class="headerlink" href="#102-undecidable-problem" title="Permanent link">&para;</a></h2>
+<p><strong>不可判定问题(undecidable problem)</strong>是一类特殊的<a href="https://en.wikipedia.org/wiki/Decision_problem">决定性问题</a>，它的特点是我们无法设计一个算法来求解它的结果。</p>
+<p><strong>停机问题是一个典型的不可计算问题，它指的是，对于任意一个程序，我们无法设计一个算法来判断它是否会在有限时间内停机（即判断程序是否会死循环）。</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031522552.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240503152204284" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031522552.png" /></a></p>
+<p>我们通过反证法可以证明：</p>
+<p>假设存在函数 <code>willHalt(func F)</code> 可以判断函数 F 是否会停机，如果会，则返回 <code>true</code>，否则返回 <code>false</code>。那么我们可以构造一个这样的函数 <code>foo()</code>：</p>
+<div class="highlight"><pre><span></span><code>void foo() {
+    if ( willHalt(foo) ) {
+        while (true) {} // Endless loop.
+    }
+    return;
+}
+</code></pre></div>
+<p>接下来，如果我们想知道 <code>foo()</code> 是否会停机，就会执行 <code>willHalt(foo)</code>。然而在 <code>foo()</code> 内部也有一个 <code>willHalt(foo)</code>，如果它认为 <code>foo()</code> 会停机，则构造一个死循环；而如果它认为 <code>foo()</code> 不会停机，则选择让它立刻停机，于是这里就产生了矛盾。</p>
+<p>理解上面这段内容的关键就是，这里虽然不存在事实意义上的“死循环”，但可以理解为这里存在一个逻辑上的递归，而这种“逻辑上的递归”，正是导致停机问题成为一个不可计算问题的原因。</p>
+<h2 id="103-p-问题-和-np-问题">10.3 P 问题 和 NP 问题<a class="headerlink" href="#103-p-问题-和-np-问题" title="Permanent link">&para;</a></h2>
+<h3 id="1031-图灵机">10.3.1 图灵机<a class="headerlink" href="#1031-图灵机" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031539678.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240503153650527" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031539678.png" /></a></p>
+<p>图灵机由一个<strong>无限长的纸带</strong>和一个<strong>读写头</strong>组成。纸带被划分为一个个<strong>格子</strong>，每个格子上有一个<strong>符号</strong>，读写头可以在纸带上移动，读写头可以读取当前格子上的符号，也可以改变当前格子上的符号。图灵机的<strong>状态</strong>是一个有限集合，每个状态都有一个<strong>转移函数</strong>，转移函数的输入是当前状态和当前格子上的符号，输出是下一个状态、下一个格子上的符号和读写头的移动方向</p>
+<p>A <strong><code>Deterministic Turing Machine</code></strong> executes one instruction at each point in time.  Then depending on the instruction, it goes to the next unique instruction.</p>
+<p><strong><code>确定性图灵机</code></strong>在每个时间点执行一条指令。 然后根据指令，它进入下一个唯一的指令。</p>
+<p>A <strong><code>Nondeterministic Turing Machine</code></strong> is free to choose its next step from a finite set.  And if one of these steps leads to a solution, it will always choose the correct one.</p>
+<p><strong><code>非确定性图灵机</code></strong>可以从有限集合中自由选择下一步。 如果这些步骤之一导致解决方案，<strong>它将始终选择正确的解决方案</strong>。</p>
+<p><strong><code>两者之间存在复杂度存在差异。假设两者都需要使用n步解决问题，其中非确定性图灵机在每一步都有k中选择，它需要在k种选择中找到正确的动作，所以需要遍历k种选择。那么确定性图灵机的时间复杂度是O(n), 非确定性图灵机的时间复杂度是O(k^n)。</code></strong></p>
+<p><strong><code>两个图灵机在解决问题上没有差异，一个图灵机能够解决，那么另一个也能解决问题，无非是不同时间复杂度上的解决问题</code></strong></p>
+<h3 id="1032-p--np">10.3.2 P &amp; NP<a class="headerlink" href="#1032-p--np" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>P 取自 polynomial time，指的是可以用<strong>[确定型图灵机（Deterministic Turing Machine）🔍]</strong>在<strong>多项式</strong>时间内<strong>解决</strong>的问题。</p>
+<p>也就是我们通常意义下所说的，可以在<strong>多项式</strong>时间内<strong>解决</strong>的问题。</p>
+<p>NP 即 nondeterministic polynomial time（<strong><code>非确定性多项式时间！=非多项式时间</code></strong>），指的是可以用<strong>[非确定型图灵机（Nondeterministic Turing Machine）🔍]</strong>在<strong>多项式</strong>时间内<strong>解决</strong>的问题。这个说法等价于可以用<strong>[确定型图灵机🔍]</strong>在<strong>多项式</strong>时间内<strong>验证</strong>（判断答案是否正确）。</p>
+<p>也就是我们通常意义下所说的，可以在<strong>多项式</strong>时间内<strong>验证</strong>的问题。</p>
+</blockquote>
+<p><strong>The problem is NP if we can prove any solution is true in polynomial time.</strong></p>
+<p><strong>example</strong>：Hamilton cycle problem：找到一个包含所有顶点的单个循环</p>
+<ul>
+<li>当前没有找到在多项式时间内解决问题的解法</li>
+<li>但是假设我们已知解法，显然可以在多项式时间内验证（把每一步走一遍），所以这是NP问题</li>
+</ul>
+<blockquote>
+<p><strong><code>看清题目，哈密顿回路问题（决策版）是可判定问题，但不是NP问题，是NPC问题</code></strong></p>
+<p><strong><code>哈密顿问题（非决策，路径版）是一个NP问题，给定路径能在多项式时间内进行验证</code></strong></p>
+</blockquote>
+<p><strong>P与NP之间的关系是 <span class="arithmatex">\(P \subseteq NP\)</span>,也就是所有能在多项式时间内解决的问题，都属于NP问题，但是问题出在两者是否是真子集的关系？</strong></p>
+<p><strong>同时并非所有可判定的问题都在 NP 中。 例如，考虑确定图是否没有哈密顿循环的问题。假如给你一个解法，你要么利用该解法找到哈密顿回路，要么就是遍历所有的回路，说明所有的回路都不是哈密顿回路</strong></p>
+<h2 id="104-npc-问题">10.4 NPC 问题<a class="headerlink" href="#104-npc-问题" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>An NP-complete problem has the property that any problem in NP can be polynomially reduced to it.</strong></p>
+<p><strong><code>所有的NP问题，都能够多项式归约到NPC问题，但是NPC不能归约到NP问题</code></strong></p>
+<p><strong>If we can solve any NP-complete problem in polynomial time, then we will be able to solve, in polynomial time, all the problems in NP!</strong></p>
+<p><strong><code>如果我们能在多项式时间内求解任何NP完全问题，那么我们将能够在多项式时间内求解NP中的所有问题！</code></strong></p>
+</blockquote>
+<h3 id="1041-多项式时间归约">10.4.1 多项式时间归约<a class="headerlink" href="#1041-多项式时间归约" title="Permanent link">&para;</a></h3>
+<p>我们引入 P/NP 等这些概念，是为了衡量问题的复杂程度，而如何在具体的“问题”间传递、比较这种“复杂程度”，就是<strong>多项式时间归约(polynomial reduce)</strong>的目的。</p>
+<pre class="mermaid"><code>graph LR
+问题A --多项式时间转化--&gt; 问题B</code></pre>
+<p>如果我们能在多项式时间的复杂度内，将问题 A 转化为问题 B，则称问题 A 可以<strong>多项式时间归约(polynomial reduce)</strong>为 B，记为 <span class="arithmatex">\(A \leq_{p} B\)</span>，表示 A 不会比 B 难。</p>
+<p>而采取数学语言来描述，则是：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+A \leq_{p} B 
+\;\;\Leftrightarrow\;\;
+&amp; \exist f() \text{ which runs in polynomial time}, \\
+&amp; s.t.    \;\; \forall x \in A,\; f(x) \in B \\
+&amp; \text{and}\; \forall f(x) \in B,\; y \in A
+\end{aligned}
+\]</div>
+<blockquote>
+<p><strong><code>将问题A多项式规约到问题B，则问题A不会比问题B难。</code></strong></p>
+<p><strong><code>也就是说问题的难度小于问题B，也就是说我们总是将一个简单的问题归约转化为一个较难的问题</code></strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031613299.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240503161308256" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031613299.png" /></a></p>
+<ul>
+<li>如果问题B是P问题，那么问题A也是P问题，两者都能用多项式时间进行解决</li>
+<li>如果A是一个NP问题，那么B也是一个NP问题</li>
+</ul>
+<blockquote>
+<p><strong>if <span class="arithmatex">\(L_1 \leq_p L_2\)</span>,说明问题L1在多项式时间复杂度内是可以归约到<span class="arithmatex">\(L2\)</span>的。也就是说，L2如果是P（多项式可解的），那么L1也是P问题（多项式可解的）。</strong></p>
+<p><strong>L2如果是NP问题（多项式可验证），那么要验证L1的一个解是否正确，就要先用多项式时间将L1的这个解转化为L2的一个解，然后再用多项式时间验证L2的这个解是否正确，因此L1也是NP问题</strong></p>
+<p><strong><code>example：假设我们已知 Hamilton Cycle Problem 问题是一个 NPC 问题，尝试通过多项式时间归约🔍的方式来证明 TSP 也是一个 NPC 问题。</code></strong></p>
+</blockquote>
+<p>Suppose that we already know that the <strong>Hamiltonian cycle problem</strong> is NP-complete.  Prove that the <strong>traveling salesman problem</strong> is NP-complete as well.   </p>
+<ul>
+<li>
+<p>Hamiltonian cycle problem: Given a graph$ G=(V, E)$, <code>is there</code> a simple cycle that visits all vertices?                 </p>
+</li>
+<li>
+<p>Traveling salesman problem: Given a complete graph $ G=(V, E),$ with edge costs, and an integer K, is there a simple cycle that visits all vertices and has total cost <span class="arithmatex">\(&lt;=\)</span> K?</p>
+</li>
+</ul>
+<p><strong>目标：将哈密顿回路问题归约到旅行者问题（NPC-&gt;???）</strong></p>
+<blockquote>
+<p>对比 HCP 和 TSP 的差异。</p>
+<p>以 HCP 为基础描述 TSP，实际上就是在一张<strong>完全图</strong>上寻找<strong>总长不超过</strong> <span class="arithmatex">\(k\)</span> 的哈密顿环路，具体来说：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">HCP</th>
+<th style="text-align: center;">TSP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">图 <span class="arithmatex">\(G(V,E)\)</span></td>
+<td style="text-align: center;">完全图 <span class="arithmatex">\(G'(V',E')\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">无边权</td>
+<td style="text-align: center;">有边权</td>
+</tr>
+<tr>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"><span class="arithmatex">\(\sum v_i \leq k\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031622435.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031622435.png" alt="image-20240503162210385" style="zoom:80%;" /></a></p>
+<ol>
+<li><strong>先证明TSP问题是NP问题</strong>：显然只需要验证给定的答案能够满足条件即可，重新走一遍就好了,只需要$ 𝑂(𝑁) $的开销就能验证</li>
+<li>由于TSP问题要求是完全图，也就是每两点之间都有一条边，我们现在哈密顿问题的基础上补全图，将没有连的边都连起来，权重标为2，原先已经在的权重就标为1，得到的新图标记为<span class="arithmatex">\(G'\)</span></li>
+<li>那么问题就转化为：<span class="arithmatex">\(G\)</span>有哈密顿回路当且仅当<span class="arithmatex">\(G'\)</span>满足TSP问题，且<span class="arithmatex">\(K = |V|\)</span></li>
+<li>所以如果哈密顿回路问题是NPC问题，那么TSP也是一个NPC问题(原问题为在 <span class="arithmatex">\(G\)</span> 上寻找哈密顿环，等价于在 <span class="arithmatex">\(G' = f(G)\)</span> 上做 <span class="arithmatex">\(K = |V|\)</span> 的 TSP。由此证明 <span class="arithmatex">\(\text{HCP} \leq_{p} \text{TSP}\)</span>)</li>
+</ol>
+<blockquote>
+<p>旅行商问题TSP存在两种定义：</p>
+<ol>
+<li>给定一个<strong>完全</strong>图，判断是否存在一条路径，使得它经过图中的每个点恰好一次，且最后回到起点，且路径<strong>长度最短</strong>。</li>
+</ol>
+<p>该版本的 TSP 问题是一个 NPH 问题，常常出现在组合优化的语境中</p>
+<ol>
+<li>给定一个<strong>完全</strong>图，判断是否存在一条路径，使得它经过图中的每个点恰好一次，且最后回到起点，且路径<strong>长度不超过</strong> <span class="arithmatex">\(k\)</span> 。</li>
+</ol>
+<p>该版本的 TSP 问题是一个 NPC 问题，常常出现在复杂度理论的语境中。</p>
+</blockquote>
+<h2 id="105-形式化语言">10.5 形式化语言<a class="headerlink" href="#105-形式化语言" title="Permanent link">&para;</a></h2>
+<h3 id="1051-abstract-problem">10.5.1 Abstract Problem<a class="headerlink" href="#1051-abstract-problem" title="Permanent link">&para;</a></h3>
+<p><strong>an abstract problem Q is a binary relation on a set I of problem instances and a set S of problem solutions.</strong></p>
+<p>抽象问题 Q 是一组问题实例和一组问题解 S 上的二元关系。</p>
+<blockquote>
+<p><strong>example:</strong></p>
+</blockquote>
+<ul>
+<li><strong>For SHORTEST-PATH problem</strong></li>
+</ul>
+<p>$ I = { <G, u, v>: G=(V, E)  is  an   undirected  graph; u, v \in V };$
+  <span class="arithmatex">\(S = { &lt;u, w_1, w_2, …, w_k, v&gt;: &lt;u, w_1&gt;, …, &lt;w_k, v&gt; \in E }.\)</span></p>
+<p><span class="arithmatex">\(For \ every \ i \in I\)</span>, <span class="arithmatex">\(SHORTEST-PATH(i) = s \in  S.\)</span></p>
+<ul>
+<li><strong>For decision problem PATH:</strong></li>
+</ul>
+<p>$ I = { <G, u, v, k>: G=(V, E)  is  an  undirected  graph; u, v \in V; k ≥ 0  is  an  integer };
+  $</p>
+<p><span class="arithmatex">\(S = { 0, 1 }.\)</span>
+  <span class="arithmatex">\(For\  every \ i \in I, PATH(i) = 1 \ or \ 0.\)</span></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031656943.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240503165610907" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031656943.png" /></a></p>
+<blockquote>
+<p><strong>如果两个形式化语言表示问题都是P问题，那么它们的交集、闭包都能在多项式时间内完成，还是P问题。也就是说P问题具有封闭性</strong></p>
+<p><strong>那如果是NP问题呢？</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031658871.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240503165831808" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031658871.png" /></a></p>
+<p>如果 <span class="arithmatex">\(A(x) = 1\)</span>，则算法 A 接受字符串 <span class="arithmatex">\(x ∈ {0， 1}\)</span></p>
+<p>如果 <span class="arithmatex">\(A(x) = 0\)</span>，则算法 A 拒绝字符串 x</p>
+<p><em>如果 L 中的每个二进制字符串都被 A 接受，并且 L 中的每个二进制字符串都被 A 拒绝，则算法 L 由算法 A 决定</em></p>
+<p>要接受一种语言，算法只需要担心 L 中的字符串，但要决定一种语言，它必须正确接受或拒绝 <span class="arithmatex">\({0， 1}\)</span> 中的每个字符串</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031700006.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240503170029943" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031700006.png" /></a></p>
+<p>验证算法是双参数算法 A，其中一个参数是普通输入字符串 x，另一个参数是称为证书的二进制字符串 y。</p>
+<p>如果存在证书 y，则双参数算法 A 验证输入字符串 x，使得 <span class="arithmatex">\(A（x， y） = 1。\)</span></p>
+<p>验证算法 A 验证的语言是 <span class="arithmatex">\(L = { x ∈ {0， 1} ： 存在 y ∈ {0， 1}，使得 A(x， y) = 1}。\)</span></p>
+<blockquote>
+<p><strong>刚刚我们研究得到P问题的补集也属于P问题</strong></p>
+<p><strong><code>现在我们研究NP的问题的补集是否也是NP问题？</code></strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031707468.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240503170714408" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031707468.png" /></a></p>
+<p>定义co-NP的条件为<span class="arithmatex">\(L\)</span>的补集<span class="arithmatex">\(\overline L \in NP\)</span>，一共存在以下四种可能</p>
+<blockquote>
+<p><strong>根据co-NP和P的定义，你会发现，<span class="arithmatex">\(P \in NP\)</span>并且<span class="arithmatex">\(P \in\)</span><span class="arithmatex">\(co-NP\)</span></strong></p>
+<p><strong>因为如果<span class="arithmatex">\(L \in P\)</span>, 那么 $ \overline L \in P \subseteq NP$符合co-NP的条件</strong></p>
+</blockquote>
+<ul>
+<li>
+<p><span class="arithmatex">\(NP = co-NP\)</span></p>
+</li>
+<li>
+<p>若<span class="arithmatex">\(P = NP\)</span>,根据<span class="arithmatex">\(P\)</span>的<strong>封闭性</strong>可得<span class="arithmatex">\(L \in P \Leftrightarrow \overline L \in P\)</span>,又因为co-NP条件为<span class="arithmatex">\(\overline L \in NP\)</span>,所以<span class="arithmatex">\(P=NP=\)</span>co-NP</p>
+</li>
+<li>
+<p><span class="arithmatex">\(NP = co-NP, P \in NP, P\in co-NP\)</span></p>
+</li>
+<li>
+<p><span class="arithmatex">\(NP != co-NP\)</span></p>
+</li>
+<li>
+<p><span class="arithmatex">\(P \in NP \cap co-NP\)</span></p>
+</li>
+<li>
+<p><span class="arithmatex">\(P = NP \cap co-NP\)</span></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>形式化语言的归约</strong></p>
+</blockquote>
+<p>A language <span class="arithmatex">\(L1\)</span> is polynomial-time reducible to a language <span class="arithmatex">\(L2\)</span> ( <span class="arithmatex">\(L1 ≤_p L2\)</span> ) if there exists a polynomial-time computable function $ f : {0, 1} → {0,1} $such that for all <span class="arithmatex">\(x \{0, 1\},  x \in L1  \ iff \  f (x) \in L2.\)</span></p>
+<p>We call the function$ f <span class="arithmatex">\(the **reduction function(归约函数)**, and a polynomial-time algorithm\)</span> F$ that computes  $f $ is called a <strong>reduction algorithm（归约算法）.</strong></p>
+<blockquote>
+<p><strong>A language L ⊆ {0, 1}* is NP-complete if</strong></p>
+<ol>
+<li><strong>L  ∈ NP, and</strong></li>
+<li><strong><span class="arithmatex">\(L' ≤_p L \ for \ every L’ ∈ NP.\)</span></strong></li>
+</ol>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031946367.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240503194629301" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405031946367.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405032018702.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405032018702.png" alt="image-20240503201830638" style="zoom:80%;" /></a></p>
+<p><strong>例子：将顶点覆盖问题归约到clique problem（分团问题）</strong></p>
+<p>假设我们已经知道分团问题（clique problem）是NP完备的。 证明顶点覆盖问题也是 NP 完备的。</p>
+<ul>
+<li>Clique problem: Given an undirected graph $G = (V, E) $and an integer <span class="arithmatex">\(K\)</span>, does <span class="arithmatex">\(G\)</span> contain a complete subgraph (clique) of (at least) <span class="arithmatex">\(K\)</span> vertices?</li>
+</ul>
+<p><code>CLIQUE = { &lt;G, K&gt; : G is a graph with a clique of size K }.</code></p>
+<ul>
+<li>Vertex cover problem: Given an undirected graph <span class="arithmatex">\(G = (V, E)\)</span> and an integer <span class="arithmatex">\(K\)</span>, does <span class="arithmatex">\(G <span class="arithmatex">(contain a subset <span class="arithmatex">\(V' \subset V\)</span> such that\)</span> |V'|\)</span> is (at most) $K $and every edge in $ G $ has a vertex in $ V' $(vertex cover)?</li>
+</ul>
+<p><code>VERTEX-COVER = { &lt;G, K&gt; : G has a vertex cover of size K }.</code></p>
+<p>证明：</p>
+<ol>
+<li><strong>VERTEX-COVER ∈</strong> <strong>NP</strong></li>
+</ol>
+<p>Given any $ x = <G, K>$, take <span class="arithmatex">\(V' \subseteq  V\)</span> as the certificate <span class="arithmatex">\(y.\)</span>
+   <strong>Verification algorithm</strong>: check if <span class="arithmatex">\(|V'| = K\)</span>; check if for each edge <span class="arithmatex">\((u, v) ∈ E\)</span>, that <span class="arithmatex">\(u ∈ V'\)</span> or <span class="arithmatex">\(v ∈ V'\)</span>. </p>
+<p><strong><code>时间复杂度为：每条边检测是否有顶点位于V‘中，一共有N条边</code><span class="arithmatex">\(O(N \times N \times N = N^3)\)</span></strong></p>
+<ol>
+<li>CLIQUE <span class="arithmatex">\(≤_p\)</span> VERTEX-COVER (<code>证明分团问题 no harder than顶点覆盖问题</code>)</li>
+</ol>
+<p><mark>G has a clique of size K iff <span class="arithmatex">\(\overline G\)</span> has a vertex cover of size <span class="arithmatex">\(|V| - K\)</span>.</mark></p>
+<p><span class="arithmatex">\(\Rightarrow\)</span></p>
+<ul>
+<li><span class="arithmatex">\(G\)</span>中存在分团子集<span class="arithmatex">\(V' \subseteq V\)</span>其大小为<span class="arithmatex">\(|V'| = K\)</span>，令边<span class="arithmatex">\((u,v)\)</span>表示不在<span class="arithmatex">\(E\)</span>中的边，也就是根据<span class="arithmatex">\(V\)</span>将<strong>原图补全成完全图的边</strong></li>
+<li>那么肯定存在一个点<span class="arithmatex">\(u/v\)</span>不在<span class="arithmatex">\(V'\)</span>中，也就是说存在于<span class="arithmatex">\(V - V'\)</span>,此时刚好说明<span class="arithmatex">\(\overline G\)</span>(原图的补图)中每一条边都至少有一个顶点存在于<span class="arithmatex">\(V - V'\)</span>中</li>
+<li>刚好满足顶盖覆盖的定义，所以 <span class="arithmatex">\(\overline G\)</span> has a vertex cover of size <span class="arithmatex">\(|V| - K\)</span>.</li>
+</ul>
+<p><span class="arithmatex">\(\Leftarrow\)</span></p>
+<ul>
+<li>已知补图满足顶点覆盖，对任意的边<span class="arithmatex">\((u,v) \notin E\)</span>,<span class="arithmatex">\(u \in V'\)</span>或者<span class="arithmatex">\(v \in V'\)</span></li>
+<li>那么对于同时不在<span class="arithmatex">\(V’\)</span>的点构成的边<span class="arithmatex">\((u,v) \in E\)</span>,所以<span class="arithmatex">\(V-V'\)</span> is a clique and it has size$ |V|-|V'| = K. $</li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161429976.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240516142931934" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161429976.png" /></a></p>
+<h2 id="106-习题集">10.6 习题集<a class="headerlink" href="#106-习题集" title="Permanent link">&para;</a></h2>
+<ol>
+<li>If <span class="arithmatex">\(𝐿1≤_p𝐿2\)</span> and$ 𝐿2∈𝑁𝑃$, then <span class="arithmatex">\(𝐿1∈𝑁𝑃\)</span>. (T/F)</li>
+</ol>
+<p><strong><code>T</code>,这里的<span class="arithmatex">\(≤_p\)</span>表示no harder than， 其实是<span class="arithmatex">\(L_1\)</span>可以多项式归约至<span class="arithmatex">\(L_2\)</span>,由于<span class="arithmatex">\(L_2 \in NP\)</span>,那么<span class="arithmatex">\(L_2\)</span>可以在非确定性图灵机上在多项式时间范围内解决问题，所以<span class="arithmatex">\(L_1\)</span>也能够在非确定性图灵机上多项式时间解决</strong></p>
+<ol>
+<li><code>All NP-complete problems are NP problems.</code></li>
+</ol>
+<p><strong><code>T,所有的NPC问题都是NP问题.</code>NPC = NP <span class="arithmatex">\(\cap\)</span> NPH</strong></p>
+<ol>
+<li>All the languages can be decided by a non-deterministic machine.</li>
+</ol>
+<p><strong><code>F,忽略了不可判定问题。非确定性图灵机能够处理NP问题，确定性图灵机能够处理P问题.</code>NPH问题无法使用不确定性图灵机进行验证</strong></p>
+<ol>
+<li>If a problem can be solved by dynamic programming, it must be solved in polynomial time.</li>
+</ol>
+<p><strong><code>F,背包问题，但是不能用多项式时间进行解决，原因是输入的数据不是多项式的</code></strong></p>
+<ol>
+<li>all decidable problems are NP problems.</li>
+</ol>
+<p><strong><code>F,但并非所有的decidable problems都可以在多项式时间内验证解，还包括NPH问题</code></strong></p>
+<ol>
+<li>Among the following problems, __ is NOT an NP-complete problem.</li>
+</ol>
+<p>A.Vertex cover problem</p>
+<p>B.Hamiltonian cycle problem</p>
+<p>C.Halting problem</p>
+<p>D.Satisfiability problem</p>
+<p><strong><code>C是不可判定问题，顶点覆盖问题和分团问题（clique problem），哈密顿回路问题和旅行商问题。D选项是最早发现的NPC问题</code></strong></p>
+<ol>
+<li>Suppose $ 𝑄 $ is a problem in <span class="arithmatex">\(𝑁𝑃\)</span>, but <strong>not necessarily NP-complete</strong>. Which of the following is <strong>FALSE</strong>?</li>
+</ol>
+<p>A. A polynomial-time algorithm for SAT would sufficiently imply a polynomial-time algorithm for <span class="arithmatex">\(𝑄\)</span>.</p>
+<p><code>B. A polynomial-time algorithm for$ 𝑄 $would sufficiently imply a polynomial-time algorithm for SAT.</code></p>
+<p>C. If <span class="arithmatex">\(Q \notin P\)</span>, then 𝑃≠𝑁𝑃.</p>
+<p>D. If 𝑄 is NP-hard, then 𝑄 is NP-complete.</p>
+<ol>
+<li>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161407128.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240516140734067" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161407128.png" /></a></p>
+</li>
+<li>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161429506.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240516142952444" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161429506.png" /></a></p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

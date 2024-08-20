@@ -1,0 +1,1360 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Lecture 12 | Local Search - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lecture-12--local-search" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lecture 12 | Local Search
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Readme/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CV/Lecture1_Introduction/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Readme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Readme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture2_Image_Classification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121-the-vertex-cover-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.1 The Vertex Cover Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-metropolis-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.2 metropolis algorithm
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-hopfield-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.3 Hopfield Neural Networks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124-the-maximum-cut-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.4 The Maximum Cut Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125-旅行商问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5 旅行商问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.5 旅行商问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1251-动态规划" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5.1 动态规划
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1252-局部搜索" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5.2 局部搜索
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126-习题集" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.6 习题集
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/Blog/blob/main/docs/ADS/12. Local Search.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/Blog/raw/main/docs/ADS/12. Local Search.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="lecture-12--local-search">Lecture 12 | Local Search<a class="headerlink" href="#lecture-12--local-search" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 4821 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 27 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 24 分钟</p>
+</div>
+<blockquote>
+<p><strong>Local</strong></p>
+</blockquote>
+<ul>
+<li>local optimum is a best solution in a neighborhood</li>
+</ul>
+<blockquote>
+<p><strong>Search</strong></p>
+</blockquote>
+<ul>
+<li>start with a feasible solution and search a better one within the neighborhood</li>
+<li>a local optimum is achieved if no improvement is possible</li>
+</ul>
+<p>① 得到一个初始的可行解  </p>
+<p>② 每一轮循环中，从这个可行解的邻域中，选择邻域最优解作为新的可行解。  </p>
+<p>③ 假如这个可行解的邻域中没有任何一个解优于这个可行解，退出循环，返回结果。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131010846.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240513101048766" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131010846.png" /></a></p>
+<p><strong><code>梯度下降算法，局部搜索找到点使得，current cost &lt; mincost</code></strong></p>
+<hr />
+<h2 id="121-the-vertex-cover-problem">12.1 The Vertex Cover Problem<a class="headerlink" href="#121-the-vertex-cover-problem" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161511004.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240516151152967" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161511004.png" /></a></p>
+<p><strong>有附带条件，size &lt;= K , 该问题是一个NP-complete问题</strong></p>
+</blockquote>
+<p><strong>顶点覆盖问题(vertex cover problem)</strong>指给定一个无向图 <span class="arithmatex">\(G=(V,E)\)</span>，找到一个最小的顶点集 <span class="arithmatex">\(S\subseteq V\)</span>，使得每条边 <span class="arithmatex">\((u,v)\)</span> 都至少有一个端点在 <span class="arithmatex">\(S\)</span> 中（即 <span class="arithmatex">\(u\in S \lor v\in S\)</span>）。</p>
+<blockquote>
+<p><strong>该问题是一个NP-Hard问题。暂时无法找到一个多项式时间的算法来解决这个问题</strong></p>
+</blockquote>
+<p>这个问题的可行解为 <span class="arithmatex">\(S = V\)</span>，即完全覆盖，其目标函数为 <span class="arithmatex">\(cost(S) = |S|\)</span>。即，我们尝试使用 local search 来降低 <span class="arithmatex">\(|S|\)</span>。</p>
+<blockquote>
+<p><strong>Search: Start from S = V; delete a node and check if S' is a vertex cover with a smaller cost.</strong></p>
+</blockquote>
+<p>给出几种案例以及可视化，说明局部搜索容易失效。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131018067.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240513101816968" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131018067.png" /></a></p>
+<ul>
+<li>case 0：没有边，显然顶点覆盖子集为空</li>
+<li>case 1：最优顶点覆盖子集为中心点。假如我们从S=V入手，假设先去掉中心点，剩下的8个点仍然是顶点覆盖子集，但是无法再删除（局部最优解）。如果先删除周围的点，才有可能得到全局最优解。<strong><code>说明局部搜索存在失效的可能</code></strong></li>
+<li>case 2：存在多个局部最优解，但是不是全局最优解 </li>
+</ul>
+<blockquote>
+<p><strong>当成本函数是非凸函数且具有多个局部最小值时，梯度下降可能无法有效地工作。在这种情况下，梯度下降可能会陷入局部最小值，而不是收敛到全局最小值。这是因为梯度下降根据成本函数的局部梯度更新参数，如果它恰好从一个初始点开始，该点接近一个局部最小值但远离全局最小值，那么它可能会收敛到该局部最小值。</strong></p>
+<p><strong>为了缓解这个问题，常用的方法是使用随机梯度下降（SGD）或其变体，如Adam、RMSprop或AdaGrad，这些方法引入了随机性或自适应学习率，以帮助跳出局部最小值并找到更好的解决方案。</strong></p>
+</blockquote>
+<h2 id="122-metropolis-algorithm">12.2 metropolis algorithm<a class="headerlink" href="#122-metropolis-algorithm" title="Permanent link">&para;</a></h2>
+<p><strong>梅特罗波利斯算法(the Metropolis algorithm)</strong>的过程：</p>
+<div class="highlight"><pre><span></span><code><span class="n">SolutionType</span><span class="w"> </span><span class="nf">Metropolis</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Define</span><span class="w"> </span><span class="n">constants</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">T</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Start</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">feasible</span><span class="w"> </span><span class="n">solution</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="err">\</span><span class="n">in</span><span class="w"> </span><span class="n">FS</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MinCost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cost</span><span class="p">(</span><span class="n">S</span><span class="p">);</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">S</span><span class="err">’</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Randomly</span><span class="w"> </span><span class="n">chosen</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">N</span><span class="p">(</span><span class="n">S</span><span class="p">);</span>
+<span class="w">        </span><span class="n">CurrentCost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cost</span><span class="p">(</span><span class="n">S</span><span class="err">’</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CurrentCost</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MinCost</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MinCost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CurrentCost</span><span class="p">;</span>
+<span class="w">            </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="err">’</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">With</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">probability</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">-</span><span class="err">\</span><span class="n">Delta</span><span class="w"> </span><span class="n">cost</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">kT</span><span class="p">)</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">let</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="err">’</span><span class="p">;</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">S</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p>在局部搜索算法中加⼊⼀个概率p，如果当邻点的值优于当前点时我们接受它；<strong><code>当邻点的值劣于当前点时我 们也有p的概率仍然接受它。这就带来了在反复迭代中跳出局部最优解的机会</code></strong>。</p>
+</li>
+<li>
+<p>概率p的大小受到当前点的值的影响，当前点值越靠近期望的⽅向（即温度越低），p的值越小。这使当前点 落⼊较优的解空间时更不容易跳出，即更稳定的能获得优值。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong><code>注：当（温度）T很高时，上坡的概率几乎为1，容易引起底部震荡；当T接近0时，上坡概率几乎为0，接近原始的梯度下降法。</code></strong></p>
+</blockquote>
+<p>Metropolis算法当然也存在需要优化的地方（对于简单问题，存在较大概率选择到一个比当前解差的情况，但是又有一定的概率接受这个解，这样就会偏离最优解，甚至陷入在几个解之间来回跳跃但就是找不到最优解的境地）。</p>
+<p><strong>观察metropolis算法的一个重要参数之后，发现高温有利于跳出局部最优解，温度较低时，进入最优解后不易跳出。因此我们希望在开始的时候温度很高，然后逐渐降低温度，这样在开始时我们能够跳出局部最优解，在逐渐降温后停留在最优解。<code>这实际上就是模拟退火的思想</code></strong></p>
+<p><strong>模拟退火(simulated annealing)</strong></p>
+<p>Cooling schedule: T = { T1 , T2 , … }<a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131038569.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131038569.png" alt="image-20240513103816508" style="zoom:25%;" /></a></p>
+<hr />
+<h2 id="123-hopfield-neural-networks">12.3 Hopfield Neural Networks<a class="headerlink" href="#123-hopfield-neural-networks" title="Permanent link">&para;</a></h2>
+<p>Graph $G = (V, E) $with integer edge weights w <strong>(positive or negative)</strong>.</p>
+<p>If <span class="arithmatex">\(w_e\)</span> &lt; 0, where <span class="arithmatex">\(e = (u, v)\)</span>, then u and v want to have the same state;</p>
+<p>if <span class="arithmatex">\(w_e &gt; 0\)</span> then u and v want different states.</p>
+<p>The absolute value <span class="arithmatex">\(|w_e|\)</span> indicates the strength of this requirement.</p>
+<p>绝对值 <span class="arithmatex">\(|w_e|\)</span>表示此要求的强度。</p>
+<ol>
+<li>
+<p>Hopfield 神经网络可以抽象为一个无向图<span class="arithmatex">\(G = (V,E)\)</span>，其中<span class="arithmatex">\(V <span class="arithmatex">\(是神经元的集合，\)</span>E <span class="arithmatex">\(是神经元之间的连接关系，并且每条边\)</span>e\)</span> 都有一个权重<span class="arithmatex">\(w_e\)</span>，这可能是正数或负数；</p>
+</li>
+<li>
+<p>对网络中每个神经元（即图的顶点）的状态的一个赋值，赋值可能为<span class="arithmatex">\(1\)</span> 或<span class="arithmatex">\(-1\)</span>，我们记顶点<span class="arithmatex">\(u\)</span> 的状态为<span class="arithmatex">\(s_u\)</span>；</p>
+</li>
+<li>
+<p>如果对于边<span class="arithmatex">\(e = (u, v)\)</span> 有<span class="arithmatex">\(w_e &gt; 0\)</span>，则我们希望<span class="arithmatex">\(u <span class="arithmatex">\(和\)</span>v <span class="arithmatex">\(具有**相反的状态**；如果\)</span>w_e &lt; 0\)</span>，则我们希望<span class="arithmatex">\(u\)</span> 和<span class="arithmatex">\(v <span class="arithmatex">\(具有**相同的状态**；综合而言，我们希望\)</span>w_es_us_v &lt; 0\)</span></p>
+</li>
+<li>
+<p>我们将满足上述条件的边<span class="arithmatex">\(e <span class="arithmatex">\(称为“好的（\)</span>good\)</span>）”，否则称为“坏的（<span class="arithmatex">\(bad\)</span>）”；</p>
+</li>
+<li>
+<p>我们称一个点u 是“满意的（<span class="arithmatex">\(satisfied\)</span>）”，当且仅当$u $所在的边中，<strong>好边的权重绝对值之和大于等于坏边的权重绝对值之和</strong>
+   $$
+   \underset{v:e=(u,v)\in E}{\sum}w_es_us_v \leq 0
+   $$</p>
+</li>
+<li>
+<p>我们称一个构型是“<strong>稳定的（stable）</strong>”，<strong>当且仅当所有的点都是满意的</strong></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Output: A configuration S of the network – an assignment of the state <span class="arithmatex">\(s_u\)</span> to each node u</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131042643.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240513104248568" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131042643.png" /></a></p>
+<p>〖Definition〗 In a configuration S, edge $e = (u, v) $is <strong><code>good</code></strong> if <span class="arithmatex">\(w_e s_u s_v &lt; 0 <span class="arithmatex">\((\)</span>w_e &lt; 0\)</span> iff <span class="arithmatex">\(s_u = s_v\)</span> ); otherwise, it is <strong><code>bad</code></strong>.</p>
+<p>〖Definition〗 In a configuration S, a node u is <strong><code>satisfied</code></strong> if <strong>the weight of incident good edges</strong> <span class="arithmatex">\(\geq\)</span>  <strong>weight of incident bad edges.</strong>
+$$
+\sum_{v:e=(u,v)\in E} w_es_us_v \leq 0
+$$
+<strong>由于不一定能找到完美的configuration，所以退而求其次，要求好边的权重大于外边的权重</strong></p>
+<p>〖Definition〗A configuration is <strong><code>stable</code></strong> if <strong>all nodes</strong> are <strong><code>satisfied.</code></strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131053974.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240513105320887" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131053974.png" /></a></p>
+<blockquote>
+<p><strong>Does a Hopfield network always have a stable configuration, and if so, how can we find one?</strong></p>
+<p><strong>如果一个结点不满足，那么我就把这个结点的state取反（因为仅有满足和不满足），取反之后与该点相连的边，好边变坏边，坏边变好边</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131054486.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240513105456424" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131054486.png" /></a></p>
+<blockquote>
+<p><strong>关键问题是：Will it always terminate？是否总会停止</strong></p>
+<p><strong><code>每一次取反之后，该点的好边权重至少+1，但是总权重是有限的，所以一定会停止</code></strong></p>
+</blockquote>
+<ul>
+<li>
+<p>Claim:  The state-flipping algorithm terminates at a stable configuration after at most <span class="arithmatex">\(W = _e|w_e|\)</span> iterations.</p>
+</li>
+<li>
+<p>Proof: <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131102901.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240513110222860" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131102901.png" /></a></p>
+</li>
+<li>
+<p>Problem:  To maximize <span class="arithmatex">\(\Phi\)</span></p>
+</li>
+</ul>
+<p><span class="arithmatex">\(S - S'\)</span>: $S' $can be obtained from S by flipping a single state</p>
+<p>Claim:  Any local maximum in the state-flipping algorithm to maximize <span class="arithmatex">\(\Phi\)</span> is a stable configuration.</p>
+<ul>
+<li>
+<blockquote>
+<p>他是否是多项式时间算法？</p>
+<p>Still an open question: to find an algorithm that constructs stable states in time polynomial in $ n$ and <span class="arithmatex">\(logW\)</span> (rather than n and W), or in a number of primitive arithmetic operations that is polynomial in n alone, independent of the value of W.</p>
+<p>仍然是一个悬而未决的问题：找到一种算法，该算法在 n 和 logW（而不是 n 和 W）中构造时间多项式中的稳定状态，或者在一些原始算术运算中构造稳定状态，该运算仅在 n 中是多项式的，与 W 的值无关。</p>
+</blockquote>
+</li>
+</ul>
+<hr />
+<h2 id="124-the-maximum-cut-problem">12.4 The Maximum Cut Problem<a class="headerlink" href="#124-the-maximum-cut-problem" title="Permanent link">&para;</a></h2>
+<p>Maximum Cut problem: Given an undirected graph <span class="arithmatex">\(G = (V, E)\)</span> with positive integer edge weights we, find a node partition$ (A, B) $such that the total weight of edges crossing the cut is maximized.
+$$
+w(A,B) = \sum_{u\in A, v\in B} w_{uv}
+$$
+应用：n项活动，M项人。每个人都想参加其中两项活动。将每项活动安排在上午或下午，以最大限度地增加可以享受这两项活动的人数。</p>
+<ul>
+<li>problem： To maximize  <span class="arithmatex">\(\Phi(S) = \sum_{e \ is \ good}|w_e|\)</span></li>
+<li>Feasible solution set FS : any partition (A, B) </li>
+<li>S - S': S' can be obtained from S by moving one node from A to B, or one from B to A.</li>
+</ul>
+<blockquote>
+<p><strong>最大割问题和Hopfield神经网络问题存在着关联。对于任意解（A，B），将A中的点的状态赋值为-1，B中的点的状态赋值为1.此时组内的边变为坏边（<span class="arithmatex">\(w_es_us_v &gt;0\)</span>）,组间的边变为好边，问题转化为最大化好边的总权重之和<span class="arithmatex">\(\Phi(S)\)</span>.</strong></p>
+<p><strong>移动一点从组A到组B，与该点相连的变，组间的变组内，组内的变组间</strong></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>ConfigType State_flipping()
+{
+    Start from an arbitrary configuration S;
+    while ( ! IsStable(S) ) {
+        u = GetUnsatisfied(S);
+        su = - su;
+    }
+    return S;
+}
+</code></pre></div>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131117085.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240513111741009" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131117085.png" /></a></p>
+<p>即图G中所有边的权重之和为<span class="arithmatex">\(W = \underset{(u,v)\in E}{\sum}w_{uv}\)</span>,因为（A，B）是一个局部最优解，即把u放到B会使割边的权重和降低，<strong><code>也就是说对于任意一个在A中的点u，满足组间权重之和大于组内权重之和</code></strong>即<span class="arithmatex">\(\underset{v\in A}{\sum}w_{uv} \leq \underset{v \in B}{\sum}w_{uv}\)</span></p>
+<p><strong><code>这是因为原先点u的好边权重之和大于坏边权重之和，一旦从A移动到B之后，原先的好边变为坏边，坏边变为好边，导致好边的权重降低</code></strong></p>
+<p>对所有的<span class="arithmatex">\(u \in A\)</span>都有这样的不等式，对所有的不等式求和得到
+$$
+\underset{u \in A}{\sum} \underset{v \in A}{\sum}w_{uv} \leq \underset{u \in A}{\sum} \underset{v \in B}{\sum}w_{uv}
+$$
+<strong>显然左边是2倍的A中所有边的权重之和，因为每一条边计算了两次，右边使所有的割边的权重之和</strong>
+$$
+2\underset{(u,v) \in A}{\sum} w_{u,v} = \underset{u \in A}{\sum} \underset{v \in A}{\sum}w_{uv} \leq \underset{u \in A}{\sum} \underset{v \in B} {\sum}w_{uv} = w(A,B) \
+对(u,v) \in B 同理
+$$
+<strong>组间权重要大于组内权重，组间权重在总权重中至少要占1/2</strong></p>
+<p>总权重<span class="arithmatex">\(W = \underset{(u,v) \in A}{\sum} w_{u,v} + \underset{(u,v) \in B}{\sum} w_{u,v} + w(A, B)\)</span>, <code>由于最大割的权重之和不会超过全体边的权重和W</code>，所以<span class="arithmatex">\(w(A^*,B^*) \leq W = \underset{(u,v) \in A}{\sum} w_{u,v} + \underset{(u,v) \in B}{\sum} w_{u,v} + w(A, B)  \leq 2w(A,B)\)</span></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131123647.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240513112305546" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131123647.png" /></a></p>
+<p><strong><code>设置一个阈值，要求每一次权重的增加需要大于阈值</code></strong></p>
+<ul>
+<li>如果添加阈值，<span class="arithmatex">\(\dfrac{2\epsilon }{|V|} w(A,B)\)</span>,那么最终得到的结果满足<span class="arithmatex">\(w(A^*,B^*) \leq (2 + \epsilon)w(A,B)\)</span></li>
+</ul>
+<p>最终翻转<span class="arithmatex">\(O(n/\epsilon logW)\)</span>次</p>
+<ul>
+<li>如果不添加阈值，最终得到的结果满足<span class="arithmatex">\(w(A^*,B^*) \leq 2w(A,B)\)</span></li>
+</ul>
+<h2 id="125-旅行商问题">12.5 旅行商问题<a class="headerlink" href="#125-旅行商问题" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>定义：给定一个无向完全图<span class="arithmatex">\(G = (V,E)\)</span>,每条边<span class="arithmatex">\((u,v) \in E\)</span>有一个权重<span class="arithmatex">\(w(u,v)\)</span>,我们希望找到一个最短回路，使得每一个顶点都被恰好访问一次，并且所付出的代价最少。</strong></p>
+<p><strong><code>这是一个NP-Hard问题，暂时找不到一个多项式时间算法来解决这个问题</code></strong></p>
+</blockquote>
+<h3 id="1251-动态规划">12.5.1 动态规划<a class="headerlink" href="#1251-动态规划" title="Permanent link">&para;</a></h3>
+<p>假设我们给所有顶点编号为1，2，3，4....，n，然后我们的目标时找一条最短的经过每一点恰好从1回到1（起始点任意，回路等价）的哈密顿回路。那么这个路径的最后一跳应当是从某个点<span class="arithmatex">\(j != 1\)</span>,那么我们的问题转化为找最优的点<span class="arithmatex">\(j\)</span>完成最后一跳。
+$$
+最优路线的成本 = min_{j = 2,3,...n}访问每个顶点的无环1\rightarrow j路径的最低成本 + c_{j1}
+$$
+这里我们就要用最短路问题自带的最优子结构来设计动态规划算法了（我们在Bellman-Ford 和Floyd-Warshall 算法中已经实践过）：即最短路径的某一段也一定是对应的起点终点的最短路径。<strong>因此如果我们要求从<span class="arithmatex">\(1\)</span> 到<span class="arithmatex">\(j\)</span> 的最短路径，我们可以考虑最后一跳的选取，假设最短路径最后一跳是从<span class="arithmatex">(k <span class="arithmatex">\(到\)</span>j\)</span>，那么我们可以将问题分解为从<span class="arithmatex">\(1\)</span> 到<span class="arithmatex">\(k\)</span> 的最短路径加上从k 到j 的成本</strong>.</p>
+<p>当然我们并不能直接知道哪个<span class="arithmatex">\(k\)</span> 最好，<strong>所以还需要遍历所有的<span class="arithmatex">\(k\)</span></strong>，这样就决定了最后一跳。然后我们递归解决倒数第二跳，以此类推。我们不难发现，这样的动态规划算法的子问题可以表达为<span class="arithmatex">\(C_{S,j}\)</span>,表示从1到<span class="arithmatex">\(j \in S\)</span>经过S中所有点恰好一次的最短路径。
+$$
+C_{S,j} = \underset{k \in S, k != 1,j}{min} C_{S-{j},k}+c_{k,j}
+$$
+<strong>根据递推式的特点，我们只要按照S的大小从小到大依次填表，就能保证解每一个问题的时候，需要的子问题的答案都已知。</strong></p>
+<h3 id="1252-局部搜索">12.5.2 局部搜索<a class="headerlink" href="#1252-局部搜索" title="Permanent link">&para;</a></h3>
+<ol>
+<li>定义邻居关系：<strong><code>对于两条长度为n的不同的哈密顿回路，它们之间能共享的最大边数为n-2</code></strong>，<strong>因此我们定义两条哈密顿回路S和S‘之间的邻居关系为：S和S’之间的边有两条不一样</strong></li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161602287.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240516160211244" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161602287.png" /></a></p>
+<ol>
+<li>接下来就可以在2-近似的解的基础上做2-变换进一步改进解（即检查改变之后受到影响的边的长度是否减小）</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161605184.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240516160507148" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161605184.png" /></a></p>
+<h2 id="126-习题集">12.6 习题集<a class="headerlink" href="#126-习题集" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Q1-1.</strong> For the graph given in the following figure, if we start from deleting the black vertex, then local search can always find the minimum vertex cover. (T/F)</li>
+</ol>
+<div style="text-align:center;">
+    <a class="glightbox" href="https://images.ptausercontent.com/150" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://images.ptausercontent.com/150" alt="12.5" style="margin: 0 auto; zoom: 80%;"/></a>
+</div>
+
+<blockquote>
+<p><code>T</code></p>
+<p><strong>一个点可以删除的条件是：这条边的另一个点没有被删除。如果可以删除，则任意删除一个。如果不能删除，则算法结束。剩下的点越少越好。</strong></p>
+<p><strong>如果删除黑点，那么不能删除右边的点，也不能删除下面的点，只能删除最下面两个。因此确实达到了最优解。</strong></p>
+</blockquote>
+<ol>
+<li><strong>Q1-2.</strong> We are given a set of sites <span class="arithmatex">\(S=\{s_{1}, s_{2}, \cdots, s_{n}\}\)</span> in the plane, and we want to choose a set of <span class="arithmatex">\(k\)</span> centers <span class="arithmatex">\(C=\{c_{1}, c_{2}, \cdots, c_{k}\}\)</span> so that the maximum distance from a site to the nearest center is minimized. Here <span class="arithmatex">\(c_{i}\)</span> can be an arbitrary point in the plane.</li>
+</ol>
+<p>A local search algorithm arbitrarily choose <span class="arithmatex">\(k\)</span> points in the plane to be the centers, then</p>
+<ul>
+<li>
+<p>(1) divide <span class="arithmatex">\(S\)</span> into <span class="arithmatex">\(k\)</span> sets, where <span class="arithmatex">\(S_{i}\)</span> is the set of all sites for which <span class="arithmatex">\(c_{i}\)</span> is the nearest center; and</p>
+</li>
+<li>
+<p>(2) for each <span class="arithmatex">\(S_{i}\)</span>, compute the central position as a new center for all the sites in <span class="arithmatex">\(S_{i}\)</span>.</p>
+</li>
+</ul>
+<p>If steps (1) and (2) cause the covering radius to strictly decrease, we perform another iteration, otherwise the algorithm stops.</p>
+<p>When the above local search algorithm terminates, <strong>the covering radius of its solution is at most 2 times the optimal covering radius</strong>. (T/F)</p>
+<blockquote>
+<p><code>F</code><strong>原因在于K center近似比不能低于2.否则P=NP</strong></p>
+</blockquote>
+<p>给出反例如下图所示。其中有</p>
+<div class="arithmatex">\[
+\begin{gathered}
+    A(-1, \frac{\sqrt{3}}{2}),\quad
+    B(1, \frac{\sqrt{3}}{2}),\quad
+    C(-1, -\frac{\sqrt{3}}{2}),\quad
+    D(1, -\frac{\sqrt{3}}{2})
+    \\
+    E(-3, 2\sqrt{3}),\quad
+    F(3, 2\sqrt{3}),\quad
+    G(0, 2\sqrt{3}+\sqrt{7}),\quad
+    H(0,0.000001),\quad
+    I(0,-0.000001)
+\end{gathered}
+\]</div>
+<p>都是需要被覆盖的点。</p>
+<div class="arithmatex">\[
+c_1(-1, 0),\quad
+c_2(0, 0),\quad
+c_3(1, 0),\quad
+c_4(0, 2\sqrt{3}+\sqrt{7}),\quad
+\]</div>
+<p><span class="arithmatex">\(c_1\)</span>, <span class="arithmatex">\(c_3\)</span> 半径为 <span class="arithmatex">\(\frac{\sqrt{3}}{2}\)</span>, <span class="arithmatex">\(c_2\)</span> 半径为 <span class="arithmatex">\(0.0001\)</span>, <span class="arithmatex">\(c_4\)</span> 半径为 <span class="arithmatex">\(4\)</span>。这样得到的解就是 Local Search 的一个可能解，覆盖半径为 <span class="arithmatex">\(4\)</span>。</p>
+<p>然而，如果取</p>
+<div class="arithmatex">\[
+c_1'(-2, \frac{5\sqrt{3}}{4}),\quad
+c_2'(0, 0),\quad
+c_3'(2, \frac{5\sqrt{3}}{4}),\quad
+c_4'(0, 2\sqrt{3}+\sqrt{7}+4),\quad
+\]</div>
+<p><span class="arithmatex">\(c_1\)</span>, <span class="arithmatex">\(c_3\)</span> 半径为 <span class="arithmatex">\(\frac{\sqrt{41}}{4}\)</span>, <span class="arithmatex">\(c_2\)</span> 半径为 <span class="arithmatex">\(\frac{\sqrt{7}}{2}\)</span>, <span class="arithmatex">\(c_4\)</span> 半径为 <span class="arithmatex">\(0.0001\)</span>。这样得到的解覆盖半径为 <span class="arithmatex">\(\frac{\sqrt{41}}{4}&lt;2\)</span>。</p>
+<p>因此虽然不确定最优解是什么，但是最优解一定比上面的 Local Search 的解的二分之一更小.</p>
+<p>下图中，绿色圆圈表示 Local Search，蓝色圆圈表示给出的一个比 Local Search 的 <span class="arithmatex">\(1/2\)</span> 更小的解。</p>
+<div style="text-align:center;">
+    <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161704374.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161704374.png" alt="12.1" style="margin: 0 auto; zoom: 80%;"/></a>
+</div>
+
+<ol>
+<li>In local search, if the optimization function has a constant value in a neighborhood, there will be a problem.</li>
+</ol>
+<blockquote>
+<p><code>T</code> <strong>说明到了一个低谷或者山峰。或者平衡状态。需要随机选择一个转移。</strong></p>
+</blockquote>
+<ol>
+<li>Greedy method is a special case of local search.</li>
+</ol>
+<blockquote>
+<p><code>F</code> <strong>Greedy是不断前进，最后达到解。而local search是不断修改值，选择一个最佳的解。求出的每一个解都是最终的解。</strong></p>
+</blockquote>
+<ol>
+<li><strong>Random restarts</strong> can help a local search algorithm to better find global maxima that are surrounded by local maxima.</li>
+</ol>
+<blockquote>
+<p><code>T</code> <strong>算法如果到达local maximum就停止了，但是如果随机开始，那么可能会到达local maximum和global maximum之间，然后找到全局最优。</strong></p>
+</blockquote>
+<ol>
+<li>In Metropolis Algorithm, the probability of jumping up depends on T, the temperature. When the temperature is high, it’ll be close to the original gradiant descent method.</li>
+</ol>
+<blockquote>
+<p><code>F</code> <strong>温度高的时候会跳跃，温度低的时候接近下降算法。</strong></p>
+</blockquote>
+<ol>
+<li>Local search algorithm can be used to solve lots of classic problems, such as SAT and <em>N</em>-Queen problems. Define the configuration of SAT to be <em>X</em> = vector of assignments of <em>N</em> boolean variables, and that of <em>N</em>-Queen to be <em>Y</em> = positions of the <em>N</em> queens in each column. The sizes of the search spaces of SAT and <em>N</em>-Queen are <span class="arithmatex">\(O(2^N)\)</span> and <span class="arithmatex">\(O(N^N)\)</span>, respectively.</li>
+</ol>
+<blockquote>
+<p><code>F</code> <strong>N皇后问题的搜索空间为<span class="arithmatex">\(N!\)</span></strong></p>
+</blockquote>
+<ol>
+<li><strong>Q2-1.</strong> Spanning Tree Problem: Given an undirected graph <span class="arithmatex">\(G=(V, E)\)</span>, where <span class="arithmatex">\(|V|=n\)</span> and <span class="arithmatex">\(|E|=m\)</span>. Let <span class="arithmatex">\(F\)</span> be the set of all spanning trees of <span class="arithmatex">\(G\)</span>. Define <span class="arithmatex">\(d(u)\)</span> to be the degree of a vertex <span class="arithmatex">\(u \in V\)</span>. Define <span class="arithmatex">\(w(e)\)</span> to be the weight of an edge <span class="arithmatex">\(e \in E\)</span>.</li>
+</ol>
+<p>We have the following three variants of spanning tree problems:</p>
+<ul>
+<li>
+<p>(1) Max Leaf Spanning Tree: find a spanning tree <span class="arithmatex">\(T \in F\)</span> with a maximum number of leaves.</p>
+</li>
+<li>
+<p>(2) Minimum Spanning Tree: find a spanning tree <span class="arithmatex">\(T \in F\)</span> with a minimum total weight of all the edges in <span class="arithmatex">\(T\)</span>.</p>
+</li>
+<li>
+<p>(3) Minimum Degree Spanning Tree: find a spanning tree <span class="arithmatex">\(T \in F\)</span> such that its maximum degree of all the vertices is the smallest.</p>
+</li>
+</ul>
+<p>For a pair of edges <span class="arithmatex">\(\left(e, e^{\prime}\right)\)</span> where <span class="arithmatex">\(e \in T\)</span> and <span class="arithmatex">\(e^{\prime} \in(G-T)\)</span> such that <span class="arithmatex">\(e\)</span> belongs to the unique cycle of <span class="arithmatex">\(T \cup e^{\prime}\)</span>, we define edge-swap <span class="arithmatex">\(\left(e, e^{\prime}\right)\)</span> to be <span class="arithmatex">\((T-e) \cup e^{\prime}\)</span>.</p>
+<p>Here is a local search algorithm:</p>
+<div class="highlight"><pre><span></span><code>T = any spanning tree in F_i
+while (there is an edge-swap (e, e&#39;) which reduces Cost(T)) {
+ T = T - e + e&#39;;
+}
+return T;
+</code></pre></div>
+<p>Here <span class="arithmatex">\(\operatorname{cost}(T)\)</span> is the number of leaves in <span class="arithmatex">\(T\)</span> in Max Leaf Spanning Tree; or is the total weight of <span class="arithmatex">\(T\)</span> in Minimum Spanning Tree; or else is the minimum degree of <span class="arithmatex">\(T\)</span> in Minimum Degree Spanning Tree.</p>
+<p>Which of the following statements is TRUE?</p>
+<p>A. The local search always return an optimal solution for Max Leaf Spanning Tree</p>
+<p>B.<code>The local search always return an optimal solution for Minimum Spanning Tree</code></p>
+<p>C. The local search always return an optimal solution for Minimum Degree Spanning Tree</p>
+<p>D. For neither of the problems that this local search always return an optimal solution</p>
+<blockquote>
+<p>B。</p>
+<p><strong>最小生成树的 Prim 算法是局部性的, 但是却是正确的, 猜想最小生成树的局部最优就是全局最优。</strong>事实上这个结论确实是正确的，这个证明比较难，读者可以考虑势能函数等方法。</p>
+<p>对于其他两种，寻找其反例。</p>
+<p>对于Max Leaf Spanning Tree，寻找反例如下:</p>
+<p><div style="text-align:center;">
+    <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161716585.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161716585.png" alt="12.2" style="margin: 0 auto; zoom: 80%;"/></a>
+</div></p>
+<p>对于Minimum Degree Spanning Tree，同样的原图(Original)，寻找反例如下:</p>
+<p><div style="text-align:center;">
+    <a class="glightbox" href="https://zhoutimemachine.github.io/note/courses/imgs/ads/ads_hw_12.3.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zhoutimemachine.github.io/note/courses/imgs/ads/ads_hw_12.3.png" alt="12.3" style="margin: 0 auto; zoom: 80%;"/></a>
+</div></p>
+<p>究其本质，最小生成树如果有更好的选择一定能交换，因为进行的正是边交换，直接影响的就是树的整体权值。另外两种树的性质则与顶点相关，不能直接影响，所以就寄了。</p>
+</blockquote>
+<ol>
+<li><strong>Q2-2.</strong> There are <span class="arithmatex">\(n\)</span> jobs, and each job <span class="arithmatex">\(j\)</span> has a processing time <span class="arithmatex">\(t_{j}\)</span>. We will use a local search algorithm to partition the jobs into two groups A and B, where set A is assigned to machine <span class="arithmatex">\(M_{1}\)</span> and set <span class="arithmatex">\(\mathrm{B}\)</span> to <span class="arithmatex">\(M_{2}\)</span>. The time needed to process all of the jobs on the two machines is <span class="arithmatex">\(T_{1}=\sum_{j \in A} t_{j}, T_{2}=\sum_{j \in B} t_{j}\)</span>. The problem is to minimize <span class="arithmatex">\(\left|T_{1}-T_{2}\right|\)</span>.</li>
+</ol>
+<p>Local search: Start by assigning jobs <span class="arithmatex">\(1, \ldots, n / 2\)</span> to <span class="arithmatex">\(M_{1}\)</span>, and the rest to <span class="arithmatex">\(M_{2}\)</span>.</p>
+<p>The local moves are to move a single job from one machine to the other, and we only move a job if the move decreases the absolute difference in the processing times. Which of the following statement is true?</p>
+<p>A. The problem is NP-hard and the local search algorithm will not terminate.</p>
+<p><code>B. When there are many candidate jobs that can be moved to reduce the absolute difference, if we always move the job $j$ with maximum $t_j$, then the local search terminates in at most $n$ moves.</code></p>
+<p>C. The local search algorithm always returns an optimal solution.</p>
+<p>D. The local search algorithm always returns a local solution with <span class="arithmatex">\(\frac{1}{2}T_1\leqslant T\leqslant 2T_1\)</span>.</p>
+<blockquote>
+<p>B。</p>
+<p>A，每次都减小，肯定会减无可减，那么一定会终止。NP-hard猜想应该是的，一共有<span class="arithmatex">\(2^n\)</span>种状态。</p>
+<p>B，一项被移到另一侧之后肯定不会再被移回来，因此最多移<span class="arithmatex">\(n\)</span>次。</p>
+<p>C，考虑<span class="arithmatex">\(\{10,11,12,12,13,14\}=\{10,11,13\}+\{12,12,14\}\)</span>，可知无法移动了，但是显然最优解是<span class="arithmatex">\(\{11,12,13\}+\{10,12,14\}\)</span>。</p>
+<p>D，考虑<span class="arithmatex">\(\{1,2,100\}=\{1,2\}+\{100\}\)</span>。    </p>
+</blockquote>
+<ol>
+<li>
+<p><strong>Q2-3.</strong> Max-cut problem: Given an undirected graph <span class="arithmatex">\(G=(V, E)\)</span> with positive integer edge weights <span class="arithmatex">\(w_{e}\)</span>, find a node partition <span class="arithmatex">\((A, B)\)</span> such that <span class="arithmatex">\(w(A, B)\)</span>, the total weight of edges crossing the cut, is maximized. Let us define <span class="arithmatex">\(S^{\prime}\)</span> be the neighbor of <span class="arithmatex">\(S\)</span> such that <span class="arithmatex">\(S^{\prime}\)</span> can be obtained from <span class="arithmatex">\(S\)</span> by moving one node from <span class="arithmatex">\(A\)</span> to <span class="arithmatex">\(B\)</span>, or one from <span class="arithmatex">\(B\)</span> to <span class="arithmatex">\(A\)</span>. only choose a node which, when flipped, increases the cut value by at least <span class="arithmatex">\(w(A, B) /|V|\)</span>. Then which of the following is true?</p>
+<p>A. <code>Upon the termination of the algorithm, the algorithm returns a cut</code><span class="arithmatex">\((A,B)\)</span> so that <span class="arithmatex">\(2.5w(A,B)\geqslant w(A^∗, b^*)\)</span>, 
+where <span class="arithmatex">\((A^∗ ,B^∗)\)</span> is an optimal partition.</p>
+<p>B. The algorithm terminates after at most <span class="arithmatex">\(O(\log|V|\log W)\)</span> flips, where <span class="arithmatex">\(W\)</span> is the total weight of edges.</p>
+<p>C. Upon the termination of the algorithm, the algorithm returns a cut <span class="arithmatex">\((A,B)\)</span> so that <span class="arithmatex">\(2w(A,B)\geqslant w(A^∗, b^*)\)</span>.</p>
+<p>D. The algorithm terminates after at most <span class="arithmatex">\(O(|V|^2)\)</span> flips.</p>
+<blockquote>
+<p><strong>题目中给出条件，increase the cut value by at least w(A,B)/V,说明此时<span class="arithmatex">\(\epsilon = 0.5\)</span></strong></p>
+<p>根据定理，最后至多执行<span class="arithmatex">\(n/\epsilon \ logW\)</span>次flip</p>
+<p>最终结果满足，<span class="arithmatex">\(w(A^*,B^*) &lt; (2 + \epsilon)w(A,B)\)</span></p>
+<p><div style="text-align:center;">
+    <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161717144.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405161717144.png" alt="12.4" style="margin: 0 auto; zoom: 80%;"/></a>
+</div></p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

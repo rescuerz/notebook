@@ -1,0 +1,1523 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Lecture 4 | Leftist Heap & Skew Heap - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lecture-4--leftist-heap--skew-heap" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lecture 4 | Leftist Heap &amp; Skew Heap
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Readme/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CV/Lecture1_Introduction/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Readme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Readme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture2_Image_Classification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-leftist-heap" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Leftist Heap
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Leftist Heap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-概念" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.1 概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.2 Merge
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1.2 Merge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4121-递归式" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.2.1 递归式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4122迭代式" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.2.2迭代式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-单点插入" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.3 单点插入
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414-单点删除" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1.4 单点删除
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-skew-heap" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Skew Heap
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Skew Heap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421-合理性分析" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.1 合理性分析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422-摊还分析" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.2 摊还分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-习题集" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 习题集
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/Blog/blob/main/docs/ADS/4. Leftist Heaps and Skew Heaps.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/Blog/raw/main/docs/ADS/4. Leftist Heaps and Skew Heaps.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="lecture-4--leftist-heap--skew-heap">Lecture 4 | Leftist Heap &amp; Skew Heap<a class="headerlink" href="#lecture-4--leftist-heap--skew-heap" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 5341 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 166 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 29 分钟</p>
+</div>
+<blockquote>
+<p><strong><code>什么是堆heap？</code></strong></p>
+</blockquote>
+<p>满足以下性质：</p>
+<ol>
+<li>结构性质：堆是一棵<strong>完全二叉树</strong>。并且由于是完全二叉树，故树高h 和总结点数之间的关系显然为<span class="arithmatex">\(h = O(log n)\)</span>。</li>
+<li>序性质：对于<strong>最大堆</strong>，根结点就是最大元素，每一个结点的孩子都必须小于等于本身。反之对于<strong>最小堆</strong>，根结点是最大元素，孩子应当大于等于父亲。</li>
+</ol>
+<p>基于数组的二叉堆实现，事实上是利用<strong>数组构造</strong>了一棵完全二叉树，我们可以通过<strong>数组索引除以2 找到结点的父亲</strong>，乘以2 和乘以2 加1 获得结点的左右孩子，因此非常方便，<strong>相比于指针需要寻址</strong>，这样的实现显然更加高效。</p>
+<p>堆(最小堆)的基本操作：</p>
+<ol>
+<li>Insert : 直接插在完全二叉树的下一个空位上，然后<strong>percolate up</strong> 找到它应当在的位置，显然<strong>最坏情况</strong>也与完全二叉树的高度成正比，即<span class="arithmatex">\(O(log n)\)</span>。</li>
+<li>FindMin : 直接返回根结点， <span class="arithmatex">\(O(1)\)</span></li>
+<li>DeleteMin： 直接用完全二叉树的最后一个元素顶替根结点，然后percolate down 找到新根结点的归宿，时间<span class="arithmatex">\(O(log n)\)</span></li>
+<li>BuildHeap: <strong>对n 个元素建堆存储</strong>。</li>
+<li>方法一：连续插入n次，但这样时间复杂度为<span class="arithmatex">\(O(n log n)\)</span></li>
+<li><strong>方法二</strong>：无需管序性质，直接任意插入这n 个值，然后从<strong>完全二叉树倒数第二排有孩子的结点</strong>开始，往前依次检查是否有违反序性质的，有就<strong>percolate down</strong> 到正确的位置，循环直到根结点也调整完毕为止，可以验证这样的算法复杂度为<span class="arithmatex">\(O(n)\)</span></li>
+</ol>
+<blockquote>
+<p><strong>在基于数组的实现中我们能想到的最好的方法也只能是直接合并两个数组，然后调用BuildHeap 在O(n) 时间内完成。</strong></p>
+</blockquote>
+<h2 id="41-leftist-heap">4.1 Leftist Heap<a class="headerlink" href="#41-leftist-heap" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="411-概念">4.1.1 概念<a class="headerlink" href="#411-概念" title="Permanent link">&para;</a></h3>
+<p>左偏堆，或者说<strong>左偏堆(Leftist Heap)</strong>，它相比于普通的堆，更好的一点在于它<strong>支持快速的堆合并操作(speed up merging in O(N))</strong>。</p>
+<p>“左偏”，并不断将新的东西往右侧合并，来实现每次都是往相对小的那一侧塞进东西，进而保相对证了这个</p>
+<p><strong>由于左偏堆不再是一个完全二叉树，所以我们不能再像维护大根堆小根堆那样用数组来维护它了。</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// struct LeftistHeapNode {</span>
+<span class="w">    </span><span class="c1">// ElementType val;</span>
+<span class="w">    </span><span class="c1">// int Npl;</span>
+<span class="w">    </span><span class="c1">// LeftistHeapNode * ls, * rs;</span>
+<span class="c1">// };</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">TreeNode</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ElementType</span><span class="w">     </span><span class="n">val</span><span class="p">;</span>
+<span class="w">    </span><span class="n">PriorityQueue</span><span class="w">   </span><span class="n">Left</span><span class="p">;</span>
+<span class="w">    </span><span class="n">PriorityQueue</span><span class="w">   </span><span class="n">Right</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w">             </span><span class="n">Npl</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<blockquote>
+<p><strong>definition “Npl” in leftist heap"</strong></p>
+<p>The null path length , Npl(X), of any node X is <strong><code>the length of the shortest path from X to a node without two children</code></strong>.  </p>
+<p><strong>Npl(x) 表示从x开始到没有孩子结点的结点（可能是x本身）的最短路径的长度</strong></p>
+<p><strong>Define Npl(NULL) = –1.</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181017847.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318101709749" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181017847.png" /></a></p>
+<ol>
+<li>如果<strong>一个结点的左孩子或右孩子为空结点</strong>，则该结点的 <strong>Npl 为 <span class="arithmatex">\(0\)</span></strong>，这种结点被称为外结点；</li>
+<li>如果一个结点的左孩子和右孩子都不为空，则该结点的 Npl 为 <span class="arithmatex">\(\min{(npl_\text{left child}, npl_\text{right child})} + 1\)</span>；</li>
+</ol>
+<p><center>
+    <img src = "https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180957356.png", width = 45%>
+    <img src = "https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180957811.png", width = 45%>
+</center></p>
+<p>而左偏堆就建立在这些性质上：</p>
+<blockquote>
+<p><strong>definition "Leftist Heap"</strong></p>
+</blockquote>
+<p>​    左偏堆的性质</p>
+<ol>
+<li>结点的value应当不大于（不小于）其孩子结点的value的二叉树（即堆的性质）</li>
+<li>且满足「左偏」性质——<strong><code>结点的左孩子的 Npl 不小于右孩子的 Npl</code></strong>。</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181020262.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318102018200" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181020262.png" /></a></p>
+<blockquote>
+<p><strong>虽然局部存在右子树结点数大于左子树，但是可能依然不影响左倾堆的性质</strong></p>
+</blockquote>
+<p>因此，回顾 Npl 的定义，我们可以得到扩展性质：</p>
+<ol>
+<li>A leftist tree with r nodes on the right path must have at least <span class="arithmatex">\(2^r -1\)</span> nodes</li>
+</ol>
+<p>在右路径上有r 个结点的左式堆必然至少有2r −1 个结点（右路径指从根结点出发一路找右孩子直到找到叶子的路径）。</p>
+<p><strong>证明： 使用数学归纳法进行证明</strong></p>
+<ul>
+<li>
+<p>若<span class="arithmatex">\(r = 1\)</span>,显然存在至少一个结点</p>
+</li>
+<li>
+<p>假设定理对右路径上小于等于<span class="arithmatex">\(r\)</span>个结点的情况都成立。现在考虑在右路径上有<span class="arithmatex">\(r+1\)</span>个结点的左倾堆。</p>
+</li>
+<li>根的右子树恰好在右路径上有<span class="arithmatex">\(r\)</span>个结点，因此右子树至少有<span class="arithmatex">\(2^r - 1\)</span>个结点</li>
+<li>再考虑左子树。左倾堆的性质，左子树的<span class="arithmatex">\(Npl\)</span>必须大于等于右子树的<span class="arithmatex">\(Npl\)</span>，而右子树的<span class="arithmatex">\(Npl\)</span>为<span class="arithmatex">\(n-1\)</span>,那么左子树结点到叶结点的距离至少为<span class="arithmatex">\(n-1\)</span></li>
+<li>利用子树也有左倾的性质，右路径<span class="arithmatex">\(Npl\)</span>更短，所以右路径至少有<span class="arithmatex">\(r\)</span>个结点，因此左子树的大小也为<span class="arithmatex">\(2^r -1\)</span></li>
+<li>所以整棵树的结点数至少为<span class="arithmatex">\(1 + 2^r-1 + 2^r -1 = 2 ^ {r+1} -1\)</span></li>
+</ul>
+<p><code>根据性质1，可以得到共有N个结点的左倾堆的右路径最多含有log（N+1）个结点。</code></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181025082.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318102513008" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181025082.png" /></a></p>
+<blockquote>
+<p>注意，在示意图中我们省略了结点自身键值的标记，但既然作为一个堆，它就需要满足堆的性质，即<strong>结点的键值不大于（不小于）其孩子结点的键值</strong>。在实际使用过程中，键值很可能不再是单纯的数，大小关系可能转化为偏序关系。</p>
+</blockquote>
+<p>简单思考一下，为什么左偏堆会这么设计呢？实际上，合并堆需要考虑的非常重要的一个点就是要能在之后的操作中尽可能地维护堆的“平衡”，否则我们把堆维护成了一个链，那显然是非常糟糕的。</p>
+<p>而<strong>左偏堆通过维护整个堆“左偏”，并不断往右侧合并</strong>，来实现每次都是往<span class="arithmatex">\(Npl\)</span>相对小的那一侧塞进东西，进而保证了这个堆的相对平衡性。</p>
+<hr />
+<h3 id="412-merge">4.1.2 Merge<a class="headerlink" href="#412-merge" title="Permanent link">&para;</a></h3>
+<p>左偏堆的核心操作就是合并。而其它操作都可以看作是合并的特殊情况。</p>
+<ul>
+<li><strong>Insert： 可以看作一个堆和一个单结点的堆的Merge</strong></li>
+<li><strong>Delete Min：首先删除根结点，然后将根结点的两个子树进行Merge即可</strong></li>
+</ul>
+<p>作为左偏堆的核心操作，合并操作自然就是要在满足性质的条件下，合并两个左偏堆。大致思路就是<strong>先维护堆的性质</strong>，在<strong>回溯时维护左偏性质</strong>，所以实际上它是一个先自上而下再自下而上的过程。</p>
+<p>按照实现方法，左偏堆的合并可以分为<strong><a href="#递归式">递归式</a></strong>和<strong><a href="#迭代式">迭代式</a></strong>两种。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181037338.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318103735273" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181037338.png" /></a></p>
+<p>顶小的树记为H1，顶大的树记为H2</p>
+<hr />
+<h4 id="4121-递归式">4.1.2.1 递归式<a class="headerlink" href="#4121-递归式" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">PriorityQueue</span><span class="w"> </span><span class="nf">Merge</span><span class="p">(</span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">H1</span><span class="p">,</span><span class="w"> </span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">H2</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">H2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">H2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">H1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H2</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">H1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">H2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Merge1</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span><span class="w"> </span><span class="n">H2</span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Merge1</span><span class="p">(</span><span class="n">H2</span><span class="p">,</span><span class="w"> </span><span class="n">H1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="n">PriorityQueue</span><span class="w"> </span><span class="nf">Merge1</span><span class="p">(</span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">H1</span><span class="p">,</span><span class="w"> </span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">H2</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Merge1 已将排除H1，H2为空的情况</span>
+<span class="w">    </span><span class="c1">// 目前 H1的value小于H2的value</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H2</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">,</span><span class="w"> </span><span class="n">H2</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="p">;</span>
+<span class="w">            </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">;</span>
+<span class="w">            </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">)</span>
+<span class="w">        </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">H1</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="n">PriorityQueue</span><span class="w"> </span><span class="nf">Merge_Recursive</span><span class="p">(</span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">H1</span><span class="p">,</span><span class="w"> </span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">H2</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">H2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">H2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">H1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H2</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">H1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">H2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H2</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge_Recursive</span><span class="p">(</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">,</span><span class="w"> </span><span class="n">H2</span><span class="p">);</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">)</span>
+<span class="w">                </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">H1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Left</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge_Recursive</span><span class="p">(</span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">,</span><span class="w"> </span><span class="n">H1</span><span class="p">);</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Left</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Left</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">)</span>
+<span class="w">                </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">H2</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>如果两个堆中至少有一个为空，直接返回另一个即可</li>
+<li>如果两个堆都非空，我们比较两个堆的根结点value的大小，value小的是<span class="arithmatex">\(H1\)</span>,value大的是<span class="arithmatex">\(H2\)</span></li>
+<li>如果<strong>H1只有一个顶点</strong>（根据左倾堆的定义，只要没有左孩子，就一定只有一个根结点），直接把H2放在H1的左子树即可</li>
+<li>如果H1不只有一个根结点，则将H1的右子树和H2<strong>merge</strong>（此处是递归，只要basecase正确，便能得到正确的结果），成为H1的<strong>新右子树</strong></li>
+<li>如果H1的Npl性质被违反，就<strong>交换两个子树</strong></li>
+<li><strong>更新H1的Npl</strong>，结束任务</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191518233.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318103735273" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191518233.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191537734.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240319153752490" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191537734.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191538444.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240319153803164" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191538444.png" /></a></p>
+<blockquote>
+<p><strong>another example:</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181050576.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318105008505" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181050576.png" /></a></p>
+<p>现在我们模拟一下这个过程，现在我们有下面两个左偏堆，尝试合并它们。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181050110.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318105022021" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181050110.png" /></a></p>
+<p>我们发现，经过比较，<font color=#2ECC71><strong>❶</strong></font> 更小，所以我们将 <font color=#2ECC71><strong>❶</strong></font> 作为合并后的根结点，左子树不变，右子树更新为「绿树右子树和蓝树的合并结果」。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181050325.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318105037237" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181050325.png" /></a></p>
+<p>经过比较，<font color=#2E86C1><strong>❷</strong></font> 更小，所以我们将 <font color=#2E86C1><strong>❷</strong></font> 作为合并后的根结点，左子树不变，右子树更新为「蓝树右子树和绿树的合并结果」。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181050488.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318105056401" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181050488.png" /></a></p>
+<p>最后还剩下两个结点啦！实际上这里直接模拟了两个步骤，首先是比较 <font color=#2ECC71><strong>❺</strong></font> 和 <font color=#2E86C1><strong>❻</strong></font>，并选择了 <font color=#2ECC71><strong>❺</strong></font> 作为新根；接下来在递归的过程中发现需要合并 <code>NULL</code> 和 <font color=#2E86C1><strong>❻</strong></font>，所以直接返回了 <font color=#2E86C1><strong>❻</strong></font>。</p>
+<p>然而还没有结束，我们还需要处理左右子树 Npl 大小关系问题。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181051691.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318105114614" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181051691.png" /></a></p>
+<p>我们发现 <font color=#2ECC71><strong>❺</strong></font> 的左孩子为 <code>NULL</code>，我们记 <span class="arithmatex">\(Npl_\text{NULL} = -1\)</span>，右孩子 <font color=#2E86C1><strong>❻</strong></font> 有 <span class="arithmatex">\(Npl_\text{right child}=0\)</span>，所以需要交换两个孩子。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181051437.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318105132353" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181051437.png" /></a></p>
+<p>这里也跳过了两个步骤：</p>
+<p>往回走，发现 <font color=#2ECC71><strong>❺</strong></font> 的 Npl 小于 <font color=#2E86C1><strong>❹</strong></font> 的 Npl，满足性质，不需要改变。</p>
+<p>继续往回走，发现 <font color=#2ECC71><strong>❷</strong></font> 和 <font color=#2E86C1><strong>❸</strong></font> 的 Npl 相同，满足性质，也不需要改变。</p>
+<p><strong>从这里也可以看出来，并不是看上去更大的子树一定在左侧。</strong></p>
+<p><strong>时间复杂度分析：</strong></p>
+<ol>
+<li>
+<p>递归的最大深度是多少？我们发现，在递归过程中，<strong><code>产生的递归层数不会超过两个左倾堆右路径长度之和</code>，因为每一次递归都会使两个堆其中之一（value更小的）向着右路径上下一个右孩子推进，知道其中一个推到了NULL结点</strong>。</p>
+</li>
+<li>
+<p>加深一层的过程中，操作都是常数级别的，因为只需要比大小和找孩子</p>
+</li>
+<li>
+<p>假设H1的结点总数为N1，H2的结点总数为N2，右路径小于等于log（N+1),所以两者<strong>右路径之和</strong>为
+   $$
+   O(logN_1 + logN_2) = O(logN_1N_2) = O(log\sqrt{N_1N_2} = O(log(N_1+N_2))
+   $$
+   上面推导使用基本不等式<span class="arithmatex">\(a + b &gt;= 2\sqrt{ab}\)</span>,两个堆右路径长度之和依然是两个堆大小的对数级别</p>
+</li>
+</ol>
+<hr />
+<h4 id="4122迭代式">4.1.2.2迭代式<a class="headerlink" href="#4122迭代式" title="Permanent link">&para;</a></h4>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181057295.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240318105738215" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403181057295.png" /></a></p>
+<p>3 -&gt; 6 -&gt; 7 -&gt; 8 -&gt; 18</p>
+<p><strong>上述递归的过程就等价于迭代的过程：每一次递归向下对应得带中保留根结点更小的堆的左子树，直到最后一次与NULL合并并直接接上。</strong></p>
+<p><strong>递归返回的过程实际上就是逐个检查新的右路径上的结点是否有违反Npl性质，并且更新Npl。</strong></p>
+<p>在迭代法的运算中，在递归向下后，交换孩子调整左倾堆性质之前，<strong><code>合并后的堆的右路径就是原来两个堆的右路径合并排序的结果</code></strong>。因此，我们只需每次都在比较两个堆的右路径上的两个点的大小，将小的作为根结点插入。<strong>只需要把两条右路径从小到大排序，然后从小到大依次带着左子树接入到新的右路径即可（但要注意在此之后还需要调整使得满足左式堆结构性质）</strong></p>
+<p>首先，我们对图片的排版稍微做一些改变，我们不再按照之前画堆的方式去画，而是“左偏”地去画：</p>
+<p><a class="glightbox" href="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/30.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/30.svg" /></a></p>
+<p>可以发现，在调整之前</p>
+<p><a class="glightbox" href="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/31.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/31.svg" /></a></p>
+<p><strong>绿色和蓝色的箭头分别表示两个待合并子树尚未合并的子树的根，紫色箭头表示最近的合并发生的位置。</strong></p>
+<p><a class="glightbox" href="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/32.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/32.svg" /></a></p>
+<p>比较 <font color=#2ECC71><strong>❶</strong></font> 和 <font color=#2E86C1><strong>❷</strong></font>，发现 <font color=#2ECC71><strong>❶</strong></font> 更小，所以我们将 <font color=#2ECC71><strong>❶</strong></font> 作为合并后的根结点，左子树随之合并进去，同时更新绿色箭头指向尚未合并进去的 <font color=#2ECC71><strong>❺</strong></font>。</p>
+<p><a class="glightbox" href="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/33.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/33.svg" /></a></p>
+<p>和上一步类似的，比较 <font color=#2ECC71><strong>❺</strong></font> 和 <font color=#2E86C1><strong>❷</strong></font>，发现 <font color=#2E86C1><strong>❷</strong></font> 更小，所以我们将 <font color=#2E86C1><strong>❷</strong></font> 作为合并后的根结点，左子树随之合并进去，同时更新蓝色箭头指向尚未合并进去的 <font color=#2E86C1><strong>❻</strong></font>。</p>
+<p><a class="glightbox" href="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/34.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/34.svg" /></a></p>
+<p>依然类似地，比较 <font color=#2ECC71><strong>❺</strong></font> 和 <font color=#2E86C1><strong>❻</strong></font>，发现 <font color=#2ECC71><strong>❺</strong></font> 更小，所以我们将 <font color=#2ECC71><strong>❺</strong></font> 作为合并后的根结点，左子树随之合并进去，同时更新绿色箭头指向 <code>NULL</code>。</p>
+<p><a class="glightbox" href="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/35.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/35.svg" /></a></p>
+<p>这时候我们发现已经有一个指针空了，也就是绿色指针已经指向了 <code>NULL</code>，这个时候我们只需要按顺序把蓝色指针指向的内容都推进去即可。</p>
+<p><a class="glightbox" href="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/36.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://note.isshikih.top/cour_note/D2CX_AdvancedDataStructure/img/36.svg" /></a></p>
+<p>接下来我们还需要维护 Npl 信息并根据性质交换左右子树。这一部分和之前一样，就不再赘述了。</p>
+<p>在迭代法的运算中，在递归向下后，交换孩子调整左倾堆性质之前，<strong><code>合并后的堆的右路径就是原来两个堆的右路径合并排序的结果</code></strong>。因此，我们只需每次都在比较两个堆的右路径上的两个点的大小，将小的作为根结点插入。<strong>只需要把两条右路径从小到大排序，然后从小到大依次带着左子树接入到新的右路径即可（但要注意在此之后还需要调整使得满足左式堆结构性质）</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191655843.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240319165557796" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191655843.png" /></a></p>
+<p>同样从这张图开始，由于我们之前提到的，它类似于一个递归排序的后半部分，具体来说是指合并两个有序数列的过程。</p>
+<p>也就是说，我们可以将这两个左偏堆改写成两个有序数列！</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191656379.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240319165605335" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191656379.png" /></a></p>
+<p>由于我们在合并过程中总是找右孩子，所以我们就沿着最右沿路径把没个左偏堆拆成这种“悬吊”的带状形式，每一“条”的值取决于根的键值，也就是这一“条”的最顶部。</p>
+<p>在这张图中，我们得到的两个<strong>有序</strong>数组分别是 <font color=#2ECC71>[1, 5]</font> 和 <font color=#2E86C1>[2, 6]</font>，接下来我们将它们进行排序。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191656536.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240319165612496" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191656536.png" /></a></p>
+<p>经过排序，就会发现它们刚好符合我们在上面步骤得到的结果（可以对比着上面的 Frame 4 看）。实际上，只要你回顾一下归并排序的过程，再对比着看上面的过程，就会发现一模一样。</p>
+<hr />
+<h3 id="413-单点插入">4.1.3 单点插入<a class="headerlink" href="#413-单点插入" title="Permanent link">&para;</a></h3>
+<p>插入结点可以看作合并一个只有一个结点的左偏堆，所以我们可以直接复用合并过程。</p>
+<div class="highlight"><pre><span></span><code><span class="n">PriorityQueue</span><span class="w"> </span><span class="nf">Insert</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">H</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">PriorityQueue</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">TreeNode</span><span class="p">));</span>
+<span class="w">    </span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">Npl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge_Recursive</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LevelOrder</span><span class="p">(</span><span class="n">H</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">H</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="414-单点删除">4.1.4 单点删除<a class="headerlink" href="#414-单点删除" title="Permanent link">&para;</a></h3>
+<p><strong>只需要合并需要被删除的结点的两个子结点，然后将这个新的树的根代替被删除的结点，再在回溯的过程中 bottom-up 地更新 Npl 即可。</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">PriorityQueue</span><span class="w"> </span><span class="nf">Deletemin</span><span class="p">(</span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">H</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">IsEmpty</span><span class="p">(</span><span class="n">H</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Error! Priority Queue is empty!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">H</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">LeftHeap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H</span><span class="o">-&gt;</span><span class="n">Left</span><span class="p">;</span>
+<span class="w">    </span><span class="n">PriorityQueue</span><span class="w"> </span><span class="n">RightHeap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">;</span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">H</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Merge_Recursive</span><span class="p">(</span><span class="n">LeftHeap</span><span class="p">,</span><span class="w"> </span><span class="n">RightHeap</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="42-skew-heap">4.2 Skew Heap<a class="headerlink" href="#42-skew-heap" title="Permanent link">&para;</a></h2>
+<p><strong>斜堆(Skew Heap)</strong>是比左偏堆更为一般的数据结构，它同样有着能够快速合并的性质。</p>
+<p>斜堆与左倾堆的关系就像是splay tree 与 AVL tree 的关系。splay tree 不再维护AVL tree的bf属性，只需要在访问一个结点之后就无脑地利用zig/zig-zig/zig-zag翻转到根结点</p>
+<p>斜堆则是不再维护Npl，也就是说在递归过程中左式堆所有维护结构性质以及更新Npl的操作不再需要。取而代之的是以下操作</p>
+<ol>
+<li>在base case 处理H与NULL连接的情况时，左倾堆直接返回H。<strong>但是斜堆必须看H的右路径，我们要求H右路径上除最大结点后都必须交换其左右孩子。</strong></li>
+<li>在非base case时，若 H1的根结点小于H2，如果是左倾堆，我们合并H1的右子树和H2作为H1新的右子树，最后判断这样是否违反性质Npl来决定是否交换孩子。<strong>而斜堆则是无脑交换，也就是说每次这种情况，都把H1的左孩子换到右孩子，然后把新合并的插入到H1的左子树上。</strong></li>
+</ol>
+<p>​    <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191959750.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240319195903707" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191959750.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191959176.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403191959176.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404211308237.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240421130822125" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404211308237.png" /></a></p>
+<div class="highlight"><pre><span></span><code><span class="n">SkewHeap</span><span class="w"> </span><span class="nf">Merge</span><span class="p">(</span><span class="n">SkewHeap</span><span class="w"> </span><span class="n">H1</span><span class="p">,</span><span class="w"> </span><span class="n">SkewHeap</span><span class="w"> </span><span class="n">H2</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// 当一者为NULL结点时，不进行交换孩子，直接返回，对应路径的最大值</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">H1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">H2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">H2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">H1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">,</span><span class="w"> </span><span class="n">H2</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Mer</span>
+<span class="w">        </span><span class="n">SkewHeap</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="p">;</span>
+<span class="w">        </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">;</span>
+<span class="w">        </span><span class="n">H1</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">H1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">,</span><span class="w"> </span><span class="n">H1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">SkewHeap</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Left</span><span class="p">;</span>
+<span class="w">        </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="p">;</span>
+<span class="w">        </span><span class="n">H2</span><span class="o">-&gt;</span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">H2</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">SkewHeap</span><span class="w"> </span><span class="nf">Insert</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">SkewHeap</span><span class="w"> </span><span class="n">H</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">SkewHeap</span><span class="w"> </span><span class="n">SingleNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Initialize</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="n">SkewHeap</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Merge</span><span class="p">(</span><span class="n">SingleNode</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LevelOrder</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="421-合理性分析">4.2.1 合理性分析<a class="headerlink" href="#421-合理性分析" title="Permanent link">&para;</a></h3>
+<p>以每次只插入一个点为例子说明问题。</p>
+<p>进一步对递归旋转到左侧做解释，<strong>递归性地转到左侧，使得本来最右侧的路径变到最左侧</strong>，即使之后交换会重新访问到这个子树，但此时除了根，其他部分依然是最左侧的路径，也不会再轻易地访问到这次路径。</p>
+<p>讨论2：判断以下两个说法是否正确，若正确，请给出详细的证明；若不正确，请举出反例：
+1. 按顺序将含有键值1, 2, · · · , 2k − 1 的结点从小到大依次插入左式堆，那么结果将形成一棵完全平衡的二叉树。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403192020062.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240319202031988" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403192020062.png" /></a></p>
+<ol>
+<li>按顺序将含有键值1, 2, · · · , 2k − 1 的结点从小到大依次插入斜堆，那么结果将形成一棵完全平衡的二叉树。</li>
+</ol>
+<hr />
+<h3 id="422-摊还分析">4.2.2 摊还分析<a class="headerlink" href="#422-摊还分析" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>势能分析方法回顾</strong></p>
+</blockquote>
+<p><span class="arithmatex">\(D_i\)</span>:表示执行第<span class="arithmatex">\(i\)</span>遍之后的数据结构</p>
+<p><span class="arithmatex">\(c_i\)</span>:表示从<span class="arithmatex">\(D_{i-1}\)</span>到<span class="arithmatex">\(D_i\)</span>的实际成本</p>
+<p><span class="arithmatex">\(\hat c_i\)</span>:表示从<span class="arithmatex">\(D_{i-1}\)</span>到<span class="arithmatex">\(D_i\)</span>的均摊成本，<span class="arithmatex">\(\hat c_i = c_i + \Phi(D_i) - \Phi(D_{i-1})\)</span></p>
+<p>总均摊成本为：<span class="arithmatex">\(\sum \hat c_i = \sum c_i + \Phi(D_n) - \Phi(D_0)\)</span></p>
+<hr />
+<p>分析 skew heap 的均摊复杂度，主要就是分析<strong>合并</strong>操作的复杂度，因为其他操作都可以转化为合并操作。</p>
+<p><strong><code>引理：</code>对于右路径上有<span class="arithmatex">\(l\)</span>个轻结点的斜堆，整个斜堆至少有<span class="arithmatex">\(2^l - 1\)</span>个结点，这意味着一个n结点的斜堆右路径上的轻结点个数为<span class="arithmatex">\(O(log \ n)\)</span></strong></p>
+<p><strong><code>证明：</code></strong></p>
+<p>​   1. 对$ l = 1$显然成立</p>
+<ol>
+<li>假设对小于等于<span class="arithmatex">\(l\)</span>都成立。对于<span class="arithmatex">\(l+1\)</span>情况，我们找到右路径上的第二个轻结点，以它为根节点的子树至少有<span class="arithmatex">\(2^l -1\)</span>个结点。</li>
+</ol>
+<p>现在考虑第一个轻结点，根据定义，<strong>轻结点的左子树更大</strong>，而右路径上的第二个轻结点在右子树中。所以第一个轻结点的左子树至少有<span class="arithmatex">\(2^l -1\)</span>个结点。</p>
+<p>所以整个堆有<span class="arithmatex">\(1 + 2^l -1 + 2^l -1 = 2^{l+1}-1\)</span>个结点</p>
+<p><strong><code>定理：</code>若我们有两个斜堆H1和H2， 它们分别由n1和n2个结点，则合并H1和H2的摊还时间复杂度为O(log n), n = n1 + n2</strong></p>
+<blockquote>
+<p><strong>definition "势能函数"</strong></p>
+</blockquote>
+<p>我们定义 <span class="arithmatex">\(\Phi(Heap) = \text{number of heavy node in } Heap\)</span></p>
+<p>其中，额外需要定义 <strong>heavy node 和 light node</strong>：</p>
+<blockquote>
+<p><strong>definition "heavy node &amp; light node"</strong></p>
+</blockquote>
+<p>对于一个子堆 <span class="arithmatex">\(H\)</span>，如果 <span class="arithmatex">\(size(H.\text{right\_descendant}) \geq \frac{1}{2}size(H)\)</span>，则 <span class="arithmatex">\(H\)</span> 是 heavy node，否则是 light node。 </p>
+<p>A node p is <strong>heavy</strong> if the number of <strong>descendants of p’s right subtree is at least half of the number of descendants of p</strong>, and light otherwise.  Note that the number of descendants of a node <code>includes the node itself</code>.</p>
+<p>令<span class="arithmatex">\(H_3\)</span>为合并后的新堆，设<span class="arithmatex">\(H_i(i = 1,2)\)</span>的右路径上的轻结点数量为<span class="arithmatex">\(l_i\)</span>,重结点数量为<span class="arithmatex">\(h_i\)</span></p>
+<p>真实的合并操作最坏的时间复杂度为<span class="arithmatex">\(\sum c_i = l_1 + l_2 + h_1+h_2\)</span>，所有的操作都在右路径上完成</p>
+<p>摊还时间成本为<span class="arithmatex">\(\sum \hat c_i = \sum c_i + \Phi(H_3) - \Phi(H_1) - \Phi(H_2)\)</span></p>
+<p>将<span class="arithmatex">\(h_i^0\)</span>记为不在右路径上的重结点的数量<span class="arithmatex">\(\Phi(H_i) = h_i + h_i^0\)</span>
+$$
+\left{
+    \begin{aligned}
+        c &amp;= l_1 + h_1 + l_2 + h_2 &amp;(1)\
+        \Phi(H_{3}) &amp;\leq l_1 + h^0_1 + l_2 + h^0_2 &amp;(2)\
+        \Phi(H_1) &amp;= h_1 + h^0_{1} &amp;(3)\
+        \Phi(H_2) &amp;= h_2 + h^0_{2} &amp;(4)
+    \end{aligned}
+\right.
+$$</p>
+<blockquote>
+<p><strong><code>性质：</code></strong></p>
+<ol>
+<li>如果一个节点是 <strong><code>heavy node</code></strong>，并且在其右子树发生了合并（包括翻转），那么它<strong>一定</strong>变为一个 <strong><code>light node</code></strong>；</li>
+<li>如果一个节点是 <strong><code>light node</code></strong>，并且在其右子树发生了合并（包括翻转），那么它<strong>可能</strong>变为一个 heavy node；</li>
+<li>合并过程中，<strong>如果一个节点的 heavy/light 发生变化，那么它原先一定在堆的最右侧路径上;因为其它结点合并前后子树是完全被复制的，所以不可能改变轻重状态</strong></li>
+</ol>
+</blockquote>
+<p>合并后原本<strong>不在右路径上的<span class="arithmatex">\(h_i^0\)</span>个重结点仍然是重结点</strong>，在右路径上的<span class="arithmatex">\(h1 + h2\)</span>个重结点全部变成轻结点，<span class="arithmatex">\(l1 + l2\)</span> 个轻结点不一定都变重。
+$$
+\begin{aligned}
+\Phi(H_3) &amp;&lt;= h_1^0 +h_2^0 + l_1 + l_2 \
+\
+\sum \hat c_i &amp;= \sum c_i + \Phi(H_3) - \Phi(H_1) -\phi(H_2) \
+&amp; &lt;= l_1 + l_2 +h_1+h_2 + (l_1 + l_2 + h_1^0 + h_2^0) - (h_1 + h_1^0 + h_2 + h_2^0)\
+&amp; = 2(l_1 + l_2) = O(log   n_1 + log  n_2) = O(log(n_1 + n_2))
+\end{aligned}
+$$</p>
+<h2 id="43-习题集">4.3 习题集<a class="headerlink" href="#43-习题集" title="Permanent link">&para;</a></h2>
+<ol>
+<li>The result of inserting keys 1 to <span class="arithmatex">\(2^k -1\)</span> for any <span class="arithmatex">\(k&gt;4\)</span> in order into an initially empty skew heap is always a full binary tree.</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211124734.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240321112455601" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211124734.png" /></a></p>
+<p><strong><code>True</code></strong></p>
+<p>数学归纳法证明，首先对于k=4，满二叉树成立</p>
+<p>对于k=5，左右子树的</p>
+<ol>
+<li>The right path of a skew heap can be arbitrarily long. </li>
+</ol>
+<p><strong><code>True</code></strong></p>
+<p>相对而言，leftist heap 就不能这么任意了，它受$ logN$ 限制。</p>
+<ol>
+<li>A skew heap is a heap data structure implemented as a binary tree. Skew heaps are advantageous because of their ability to merge more quickly than balanced binary heaps. The <strong>worst case</strong> time complexities for Merge, Insert, and DeleteMin are all <span class="arithmatex">\(O(N)\)</span>, while the <strong>amorited time complexities</strong> for Merge, Insert, and DeleteMin are all <span class="arithmatex">\(O(logN)\)</span>.</li>
+</ol>
+<p><strong>True</strong></p>
+<p><strong><code>斜堆执行merge，insert，delete最坏时间复杂度为O（N），均摊时间复杂度为O（logN）</code></strong></p>
+<ol>
+<li>Merge the two leftist heaps in the following figure.  Which one of the following statements is FALSE?</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211132099.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211132099.png" alt="image-20240321113208056" style="zoom:80%;" /></a></p>
+<ul>
+<li>
+<p>A. 2 is the root with 11 being its right child</p>
+</li>
+<li>
+<p>B. the depths of 9 and 12 are the same</p>
+</li>
+<li>
+<p>C. 21 is the deepest node with 11 being its parent</p>
+</li>
+<li>
+<p><code>D. the null path length of 4 is less than that of 2</code></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211134537.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211134537.png" alt="image-20240321113403464" style="zoom:67%;" /></a></p>
+</li>
+<li>
+<p>We can perform <strong>BuildHeap</strong> for leftist heaps by considering each element as a <strong>one-node leftist heap</strong>, placing all these heaps on a queue, and performing the following step: <strong>Until only one heap is on the queue, dequeue two heaps, merge them, and enqueue the result</strong>.  Which one of the following statements is FALSE?</p>
+</li>
+<li>
+<p>A. in the <span class="arithmatex">\(k\)</span>-th run, <span class="arithmatex">\(\lceil N/2^k \rceil\)</span> leftist heaps are formed, each contains <span class="arithmatex">\(2^k\)</span> nodes</p>
+</li>
+<li>
+<p>B. the worst case is when <span class="arithmatex">\(N=2^K\)</span> for some integer <span class="arithmatex">\(K\)</span></p>
+</li>
+<li>
+<p>C. the time complexity <span class="arithmatex">\(T(N) = O(\frac{N}{2}log 2^0 + \frac{N}{2^2}log 2^1 + \frac{N}{2^3}log 2^2 + \cdots + \frac{N}{2^K}log 2^{K-1})\)</span> for some integer <span class="arithmatex">\(K\)</span> so that <span class="arithmatex">\(N=2^K\)</span></p>
+</li>
+<li>
+<p>D. the worst case time complexity of this algorithm is <span class="arithmatex">\(\Theta (NlogN)\)</span></p>
+</li>
+</ul>
+<p><strong>C选项得到的时间复杂度为O(N), 与D选项矛盾</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404211343045.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240421134313940" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404211343045.png" /></a></p>
+<ol>
+<li>
+<p>Insert keys 1 to 15 in order into an initially empty skew heap.  Which one of the following statements is FALSE?</p>
+</li>
+<li>
+<p>A. the resulting tree is a complete binary tree</p>
+</li>
+<li>
+<p>B. there are 6 leaf nodes</p>
+</li>
+<li>
+<p>C. 6 is the left child of 2</p>
+</li>
+<li>
+<p>D. 11 is the right child of 7</p>
+</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211142347.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211142347.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211148920.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211148920.png" alt="4.4" style="zoom:67%;" /></a></p>
+<p><strong>显然，AB选项矛盾，前面得到，结果肯定是满二叉树</strong></p>
+<ol>
+<li>Merge the two skew heaps in the following figure.  Which one of the following statements is FALSE?</li>
+</ol>
+<p><a class="glightbox" href="https://images.ptausercontent.com/195" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://images.ptausercontent.com/195" /></a></p>
+<ul>
+<li>
+<p>A. 15 is the right child of 8</p>
+</li>
+<li>
+<p>B. 14 is the right child of 6</p>
+</li>
+<li>
+<p>C. 1 is the root</p>
+</li>
+<li>
+<p>D. 9 is the right child of 3</p>
+</li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211146679.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403211146679.png" alt="4.5" width = 60%></a></p>
+<blockquote>
+<p><strong><code>具体思路为：先对右路径结点进行大小排序，分别为1，3，5，6，13</code></strong></p>
+<p><strong>对应结点的左子树直接移动到右子树即可</strong></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

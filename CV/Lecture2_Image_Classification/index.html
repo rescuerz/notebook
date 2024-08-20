@@ -1,0 +1,1669 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+        <link rel="prev" href="../Lecture1_Introduction/">
+      
+      
+        <link rel="next" href="../Lecture3_Linear_Classifiers/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Image_Classification - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#image_classification" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Image_Classification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ADS/Readme/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Lecture1_Introduction/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/Readme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Readme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#概念" class="md-nav__link">
+    <span class="md-ellipsis">
+      概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#困难和挑战" class="md-nav__link">
+    <span class="md-ellipsis">
+      困难和挑战
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="困难和挑战">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#类别不平衡问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      类别不平衡问题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#样本数量少问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      样本数量少问题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#目标检测任务" class="md-nav__link">
+    <span class="md-ellipsis">
+      目标检测任务
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#数据驱动方法-data-driven-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据驱动方法 Data-Driven Approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#数据集" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据集
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mnist-数据集计算机视觉中的果蝇" class="md-nav__link">
+    <span class="md-ellipsis">
+      MNIST 数据集：计算机视觉中的果蝇
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifar-数据集" class="md-nav__link">
+    <span class="md-ellipsis">
+      CIFAR 数据集
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imagenet黄金数据集" class="md-nav__link">
+    <span class="md-ellipsis">
+      ImageNet：黄金数据集
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nearest-neighbor-分类器" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nearest Neighbor 分类器
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k-nearest-neighbor-分类器" class="md-nav__link">
+    <span class="md-ellipsis">
+      k-Nearest Neighbor 分类器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="k-Nearest Neighbor 分类器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#用于超参数调优的验证集" class="md-nav__link">
+    <span class="md-ellipsis">
+      用于超参数调优的验证集
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nearest-neighbor-分类器的优劣" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nearest Neighbor 分类器的优劣
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      小结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#小结实际应用-k-nn" class="md-nav__link">
+    <span class="md-ellipsis">
+      小结：实际应用 k-NN
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#评价指标" class="md-nav__link">
+    <span class="md-ellipsis">
+      评价指标
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="评价指标">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#正负样本" class="md-nav__link">
+    <span class="md-ellipsis">
+      正负样本
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pr-曲线" class="md-nav__link">
+    <span class="md-ellipsis">
+      PR 曲线
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roc-曲线与-auc" class="md-nav__link">
+    <span class="md-ellipsis">
+      ROC 曲线与 AUC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#混淆矩阵" class="md-nav__link">
+    <span class="md-ellipsis">
+      混淆矩阵
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#概念" class="md-nav__link">
+    <span class="md-ellipsis">
+      概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#困难和挑战" class="md-nav__link">
+    <span class="md-ellipsis">
+      困难和挑战
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="困难和挑战">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#类别不平衡问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      类别不平衡问题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#样本数量少问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      样本数量少问题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#目标检测任务" class="md-nav__link">
+    <span class="md-ellipsis">
+      目标检测任务
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#数据驱动方法-data-driven-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据驱动方法 Data-Driven Approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#数据集" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据集
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mnist-数据集计算机视觉中的果蝇" class="md-nav__link">
+    <span class="md-ellipsis">
+      MNIST 数据集：计算机视觉中的果蝇
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cifar-数据集" class="md-nav__link">
+    <span class="md-ellipsis">
+      CIFAR 数据集
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imagenet黄金数据集" class="md-nav__link">
+    <span class="md-ellipsis">
+      ImageNet：黄金数据集
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nearest-neighbor-分类器" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nearest Neighbor 分类器
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k-nearest-neighbor-分类器" class="md-nav__link">
+    <span class="md-ellipsis">
+      k-Nearest Neighbor 分类器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="k-Nearest Neighbor 分类器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#用于超参数调优的验证集" class="md-nav__link">
+    <span class="md-ellipsis">
+      用于超参数调优的验证集
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nearest-neighbor-分类器的优劣" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nearest Neighbor 分类器的优劣
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      小结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#小结实际应用-k-nn" class="md-nav__link">
+    <span class="md-ellipsis">
+      小结：实际应用 k-NN
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#评价指标" class="md-nav__link">
+    <span class="md-ellipsis">
+      评价指标
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="评价指标">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#正负样本" class="md-nav__link">
+    <span class="md-ellipsis">
+      正负样本
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pr-曲线" class="md-nav__link">
+    <span class="md-ellipsis">
+      PR 曲线
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roc-曲线与-auc" class="md-nav__link">
+    <span class="md-ellipsis">
+      ROC 曲线与 AUC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#混淆矩阵" class="md-nav__link">
+    <span class="md-ellipsis">
+      混淆矩阵
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/Blog/blob/main/docs/CV/Lecture2_Image_Classification.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/Blog/raw/main/docs/CV/Lecture2_Image_Classification.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="image_classification">Image_Classification<a class="headerlink" href="#image_classification" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 8023 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 63 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 41 分钟</p>
+</div>
+<h2 id="概念">概念<a class="headerlink" href="#概念" title="Permanent link">&para;</a></h2>
+<p><strong>目标</strong>：这一节我们将介绍图像分类问题。<strong><code>所谓图像分类问题，就是已有固定的分类标签集合，然后对于输入的图像，从分类标签集合中找出一个分类标签，最后把分类标签分配给该输入图像，或者简单的说，就是对于一个给定的图像，预测它属于哪个类别（或者给出属于一系列不同标签的可能性）。</code></strong> 虽然看起来挺简单的，但这可是计算机视觉领域的核心问题之一，并且有着各种各样的实际应用。在这里我们面临的挑战就是 <strong>语义鸿沟(semantic gap)</strong>。在后面的课程中，我们可以看到计算机视觉领域中很多看似不同的问题（比如物体检测和分割），都可以被归结为图像分类问题。</p>
+<blockquote>
+<p><strong>例子</strong>：以下图为例，图像分类模型读取该图片，并生成该图片属于集合 {cat, dog, hat, mug}中各个标签的概率。需要注意的是，对于计算机来说，图像是一个由数字组成的巨大的 3 维数组（在深度学习工具中，图像就是一个三维张量）。在下图这个例子中，猫的图像大小是宽 248 像素，高 400 像素，有 3 个颜色通道，分别是红、绿和蓝（简称 RGB）。</p>
+<p>如此，该图像就包含了 <span class="arithmatex">\(248\times400\times3 = 297600\)</span> 个数字，每个数字都是在范围 0-255 之间的整型，其中 0 表示全黑，255 表示全白。我们的任务就是把这些上百万的数字变成一个简单的标签，比如 "猫"。或者说，我们需要借助某种方法将这个原始数字网络转变为相应的有意义的语义——比如说“猫”标签</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151643362.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815164351285" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151643362.png" /></a></p>
+</blockquote>
+<h2 id="困难和挑战">困难和挑战<a class="headerlink" href="#困难和挑战" title="Permanent link">&para;</a></h2>
+<p>对于人来说，识别出一个像 "猫" 一样视觉概念是简单至极的，然而从计算机视觉算法的角度来看就值得深思了。我们在下面列举了计算机视觉算法在图像识别方面遇到的一些困难</p>
+<ul>
+<li><strong>视角变化（</strong> Viewpoint variation <strong>）</strong>：同一个物体，摄像机可以从 <strong><code>多个角度来展现</code></strong>，尽管可能角度的变化很轻微，但是可能使得这些数字发生不直观的某种改变</li>
+<li><strong>类内差异（</strong> Intra-class variation <strong>）</strong>：一类物体的个体之间的外形差异很大，比如椅子。<strong><code>这一类物体有许多不同的对象，每个都有自己的外形</code></strong>。比如说猫就是一种很会变形的生物</li>
+<li><strong>相似类（</strong> Fine-Grained Categories <strong>）</strong>：不同类物体的个体之间的外形差异小</li>
+<li><strong>背景干扰（</strong> Background clutter <strong>）</strong>：物体可能 <strong><code>混入背景之中</code></strong>，使之难以被辨认</li>
+<li><strong>光照条件（</strong> Illumination conditions <strong>）</strong>：在像素层面上，光照的影响非常大，比如说 <strong><code>光照和昏暗情况</code></strong> 下图像会有不同情况</li>
+<li><strong>形变（</strong> Deformation <strong>）</strong>：很多东西的形状并非一成不变，会有很大变化。</li>
+<li><strong>遮挡（</strong> Occlusion <strong>）</strong>：<strong><code>目标物体可能被挡住</code></strong>。有时候只有物体的一小部分（可以小到几个像素）是可见的，比如说猫隐藏在草丛中，并不明显</li>
+<li><strong>大小变化（</strong> Scale variation <strong>）</strong>：物体可视的大小通常是会变化的（不仅是在图片中，在真实世界中大小也是变化的）。</li>
+</ul>
+<p><strong>面对以上所有变化及其组合，好的图像分类模型能够在维持分类结论稳定的同时，保持对 <code>类内差异</code> 足够敏感。</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151644458.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815164428396" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151644458.png" /></a></p>
+<p>当然，图像分类有不同的境界</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151037315.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L1_7" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151037315.png" /></a></p>
+<p>通用的多类别分类，是在不同物种的层次上进行分类，比如说我们只需要区分出猫和狗即可</p>
+<p>子类细粒度分类是对一个大类中的子类进行划分，比如说我们区分了猫狗，我们需要进一步区别是什么品种的猫和狗</p>
+<p>最高的是实例级分类，一个个体就是一个类，这种的细粒度最高</p>
+<h3 id="类别不平衡问题">类别不平衡问题<a class="headerlink" href="#类别不平衡问题" title="Permanent link">&para;</a></h3>
+<p>如果不同类别下样本数量相差很大，就会导致分类模型的性能变差，就与学生极度偏科一样，总分无法特别高，我们可以使用不同方面的方法提供解决方案</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151037966.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L2_24" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151037966.png" /></a></p>
+<h3 id="样本数量少问题">样本数量少问题<a class="headerlink" href="#样本数量少问题" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>我们可以将样本数量很少的类别，<strong>随机进行一些插值</strong>，比如说<strong>随机选择一些图片进行复制添加到该类别包含的图像内</strong>，实际上这就是一种插值方式</p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038309.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L2_25" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038309.png" /></a></p>
+<blockquote>
+<p>当然我们可以以结果为导向进行提高，删除一些分类好的类别的样本，复制一些比较差的样本的类别</p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038500.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L2_27" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038500.png" /></a></p>
+<blockquote>
+<p>或者我们可以对算法本身进行改进，先构建一个比较均衡的数据集，然后在这个上面进行预训练，后面进行微调，也可以有一定程度上的提高</p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038970.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L2_28" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038970.png" /></a></p>
+<blockquote>
+<p><strong>也可以进行基于样本数量的自适应加权，提高数量少的类别的权重</strong></p>
+</blockquote>
+<p>研究类别数量不均衡的问题是有意义的，因为在一些特定样本难以获取的任务上，样本数量几乎是必定极为不均衡的，<strong>比如说医疗视觉模型任务中，一些罕见病的影像数量很少</strong></p>
+<p>当然，我们也可以尝试通过迁移学习解决，如果预训练模型的训练数据足够大，并且与本任务相匹配，那么这个预训练模型所学的特征就会具有一定的通用性，比如说用途广泛的 ImageNet 数据集</p>
+<p>当然我们也可以使用数据增强方式，人为扩充数据集，这样子就可以一定程度上解决数据集的问题</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038161.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L2_32" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038161.png" /></a></p>
+<h2 id="目标检测任务">目标检测任务<a class="headerlink" href="#目标检测任务" title="Permanent link">&para;</a></h2>
+<p>当然，计算机视觉不止有图像分类，还有另一个相关的任务——<strong><code>目标检测（object detection）</code></strong>，这个任务我们需要将图像中的目标对象圈出来</p>
+<p>结果证明，图像分类本来就是一个基础，可以用来构建更多更复杂的应用程序，比如说目标检测，根据图片生成 caption 注释（例如下图可以生成 man ride horse），等
+<a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038331.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038331.jpeg" /></a></p>
+<hr />
+<blockquote>
+<p><strong>想法</strong>：如何实现图像分类？</p>
+<p>根据之前所了解到的方法，我们可能首先想到通过对照片进行 <strong><code>边缘检测(edge detection)</code></strong> 来提取特征，如何尝试找到角点或者其他类型的可解释模式，比如说猫有三角形尖耳朵，所以可以通过检测这方面的边缘信息，或者我们知道猫有胡须，所以我们可以提取胡须的边缘信息，我们根据这些信息来写一个算法来检测他们</p>
+<p>当然，这并不是一个很好的方法，比如说会有没有胡须的猫，会有没有尖耳朵的猫，<strong>或者有时候边缘检测器会失效从而无法正常提交所需的边缘</strong>，而且这很难进行迁移——当我们可以成功识别猫的时候，如果我们想将其用到其他方面，比如说识别狗，那么之前的工作将毫无意义，<strong><code>所以我们需要找到一种具有可扩展性的算法</code></strong></p>
+</blockquote>
+<h2 id="数据驱动方法-data-driven-approach">数据驱动方法 Data-Driven Approach<a class="headerlink" href="#数据驱动方法-data-driven-approach" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Collect a dataset of images and labels</li>
+<li>Use machine learning to train a classifier</li>
+<li>Evaluate the classifier on new images</li>
+</ol>
+<p>3 个重要的环节：</p>
+<ul>
+<li>
+<p><strong>input</strong>：输入是包含 N 个图像的集合，每个图像的标签是 K 种分类标签中的一种。这个集合称为训练集。</p>
+</li>
+<li>
+<p><strong>train</strong>： 输入图像数据集以及相关标签集合，使用某种机器学习算法，返回统计模型</p>
+</li>
+<li><strong>predict</strong>：让分类器来预测它未曾见过的图像的分类标签，并以此来评价分类器的质量。</li>
+</ul>
+<blockquote>
+<p>传统的图像分类是由专家去手动设计特征去提取（依靠人类现有的约定俗成的知识），深度学习分类方法则是让机器自动去学习如何提取特征和哪些提取特征，人类所需要做的就是投喂大量的目标 label 的图像。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038903.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L1_12" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038903.png" /></a></p>
+</blockquote>
+<p>如何写一个图像分类的算法呢？这和写个排序算法可是大不一样。怎么写一个从图像中认出猫的算法？搞不清楚。因此，<strong><code>与其在代码中直接写明各类物体到底看起来是什么样的，倒不如说我们采取的方法和教小孩儿看图识物类似：给计算机很多数据，然后实现学习算法，让计算机学习到每个类的外形。</code></strong> 这种方法，就是<em>数据驱动方法</em>。也就是使用拥有从数据中学习如何识别不同类型对象与图像的算法。既然该方法的第一步就是收集大量已经做好分类标注的图片来作为训练集，那么下面就看看数据集到底长什么样：</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151647752.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815164711670" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151647752.png" /></a></p>
+<hr />
+<h2 id="数据集">数据集<a class="headerlink" href="#数据集" title="Permanent link">&para;</a></h2>
+<h3 id="mnist-数据集计算机视觉中的果蝇">MNIST 数据集：计算机视觉中的果蝇<a class="headerlink" href="#mnist-数据集计算机视觉中的果蝇" title="Permanent link">&para;</a></h3>
+<p>MNIST 数据集是一种手写数字数据集，其中的每张图片都包括一个不同的手写数字，大小统一为 28 <span class="arithmatex">\(\times\)</span> 28，十个类别，有五万张作为训练集和一万张作为测试集</p>
+<p>它更像一种玩具数据集，或者也被称为计算机视觉的果蝇，可以做很多测试，因为这个数据集很小而且简单，可以快速验证新想法</p>
+<h3 id="cifar-数据集">CIFAR 数据集<a class="headerlink" href="#cifar-数据集" title="Permanent link">&para;</a></h3>
+<p><strong>CIFAR-10</strong>：一个非常流行的图像分类数据集是 [CIFAR-10][15]。这个数据集包含了 60000 张 32X32 的小图像。每张图像都有 10 种分类标签中的一种并且只有一个主体对象。这 60000 张图像被分为包含 50000 张图像的训练集和包含 10000 张图像的测试集。可以视作 MNIST 的彩色增强版</p>
+<p>在下图中你可以看见 10 个类的 10 张随机图片。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151647352.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815164732263" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151647352.png" /></a></p>
+<p><strong>左边</strong>：从 [CIFAR-10][15] 数据库来的样本图像。<strong>右边：第一列是测试图像，然后第一列的每个测试图像右边是使用 Nearest Neighbor 算法，根据像素差异，从训练集中选出的 10 张最类似的图片。</strong></p>
+<p>此外还有 CIFAR100 数据集（100 类），细粒度更高，有一百个类，并且每五个类组成一个超类每个类有 600 个图像，并且每个图像有两个标签——一个是精细的类标签，一个是粗糙的超类标签，如下图所示</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038896.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L1_19" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038896.png" /></a></p>
+<h3 id="imagenet黄金数据集">ImageNet：黄金数据集<a class="headerlink" href="#imagenet黄金数据集" title="Permanent link">&para;</a></h3>
+<p>这是一个非常大的数据，有两万种类别，同时有千万张图片（每个类别 1300 张），百万标注框，图像大小不统一，以其命名的 ImageNet 分类竞赛使用了其中一千个类的子集，在此竞赛中出现了大量经典工作，如 AlexNet 等 <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038865.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L1_22" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038865.png" /></a></p>
+<p>我们可以看到，一个图片的标注可以分为很多个级别，颗粒度越来越小（或者说一个图片有多个标签并且呈包含关系）</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038402.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L1_24" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038402.png" /></a></p>
+<h2 id="nearest-neighbor-分类器">Nearest Neighbor 分类器<a class="headerlink" href="#nearest-neighbor-分类器" title="Permanent link">&para;</a></h2>
+<p>作为课程介绍的第一个方法，我们来实现一个 <strong>Nearest Neighbor 分类器</strong>。虽然这个分类器和卷积神经网络没有任何关系，实际中也极少使用而且其非常简单，但通过实现它，可以让读者对于解决图像分类问题的方法有个基本的认识，也就是机器学习系统的两个基本部分——训练、预测。</p>
+<p><strong><code>其中，训练函数，就是记住所有的数据和标签（或者说进行学习），预测函数，就是预测出图像最可能的标签</code></strong></p>
+<p>假设现在我们有 CIFAR-10 的 50000 张图片（每种分类 5000 张）作为训练集，我们希望将余下的 10000 作为测试集并给他们打上标签。Nearest Neighbor 算法将会拿着测试图片和训练集中每一张图片去比较，然后将它认为最相似的那个训练集图片的标签赋给这张测试图片。</p>
+<p>那么具体如何比较两张图片的相似程度呢（或者可以将相似程度理解为距离，距离越近，图片越相似）？在本例中，就是比较 32x32x3 的像素块。最简单的方法就是逐个像素比较，最后将差异值全部加起来。换句话说，就是将两张图片先转化为两个向量 <span class="arithmatex">\(I_1, I_2\)</span>，然后计算他们的 <strong>L1 距离（曼哈顿距离）：</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151039400.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="EECS498_L2_61" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151039400.jpeg" /></a></p>
+<p>这里的求和是针对所有的像素。下面是整个比较流程的图例：</p>
+<blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151648725.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815164852682" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151648725.png" /></a></p>
+<p>以图片中的一个颜色通道为例来进行说明。两张图片使用 L1 距离来进行比较。逐个像素求差值，然后将所有差值加起来得到一个数值。如果两张图片一模一样，那么 L1 距离为 0，但是如果两张图片很是不同，那 L1 值将会非常大。</p>
+</blockquote>
+<hr />
+<p>下面，让我们看看如何用代码来实现这个分类器。首先，我们将 CIFAR-10 的数据加载到内存中，并分成 4 个数组：<strong>训练数据和标签，测试数据和标签</strong>。在下面的代码中，<strong>Xtr</strong>（大小是 <span class="arithmatex">\(50000\times32\times32\times3\)</span>）存有训练集中所有的图像，<strong>Ytr</strong> 是对应的长度为 50000 的 1 维数组，存有图像对应的分类标签（从 0 到 9）：</p>
+<div class="highlight"><pre><span></span><code><span class="n">Xtr</span><span class="p">,</span> <span class="n">Ytr</span><span class="p">,</span> <span class="n">Xte</span><span class="p">,</span> <span class="n">Yte</span> <span class="o">=</span> <span class="n">load_CIFAR10</span><span class="p">(</span><span class="s1">&#39;data/cifar10/&#39;</span><span class="p">)</span> <span class="c1"># a magifunction we provide</span>
+<span class="c1"># flatten out all images to be one-dimensional</span>
+<span class="n">Xtr_rows</span> <span class="o">=</span> <span class="n">Xtr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Xtr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">32</span> <span class="o">*</span> <span class="mi">32</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># Xtr_row becomes 50000 x 3072</span>
+<span class="n">Xte_rows</span> <span class="o">=</span> <span class="n">Xte</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Xte</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">32</span> <span class="o">*</span> <span class="mi">32</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># Xte_row becomes 10000 x 3072</span>
+</code></pre></div>
+<ul>
+<li><code>Xtr.shape[0]</code> 获取 <code>Xtr</code> 数组的第一个维度的大小，即样本的数量。</li>
+<li>
+<p><code>reshape</code> 方法用于将每个 32x32 的彩色图像（3 个通道分别对应 RGB）转换为一个 3072 维的 1 维向量（32 _ 32 _ 3 = 3072）。</p>
+</li>
+<li>
+<p><code>Xtr_rows</code> 和 <code>Xte_rows</code> 的形状分别为 <code>(50000, 3072)</code> 和 <code>(10000, 3072)</code>，其中每一行表示一个展平的图像。</p>
+</li>
+</ul>
+<blockquote>
+<p>通过 <code>Xtr.shape[0]</code>，你获得了样本数量（50000），并在 <code>reshape</code> 方法中将每张图像展平成一个 3072 维的向量。这样可以确保展平后的数组仍然包含 50000 个样本，每个样本有 3072 个特征。</p>
+</blockquote>
+<p>现在我们得到所有的图像数据，并且把他们拉长成为行向量了。接下来展示如何训练并评价一个分类器：</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">nn</span> <span class="o">=</span> <span class="n">NearestNeighbor</span><span class="p">()</span> <span class="c1"># create a Nearest Neighbor classifier class</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">Xtr_rows</span><span class="p">,</span> <span class="n">Ytr</span><span class="p">)</span> <span class="c1"># train the classifier on the training images and labels</span>
+    <span class="n">Yte_predict</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xte_rows</span><span class="p">)</span> <span class="c1"># predict labels on the test images</span>
+    <span class="c1"># and now print the classification accuracy, which is the average number</span>
+    <span class="c1"># of examples that are correctly predicted (i.e. label matches)</span>
+    <span class="nb">print</span> <span class="s1">&#39;accuracy: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Yte_predict</span> <span class="o">==</span> <span class="n">Yte</span><span class="p">)</span> <span class="p">)</span>
+</code></pre></div>
+<ol>
+<li>常见最近邻分类器</li>
+</ol>
+<p>这里的 <code>NearestNeighbor</code> 是一个自定义的最近邻分类器类的实例化对象。这个类应该有方法来训练模型和进行预测</p>
+<ol>
+<li>训练分类器</li>
+</ol>
+<p><code>train()</code> 方法将分类器训练在训练集上。它接收两个参数：</p>
+<ul>
+<li><code>Xtr_rows</code>：展平后的训练图像数据（50000 x 3072）。</li>
+<li><code>Ytr</code>：训练图像的标签。</li>
+</ul>
+<p>在最近邻分类器中，训练通常只是将训练数据存储起来，因为预测时只需要找到距离最近的训练样本。</p>
+<ol>
+<li>进行预测</li>
+</ol>
+<p><code>predict()</code> 方法使用最近邻算法对测试集 <code>Xte_rows</code> 进行预测。它将为测试集中的每个样本找到距离最近的训练样本，并返回相应的标签。</p>
+<ol>
+<li>计算并打印了分类器在测试集上的准确率。</li>
+</ol>
+<p><code>Yte_predict == Yte</code> 会生成一个布尔数组，表示预测标签与实际标签是否匹配。</p>
+<p><code>np.mean()</code> 计算该布尔数组中 <code>True</code> 的比例（即分类正确的样本占比），作为准确率。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">class</span> <span class="nc">NearestNeighbor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="c1"># X 是形状为 N x D 的训练数据，其中每一行是一个示例，y 是 N 长度的一维标签数组</span>
+        <span class="c1"># 最近邻分类器只需要记住所有的训练数据</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Xtr</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ytr</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="c1"># X 是形状为 N x D 的测试数据，其中每一行是一个我们想预测标签的示例</span>
+        <span class="n">num_test</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># 确保输出类型与输入类型匹配</span>
+        <span class="n">Ypred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_test</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Ytr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="c1"># 遍历所有测试样本</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_test</span><span class="p">):</span>
+            <span class="c1"># 找到与第 i 个测试样本最近的训练样本</span>
+            <span class="c1"># 使用 L1 距离（绝对值差的和）</span>
+            <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Xtr</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># 获取距离最小的索引</span>
+            <span class="n">min_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+            <span class="c1"># 预测最近样本的标签</span>
+            <span class="n">Ypred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ytr</span><span class="p">[</span><span class="n">min_index</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">Ypred</span>
+</code></pre></div>
+<p>如果你用这段代码跑 CIFAR-10，你会发现准确率能达到 <strong>38.6%</strong>。这比随机猜测的 10%要好，但是比人类识别的水平（[据研究推测是 94%__][21]）和卷积神经网络能达到的 95%还是差多了。点击查看基于 CIFAR-10 数据的[Kaggle 算法竞赛排行榜__][22]。</p>
+<p><strong>距离选择</strong>：计算向量间的距离有很多种方法，另一个常用的方法是 <strong>L2 距离</strong>，从几何学的角度，可以理解为它在计算两个向量间的欧式距离。L2 距离的公式如下：</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151039314.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="EECS498_L2_61" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151039314.jpeg" /></a></p>
+<p>换句话说，我们依旧是在计算像素间的差值，只是先求其平方，然后把这些平方全部加起来，最后对这个和开方。在 Numpy 中，我们只需要替换上面代码中的 1 行代码就行：</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Xtr</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,:]),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></div>
+<p>注意在这里使用了 <strong>np.sqrt</strong>，但是在实际中可能不用。因为求平方根函数是一个单调函数，它对不同距离的绝对值求平方根虽然改变了数值大小，但依然保持了不同距离大小的顺序。所以用不用它，都能够对像素差异的大小进行正确比较。如果你在 CIFAR-10 上面跑这个模型，正确率是 <strong>35.4%</strong>，比刚才低了一点。</p>
+<h2 id="k-nearest-neighbor-分类器">k-Nearest Neighbor 分类器<a class="headerlink" href="#k-nearest-neighbor-分类器" title="Permanent link">&para;</a></h2>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151533303.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815153348077" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151533303.png" /></a></p>
+<p>你可能注意到了，为什么只用最相似的 1 张图片的标签来作为测试图像的标签呢？这不是很奇怪吗！是的，使用 <strong>k-Nearest Neighbor 分类器</strong> 就能做得更好。它的思想很简单：与其只找最相近的那 1 个图片的标签，我们找最相似的 k 个图片的标签，然后让他们针对测试图片进行投票，最后把票数最高的标签作为对测试图片的预测。所以当 k = 1 的时候，k-Nearest Neighbor 分类器就是 Nearest Neighbor 分类器。从直观感受上就可以看到，更高的 k 值可以让分类的效果更平滑，使得分类器对于异常值更有抵抗力。</p>
+<hr />
+<p><a class="glightbox" href="https://github.com/Michael-Jetson/ML_DL_CV_with_pytorch/assets/114546283/bdd1fa05-cb3c-4dc5-b24f-940987cdb225" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="51aef845faa10195e33bdd4657592f86_r" src="https://github.com/Michael-Jetson/ML_DL_CV_with_pytorch/assets/114546283/bdd1fa05-cb3c-4dc5-b24f-940987cdb225" /></a> 上面示例展示了 Nearest Neighbor 分类器和 5-Nearest Neighbor 分类器的区别。例子使用了 2 维的点来表示，分成 3 类（红、蓝和绿）。不同颜色区域代表的是使用 L2 距离的分类器的 <strong>决策边界</strong>。白色的区域是分类模糊的例子（即图像与两个以上的分类标签绑定）。需要注意的是，在 NN 分类器中，异常的数据点（比如：在蓝色区域中的绿点）制造出一个不正确预测的孤岛。5-NN 分类器将这些不规则都平滑了，使得它针对测试数据的 <strong>泛化（generalization）</strong> 能力更好（例子中未展示）。注意，5-NN 中也存在一些灰色区域，这些区域是因为近邻标签的最高票数相同导致的（比如：2 个邻居是红色，2 个邻居是蓝色，还有 1 个是绿色)。</p>
+<h3 id="用于超参数调优的验证集">用于超参数调优的验证集<a class="headerlink" href="#用于超参数调优的验证集" title="Permanent link">&para;</a></h3>
+<p>k-NN 分类器需要设定 k 值，那么选择哪个 k 值最合适的呢？我们可以选择不同的距离函数，比如 L1 范数和 L2 范数等，那么选哪个好？还有不少选择我们甚至连考虑都没有考虑到（比如：点积）。所有这些选择，被称为 <strong>超参数（hyperparameter）</strong>。在基于数据进行学习的机器学习算法设计中，超参数是很常见的。一般说来，这些超参数具体怎么设置或取值并不是显而易见的。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151554538.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815155408472" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151554538.png" /></a></p>
+<p><strong><code>你可能会建议尝试不同的值，看哪个值表现最好就选哪个。</code></strong></p>
+<ul>
+<li>choose hyperparameters that work best on the data</li>
+</ul>
+<p><strong><code>K = 1 always works perfectly on training data</code></strong></p>
+<ul>
+<li>Split data into train and test，choose hyperparameters that work best on the test data</li>
+</ul>
+<p><strong><code>No idea how algorithm will perform on new data</code></strong></p>
+<p>特别注意：<strong><code>决不能使用测试集来进行调优</code></strong>。当你在设计机器学习算法的时候，应该把测试集看做非常珍贵的资源，不到最后一步，绝不使用它。如果你使用测试集来调优，而且算法看起来效果不错，那么真正的危险在于：算法实际部署后，性能可能会远低于预期。这种情况，称之为算法对测试集 <strong><code>过拟合</code></strong>。从另一个角度来说，如果使用测试集来调优，实际上就是把测试集当做训练集，由测试集训练出来的算法再跑测试集，自然性能看起来会很好。这其实是过于乐观了，实际部署起来效果就会差很多。所以，最终测试的时候再使用测试集，可以很好地近似度量你所设计的分类器的泛化性能（在接下来的课程中会有很多关于泛化性能的讨论）。</p>
+<blockquote>
+<p>测试数据集只使用一次，即在训练完成后评价最终的模型时使用。</p>
+<p>但是只有训练集和测试集会有一个问题，那就是不知道算法在新数据上表现如何。 解决思路是：<strong><code>从训练集中取出一部分数据用来调优，我们称之为验证集（validation set）。</code></strong> 以 CIFAR-10 为例，我们可以用 49000 个图像作为训练集，用 1000 个图像作为验证集。验证集其实就是作为假的测试集来调优</p>
+</blockquote>
+<p>下面就是代码：</p>
+<div class="highlight"><pre><span></span><code>    <span class="c1"># assume we have Xtr_rows, Ytr, Xte_rows, Yte as before</span>
+    <span class="c1"># recall Xtr_rows is 50,000 x 3072 matrix</span>
+    <span class="n">Xval_rows</span> <span class="o">=</span> <span class="n">Xtr_rows</span><span class="p">[:</span><span class="mi">1000</span><span class="p">,</span> <span class="p">:]</span> <span class="c1"># take first 1000 for validation</span>
+    <span class="n">Yval</span> <span class="o">=</span> <span class="n">Ytr</span><span class="p">[:</span><span class="mi">1000</span><span class="p">]</span>
+    <span class="n">Xtr_rows</span> <span class="o">=</span> <span class="n">Xtr_rows</span><span class="p">[</span><span class="mi">1000</span><span class="p">:,</span> <span class="p">:]</span> <span class="c1"># keep last 49,000 for train</span>
+    <span class="n">Ytr</span> <span class="o">=</span> <span class="n">Ytr</span><span class="p">[</span><span class="mi">1000</span><span class="p">:]</span>
+
+    <span class="c1"># find hyperparameters that work best on the validation set</span>
+    <span class="n">validation_accuracies</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+
+      <span class="c1"># use a particular value of k and evaluation on validation data</span>
+      <span class="n">nn</span> <span class="o">=</span> <span class="n">NearestNeighbor</span><span class="p">()</span>
+      <span class="n">nn</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">Xtr_rows</span><span class="p">,</span> <span class="n">Ytr</span><span class="p">)</span>
+      <span class="c1"># here we assume a modified NearestNeighbor class that can take a k as input</span>
+      <span class="n">Yval_predict</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xval_rows</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">)</span>
+      <span class="n">acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Yval_predict</span> <span class="o">==</span> <span class="n">Yval</span><span class="p">)</span>
+      <span class="nb">print</span> <span class="s1">&#39;accuracy: </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">acc</span><span class="p">,)</span>
+
+      <span class="c1"># keep track of what works on the validation set</span>
+      <span class="n">validation_accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">acc</span><span class="p">))</span>
+</code></pre></div>
+<p>程序结束后，我们会作图分析出哪个 k 值表现最好，然后用这个 k 值来跑真正的测试集，并作出对算法的评价。 把训练集分成训练集和验证集。使用验证集来对所有超参数调优。最后只在测试集上跑一次并报告结果。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151557984.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815155722905" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151557984.png" /></a></p>
+<p><strong>交叉验证</strong>。有时候，训练集数量较小（因此验证集的数量更小），人们会使用一种被称为 <strong>交叉验证</strong> 的方法，这种方法更加复杂些。还是用刚才的例子，如果是交叉验证集，我们就不是取 1000 个图像，而是将训练集平均分成 5 份，其中 4 份用来训练，1 份用来验证。然后我们循环着取其中 4 份来训练，其中 1 份来验证，最后取所有 5 次验证结果的平均值作为算法验证结果。</p>
+<blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151621721.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815162141680" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151621721.png" /></a> 常用的数据分割模式。给出训练集和测试集后，训练集一般会被均分。这里是分成 5 份。前面 4 份用来训练，黄色那份用作验证集调优。如果采取交叉验证，那就各份轮流作为验证集。最后模型训练完毕，超参数都定好了，让模型跑一次（而且只跑一次)测试集，以此测试结果评价算法。</p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151624767.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151624767.png" alt="image-20240815162404723" style="zoom:67%;" /></a></p>
+<p>这就是 5 份交叉验证对 k 值调优的例子。针对每个 k 值，得到 5 个准确率结果，取其平均值，然后对不同 k 值的平均表现画线连接。本例中，当 k = 7 的时算法表现最好（对应图中的准确率峰值）。如果我们将训练集分成更多份数，直线一般会更加平滑（噪音更少）。</p>
+<blockquote>
+<p>随着 training samples 的数量趋于无穷，nearest neighbor 可以表示任何函数</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151609425.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815160954382" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151609425.png" /></a></p>
+<p>但是随着维数的增长，为了尽可能覆盖测试集，测试点的数量指数级增长</p>
+</blockquote>
+<h3 id="nearest-neighbor-分类器的优劣">Nearest Neighbor 分类器的优劣<a class="headerlink" href="#nearest-neighbor-分类器的优劣" title="Permanent link">&para;</a></h3>
+<p>现在对 Nearest Neighbor 分类器的优缺点进行思考。首先，Nearest Neighbor 分类器易于理解，实现简单。其次，<strong><code>算法的训练不需要花时间，因为其训练过程只是将训练集数据存储起来。然而测试要花费大量时间计算，因为每个测试图像需要和所有存储的训练图像进行比较</code></strong>，这显然是一个缺点。<strong>在实际应用中，我们关注测试效率远远高于训练效率。</strong></p>
+<p>其实，我们后续要学习的 <strong><code>卷积神经网络</code></strong> 在这个权衡上走到了另一个极端：<strong><code>虽然训练花费很多时间，但是一旦训练完成，对新的测试数据进行分类非常快</code></strong>。这样的模式就符合实际使用需求。</p>
+<p>Nearest Neighbor 分类器的计算复杂度研究是一个活跃的研究领域，若干 <strong>Approximate Nearest Neighbor </strong>(ANN)算法和库的使用可以提升 Nearest Neighbor 分类器在数据上的计算速度（比如：[FLANN__][14]）。这些算法可以在准确率和时空复杂度之间进行权衡，并通常依赖一个预处理/索引过程，这个过程中一般包含 kd 树的创建和 k-means 算法的运用。</p>
+<p>Nearest Neighbor 分类器在某些特定情况（比如数据维度较低）下，可能是不错的选择。但是在实际的图像分类工作中，很少使用。</p>
+<ol>
+<li>图像都是高维度数据（他们通常包含很多像素），要想性能好，训练集指数增长需要足够庞大</li>
+<li>测试时间过于漫长</li>
+<li>而高维度向量之间的距离通常是反直觉的。下面的图片展示了基于像素的相似和基于感官的相似是有很大不同的：</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151624871.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240815162431800" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151624871.png" /></a></p>
+<p>在高维度数据上，基于像素的的距离和感官上的非常不同。上图中，右边 3 张图片和左边第 1 张原始图片的 L2 距离是一样的。很显然，基于像素比较的相似和感官上以及语义上的相似是不同的。</p>
+<h3 id="小结">小结<a class="headerlink" href="#小结" title="Permanent link">&para;</a></h3>
+<ul>
+<li>介绍了 <strong>图像分类</strong> 问题。在该问题中，给出一个由被标注了分类标签的图像组成的集合，要求算法能预测没有标签的图像的分类标签，并根据算法预测准确率进行评价。</li>
+<li>介绍了一个简单的图像分类器：<strong>最近邻分类器(Nearest Neighbor classifier)</strong>。分类器中存在不同的超参数(比如 k 值或距离类型的选取)，要想选取好的超参数不是一件轻而易举的事。</li>
+<li>选取超参数的正确方法是：将原始训练集分为训练集和 <strong>验证集</strong>，我们在验证集上尝试不同的超参数，最后保留表现最好那个。</li>
+<li>如果训练数据量不够，使用 <strong>交叉验证</strong> 方法，它能帮助我们在选取最优超参数的时候减少噪音。</li>
+<li>一旦找到最优的超参数，就让算法以该参数在测试集跑且只跑一次，并根据测试结果评价算法。</li>
+<li>最近邻分类器能够在 CIFAR-10 上得到将近 40%的准确率。该算法简单易实现，但需要存储所有训练数据，并且在测试的时候过于耗费计算能力。</li>
+<li>最后，我们知道了仅仅使用 L1 和 L2 范数来进行像素比较是不够的，图像更多的是按照背景和颜色被分类，而不是语义主体分身。</li>
+</ul>
+<p>在接下来的课程中，我们将专注于解决这些问题和挑战，并最终能够得到超过 90%准确率的解决方案。该方案能够在完成学习就丢掉训练集，并在一毫秒之内就完成一张图片的分类。</p>
+<h3 id="小结实际应用-k-nn">小结：实际应用 k-NN<a class="headerlink" href="#小结实际应用-k-nn" title="Permanent link">&para;</a></h3>
+<p>如果你希望将 k-NN 分类器用到实处（最好别用到图像上，若是仅仅作为练手还可以接受），那么可以按照以下流程：</p>
+<ol>
+<li>预处理你的数据：对你数据中的特征进行归一化（normalize），让其具有零平均值（zero mean）和单位方差（unit variance）。在后面的小节我们会讨论这些细节。本小节不讨论，是因为图像中的像素都是同质的，不会表现出较大的差异分布，也就不需要标准化处理了。</li>
+<li>如果数据是高维数据，考虑使用降维方法，比如 PCA([wiki ref __][18], [CS229ref__][19], [blog ref __][20])或[随机投影__][21]。</li>
+<li>将数据随机分入训练集和验证集。按照一般规律，70%-90% 数据作为训练集。这个比例根据算法中有多少超参数，以及这些超参数对于算法的预期影响来决定。如果需要预测的超参数很多，那么就应该使用更大的验证集来有效地估计它们。如果担心验证集数量不够，那么就尝试交叉验证方法。如果计算资源足够，使用交叉验证总是更加安全的（份数越多，效果越好，也更耗费计算资源）。</li>
+<li>在验证集上调优，尝试足够多的 k 值，尝试 L1 和 L2 两种范数计算方式。</li>
+<li>如果分类器跑得太慢，尝试使用 Approximate Nearest Neighbor 库（比如[FLANN__][14]）来加速这个过程，其代价是降低一些准确率。</li>
+<li>对最优的超参数做记录。记录最优参数后，是否应该让使用最优参数的算法在完整的训练集上运行并再次训练呢？因为如果把验证集重新放回到训练集中（自然训练集的数据量就又变大了），有可能最优参数又会有所变化。在实践中，<strong>不要这样做</strong>。千万不要在最终的分类器中使用验证集数据，这样做会破坏对于最优参数的估计。<strong>直接使用测试集来测试用最优参数设置好的最优模型</strong>，得到测试集数据的分类准确率，并以此作为你的 kNN 分类器在该数据上的性能表现。</li>
+</ol>
+<h2 id="评价指标">评价指标<a class="headerlink" href="#评价指标" title="Permanent link">&para;</a></h2>
+<h3 id="正负样本">正负样本<a class="headerlink" href="#正负样本" title="Permanent link">&para;</a></h3>
+<p>指标首先是统计正负样本</p>
+<ol>
+<li><strong>正样本（Positive Samples）</strong>：</li>
+<li>正样本是指那些标签或输出是正类的数据点。在二元分类中，“正”通常意味着我们感兴趣的类别，或者是我们希望模型检测或预测的类别。</li>
+<li>例如，在垃圾邮件检测问题中，垃圾邮件是正样本，因为模型的任务是识别出垃圾邮件。</li>
+<li><strong>负样本（Negative Samples）</strong>：</li>
+<li>负样本是指那些标签或输出是负类的数据点。在二元分类中，“负”通常意味着非目标类别，即我们不希望模型检测或预测的类别。</li>
+<li>在垃圾邮件检测的例子中，非垃圾邮件是负样本。</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038705.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L1_27" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038705.png" /></a></p>
+<h3 id="pr-曲线">PR 曲线<a class="headerlink" href="#pr-曲线" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Precision：也叫查准率，表示所有被模型判定为正样本中，真正的正样本的比例。</li>
+<li>Recall：也叫查全率或者召回率，表示所有真正的正样本中，被模型判定为正样本的比例。</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038441.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="AutoDriveHeart_YOLO_L1_28" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038441.png" /></a></p>
+<p>通常会为每个物体类别绘制一个 PR 曲线（Precision-Recall 曲线），然后计算该曲线下的面积，即 AP（Average Precision，平均精度）。AP 值越高，说明模型在该类别的检测性能越好。</p>
+<p>不过精度和召回率是相互矛盾的，召回率越高，模型越倾向于把更多样本归类为正样本，就容易误判</p>
+<p>所以我们需要综合考虑，也就是 PR 曲线的面积越大，性能就越好，但是 PR 曲线对正负样本不均衡很敏感，PR 曲线更关注正样本的预测准确性，因此在正样本较少的情况下，模型性能的微小变化也会在 PR 曲线上表现得非常明显。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038619.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L1_29" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151038619.png" /></a></p>
+<p>所以我们也会使用 ROC 曲线进行更全面的判断</p>
+<h3 id="roc-曲线与-auc">ROC 曲线与 AUC<a class="headerlink" href="#roc-曲线与-auc" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151039490.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L1_30" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151039490.png" /></a></p>
+<p>AUC 就是 ROC 曲线下的面积，AUC 曲线对正负样本不平衡的敏感度较低。即使在负样本数量远超正样本的情况下，AUC 仍能提供较为合理的性能评估。这是因为 AUC 考虑了所有可能的分类阈值，并且 FPR 的计算抵消了负样本数量多的影响。</p>
+<h3 id="混淆矩阵">混淆矩阵<a class="headerlink" href="#混淆矩阵" title="Permanent link">&para;</a></h3>
+<p>对于多分类问题，比如说有 K 类，就有一个 KxK 的混淆矩阵，元素 <span class="arithmatex">\(c_{ij}\)</span> 表示第 i 类样本被分类器判定为第 j 类的数量，主对角线是正确分类的样本数量，我们可以通过观察混淆矩阵，判断哪些类更容易混淆</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151039876.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L1_33" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408151039876.png" /></a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

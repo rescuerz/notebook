@@ -1,0 +1,1166 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>二. Red Black Tree & B+ Tree - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#二-red-black-tree--b-tree" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              二. Red Black Tree &amp; B+ Tree
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Readme/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CV/Lecture1_Introduction/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Readme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Readme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture2_Image_Classification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-red-black-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Red Black Tree
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Red Black Tree">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.1 Insert
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.2 Delete
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-b-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 B+ Tree
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 B+ Tree">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-查找" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.1 查找
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-插入" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 插入
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/Blog/blob/main/docs/ADS/2. Red Black Tree & B+ Tree.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/Blog/raw/main/docs/ADS/2. Red Black Tree & B+ Tree.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="二-red-black-tree--b-tree">二. Red Black Tree &amp; B+ Tree<a class="headerlink" href="#二-red-black-tree--b-tree" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 3364 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 17 分钟</p>
+</div>
+<h2 id="21-red-black-tree">2.1 Red Black Tree<a class="headerlink" href="#21-red-black-tree" title="Permanent link">&para;</a></h2>
+<p>红黑树是满足如下性质的一种二叉搜索树：</p>
+<ol>
+<li>
+<p>Every node is either red or black.</p>
+</li>
+<li>
+<p><strong>The root is black.</strong></p>
+</li>
+<li>
+<p>Every leaf (<code>NIL</code>) is black.</p>
+</li>
+<li>
+<p>if a node is red, then both its children are black.</p>
+</li>
+<li>
+<p>For each node, all <strong>simple paths</strong> from the node to <strong>descendant leaves</strong> contain the same number of black nodes.</p>
+</li>
+</ol>
+<p>对于每个结点，从该结点到后代叶子的所有简单路径都包含<strong>相同数量的黑色结点。</strong></p>
+<blockquote>
+<p>注意点：</p>
+<p><code>1. 红结点的父结点一定为黑结点</code></p>
+<p><code>2. 性质3，所有的NULL leaf 都是black，你看到的leaf不是NULL，但是它的左右结点是NULL，未显示的左右儿子也是黑结点。</code></p>
+<p><strong>此处叶子结点被重新定义，称所有两个子结点都是NULL的结点为末端结点（也就是传统意义上的leaf）</strong></p>
+<p><code>3. 由性质5得，合法红黑树的红色结点的两个子结点（存在且为黑色）一定都是叶子或者都不是叶子，不然从红结点出发，到两个子结点，包含不同数量的黑色结点</code></p>
+<p><strong><code>4. 我们称NIL 为外部结点(external)，其余有键值的结点为内部结点(internal)。</code></strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404201556586.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404201556586.png" /></a></p>
+<p>上图的红黑树是否合法？</p>
+<p><code>16</code> 号结点的右儿子是一个<strong>黑叶子（NULL）</strong>，而这个叶子到根的路径上只有 3 个黑结点，而其他叶子到根都有 4 个黑结点。</p>
+<blockquote>
+<p><code>black height</code>的定义：</p>
+<p>特定结点的黑高，等于该结点到<strong>叶结点(NIL)</strong>到简单路径中（<strong>不包括自身</strong>），黑色结点的数量。记作<strong><span class="arithmatex">\(bh(X)\)</span></strong>,其中整棵红黑树的黑高也就是根结点的黑高</p>
+</blockquote>
+<p>【lemma】一个有 <span class="arithmatex">\(N\)</span> 个内部结点（不包括叶子结点）的红黑树，其高度最大为 <span class="arithmatex">\(2log_⁡2(N + 1)\)</span>。</p>
+<p>【lemma】<span class="arithmatex">\(bh(Tree) &gt;= h(Tree)/2\)</span> 黑结点的数量至少占树高的一半</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059766.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240304104841849" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059766.png" /></a></p>
+<ol>
+<li>红黑树结点最少情况，全是黑结点，此时就是二分搜索树，二分搜索树<span class="arithmatex">\(sizeof(x) = 2^{h(x)} - 1\)</span>。<strong><code>请注意此处为内部结点</code></strong>大于是因为此时的二分搜索树并不一定是完全平衡二叉树**</li>
+<li><span class="arithmatex">\(bh(child) = bh(x)\ or \ bh(x)-1\)</span>, 分别对应child是否为黑结点</li>
+<li>$sizeof(x) = 1 + 2 \times sizeof(child) &gt;= 1 + 2 \times (2^{bh(child)}-1) &gt;= 2 \times 2^{bh(x)-1} -1 = 2^{bh(x)}-1 $</li>
+<li>红结点的孩子一定是黑结点，所以<strong>有红必有黑</strong>，<strong>任何路径上黑色结点必定占到至少一半的数量</strong></li>
+</ol>
+<h3 id="211-insert">2.1.1 Insert<a class="headerlink" href="#211-insert" title="Permanent link">&para;</a></h3>
+<p><code>前情提要：</code>如果插入一个红色结点，也就是一个NULL结点被红色结点替代，此时并不会改变黑高。但是需要满足<strong>红色结点互不相邻</strong>的性质。</p>
+<p>如果插入的是黑色结点，那么性质5一定会被打破，黑高一定会加1</p>
+<blockquote>
+<p><strong>总体思路为：先将红黑树当作普通的二叉搜索树，将目标数据插入到书中的末端</strong>，<strong><code>并将它染成红色</code>，再调整使之在满足黑高不变的情况下，红色结点不相邻</strong></p>
+</blockquote>
+<p>不妨先假设我们插入的是红色结点。</p>
+<ul>
+<li>
+<p>如果插在黑色结点下面，没有影响</p>
+</li>
+<li>
+<p>如果插入空树，则将红结点直接变为黑结点</p>
+</li>
+<li>
+<p><strong>如果插入到红色结点的下面，此时破坏了性质4</strong></p>
+</li>
+<li>
+<p>case1：<code>X的叔叔（即父亲的兄弟）是红色的</code></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059733.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059733.png" alt="image-20240306190448146" style="zoom:67%;" /></a></p>
+<p>这里所有的结点都带子树，至少会有NULL结点</p>
+<p><code>解决方法：由于父结点P和叔叔结点U都是红色的，寻求爷爷结点G的帮忙，最后将父结点P和叔叔结点U染黑，爷爷结点染红</code></p>
+<p>本质在于将问题向上推，最差的情况也就是将问题<strong>一直推到根结点</strong>，此时只需要将<strong>根结点染黑</strong>即可</p>
+<p>但是所有结点仍然满足性质，从该结点出发到后代叶结点的包含相同数量的黑结点</p>
+</li>
+<li>
+<p>case2：<code>X的叔叔是黑结点，且X是P的右孩子</code></p>
+</li>
+<li>
+<p>case3：<code>X的叔叔是黑结点，且X是P的左孩子</code></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059752.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306191302864" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059752.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059702.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306193628555" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059702.png" /></a></p>
+<p>对于case2到case3的转变，X绕P点进行<strong>右旋（RR rotation）</strong></p>
+<p>对于case3情况，G点绕X点进行<strong>左旋（LL rotation）</strong>，成功解决问题</p>
+<p>最后进行染色，根结点为黑色，第二层为红色</p>
+<p><strong>对于case2，可以是直接使用LR旋转，只需要保证最终根结点为黑色，第二层为红色</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059762.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306191947022" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059762.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059333.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059333.png" /></a></p>
+</li>
+</ul>
+<blockquote>
+<p><strong><em>即如果插入后直接落入情况三，只需要一次旋转染色即可解决。直接落入情况二，一次旋转进入情况三，再一次旋转染色即可解决。但如果落入情况一，一次调整后可能还在情况一，可能直到最后都是通过情况一加上染黑根结点解决，也可能几次调整后进入情况二或三后解决。</em></strong></p>
+</blockquote>
+<p><strong><code>定理：</code></strong> <strong>一棵有n个内部结点的红黑树，插入一个结点的时间复杂度为<span class="arithmatex">\(O(logN)\)</span></strong></p>
+<p>根据上述流程，红黑树插入最多的旋转次数为2次（因为只有情况2 和3 会要旋转进入情况2 后1 次旋转必定进入情况3，进入情况3 后1 次旋转必定解决），改变颜色最多是<span class="arithmatex">\(O(logN)\)</span>次，在情况2、3只需要染一次色，情况1最差也是每两层染一次色，因为我们已知红黑树的最大高度为<span class="arithmatex">\(O(logN)\)</span>。</p>
+<p>因此插入操作，除了<span class="arithmatex">\(O(logN)\)</span>的搜索时间外，仅剩常数次的旋转和<span class="arithmatex">\(O(logN)\)</span>次的染色，最后仍为<span class="arithmatex">\(O(logN)\)</span>的时间复杂度</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059233.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306193014658" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059233.png" /></a></p>
+<p>一定会有红色。数学归纳法进行证明</p>
+<ol>
+<li>当<span class="arithmatex">\(n=2\)</span>时，在黑色根结点的下方插入一个红结点，不产生任何负面影响，红色结点数+1</li>
+<li>如果以后插入红结点后不需要调整，则红色结点数量增加</li>
+<li>如果需要调整，也就是对应<span class="arithmatex">\(case1-3\)</span></li>
+<li>对于case1，<span class="arithmatex">\(X,G\)</span>一定为红色结点，即使 最后<span class="arithmatex">\(G\)</span>不断向上推移到根结点后被染黑，<strong><span class="arithmatex">\(X\)</span>依然保持红色</strong></li>
+<li>对于case2，经过旋转，叔叔结点的<strong>近侄子变为远侄子</strong>，红色结点数不变</li>
+<li>对于case3，再次旋转后，可以保证<strong>根结点为黑色，第二层均为红结点</strong></li>
+</ol>
+<h3 id="212-delete">2.1.2 Delete<a class="headerlink" href="#212-delete" title="Permanent link">&para;</a></h3>
+<p>不考虑红黑树，BST结点删除的回顾</p>
+<ul>
+<li>
+<p>Delete a leaf node: reset its parent link to NULL 如果X没有孩子，直接删除就好</p>
+</li>
+<li>
+<p>Delete a degree 1 node: replace the node by its single child 如果X只有一个孩子，那让孩子接替X的位置</p>
+</li>
+<li>
+<p>Delete a degree 2 node: </p>
+</li>
+<li>
+<p><strong>Replace the node by the</strong> <strong>largest</strong> <strong>one in its</strong> <strong>left</strong> <strong>subtree</strong> <strong>or</strong> <strong>the</strong> <strong>smallest</strong> <strong>one in its</strong> <strong>right</strong> <strong>subtree.</strong></p>
+</li>
+<li>
+<p><strong>Delete the replacing node from the subtree.</strong></p>
+<p>如果X有两个孩子，那就让X与左子树的最大结点交换，然后删除X</p>
+<p><strong><code>此时X所在位置最多只有一个孩子结点，因为左子树的最大值没有右孩子，右子树的最小值没有左孩子</code></strong></p>
+</li>
+</ul>
+<blockquote>
+<p>红黑树的删除在此基础上展开，对于第三种情况，X与左子树的最大值进行交换，<strong><code>交换的仅仅是键值，颜色并没有交换</code></strong>，否则红结点可能换到根结点（虽然可以染黑），黑结点换到下方，极有可能造成性质5被破坏。</p>
+<p><strong>并且第三种情况经过交换后，会直接转化为第一、第二种情况。</strong></p>
+</blockquote>
+<p>对于情况一，接替被删除结点的是NULL</p>
+<p>对于情况二，被删除结点的子结点接替位置。如果被删除结点为红结点（似乎不太可能，<strong>性质5，红结点的两个子结点都为黑色，要么都为叶子，要么都不为</strong>）。如果删除的是黑色，<code>接替上来是红色，染黑即可，性质5仍然满足。</code> <strong><code>接替上来是黑色，这该如何处理，显然沿着子树的路径，黑色结点数少了一</code></strong></p>
+<blockquote>
+<p><strong>为了解决删除黑色，接替结点为黑色，沿子树路径黑色结点数减一</strong> <strong>Must</strong> <strong>add 1 black</strong> <strong>to the path of the replacing node.<code>直接给替换上来的黑色再加一重黑色，变成双黑</code></strong> </p>
+</blockquote>
+<p>以下X 在此处则表示双黑结点，图中用黑色圆圈和圆旁边的加号表示双黑，蓝色表示颜色无所谓，可红可黑。</p>
+<ul>
+<li>case1：<strong>X的兄弟是红色的</strong></li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059255.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240304113340387" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059255.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059326.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306204643985" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059326.png" /></a>
+  $$
+  父兄换色 + 右旋
+  $$
+  由于原先的树满足红黑树定义第四条，因此此时父结点一定是黑色。我们的想法很简单，兄弟是红色，那就希望兄弟能两肋插刀，把兄弟转上去，为了保持红黑树性质，很可惜只能把父亲染红，，自己还承受双黑debuff。但是好处在于，<strong>这个问题转化为了接下来的情况二三四中的一种</strong>，我们来看如何解决。</p>
+<ul>
+<li>case2：<strong>X的兄弟是黑色的，且兄弟的两个孩子（根据远近划分为远侄子和近侄子）都是黑色的</strong></li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059330.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059330.png" alt="image-20240304113650455" style="zoom:80%;" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059479.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306205303056" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059479.png" /></a></p>
+<p>现在这个情况从P视角出发，满足性质5。<strong>所以为了缓减双黑这个debuff，我将双黑推给父亲，这时性质5被打破了，兄弟被迫变为红色</strong></p>
+<ul>
+<li>如果父结点本身为红色，<code>在双黑加持下，变为黑色，恰好弥补黑色少一的情况，问题解决</code></li>
+<li>如果父结点本身为黑色，那就变为双黑，问题向根结点靠近</li>
+<li>
+<p><strong>假如从case1变为case2，父结点一定为红色，那么问题直接解决</strong></p>
+</li>
+<li>
+<p>case3 ： <strong>X的兄弟结点是黑色，但是近侄子是红色的，远侄子是黑色的</strong></p>
+</li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059678.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059678.png" alt="image-20240304113921535" style="zoom: 80%;" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059704.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306210046641" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059704.png" /></a></p>
+<p>此时的红色在父亲<span class="arithmatex">\(P\)</span>的<span class="arithmatex">\(RL\)</span>位置上，因此实现double rotation中的一个single rotation（左旋）就能得到<span class="arithmatex">\(RR\)</span>情况</p>
+<p>并且此处存在颜色变换</p>
+<ul>
+<li>case4 : X 的兄弟是黑色的，且<strong>远侄子是红色的</strong>，近侄子颜色任意</li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059767.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059767.png" alt="image-20240304114030783" style="zoom:80%;" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059738.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306212705846" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059738.png" /></a></p>
+<p>此时对应AVL树的RR，于是再一次single rotation即可把双黑的一重黑丢给红色远侄子（即<span class="arithmatex">\(X,N_2\)</span>都变成黑色），但为了保证红黑树性质的颜色变换，P和S还要交换颜色</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059800.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306213132965" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059800.png" /></a></p>
+<p><strong><code>定理</code></strong>: <strong>一棵有n个内部结点的红黑树删除一个结点的时间复杂度为<span class="arithmatex">\(O(logN)\)</span></strong></p>
+<ol>
+<li>我们最多使用<span class="arithmatex">\(O(logN)\)</span>的时间找到删除结点，进行一次交换，后续进行删除操作</li>
+<li>最坏进入删除黑色，接替点为黑色的情况，对于case1，如果进入case3，case4能快速解决，因为4 可以直接解决，3 直接进入4 然后解决。如果进入case2，也因为父结点为红色直接解决。</li>
+<li>对于case2，可以因为父结点为红色直接解决，也能多次多次进入case2，每次向上推一格，由于树高为<span class="arithmatex">\(O(logN)\)</span>,所以最多进行<span class="arithmatex">\(O(logN)\)</span>次</li>
+<li>对于case3，case4，均能快速解决。</li>
+</ol>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059945.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306214350394" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059945.png" /></a></p>
+<h2 id="22-b-tree">2.2 B+ Tree<a class="headerlink" href="#22-b-tree" title="Permanent link">&para;</a></h2>
+<p>B+ 树是一种用树状形式维护有序数列比较信息的数据结构，其增改操作拥相对于二叉树结构更加稳定的对数时间复杂度，通常用于数据库和操作系统的文件系统中。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059985.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306215547576" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059985.png" /></a></p>
+<p><strong>A</strong> <strong>B+ tree</strong> <strong>of order</strong> <strong>M</strong> <strong>is a tree with the following structural properties:</strong></p>
+<ol>
+<li>The root is either a leaf or has between 2 and <span class="arithmatex">\(M\)</span> children.
+   根要么是叶子，要么具有 2 和<span class="arithmatex">\(M\)</span> 子级。</li>
+<li>All nonleaf nodes (except the root) have between$ ⌈M/2⌉$and M children.
+   所有非叶结点（根除外）都有 ⌈<em>M</em>/2⌉ 和 M 个子结点。</li>
+<li>All leaves are at the same depth.
+   所有叶子都处于相同的深度。</li>
+</ol>
+<blockquote>
+<p><strong><code>所有真实的数据都被存储在叶子结点中，形成一个有序的数列。而非叶子结点（不包含root）中第$i$个值等于第$i+1$颗子树的最小值。如上图所示表现为颜色相同的一对上下结点。因此非叶结点最多存 $M-1$个值。</code></strong></p>
+</blockquote>
+<p>抽象地来说就是，我们把一个数列相对均匀的分为 <span class="arithmatex">\(m\)</span>块，然后把分界的数拿出来。当我们去查找或插入时，只需要和这些边界数进行比较，就知道它应该放在哪一块里。再不断细化粒度，用类似于<span class="arithmatex">\(m\)</span>分”的思想来找到目标位置。</p>
+<p>由于它在空间最浪费的情况下是一棵 <span class="arithmatex">\(\lceil M/2 \rceil\)</span> 叉树，所以 B+ 树的深度是 <span class="arithmatex">\(O(\lceil \log_{\lceil M/2 \rceil} N \rceil)\)</span>。</p>
+<h3 id="221-查找">2.2.1 查找<a class="headerlink" href="#221-查找" title="Permanent link">&para;</a></h3>
+<p>例如，我们在上面这棵树中找 <code>43</code> 这个值，橙色部分表示我们的焦点。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059056.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306220851541" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059056.png" /></a></p>
+<p>我们发现有 21≤43&lt;48，所以顺着标识的橙色指针向下。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059069.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306220945467" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059069.png" /></a></p>
+<p>我们发现有 41≤43，所以顺着标识的橙色指针向下</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059140.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306220957773" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059140.png" /></a></p>
+<p>已经走到叶子结点，最后发现我们要找的 <code>43</code>。</p>
+<h3 id="222-插入">2.2.2 插入<a class="headerlink" href="#222-插入" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Insert(46), no split</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059381.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306221056756" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059381.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059417.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306221106486" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059417.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059426.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306221113847" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059426.png" /></a></p>
+<p>找到要塞的位置了，发现要塞的地方是 <code>45</code> 的后面，插入以后发现一共 4 个数，而 �=4<em>M</em>=4，不需要分裂。</p>
+<blockquote>
+<p><strong>Insert(44), split</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059491.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306221128282" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059491.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059579.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306221137239" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059579.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059662.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306221148709" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059662.png" /></a></p>
+<p>找到要塞的位置了，发现要塞的地方是 <code>45</code> 的前面，插入以后发现一共 5 个数，而 �=4<em>M</em>=4，需要分裂！</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059804.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306221158241" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059804.png" /></a></p>
+<p>向上递归，我们悲痛地发现，这个节点在分裂后有了 <code>5</code> 个子节点，不得不再次分裂。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059844.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306221207458" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059844.png" /></a></p>
+<p>向上递归，我的老天爷呀，怎么还没到头！这下我们要分裂根部了！</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059885.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240306221218515" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403071059885.png" /></a></p>
+<p>由于根部被裂开了，所以我们需要添加一个新的根，这也意味着树的层数增高了。</p>
+<p>现在，我们终于完成了插入。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
