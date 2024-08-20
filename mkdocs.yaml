@@ -1,0 +1,119 @@
+site_name: rescuerz's notebook
+repo_name: rescuerz/Blog
+repo_url: https://github.com/rescuerz/Blog
+edit_uri: blob/main/docs
+
+site_description: rescuerz's notebook
+copyright: "Copyright &copy 2024 rescuerz" # TODO: 请修改项配置，主要就是年份，对的就不用管
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.indexes
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+  icon:
+    repo: fontawesome/brands/github-alt
+    edit: material/pencil
+    view: material/eye
+  # custom_dir: overrides # TODO: 请根据指导配置完 Giscus 后再取消注释：https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      slugify:
+        !!python/object/apply:pymdownx.slugs.slugify { kwds: { case: lower } }
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - footnotes
+  - md_in_html
+  - tables
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - changelog
+  - search:
+      separator: '[\s\-\.]+'
+  - statistics:
+      words_per_minute: 200
+  - glightbox
+
+extra_css:
+  # 如果需要修改主题样式，可以修改 `theme.css`；如果需要修改 admonitions 的主题，可以修改 `admonitions.css`
+  - supports/css/base.css
+  - supports/css/theme.css
+  - supports/css/admonitions.css
+  # 如果公式渲染样式出现问题，请检查如下脚本
+  - https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css
+
+extra_javascript:
+  # 自动令所有第三方链接在新标签页中打开
+  - supports/js/xlink.js
+  # 如果公式渲染出现问题，请检查如下脚本
+  - supports/js/katex.js
+  - https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js
+
+# ======================================== >>>
+# TODO: 请修改本项配置，本节是导航配置项，一般只需要在下面增加新的章节对应的文件即可，支持结构化配置
+
+nav:
+  - Home:
+      - index.md
+      - 更新记录: changelog.md
+      - 友链: link.md
+  - Computer Science:
+      - 高级数据结构与算法分析:
+          - ADS/Readme.md
+          # - ADS/1. AVL_tree.md
+          # - ADS/2. Red Black Tree & B+ Tree.md
+          # - ADS/3. Inverted File Index.md
+          # - ADS/4. Leftist Heaps and Skew Heaps.md
+          # - ADS/5. Binomial Queue.md
+          # - ADS/6. backtracking.md
+          # - ADS/7. Divide & Conquer.md
+          # - ADS/8. Dynamic Programming.md
+          # - ADS/9. Greedy Algorithms.md
+          # - ADS/10. NP-Completeness.md
+          # - ADS/11. Approximation.md
+          # - ADS/12. Local Search.md
+          # - ADS/13. Randomized Algorithms.md
+          # - ADS/14. Parallel Algorithm.md
+          # - ADS/15. External Sorting.md
+
+  - Artificial Intelligence:
+      - Computer Vision:
+          - CV/Lecture1_Introduction.md
+          - CV/Lecture2_Image_Classification.md
+          - CV/Lecture3_Linear_Classifiers.md
+          - CV/Lecture4_Optimization.md
+
+  # - "Appendix":
+# ======================================== <<<
+
