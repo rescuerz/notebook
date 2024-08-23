@@ -1,0 +1,1621 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+        <link rel="prev" href="../Lecture4_Optimization/">
+      
+      
+        <link rel="next" href="../Lecture6_Backpropagation/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Neural Network - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#neural-network" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Neural Network
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ADS/Readme/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Lecture1_Introduction/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/Readme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Readme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture2_Image_Classification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Neural Network
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Neural Network
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#feature-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      feature transforms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#color-histogram--histogram-of-oriented-gradients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Color Histogram &amp; Histogram of Oriented Gradients
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bag-of-words-data-driven" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bag-of-Words Data-Driven
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#神经网络概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      神经网络概述
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="神经网络概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#两层神经网络的结构与计算" class="md-nav__link">
+    <span class="md-ellipsis">
+      两层神经网络的结构与计算
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#神经网络的几何解释" class="md-nav__link">
+    <span class="md-ellipsis">
+      神经网络的几何解释
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#代码实现" class="md-nav__link">
+    <span class="md-ellipsis">
+      代码实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#常用激活函数" class="md-nav__link">
+    <span class="md-ellipsis">
+      常用激活函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#神经元-neuron-建模" class="md-nav__link">
+    <span class="md-ellipsis">
+      神经元 neuron 建模
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="神经元 neuron 建模">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#生物动机与连接" class="md-nav__link">
+    <span class="md-ellipsis">
+      生物动机与连接
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#作为线性分类器的单个神经元" class="md-nav__link">
+    <span class="md-ellipsis">
+      作为线性分类器的单个神经元
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture6_Backpropagation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Backpropagation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture7_ConvolutionalNetworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convolutional Neural Networks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#feature-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      feature transforms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#color-histogram--histogram-of-oriented-gradients" class="md-nav__link">
+    <span class="md-ellipsis">
+      Color Histogram &amp; Histogram of Oriented Gradients
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bag-of-words-data-driven" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bag-of-Words Data-Driven
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#神经网络概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      神经网络概述
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="神经网络概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#两层神经网络的结构与计算" class="md-nav__link">
+    <span class="md-ellipsis">
+      两层神经网络的结构与计算
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#神经网络的几何解释" class="md-nav__link">
+    <span class="md-ellipsis">
+      神经网络的几何解释
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#代码实现" class="md-nav__link">
+    <span class="md-ellipsis">
+      代码实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#常用激活函数" class="md-nav__link">
+    <span class="md-ellipsis">
+      常用激活函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#神经元-neuron-建模" class="md-nav__link">
+    <span class="md-ellipsis">
+      神经元 neuron 建模
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="神经元 neuron 建模">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#生物动机与连接" class="md-nav__link">
+    <span class="md-ellipsis">
+      生物动机与连接
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#作为线性分类器的单个神经元" class="md-nav__link">
+    <span class="md-ellipsis">
+      作为线性分类器的单个神经元
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/Blog/blob/main/docs/CV/Lecture5_Neural_Networks.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/Blog/raw/main/docs/CV/Lecture5_Neural_Networks.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="neural-network">Neural Network<a class="headerlink" href="#neural-network" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 8537 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 22 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 43 分钟</p>
+</div>
+<h2 id="feature-transforms">feature transforms<a class="headerlink" href="#feature-transforms" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>从 Geometric 几何视角分析：线性分类器是在画高维超平面，将这个高维的欧几里得空间分割成两块</p>
+</li>
+<li>
+<p>从视觉角度 Vision Viewpoint 分析，我们认为线性分类器只为每个类别学习一个模板，<strong><code>因此它们无法代表同一对象类别的多种模式。</code></strong></p>
+</li>
+</ul>
+<p>模板是一种用于表示目标对象特征的数据结构，可以采用多种形式。在模板匹配和模板学习任务中，模板被用来在输入数据中搜索和识别目标对象</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408201205398.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240820120536280" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408201205398.png" /></a></p>
+<blockquote>
+<p>linear classifier 的局限性：<strong>只能处理线性可分的数据</strong>：</p>
+<ul>
+<li>线性分类器只能通过一条直线（或高维空间中的一个超平面）将数据分割开。因此，<strong>对于线性不可分的数据（即不能用一条直线或一个超平面分隔的类），它们的表现往往较差。</strong> 比如，XOR 问题中，两个类的数据点无法用一条直线分开，线性分类器对此无能为力。</li>
+</ul>
+<p>解决方法：</p>
+<ul>
+<li>对于某些线性不可分的数据集，我们可以提出一种 <strong><code>特征变换</code></strong> 的方式 <strong><code>（feature transform）</code></strong>，将这些数据映射到特征空间去进行分类，或者说找到一种合适分类的映射方式来完成分类任务，这样就可以克服线性分类器的一些缺点；在这里我们是在特征空间中训练分类器</li>
+</ul>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408201213141.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240820121321056" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408201213141.png" /></a></p>
+<p>这就是一个 <strong>将笛卡尔坐标系变换到极坐标系</strong>(polar coordinate)下的例子，<strong>原本在笛卡尔坐标系下线性不可分的数据集，在极坐标系下线性可分了</strong>，也就是说我们可以在特征空间下构建线性分类器</p>
+<blockquote>
+<p>特征变换的 <strong>核心思想</strong> 是将原始输入特征映射到一个 <strong>更高维度的特征空间</strong>，使得在该空间中，原本线性不可分的数据变得线性可分。通过特征变换，线性分类器在新特征空间中就可以使用 <strong>线性决策边界</strong> 来分割数据，从而克服线性不可分的问题。</p>
+</blockquote>
+<p>你提出的解决方法非常关键。特征变换（Feature Transform）确实是解决线性分类器局限性的一种有效方法。以下是对这一方法的详细解释和扩展：</p>
+<blockquote>
+<p>特征变换（Feature Transform）</p>
+<p>特征变换的核心思想是将原始输入特征映射到一个更高维度的特征空间，使得在该空间中，原本线性不可分的数据变得线性可分。通过特征变换，线性分类器在新特征空间中就可以使用线性决策边界来分割数据，从而克服线性不可分的问题。</p>
+</blockquote>
+<ol>
+<li>
+<p><strong>设计特征映射函数</strong>：</p>
+</li>
+<li>
+<p>选择或设计一个特征映射函数 <span class="arithmatex">\(\phi(x)\)</span>，将原始输入特征 <span class="arithmatex">\(\textbf{x}\)</span> 映射到一个高维空间 <span class="arithmatex">\(\mathbf{z} = \phi(\mathbf{x})\)</span>。例如：</p>
+<ul>
+<li>对于二次特征变换，$\phi(\mathbf{x}) $ 可以将输入 <span class="arithmatex">\(\mathbf{x} = [x_1, x_2]\)</span> 映射为 <span class="arithmatex">\(\mathbf{z} = [x_1, x_2, x_1^2, x_2^2, x_1x_2]\)</span>。</li>
+</ul>
+</li>
+<li>
+<p><strong>在特征空间中训练线性分类器</strong>：</p>
+</li>
+<li>
+<p>在新的特征空间中训练线性分类器，如线性支持向量机、线性回归分类器等。由于数据在高维空间中可能变得线性可分，线性分类器可以在此空间中找到合适的决策边界。</p>
+</li>
+<li>
+<p><strong>核方法的应用</strong>：</p>
+</li>
+<li>为了避免显式计算高维特征，核方法通过计算原始特征空间中的点积直接得到特征空间中的点积，从而大幅提高计算效率。例如，支持向量机（SVM）中使用的高斯核（RBF 核）和多项式核等，就是这种思想的具体实现。</li>
+</ol>
+<h2 id="color-histogram--histogram-of-oriented-gradients">Color Histogram &amp; Histogram of Oriented Gradients<a class="headerlink" href="#color-histogram--histogram-of-oriented-gradients" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>定向梯度直方图（Histogram of Oriented Gradients, HOG）和颜色直方图(Color Histogram)是两种常用的图像特征提取方法，它们在图像处理中具有不同的优势。</p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408201214506.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="10" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408201214506.jpeg" /></a></p>
+<blockquote>
+<p>颜色直方图通过将图像中的颜色空间的 RGB 光 谱进行分解与统计，统计图像中 <strong>每种颜色出现的频率来描述图像的颜色分布</strong>，这种方式丢弃了图像中的空间信息，只关心图像中的颜色分布，更具有 <strong>空间不变性</strong>，通常用于图像检索和分类。<strong><code>颜色直方图的优点在于它对图像的旋转、平移和尺度变化具有鲁棒性，因为它不依赖于图像中的空间布局。</code></strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408201225475.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240820122519369" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408201225475.png" /></a></p>
+<p>HOG 特征通过统计图像局部区域内的梯度方向分布来描述图像的形状和纹理信息，特别适合捕捉物体的边缘和轮廓。与颜色直方图相反，抛弃颜色信息，保留空间信息。</p>
+<blockquote>
+<p><strong>形状与边缘检测</strong>：HOG 特别擅长捕捉物体的形状和轮廓信息，对光照和局部对比度具有较好的鲁棒性。</p>
+<p><strong>方向不变性</strong>：由于梯度方向的统计，HOG 在捕捉相同形状但方向不同的物体时表现良好。</p>
+</blockquote>
+<h2 id="bag-of-words-data-driven">Bag-of-Words Data-Driven<a class="headerlink" href="#bag-of-words-data-driven" title="Permanent link">&para;</a></h2>
+<p>视觉词袋模型（Visual Bag-of-Words, BoW）是一种经典的图像特征表示方法，它将原本用于文本处理的词袋模型（Bag-of-Words, BoW）思想引入到计算机视觉中。<strong>通过将图像描述为一组“视觉词”的出现频率</strong>，这种方法能够有效地捕捉图像的局部特征，并在分类和检索任务中表现良好。</p>
+<p><strong>随机补丁提取</strong>：</p>
+<ul>
+<li>从训练图像中提取大量不同比例和大小的随机补丁（patches），这些补丁可以包含不同的纹理、边缘和颜色信息。</li>
+</ul>
+<p><strong>特征描述与聚类</strong>：</p>
+<ul>
+<li>对每个补丁进行特征描述，如使用 SIFT（Scale-Invariant Feature Transform）或 SURF（Speeded-Up Robust Features）等方法，提取关键点的局部特征向量。</li>
+<li>对这些特征向量进行聚类分析（通常使用 K-means 聚类），将其归为 KKK 个簇。每个簇的中心就代表一个“视觉词”。</li>
+</ul>
+<p><strong>构建视觉词代码本</strong>：</p>
+<ul>
+<li>通过聚类得到的 K 个 <strong>视觉词 Visual Word</strong> 形成了所谓的“代码本”（codebook），也被称为“视觉词典”（visual vocabulary）。这个代码本类似于文本中的词汇表，用来描述训练集中常见的视觉特征。</li>
+</ul>
+<p><strong>图像编码</strong>：</p>
+<ul>
+<li>对于每个新图像，用代码本中的视觉词对其进行编码。具体做法是，将图像中的局部特征映射到最近的视觉词，<strong>并统计每个视觉词在图像中出现的频率，形成一个视觉词直方图。</strong></li>
+</ul>
+<p><strong>分类与检索</strong>：</p>
+<ul>
+<li>生成的视觉词直方图向量作为图像的特征表示，接下来可以输入到分类器（如支持向量机 SVM）中进行训练和分类，或用于图像检索。</li>
+</ul>
+<p><a class="glightbox" href="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/EECS498_L5_17.jpg?" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="16" src="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/EECS498_L5_17.jpg?" /></a></p>
+<blockquote>
+<p><strong>鲁棒性</strong>：视觉词袋模型对图像的旋转、缩放、光照变化具有较好的鲁棒性，因为它依赖于局部特征而非整体图像。</p>
+<p><strong>可扩展性</strong>：代码本的大小 K 可以调节，适应不同规模的数据集和应用场景。</p>
+<p><strong>可组合性</strong>：视觉词袋模型可以与其他特征提取器和分类器组合，提升分类性能。</p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202207875.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240820220723657" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202207875.png" /></a></p>
+<p><strong><code>在左侧接收图像的原始像素，右侧进行predict分类的分数或者概率，在训练的过程中，并不仅仅调整最后一层的参数，而是整个系统的参数，maximize the performance of classification</code></strong></p>
+<ul>
+<li>feature extractor 特征提取器</li>
+</ul>
+<p>特征提取器的作用是从原始图像数据中提取出能够表征图像内容的关键特征。这些特征通常是高维的、经过处理的向量，它们携带了图像的重要信息，同时丢弃了不必要的细节和噪声。特征提取器的效果直接影响后续模型的分类或识别性能。</p>
+<blockquote>
+<p><strong>手工设计的特征</strong>：</p>
+<ul>
+<li><strong>SIFT（Scale-Invariant Feature Transform）</strong>：提取尺度不变的关键点，适用于各种尺度和旋转的图像。</li>
+<li><strong>HOG（Histogram of Oriented Gradients）</strong>：基于梯度方向分布，捕捉物体的边缘和形状。</li>
+<li><strong>颜色直方图</strong>：描述图像中的颜色分布，常用于图像检索。</li>
+</ul>
+<p><strong>数据驱动的特征</strong>：</p>
+<ul>
+<li><strong>卷积神经网络（CNN）</strong>：通过多层卷积层自动学习图像的高层次特征，是当前最流行的特征提取方法。</li>
+<li><strong>视觉词袋模型（BoW）</strong>：将局部特征聚类成视觉词典，用视觉词的直方图表示图像。</li>
+</ul>
+</blockquote>
+<ul>
+<li>learnable model 可学习模型</li>
+</ul>
+<p>可学习模型是指通过数据驱动的方式调整其内部参数，以优化目标函数的模型。可学习模型的输入通常是特征提取器生成的特征向量，输出则是预测结果，如图像分类、物体检测或图像分割等任务的结果。</p>
+<blockquote>
+<ul>
+<li>
+<p><strong>支持向量机（SVM）</strong>：线性或非线性模型，用于二分类或多分类任务，擅长处理高维数据。</p>
+</li>
+<li>
+<p><strong>k-近邻（k-NN）</strong>：基于距离度量的方法，适用于简单分类任务。</p>
+</li>
+<li>
+<p><strong>神经网络</strong>：</p>
+</li>
+<li>
+<p><strong>多层感知器（MLP）</strong>：传统的全连接神经网络，适合处理经过特征提取的低维数据。</p>
+</li>
+<li>
+<p><strong>卷积神经网络（CNN）</strong>：用于直接处理图像数据，结合特征提取与分类功能。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="神经网络概述">神经网络概述<a class="headerlink" href="#神经网络概述" title="Permanent link">&para;</a></h2>
+<p>神经网络是一种能够学习复杂映射关系的算法，通过多层非线性变换，将输入数据映射到输出类别。与线性分类器相比，神经网络引入了激活函数，使得模型能够拟合更加复杂的非线性数据。</p>
+<p>在线性分类一节中，在给出图像的情况下，是使用 <span class="arithmatex">\(f = Wx\)</span> 来计算不同视觉类别的评分，其中 <span class="arithmatex">\(W\)</span> 是一个矩阵，<span class="arithmatex">\(x\)</span> 是一个输入列向量，它包含了图像的全部像素数据。在使用数据库 CIFAR-10 的案例中，<span class="arithmatex">\(x\)</span> 是一个 [<span class="arithmatex">\(3072 \times 1\)</span>] 的列向量，<span class="arithmatex">\(W\)</span> 是一个 [<span class="arithmatex">\(10\times 3072\)</span>] 的矩阵，所以输出的评分是一个包含 10 个分类评分的向量。</p>
+<h3 id="两层神经网络的结构与计算">两层神经网络的结构与计算<a class="headerlink" href="#两层神经网络的结构与计算" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202230375.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="EECS498_L5_25" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202230375.jpeg" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202235982.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240820223539799" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202235982.png" /></a></p>
+<blockquote>
+<p>神经网络与线性分类器的主要区别在于它引入了 <strong>隐藏层和非线性激活函数</strong>。这 <strong><code>个非线性部分打破了线性模型的局限，使得网络可以处理复杂的非线性问题。</code></strong></p>
+</blockquote>
+<p>神经网络的计算公式是 <span class="arithmatex">\(s = W_2max(0, W_1x)\)</span>。</p>
+<div class="arithmatex">\[
+f = W_2\max(0, W_1x)\\
+W_2\in \mathbb{R}^{C\times H}\quad
+W_1\in \mathbb{R}^{H\times D}\quad
+x\in \mathbb{R}^{D}
+\]</div>
+<ul>
+<li>x 是输入向量（图像像素）</li>
+<li><span class="arithmatex">\(W_1\)</span> 是第一层权重矩阵，将输入向量映射到隐藏层</li>
+<li><span class="arithmatex">\(max(0,W_1x)\)</span> 是激活函数 ReLU 的应用，它将负值置为零，保留正值</li>
+<li><span class="arithmatex">\(W_2\)</span> 是第二层的权重矩阵，将隐藏层输出映射到最终分类评分。</li>
+</ul>
+<p>举个例子来说，<span class="arithmatex">\(W_1\)</span> 可以是一个 [<span class="arithmatex">\(100 \times 3072\)</span>] 的矩阵，其作用是将输入从 3072 维的像素空间映射到 100 维的隐藏层。函数 <span class="arithmatex">\(max(0,-)\)</span> 是非线性的，它会作用到每个元素。激活函数 ReLU 的输出为一个 100 维的向量。<span class="arithmatex">\(W_2\)</span> 的维度为 [<span class="arithmatex">\(10 \times 100\)</span>]，将 100 维向量映射到 10 个分类评分。网络的参数 <span class="arithmatex">\(W_1\)</span> 和 <span class="arithmatex">\(W_2\)</span> 是通过梯度下降优化的。梯度通过反向传播计算，反向传播利用链式法则逐层计算每个参数的梯度，从而更新它们，以最小化损失函数。</p>
+<blockquote>
+<p>注意非线性函数在计算上是至关重要的，如果略去这一步，那么两个矩阵将会合二为一，对于分类的评分计算将重新变成关于输入的线性函数。这个非线性函数就是<em>改变</em>的关键点</p>
+<p>如果没有激活函数，<span class="arithmatex">\(f = W_2max(0,W_1x)\)</span>将变为<span class="arithmatex">\(s =W_2W_1x\)</span>，本质上依然是一个线性分类器</p>
+</blockquote>
+<p>一个三层的神经网络可以类比地看做 <span class="arithmatex">\(s = W_3max(0, W_2max(0, W_1x)\)</span></p>
+<ul>
+<li><strong>输入层</strong>： <span class="arithmatex">\(x\)</span> 是输入向量，通常表示为一个列向量，包含原始数据特征（例如图像的像素值）。</li>
+<li><strong>第一层权重</strong>：矩阵 <span class="arithmatex">\(W_1\)</span> 将输入向量 <span class="arithmatex">\(x\)</span> 映射到第一层隐藏单元。假设 <span class="arithmatex">\(W_1\)</span> 的维度为 [<span class="arithmatex">\(H_1 \times D\)</span>]，其中 <span class="arithmatex">\(D\)</span> 是输入向量的维度， <span class="arithmatex">\(H_1\)</span> 是第一隐藏层的维度。</li>
+<li><strong>第一层激活</strong>：经过 <span class="arithmatex">\(W_1\)</span> 变换后，应用 ReLU 激活函数 <span class="arithmatex">\(\max(0, W_1x)\)</span> ，引入非线性。此时，输出为一个 <span class="arithmatex">\(H_1\)</span> 维的向量。</li>
+<li><strong>第二层权重</strong>：矩阵 <span class="arithmatex">\(W_2\)</span> 将第一层的输出映射到第二层隐藏单元，维度为 [<span class="arithmatex">\(H_2 \times H_1\)</span>]，其中 <span class="arithmatex">\(H_2\)</span> 是第二隐藏层的维度。</li>
+<li><strong>第二层激活</strong>：再次应用 ReLU 函数，得到第二层的激活输出 <span class="arithmatex">\(\max(0, W_2 \max(0, W_1x))\)</span> ，此时输出为一个 <span class="arithmatex">\(H_2\)</span> 维的向量。</li>
+<li><strong>第三层权重</strong>：矩阵 W_3 将第二层的输出映射到最终的分类评分，维度为 [<span class="arithmatex">\(C \times H_2\)</span>]，其中 <span class="arithmatex">\(C\)</span> 是分类类别的数量。</li>
+</ul>
+<blockquote>
+<p>隐层的尺寸（ H_1, H_2 等）是超参数，决定了网络的表达能力和计算复杂度。隐层尺寸越大，网络的拟合能力越强，但也可能更容易过拟合。此外，增加层数和每层的神经元数量还会显著增加计算资源的需求。</p>
+</blockquote>
+<p>当然我们也可以使用这种图形化的形式来表示神经网络，因为其中的每个部分都相互连接，所以也被称为<strong><code>全连接神经网络 Fully-connected neural network，通常也被称为multi-layer-perceptron 多层感知机</code></strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202237572.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240820223747416" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202237572.png" /></a></p>
+<p>输入的向量 x，全部参与影响隐藏层的向量 h，向量 h，全部元素参与影响输出的向量 s</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202246129.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240820224628917" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202246129.png" /></a></p>
+<blockquote>
+<p>神经网络如何解决一个 class 具有多个 mode 的问题（线性分类器只适用于一个模板，所以对于马的头朝向左边和马的头朝向右边，无法区分。）</p>
+<ul>
+<li>W1 的作用是从原始输入数据中<strong><code>提取初级特征</code></strong>。例如，对于图像数据，<span class="arithmatex">\(W_1\)</span> 可以检测到图像中的基本边缘、纹理或局部模式。这个过程可以理解为将图像从像素空间转换到一个更高维的特征空间。</li>
+</ul>
+<p>在你提到的马的例子中，<span class="arithmatex">\(W_1\)</span> 可以捕捉到“马头的轮廓”或“马的腿”的特征，无论它们朝向哪个方向。</p>
+<ul>
+<li>W2 的作用是将第一层的初级特征<strong><code>组合成更加复杂的模式</code></strong>。例如，它可以将“马的头”和“马的腿”组合在一起，形成整体的“马”的概念。这个组合过程使得模型能够捕捉更高层次的语义信息。</li>
+</ul>
+<p>在马的例子中，<span class="arithmatex">\(W_2\)</span> 可以学会识别“马”的整体形象，无论它的头是朝左还是朝右。</p>
+<p>神经网络的优越性：</p>
+<p><strong>多层特征提取</strong>：</p>
+<ul>
+<li>神经网络的多层结构允许它<strong><code>逐层提取和组合特征</code></strong>。第一层可以识别局部的基本特征（如边缘或方向），而后续层将这些基本特征组合成更复杂的模式（如整体形状）。</li>
+</ul>
+<p><strong>非线性变换</strong>：</p>
+<ul>
+<li>每一层之间的非线性激活函数（如 ReLU）使得模型可以处理复杂的非线性模式。这意味着即使马的头部位置不同，网络仍然可以通过<strong><code>学习不同的激活模式来识别出它是同一匹马。</code></strong></li>
+</ul>
+<p><strong>平移和旋转不变性</strong>：</p>
+<ul>
+<li>通过训练，网络可以学会识别出图像中相同的对象，即使它们经历了<strong><code>旋转、缩放或镜像等变换</code></strong>。比如，第一层可以检测到马的头部边缘，而无论它朝向哪个方向，第二层通过组合这些特征，仍然可以正确地识别为“马”。</li>
+</ul>
+</blockquote>
+<h3 id="神经网络的几何解释">神经网络的几何解释<a class="headerlink" href="#神经网络的几何解释" title="Permanent link">&para;</a></h3>
+<p>面对一个线性可分的数据集，线性分类器的功能就是找到一个或者多个超平面，可以对不同的数据进行分割，但是存在某些线性不可分的数据集，这个时候，就无法使用超平面进行分割了，或者说找不到一种线性方式进行分割，比如说下面的数据集</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202230146.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="EECS498_L5_56" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202230146.jpeg" /></a></p>
+<p>我们发现，找不到一个合适的变换矩阵 <span class="arithmatex">\(W\)</span> 来分割这个数据集，所以就需要找到一种非线性方式来分割，也就是激活函数的方式，这样就可以完成某些无法线性分割的数据集的分割，比如说下面这种方式，就是使用 ReLu 函数进行特征变换，ReLU(z)=max(0,z) 它将输入的负值变为 0，正值保持不变。这种非线性变换能够改变数据的几何结构，使得原本线性不可分的数据在变换后的空间中变得可分。</p>
+<blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202230073.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="EECS498_L5_61" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202230073.jpeg" /></a></p>
+<p>原始的 A 象限，沿着 h1 和 h2 方向，数值都在增大，对应变换坐标后的第一象限。同理对于 B 象限，沿着 h1 方向值减小，沿着 h2 方向值增大，对应坐标变换之后的第二象限</p>
+<p>在这个例子中，数据点被映射到新空间的不同象限和坐标轴上，从而可以通过线性超平面进行分割。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211655067.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="EECS498_L5_65" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211655067.jpeg" /></a></p>
+</blockquote>
+<p>通过组合多个层和非线性激活函数，神经网络能够在高维空间中形成复杂的决策边界。这使得它可以处理各种复杂的分类问题。第一张图展示了一个神经网络如何处理非线性数据集。通过多层网络和非线性激活函数（如 ReLU、tanh 等），神经网络可以学习复杂的决策边界。这使得它能够很好地将数据分割为不同的类别，即使这些类别无法通过简单的线性分割来区分。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211654534.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240821165430447" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211654534.png" /></a></p>
+<p>第二张图强调了使用正则化参数来防止过拟合。正则化通过增加损失函数中的惩罚项来抑制权重的过度增长，避免模型对训练数据的过度拟合。通过增大正则化参数（如 L2 正则化中的 <span class="arithmatex">\(\lambda\)</span>），而不是减小隐藏层的维数，模型能够保持其复杂度，同时降低过拟合的风险。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211656787.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240821165635675" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211656787.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211721271.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240821172134190" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211721271.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211724140.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240821172410082" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211724140.png" /></a></p>
+<p><strong>Universal Approximation Theorem</strong> 是神经网络理论中的一个重要结果，它阐明了神经网络的强大表达能力。该定理表明，只要有足够的隐藏层神经元，带有非线性激活函数的前馈神经网络可以逼近任何连续函数，且误差可以任意小。这意味着神经网络理论上可以学习并表示任何复杂的函数映射，无论是分类任务还是回归任务。</p>
+<p><strong>收敛性</strong>：定理保证了存在一个网络可以逼近目标函数，但不保证实际训练时一定能找到这一最优网络。</p>
+<p><strong>计算代价</strong>：需要足够多的神经元，但实际计算资源有限，过多的神经元可能导致计算复杂性和训练时间增加。</p>
+<p><strong>过拟合风险</strong>：隐藏层神经元数量太多时，可能导致模型记住训练数据而失去泛化能力。</p>
+<blockquote>
+<p>convex function</p>
+<p>一个函数 f(x) 被称为凸函数，如果对于任意的两个点 <span class="arithmatex">\(x_1\)</span> 和 <span class="arithmatex">\(x_2\)</span> 以及 <span class="arithmatex">\(t \in [0, 1]\)</span> ，以下不等式成立：</p>
+<div class="arithmatex">\[
+f(tx_1 + (1 - t)x_2) \leq t f(x_1) + (1 - t) f(x_2)
+\]</div>
+<p>这意味着连接函数图像中任意两点的直线总是位于函数图像的上方或与其重合。换句话说，凸函数的图像总是呈现“碗”形（开口向上），没有局部凹陷或波峰。</p>
+<p>凸函数的特性</p>
+<ol>
+<li>
+<p><strong>全局最优性</strong>：对于凸函数，<strong><code>任意的局部最小值都是全局最小值</code></strong>。这是凸函数最重要的特性之一，极大地简化了优化问题的求解。</p>
+</li>
+<li>
+<p><strong>凸集与函数的关系</strong>：如果 <span class="arithmatex">\(f(x)\)</span> 是凸的，那么它的下超水平集（即 <span class="arithmatex">\(\{x : f(x) \leq c\}\)</span>是凸集。</p>
+</li>
+<li>
+<p><strong>一阶条件</strong>：如果 <span class="arithmatex">\( f(x) \)</span> 在某个区间内可微且是凸的，那么函数图像在任意点上的切线永远不会在函数图像的下方。这可以用以下不等式表示：
+   $$
+   f(y) \geq f(x) + \nabla f(x)^T (y - x) \quad \text{for all } x, y
+   $$
+   其中 <span class="arithmatex">\(\nabla f(x)\)</span> 是在点 <span class="arithmatex">\(x\)</span> 处的梯度。</p>
+</li>
+</ol>
+<p>相比之下，非凸函数可能有多个局部最小值，因此很难找到全局最优解。深度学习中的许多目标函数是非凸的，这使得梯度下降法等优化方法的效果较不确定。然而，通过添加正则化、合理初始化参数、使用动量或自适应优化器等方法，可以在实际应用中提高优化效果。</p>
+</blockquote>
+<h3 id="代码实现">代码实现<a class="headerlink" href="#代码实现" title="Permanent link">&para;</a></h3>
+<p>这个 Python 代码实现了一个简单的两层神经网络，并使用梯度下降法进行训练。它的任务是最小化网络的预测输出（<code>y_pred</code>）与目标输出（<code>y</code>）之间的均方误差损失</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">randn</span>
+
+<span class="n">N</span><span class="p">,</span> <span class="n">Din</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">Dout</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">Din</span><span class="p">),</span> <span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">Dout</span><span class="p">)</span>
+<span class="n">w1</span><span class="p">,</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">Din</span><span class="p">,</span> <span class="n">H</span><span class="p">),</span> <span class="n">randn</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">Dout</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w1</span><span class="p">)))</span>  <span class="c1"># Sigmoid 激活函数</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w2</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">dy_pred</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">dw2</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dy_pred</span><span class="p">)</span>
+    <span class="n">dh</span> <span class="o">=</span> <span class="n">dy_pred</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">dw1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dh</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span>
+    <span class="n">w1</span> <span class="o">-=</span> <span class="mf">1e-4</span> <span class="o">*</span> <span class="n">dw1</span>
+    <span class="n">w2</span> <span class="o">-=</span> <span class="mf">1e-4</span> <span class="o">*</span> <span class="n">dw2</span>
+</code></pre></div>
+<ul>
+<li>初始化：</li>
+</ul>
+<p><code>x</code>：输入数据，形状为 <code>(N, Din)</code>。</p>
+<p><code>y</code>：目标输出数据，形状为 <code>(N, Dout)</code>。</p>
+<p><code>w1</code>：输入层到隐藏层的权重矩阵，形状为 <code>(Din, H)</code>。</p>
+<p><code>w2</code>：隐藏层到输出层的权重矩阵，形状为 <code>(H, Dout)</code>。</p>
+<ul>
+<li>前向传播（Forward Pass）</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">h</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w1</span><span class="p">)))</span>  <span class="c1"># Sigmoid 激活函数</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w2</span><span class="p">)</span>
+</code></pre></div>
+<p><code>1.0 / (1.0 + np.exp(-x.dot(w1)))</code> 应用了 Sigmoid 激活函数，将隐藏层的输出限制在 <code>(0, 1)</code> 之间。</p>
+<ul>
+<li>反向传播（Backward Pass）</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">dy_pred</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">dw2</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dy_pred</span><span class="p">)</span>
+<span class="n">dh</span> <span class="o">=</span> <span class="n">dy_pred</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">dw1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dh</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span>
+</code></pre></div>
+<blockquote>
+<p><strong>前向传播公式</strong>:</p>
+</blockquote>
+<div class="arithmatex">\[
+h = \sigma(XW_1) = \frac{1}{1 + e^{-XW_1}}\\
+y_{\text{pred}} = hW_2
+\]</div>
+<blockquote>
+<p><strong>损失函数</strong>:</p>
+</blockquote>
+<div class="arithmatex">\[
+L = \sum \left(y_{\text{pred}} - y\right)^2
+\]</div>
+<blockquote>
+<p><strong>反向传播公式</strong>:</p>
+</blockquote>
+<p>输出层梯度:</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial W_2} =\frac{\partial L}{\partial  y_{\text{pred}} }  \cdot   \frac{\partial  y_{\text{pred}} }{{\partial W_2}}= h^T \cdot \frac{\partial L}{\partial y_{\text{pred}}} = h^T \cdot 2(y_{\text{pred}} - y)
+\]</div>
+<p>隐藏层梯度:</p>
+<div class="arithmatex">\[
+   \frac{\partial L}{\partial W_1} = X^T \cdot \left(\frac{\partial L}{\partial h} \cdot h(1 - h)\right)
+\]</div>
+<p>该代码中，整个流程为：前向传播 -&gt; 损失计算 -&gt; 反向传播 -&gt; 梯度更新，从而不断优化神经网络的权重，使预测输出更加接近目标值。</p>
+<hr />
+<h2 id="常用激活函数">常用激活函数<a class="headerlink" href="#常用激活函数" title="Permanent link">&para;</a></h2>
+<p>每个激活函数（或非线性函数）的输入都是一个数字，然后对其进行某种固定的数学操作。下面是在实践中可能遇到的几种激活函数：</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202336304.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240820233615111" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202336304.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202334475.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202334475.png" /></a></p>
+<p>左边是 Sigmoid 非线性函数，将实数压缩到 [0,1] 之间。右边是 tanh 函数，将实数压缩到 [-1,1]。</p>
+<p><strong>Sigmoid。</strong> sigmoid 非线性函数的数学公式是 <span class="arithmatex">\(\sigma(x)= \dfrac{1}{(1+e^{-x})}\)</span>，函数图像如上图的左边所示。在前一节中已经提到过，它输入实数值并将其 "挤压" 到 0 到 1 范围内。更具体地说，很大的负数变成 0，很大的正数变成 1。随着对深层神经网络理解的加深，尤其是在深度学习的发展中，Sigmoid 函数逐渐被其他激活函数所取代，原因主要是由于以下两个关键缺陷：</p>
+<ol>
+<li>梯度消失问题</li>
+</ol>
+<p>Sigmoid 函数的输出范围在 0 到 1 之间，且其导数在接近这两个极值（即 0 或 1）时会趋近于 0。这意味着当输入值很大或很小时，Sigmoid 函数的梯度几乎为零。在反向传播过程中，这些小梯度将会被逐层传播，使得网络的权重更新变得非常缓慢，甚至停止更新。这一现象被称为梯度消失问题（vanishing gradient problem），严重阻碍了深层网络的训练。</p>
+<blockquote>
+<p>回忆一下，在反向传播的时候，<strong><code>这个（局部）梯度将会与整个损失函数关于该门单元输出的梯度相乘。</code></strong>因此，如果局部梯度非常小，那么相乘的结果也会接近零，这会有效地 "杀死" 梯度，几乎就有没有信号通过神经元传到权重再到数据了。</p>
+</blockquote>
+<ol>
+<li>非零中心性</li>
+</ol>
+<p>Sigmoid 函数的输出范围是 (0, 1)，<strong><code>这意味着它的输出不是零中心的</code></strong>。在反向传播中，如果输入到一个神经元的数据总是正数（即 <span class="arithmatex">\(x &gt; 0\)</span>），则该神经元的输出也是正数。这将导致梯度在反向传播过程中要么全部为正，要么全部为负，从而<strong><code>造成参数更新时的“锯齿形”震荡，减缓收敛速度</code></strong>。虽然通过增加数据的批量和其他手段可以部分缓解这一问题，但它仍然对网络的训练效率产生不利影响。</p>
+<blockquote>
+<p>因为如果输入神经元的数据总是正数（比如在 <span class="arithmatex">\(f = w^Tx+b\)</span> 中每个元素都）<span class="arithmatex">\(x &gt; 0\)</span>，那么关于 <span class="arithmatex">\(w\)</span> 的梯度在反向传播的过程中，将会要么全部是正数，要么全部是负数（具体依整个表达式 <span class="arithmatex">\(f\)</span> 而定）。这将会导致梯度下降权重更新时出现 z 字型的下降。</p>
+</blockquote>
+<p><strong>Tanh。</strong> Tanh（双曲正切）函数是一种常用的激活函数，其输出范围为 [-1, 1]，与 Sigmoid 函数相似，它也存在饱和问题，但 Tanh 的一个显著优势是它的输出是零中心的。这意味着 Tanh 的输出在反向传播过程中不会引起像 Sigmoid 那样的梯度震荡问题，因此在神经网络的训练中往往表现得更好。</p>
+<blockquote>
+<p><strong>梯度消失</strong>：尽管 Tanh 的零中心输出是一大优势，但它仍然面临梯度消失问题。当输入远离零（即非常大或非常小）时，Tanh 的梯度会接近 0，从而导致深层网络中梯度传播的困难。</p>
+</blockquote>
+<p>Tanh 函数实际上是一个经过放大和位移的 Sigmoid 函数，其公式为 <span class="arithmatex">\(\tanh(x) = 2\sigma(2x) - 1\)</span>，其中 <span class="arithmatex">\(\sigma(x)\)</span> 是 Sigmoid 函数。这种关系表明，Tanh 在某种程度上可以被视为 Sigmoid 的改进版本。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202334751.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202334751.png" /></a></p>
+<p>左边是 ReLU（校正线性单元：Rectified Linear Unit）激活函数，当 <span class="arithmatex">\(x = 0\)</span> 时函数值为 0。当 <span class="arithmatex">\(x &gt; 0\)</span> 函数的斜率为 1。右边是从 [Krizhevsky__][41]等的论文中截取的图表，指明<strong><code>使用 ReLU 比使用 tanh 的收敛快 6 倍。</code></strong></p>
+<blockquote>
+<p>优点：</p>
+<ol>
+<li>加速收敛</li>
+</ol>
+<p>相较于 sigmoid 和 tanh 函数，ReLU 对于随机梯度下降的收敛有巨大的加速作用（ [Krizhevsky __][41]等的论文指出有 6 倍之多）。据称这是由它的线性，非饱和的公式导致的。</p>
+<ol>
+<li>计算简单</li>
+</ol>
+<p>sigmoid 和 tanh 神经元含有指数运算等耗费计算资源的操作，而 ReLU 可以简单地通过对一个矩阵进行阈值计算得到。</p>
+<p>缺点：</p>
+<ol>
+<li><strong>"Dying ReLU" 问题</strong>：在训练过程中，如果 ReLU 神经元接收到非常大的负梯度，它可能永远处于零输出状态，这意味着神经元再也不会激活，导致网络的部分单元永久失效。这个问题通常被称为“ReLU 死亡”。</li>
+</ol>
+<p>例如，如果学习率设置得太高，可能会发现网络中 40%的神经元都会死掉（在整个训练集中这些神经元都不会被激活）。通过合理设置学习率，这种情况的发生概率会降低。</p>
+</blockquote>
+<p><strong>Leaky ReLU</strong>：Leaky ReLU 是为解决 "ReLU 死亡" 问题的尝试。ReLU 中当 x&lt; 0 时，函数值为 0。Leaky ReLU 为负数输入提供了一个非常小的斜率（例如 0.01），而不是将负数直接映射为零。其公式为：</p>
+<div class="arithmatex">\[
+f(x) = \begin{cases} x &amp; \text{if } x &gt; 0 \\ \alpha x &amp; \text{if } x \leq 0 \end{cases}
+\]</div>
+<p>其中 <span class="arithmatex">\(\alpha\)</span> 是一个小常数。这种设计允许负数输入也能产生小的负梯度，从而减少神经元“死亡”的可能性。</p>
+<p><strong><code>Maxout 是一种通用化的激活函数，它通过选择两个线性函数的最大值来构建激活输出</code></strong>。其函数公式为：</p>
+<div class="arithmatex">\[
+f(x) = \max(w^T_1x + b_1, w^T_2x + b_2)
+\]</div>
+<blockquote>
+<p>Maxout 是对 ReLU 和 leaky ReLU 的一般化归纳，它的函数是：<span class="arithmatex">\(max(w^T_1x+b_1, w^T_2x+b_2)\)</span>。ReLU 和 Leaky ReLU 都是这个公式的特殊情况（<strong>比如 ReLU 就是当 <span class="arithmatex">\(w_1, b_1 = 0\)</span> 的时候</strong>）。这样 Maxout 神经元就拥有 ReLU 单元的所有优点（线性操作和不饱和），而没有它的缺点（死亡的 ReLU 单元）。</p>
+<ol>
+<li><strong>避免“死亡”ReLU 问题</strong>:在训练深层神经网络时更加鲁棒</li>
+<li><strong>更强的表达能力</strong>:Maxout 是对 ReLU 和 Leaky ReLU 的一般化</li>
+<li><strong>线性且不饱和</strong>:帮助解决梯度消失问题并加快训练过程。</li>
+</ol>
+<p>Maxout 的缺点</p>
+<ol>
+<li><strong>参数数量翻倍</strong>：每个 Maxout 神经元需要双倍的参数，因为它计算了两个线性函数的最大值。这使得网络的参数数量大幅增加，从而可能导致计算资源的需求和存储成本的显著上升。随着网络深度和宽度的增加，这一问题将更加突出。</li>
+<li><strong>计算复杂性增加</strong>：由于 Maxout 需要计算两个线性函数的最大值，它的计算复杂性高于 ReLU。对于非常深的网络，Maxout 的计算开销可能成为瓶颈。</li>
+</ol>
+</blockquote>
+<p>尽管 Maxout 具有强大的表达能力和解决 ReLU 缺陷的优势，但其较高的参数和计算开销使得它更适用于需要高模型复杂性且计算资源充裕的场景。</p>
+<h2 id="神经元-neuron-建模">神经元 neuron 建模<a class="headerlink" href="#神经元-neuron-建模" title="Permanent link">&para;</a></h2>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211629394.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240821162909277" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408211629394.png" /></a></p>
+<h3 id="生物动机与连接">生物动机与连接<a class="headerlink" href="#生物动机与连接" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202333903.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408202333903.png" /></a></p>
+<p>大脑的基本计算单位是 <strong>神经元（neuron）</strong>。人类的神经系统中大约有 860 亿个神经元，它们被大约 10<sup>14-10</sup>15 个 <strong>突触（synapses）</strong> 连接起来。下面图表的左边展示了一个生物学的神经元，右边展示了一个常用的数学模型。每个神经元都从它的多个 <strong>树突</strong>(debdrite) 获得输入信号，然后沿着它唯一的 <strong>轴突（axon）</strong> 产生输出信号。轴突在末端会逐渐分枝，通过突触和其他神经元的树突相连。<strong><code>人工神经元则通过加权的输入信号和偏差计算一个激活值，并根据激活函数决定输出信号。</code></strong></p>
+<p>在下图右侧的神经元计算模型中，沿着轴突传播的信号将基于突触的突触强度，与其他神经元的树突进行乘法交互。突触的强度（也就是权重 <span class="arithmatex">\(w_i\)</span>），是可学习的，且可以控制一个神经元对于另一个神经元的影响强度（还可以控制影响方向：使其兴奋（正权重）或使其抑制（负权重））。</p>
+<p>在基本模型中，其他神经元的树突将信号（也就是输入 <span class="arithmatex">\(x_i\)</span>）传递到细胞体，信号在细胞体中相加（下图右侧的 <span class="arithmatex">\(\Sigma w_ix_i+b\)</span>)。求和后的信号传递到激活函数，激活函数对求和信号进行非线性变换，输出结果用于决定神经元是否激活及激活程度。</p>
+<p>换句话说，每个神经元都对它的输入和权重进行点积，然后加上偏差，最后使用非线性函数（或称为激活函数）。本例中使用的是 sigmoid 函数 <span class="arithmatex">\(\sigma(x)= 1/(1+e^{-x})\)</span>。</p>
+<p><strong>粗糙模型</strong>：要注意这个对于生物神经元的建模是非常粗糙的：在实际中，有很多不同类型的神经元，每种都有不同的属性。生物神经元的树突可以进行复杂的非线性计算。突触并不就是一个简单的权重，它们是复杂的非线性动态系统。</p>
+<h3 id="作为线性分类器的单个神经元">作为线性分类器的单个神经元<a class="headerlink" href="#作为线性分类器的单个神经元" title="Permanent link">&para;</a></h3>
+<p>神经元模型通过对输入信号进行加权求和，然后通过激活函数（如 sigmoid 函数）将其输出为一个概率值。这个输出可以直接用于二分类任务：</p>
+<ul>
+<li><strong><code>当神经元输出接近 1 时，表示神经元“喜欢”输入，意味着输入属于某个特定类别。</code></strong></li>
+<li><strong><code>当输出接近 0 时，表示神经元“不喜欢”输入，意味着输入不属于该类别。</code></strong></li>
+</ul>
+<p>因此，单个神经元模型能够划分输入空间为两个线性分隔的区域，这类似于线性分类器的行为。</p>
+<p><strong>二分类 Softmax 分类器</strong>。在二分类任务中，sigmoid 函数的输出可以被解释为某个类别的概率 <span class="arithmatex">\(P(y_i = 1|x_i; w)\)</span>。另一类别的概率则是 <span class="arithmatex">\(P(y_i = 0|x_i; w) = 1 - P(y_i = 1|x_i; w)\)</span>，因为总概率为 1。基于这个概率分布，可以使用交叉熵损失来优化神经元参数，从而得到一个二分类的 Softmax 分类器（即逻辑回归模型）。在这种情况下，神经元的输出大于 0.5 时，模型预测输入属于第一个类别。</p>
+<p><strong>二分类 SVM 分类器</strong>。通过在神经元输出端增加一个最大边界折叶损失（hinge loss）函数，神经元可以用作支持向量机（SVM）的二分类器。最大边界折叶损失强调分类边界的最大化，使分类器更加鲁棒。</p>
+<p><strong>理解正则化</strong>。在 SVM/Softmax 的例子中，正则化项可以看作是一种“<strong><code>逐渐遗忘</code></strong>”的机制。它通过<strong><code>引导权重逐渐趋向于 0</code></strong>，从而<strong><code>防止模型过拟合</code></strong>。这种方式在生物学上类似于突触的长期衰减，即突触强度随着时间的推移而逐渐减弱。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

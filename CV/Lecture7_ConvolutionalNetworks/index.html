@@ -1,0 +1,2008 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+        <link rel="prev" href="../Lecture6_Backpropagation/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Convolutional Neural Networks - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#convolutional-neural-networks" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Convolutional Neural Networks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ADS/Readme/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Lecture1_Introduction/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/Readme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Readme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture2_Image_Classification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture5_Neural_Networks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Neural Network
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture6_Backpropagation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Backpropagation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Convolutional Neural Networks
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Convolutional Neural Networks
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#概念" class="md-nav__link">
+    <span class="md-ellipsis">
+      概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#结构概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      结构概述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#核心特性和不同的-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      核心特性和不同的 layer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="核心特性和不同的 layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#卷积层" class="md-nav__link">
+    <span class="md-ellipsis">
+      卷积层
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="卷积层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#卷积操作" class="md-nav__link">
+    <span class="md-ellipsis">
+      卷积操作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#超参数分析深度步长和零填充" class="md-nav__link">
+    <span class="md-ellipsis">
+      超参数分析：深度、步长和零填充
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用零填充" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用零填充
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#参数共享" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数共享
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#池化层" class="md-nav__link">
+    <span class="md-ellipsis">
+      池化层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#归一化层" class="md-nav__link">
+    <span class="md-ellipsis">
+      归一化层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#全连接层" class="md-nav__link">
+    <span class="md-ellipsis">
+      全连接层
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#把全连接层转化成卷积层" class="md-nav__link">
+    <span class="md-ellipsis">
+      把全连接层转化成卷积层
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="把全连接层转化成卷积层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#卷积神经网络的结构" class="md-nav__link">
+    <span class="md-ellipsis">
+      卷积神经网络的结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="卷积神经网络的结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#层的排列规律" class="md-nav__link">
+    <span class="md-ellipsis">
+      层的排列规律
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#层的尺寸设置规律" class="md-nav__link">
+    <span class="md-ellipsis">
+      层的尺寸设置规律
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#计算上的考量" class="md-nav__link">
+    <span class="md-ellipsis">
+      计算上的考量
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#概念" class="md-nav__link">
+    <span class="md-ellipsis">
+      概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#结构概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      结构概述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#核心特性和不同的-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      核心特性和不同的 layer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="核心特性和不同的 layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#卷积层" class="md-nav__link">
+    <span class="md-ellipsis">
+      卷积层
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="卷积层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#卷积操作" class="md-nav__link">
+    <span class="md-ellipsis">
+      卷积操作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#超参数分析深度步长和零填充" class="md-nav__link">
+    <span class="md-ellipsis">
+      超参数分析：深度、步长和零填充
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用零填充" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用零填充
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#参数共享" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数共享
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#池化层" class="md-nav__link">
+    <span class="md-ellipsis">
+      池化层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#归一化层" class="md-nav__link">
+    <span class="md-ellipsis">
+      归一化层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#全连接层" class="md-nav__link">
+    <span class="md-ellipsis">
+      全连接层
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#把全连接层转化成卷积层" class="md-nav__link">
+    <span class="md-ellipsis">
+      把全连接层转化成卷积层
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="把全连接层转化成卷积层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#卷积神经网络的结构" class="md-nav__link">
+    <span class="md-ellipsis">
+      卷积神经网络的结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="卷积神经网络的结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#层的排列规律" class="md-nav__link">
+    <span class="md-ellipsis">
+      层的排列规律
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#层的尺寸设置规律" class="md-nav__link">
+    <span class="md-ellipsis">
+      层的尺寸设置规律
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#计算上的考量" class="md-nav__link">
+    <span class="md-ellipsis">
+      计算上的考量
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/Blog/blob/main/docs/CV/Lecture7_ConvolutionalNetworks.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/Blog/raw/main/docs/CV/Lecture7_ConvolutionalNetworks.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="convolutional-neural-networks">Convolutional Neural Networks<a class="headerlink" href="#convolutional-neural-networks" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 12305 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 20 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 62 分钟</p>
+</div>
+<h2 id="概念">概念<a class="headerlink" href="#概念" title="Permanent link">&para;</a></h2>
+<p>卷积神经网络（CNN，或称 ConvNet）是专门为处理图像和视频数据而设计的神经网络，它们通过引入卷积操作来捕捉输入数据中的空间和局部模式信息。与传统的全连接神经网络相比，CNN 在处理视觉数据时具有更强的表现力和效率。</p>
+<h2 id="结构概述">结构概述<a class="headerlink" href="#结构概述" title="Permanent link">&para;</a></h2>
+<p>在上一章中，神经网络的输入是一个向量，然后在一系列的隐藏层中对它做变换。每个隐层都是由若干的神经元组成，每个神经元都与前一层中的所有神经元连接。但是在一个隐层中，神经元相互独立不进行任何连接。最后的全连接层被称为 "输出层"，在分类问题中，它输出的值被看做是不同类别的评分值。</p>
+<p>常规神经网络对于大尺寸图像效果不尽人。在 CIFAR-10 中，图像的尺寸是 <span class="arithmatex">\(32\times32\times3\)</span>（宽高均为 32 像素，3 个颜色通道），因此，对应的的常规神经网络的第一个隐层中，每一个单独的全连接神经元就有 <span class="arithmatex">\(32\times32\times3 = 3072\)</span> 个权重。这个数量看起来还可以接受，但是很显然这个全连接的结构不适用于更大尺寸的图像。举例说来，一个尺寸为 <span class="arithmatex">\(200\times200\times3\)</span> 的图像，会让神经元包含<span class="arithmatex">\(200\times200\times3 = 120000\)</span>个权重值。<strong>如此庞大的参数数量不仅导致<code>计算资源的浪费</code>，还容易导致模型的<code>过拟合</code>。</strong></p>
+<p>CNN 通过利用输入数据的空间结构来减少参数数量，并提高模型的学习能力。与常规神经网络不同，卷积神经网络的各层中的神经元是 3 维排列的：<strong>宽度</strong>、<strong>高度</strong> 和 <strong>深度</strong>（<strong>这里的 深度 指的是该层特征图的数量，而不是整个网络的深度，整个网络的深度指的是网络的层数</strong>）。</p>
+<p>举个例子，CIFAR-10 中的图像是作为卷积神经网络的输入，该数据体的维度是 <span class="arithmatex">\(32\times32\times3\)</span>（宽度，高度和深度）。每一层的神经元只与前一层的小区域（称为感受野）连接，而不是采取全连接方式。这样，卷积层的每个神经元只负责检测局部特征（例如边缘、角点等），然后这些局部特征逐层组合，形成对整个图像的全局理解。对于用来分类 CIFAR-10 中的图像的卷积网络，其最后的输出层的维度是 <span class="arithmatex">\(1\times1\times10\)</span>，因为在卷积神经网络结构的最后部分将会把全尺寸的图像压缩为包含分类评分的一个向量，向量是在深度方向排列的。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408221553958.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408221553958.jpeg" /></a></p>
+<p>左边是一个 3 层的常规神经网络，每一层的神经元与前一层的所有神经元全连接。右边是一个卷积神经网络，图例中网络将它的神经元都排列成 3 个维度（宽、高和深度）。卷积神经网络的每一层都将 3D 的输入数据变化为神经元 3D 的激活数据并输出。在这个例子中，红色的输入层装的是图像，所以它的宽度和高度就是图像的宽度和高度，它的深度是 3（代表了红、绿、蓝 3 种颜色通道）。</p>
+<h2 id="核心特性和不同的-layer">核心特性和不同的 layer<a class="headerlink" href="#核心特性和不同的-layer" title="Permanent link">&para;</a></h2>
+<p>一个简单的卷积神经网络是由各种层按照顺序排列组成，网络中的每个层使用一个可以微分的函数将激活数据从一个层传递到另一个层。卷积神经网络主要由三种类型的层构成：<strong>卷积层</strong>，<strong>池化（Pooling）层</strong> 和 <strong>全连接层</strong>（全连接层和常规神经网络中的一样）。通过将这些层叠加起来，就可以构建一个完整的卷积神经网络。</p>
+<p><strong><code>一个用于 CIFAR-10 图像数据分类的卷积神经网络的结构可以是 [输入层-卷积层-ReLU 层-池化层-全连接层]。</code></strong></p>
+<ul>
+<li>
+<p>输入 [<span class="arithmatex">\(32\times32\times3\)</span>] 存有图像的原始像素值，本例中图像宽高均为 32，有 3 个颜色通道。</p>
+</li>
+<li>
+<p>卷积层使用多个卷积核（滤波器）在输入图像上滑动，每个卷积核计算局部区域与自身权重的内积。内积值表示该区域与卷积核的匹配程度。<strong>（这个内积作为元素组成下一张特征图，其含义为与模版匹配的程度）</strong>，同时每个卷积核都有一个偏差项。卷积层会计算所有神经元的输出。如果我们使用 12 个滤波器（也叫作核），<strong>输出尺寸</strong>为<code>[32x32x12]</code>，12 个特征图，每个特征图表示不同的局部特征（如边缘、纹理等）。</p>
+</li>
+</ul>
+<blockquote>
+<blockquote>
+<p><strong>卷积操作（Convolution Operation）</strong></p>
+</blockquote>
+<p>在卷积神经网络中，卷积层取代了传统神经网络中的全连接层。卷积层使用 <strong><code>卷积核</code></strong>（或称为滤波器）在输入图像上滑动，通过与图像局部区域进行点积运算来提取特征。卷积操作的关键在于它保留了图像的空间结构，利用了图像像素之间的空间关系。</p>
+<ul>
+<li><strong>局部连接性</strong>：<strong>卷积层中的每个神经元只与上一层的 <code>局部区域</code> 连接</strong>，而不是与所有神经元连接，这显著 <strong><code>减少了参数数量</code></strong>。</li>
+<li><strong>权重共享</strong>：<strong><code>同一个卷积核在图像的不同位置共享权重</code></strong>，这进一步减少了模型的参数，并使模型能够在不同图像位置上检测相同的特征。</li>
+</ul>
+<blockquote>
+<p><strong>卷积层的架构设计</strong></p>
+</blockquote>
+<ul>
+<li><strong>深度（Depth）</strong>：卷积核的数量决定了输出特征图的深度。</li>
+<li><strong>步幅（Stride）</strong>：卷积核在图像上移动的步长，步幅越大，输出特征图越小。</li>
+<li><strong>填充（Padding）</strong>：为了保持输出特征图的尺寸，可以在输入图像边缘添加额外的像素（通常为零）。</li>
+</ul>
+</blockquote>
+<ul>
+<li>ReLU 层将会逐个元素地进行激活函数操作，比如使用以 0 为阈值的<span class="arithmatex">\(f(x) = max(0,x)\)</span>作为激活函数。该层对数据尺寸没有改变，还是 [32x32x12]。</li>
+</ul>
+<blockquote>
+<blockquote>
+<p><strong>激活函数（Activation Function）</strong></p>
+</blockquote>
+<p>卷积层的输出通常通过非线性激活函数处理，例如 ReLU（Rectified Linear Unit），以引入非线性，使模型能够表示更复杂的特征。</p>
+</blockquote>
+<ul>
+<li>池化层在在空间维度（宽度和高度）上进行降采样（downsampling）操作，通常是最大池化（Max Pooling），将局部区域（如 2x2 窗口）内的最大值作为输出，减少空间维度。<strong>输出尺寸</strong>：<code>[16x16x12]</code>，宽度和高度均减半，深度不变。</li>
+</ul>
+<blockquote>
+<blockquote>
+<p><strong>池化层（Pooling Layer）</strong></p>
+</blockquote>
+<p>卷积神经网络中通常包含池化层，主要用于 <strong><code>下采样（downsampling）</code></strong>，以 <strong>减少特征图的尺寸，降低计算复杂度</strong>，并增加模型的空间不变性。最常见的池化操作是最大池化（Max Pooling），它在局部区域内取最大值作为输出。</p>
+</blockquote>
+<ul>
+<li>全连接层将会计算分类评分，特征图<code>[16x16x12]</code>，需要展平成一个向量。将展平的特征向量与全连接层的权重矩阵相乘，并加上偏置，输出分类得分。数据尺寸变为 [<span class="arithmatex">\(1\times1\times10\)</span>]，其中 10 个数字对应的就是 CIFAR-10 中 10 个类别的分类评分值。</li>
+</ul>
+<blockquote>
+<blockquote>
+<p><strong>全连接层（Fully Connected Layer）</strong></p>
+</blockquote>
+<p>在卷积神经网络的最后，通常会包含一个或多个全连接层。这些层将卷积和池化层提取的特征映射到输出类别。<strong><code>全连接层将卷积网络的输出展平为一维向量</code></strong>，并通过 Softmax 或 SVM 等损失函数进行分类。</p>
+<p>总结：</p>
+<ul>
+<li>
+<p><strong>层次结构</strong>：通过卷积层提取图像特征，ReLU 层引入非线性，池化层降采样并减少特征图尺寸，最后全连接层生成分类评分。</p>
+</li>
+<li>
+<p><strong>参数和超参数</strong>：卷积层和全连接层含有可训练的权重参数，而 ReLU 层和池化层没有参数。超参数包括滤波器大小、数量、步幅、填充方式以及池化窗口大小。</p>
+</li>
+<li>
+<p><strong>特征提取和分类</strong>：CNN 逐层将图像从原始像素值转化为高层次特征，最终用于图像分类。</p>
+</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li><strong>空间不变性</strong>：卷积操作保留了输入的空间信息，使得模型能够识别出在不同位置的相同特征。</li>
+<li><strong>参数效率</strong>：通过局部连接和权重共享，CNN 大幅减少了模型参数，使得训练更加高效。</li>
+<li><strong>自动特征提取</strong>：CNN 可以自动学习和提取多层次的特征，从低级边缘和纹理到高级的对象和形状。</li>
+</ul>
+</blockquote>
+<h3 id="卷积层">卷积层<a class="headerlink" href="#卷积层" title="Permanent link">&para;</a></h3>
+<h4 id="卷积操作">卷积操作<a class="headerlink" href="#卷积操作" title="Permanent link">&para;</a></h4>
+<blockquote>
+<ol>
+<li><strong>单次卷积操作示意图</strong></li>
+</ol>
+</blockquote>
+<p><a class="glightbox" href="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/EECS498_L7_16.jpg?" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="15" src="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/EECS498_L7_16.jpg?" /></a></p>
+<p>在这张示意图中，卷积操作展示了如何利用一个卷积核扫描输入图像的每个局部区域并生成对应的输出值。具体步骤如下：</p>
+<p><strong>输入</strong>：左侧为输入图像的一部分，表示一个局部的像素区域。</p>
+<p><strong>卷积核</strong>：卷积核在图像上滑动，在每个位置计算图像局部区域与卷积核之间的内积。这种内积计算是线性操作，即将输入区域的每个像素值与卷积核对应的权重相乘后求和。</p>
+<p><strong>输出</strong>：内积的结果形成一个输出值，表示该局部区域与卷积核特征的匹配程度。这些输出值组成特征图（Feature Map），如图右侧所示。</p>
+<blockquote>
+<p><strong>可以这样理解，一个卷积核就表示一种特征，输出的结果就是卷积核在此处进行匹配操作的得分或者相似度，得分越高，<code>说明此处局部图像就与卷积核要寻找的特征越相似</code>，然后卷积核的参数是可以改变的，或者说是可学习的，也就是卷积核要寻找的特征是会变化的，卷积核会去寻找最有用的特征，或者说最有助于降低分类误差的特征）</strong></p>
+<ol>
+<li><strong>多维卷积核表示</strong></li>
+</ol>
+</blockquote>
+<p><a class="glightbox" href="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/EECS498_L7_18.jpg?" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="17" src="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/EECS498_L7_18.jpg?" /></a></p>
+<p>这里有六个卷积核，每个卷积核的大小为 <code>[3x5x5]</code>，其中 <code>3</code> 表示通道数（对应 RGB），<code>5x5</code> 表示空间尺寸。</p>
+<p><strong>多个卷积核堆叠在一起，形成一个四维张量</strong>。对于卷积层来说，输入图像的每个局部区域与每个卷积核进行运算后，会生成一个特征图。</p>
+<p>这里有 6 个卷积核，因此<strong>将生成 6 张特征图</strong>，表示不同的卷积核在图像上提取到的不同特征。</p>
+<blockquote>
+<ol>
+<li><strong>卷积操作后生成特征图</strong></li>
+</ol>
+</blockquote>
+<p><a class="glightbox" href="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/EECS498_L7_24.jpg?" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="23" src="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/EECS498_L7_24.jpg?" /></a></p>
+<p>如果我们进行多次卷积操作，那么一张 3*32*32 的图片，经过大小为 6*3*5*5 的卷积核卷积，就得到六张特征图，大小为 6*28*28</p>
+<p><strong>但是，我们并不能直接这样操作，因为实际上卷积是线性操作，多个卷积仍然是线性网络，所以我们需要加上<code>激活函数</code></strong>，这样才可以更好的学习</p>
+<blockquote>
+<ol>
+<li><strong>激活函数示意图</strong></li>
+</ol>
+</blockquote>
+<p><a class="glightbox" href="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/EECS498_L7_26.jpg?raw=true" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="25" src="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/EECS498_L7_26.jpg?raw=true" /></a></p>
+<p>此图展示了在卷积操作后添加激活函数的步骤：</p>
+<ul>
+<li><strong>卷积的线性特性</strong>：卷积本质上是一个线性操作，这意味着即使进行多次卷积，网络仍然是线性的，不具备复杂的表示能力。</li>
+<li><strong>激活函数</strong>：为了引入非线性特性，需要在卷积操作后加上非线性激活函数。常用的激活函数包括 ReLU（<code>max(0, x)</code>），它会将负值置为 0，保留正值不变。通过激活函数，网络可以学习更复杂的特征。</li>
+</ul>
+<p><strong>概述和直观介绍</strong>：假设我们有一张 32x32 像素的 RGB 图像作为输入，第一层卷积层使用一个 5x5x3 的滤波器。这个滤波器的作用就像一个“模板”，它会滑动在图像的不同区域上，检测每个区域中是否存在特定的视觉模式（例如一条边缘）。<strong><code>如果滤波器“匹配”到图像中的特征，它的输出（激活值）就会高，反之则低。通过卷积操作生成的激活图展示了滤波器对整个图像的反应。</code></strong></p>
+<p>假如我们有多个滤波器，每个滤波器都能检测不同的特征。例如，一个滤波器可能专门检测水平边缘，另一个则检测垂直边缘，最终生成多个不同的激活图，在深度方向上层叠起来就生成了输出数据。</p>
+<blockquote>
+<p><strong>卷积神经网络中的神经元连接和参数共享</strong></p>
+</blockquote>
+<ul>
+<li><strong>局部连接与感受野</strong></li>
+</ul>
+<p>在卷积层中，神经元并不是像全连接层那样与前一层的所有神经元相连。相反，它们仅与输入数据的一个局部区域连接。这种局部连接的区域称为神经元的 <strong>感受野（receptive field）</strong>，它对应卷积核的空间尺寸。例如，如果卷积核的大小是 <code>5x5</code>，那么感受野的空间尺寸就是 <code>5x5</code>。</p>
+<p><strong>空间上的局部连接</strong>：神经元只与输入图像的一个小块相连，而非整个图像。这种局部连接的设计基于图像的局部相关性，允许网络集中关注图像的局部特征，如边缘、角点等。</p>
+<p><strong>深度上的全连接</strong>：虽然在空间上是局部连接，但在深度维度上，神经元与输入数据的所有通道都连接。这意味着输入图像的每个颜色通道（如 RGB 图像的 3 个通道）都参与计算。</p>
+<ul>
+<li><strong>参数共享</strong></li>
+</ul>
+<p>卷积层中的参数共享机制意味着<strong><code>同一个滤波器（卷积核）在输入数据的不同位置重复使用</code></strong>。具体来说，卷积层的每个神经元虽然只观察输入数据的一个小区域，但这个小区域对应的参数（即滤波器的权重）在空间上是共享的。</p>
+<p><strong>共享参数的效果</strong>：这种参数共享方式使得卷积层可以有效地检测相同的特征在不同的空间位置。举例来说，<strong><code>一个卷积核如果能够在图像的一部分检测到边缘，它也能在其他部分检测到相同的边缘</code></strong>。这种共享机制减少了模型参数的数量，提升了网络的泛化能力。</p>
+<ul>
+<li><strong><code>举例说明</code></strong></li>
+</ul>
+<p><strong>例 1</strong>：假设输入数据是一个 <code>32x32x3</code> 的 RGB 图像（如 CIFAR-10 图像），卷积层使用 <code>5x5x3</code> 的滤波器。在这种情况下，卷积层中的每个神经元都只与 <code>5x5</code> 空间区域和 <code>3</code> 个颜色通道连接，因此每个神经元有 <code>5x5x3 = 75</code> 个权重，再加上一个偏置参数。</p>
+<p><strong>例 2</strong>：如果输入数据的尺寸是 <code>16x16x20</code>，并且感受野的尺寸是 <code>3x3</code>，那么卷积层中的每个神经元将与输入数据的一个 <code>3x3x20</code> 区域相连，这意味着每个神经元有 <code>3x3x20 = 180</code> 个权重。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408221651716.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408221651716.jpeg" /></a></p>
+<p><strong>左边</strong>：左侧的示意图展示了卷积层中的神经元如何连接到输入数据的一个局部区域。红色区域表示输入数据，蓝色表示卷积层中的神经元。可以看到，卷积层中的神经元只与输入数据的一个空间区域（感受野）连接，而在深度方向上，则与所有输入通道（如颜色通道）连接。</p>
+<p><strong>右边</strong>：神经网络章节中介绍的神经元保持不变，它们还是计算权重和输入的内积，然后进行激活函数运算，只是它们的连接被限制在一个局部空间。</p>
+<h4 id="超参数分析深度步长和零填充">超参数分析：深度、步长和零填充<a class="headerlink" href="#超参数分析深度步长和零填充" title="Permanent link">&para;</a></h4>
+<p>卷积神经网络（CNN）的输出特征图的空间排列受多个超参数的影响，包括深度、步长和零填充。这些超参数不仅决定了输出特征图的尺寸，还影响了特征图的分辨率和信息保留程度。</p>
+<ol>
+<li><strong>深度（Depth）</strong>：</li>
+<li>深度对应于输出特征图的通道数，<strong>等同于使用的滤波器的数量</strong>。每个滤波器在输入数据中寻找不同的特征，例如边缘、颜色斑点等。因此，输出特征图的深度是由滤波器的数量决定的。每个深度列中的神经元共享相同的感受野，但在不同通道上激活。</li>
+<li><strong>步长（Stride）</strong>：</li>
+<li>步长决定了卷积核在输入图像上滑动的距离。<strong><code>较小的步长（如 1）意味着卷积核逐像素移动，这会产生更大的输出特征图</code></strong>。较大的步长（如 2）则意味着每次移动多个像素，这将导致输出特征图尺寸减小。</li>
+<li>步长影响输出特征图的分辨率：<strong><code>步长越大，输出特征图越小，分辨率也越低。大步长通常用于减小特征图的空间尺寸。</code></strong></li>
+<li><strong>零填充（Zero-padding）</strong>：</li>
+<li>零填充是在输入图像的边缘填充额外的零像素，以控制输出特征图的空间尺寸。零填充的目的是避免在卷积过程中丢失边缘信息，或者保持输出特征图与输入图像在空间尺寸上的一致性。</li>
+<li>通过适当的零填充，<strong><code>可以确保输出特征图的尺寸与输入图像相同</code></strong>，或者根据需要调整为特定大小。</li>
+</ol>
+<blockquote>
+<p><strong>输出特征图空间尺寸计算</strong></p>
+<div class="arithmatex">\[
+输出尺寸 = \dfrac{W - F + 2P}{S} + 1
+\]</div>
+<ul>
+<li>
+<p><strong>W 是输入图像的尺寸（假设高度和宽度相等）。</strong></p>
+</li>
+<li>
+<p><strong>F 是卷积核的尺寸。</strong></p>
+</li>
+<li>
+<p><strong>P 是零填充的数量。</strong></p>
+</li>
+<li>
+<p><strong>S 是步长。</strong></p>
+</li>
+</ul>
+<p><strong>例 1</strong>：假设输入图像尺寸为 <span class="arithmatex">\(W = 7\)</span>，卷积核尺寸 <span class="arithmatex">\(F = 3\)</span>，步长 <span class="arithmatex">\(S = 1\)</span>，零填充 <span class="arithmatex">\(P = 0\)</span>。那么输出特征图的尺寸为：</p>
+<p><span class="arithmatex">\(\text{输出尺寸} = \dfrac{7 - 3 + 2(0)}{1} + 1 = 5\)</span></p>
+<p><strong>例 2</strong>：如果使用相同的输入图像和卷积核，但步长<span class="arithmatex">\(S = 2\)</span>，则输出特征图的尺寸为：</p>
+<p><span class="arithmatex">\(\text{输出尺寸} = \dfrac{7 - 3 + 2(0)}{2} + 1 = 3\)</span></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408221658244.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408221658244.jpeg" /></a></p>
+<p>空间排列的图示。在本例中只有一个空间维度（x 轴），神经元的感受野尺寸 F = 3，输入尺寸 W = 5，<strong><code>零填充 P = 1</code></strong>。左边：神经元使用的步长 S = 1，所以输出尺寸是(5-3+2)/1+1 = 5。右边：神经元的步长 S = 2，则输出尺寸是(5-3+2)/2+1 = 3。注意当步长 S = 3 时是无法使用的，因为它无法整齐地穿过数据体。从等式上来说，因为(5-3+2)= 4 是不能被 3 整除的。</p>
+<p>本例中，神经元的权重是 [1,0,-1]，显示在图的右上角，偏差值为 0。这些权重是被所有黄色的神经元共享的</p>
+<h4 id="使用零填充"><strong>使用零填充</strong><a class="headerlink" href="#使用零填充" title="Permanent link">&para;</a></h4>
+<p>零填充（Zero-padding）在卷积神经网络（CNN）中的作用主要体现在两个方面：<strong>保持输出特征图的尺寸与输入一致</strong>，以及<strong>避免边缘信息丢失</strong>。通过合理使用零填充，可以有效地解决卷积操作中遇到的一些尺寸限制问题，尤其是当步长和滤波器尺寸的组合不适用于输入图像时。</p>
+<ul>
+<li><strong>保持空间维度不变</strong></li>
+</ul>
+<p>在上面的例子中，当感受野为 3 且步长为 1 时，通过使用零填充 <span class="arithmatex">\(P = 1\)</span>，可以确保输出特征图的空间维度与输入相同。这种情况下，<strong><code>如果不使用零填充，输出特征图的空间维度将减少至 3</code></strong>。这种保持输入与输出空间维度一致的策略在深层卷积网络中很常见，因为它使网络能够逐层提取特征，同时保持图像的空间分辨率。</p>
+<ul>
+<li><strong>步长的限制与有效设置</strong></li>
+</ul>
+<p>对于某些步长和滤波器尺寸组合，如果不使用零填充，输出特征图的尺寸计算可能无法得到整数结果。例如，输入尺寸为 10，滤波器尺寸为 3，步长为 2，不使用零填充时，计算结果为 <span class="arithmatex">\(\dfrac{10-3+0}{2}+1 = 4.5\)</span>，不是整数，这就是说神经元不能整齐对称地滑过输入数据体,这显然是无效的设置。为避免此类问题，通常需要调整零填充或步长，使得计算结果为整数。</p>
+<h4 id="参数共享">参数共享<a class="headerlink" href="#参数共享" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>参数共享的原理</strong></li>
+</ol>
+<p>在标准的全连接神经网络中，每个神经元都有其独立的权重和偏差，与前一层的所有神经元相连。然而，在卷积神经网络中，基于这样一个假设：<strong><code>如果某个特征在输入数据的某个位置有用，那么在其他位置也很可能有用</code></strong>。这个假设被称为<strong><code>平移不变性</code></strong>，意味着特征在不同位置上的表示可以是相同的。因此，通过将同一组权重（即滤波器）应用于输入的不同区域，网络可以共享这些权重，从而减少需要学习的参数数量。</p>
+<ol>
+<li><strong>参数共享的实际应用</strong></li>
+</ol>
+<p>以文中提到的卷积层为例，假设输入数据体的尺寸为 [55x55x96]，每个卷积核的尺寸为 [11x11x3]，且网络使用了 96 个不同的滤波器。如果不进行参数共享，每个神经元将独立学习其对应的参数，这将导致大量参数。例如，在一个 [55x55] 的深度切片中，共有 55x55 = 3025 个神经元，每个神经元需要学习 11x11x3 = 363 个参数。这意味着在没有参数共享的情况下，卷积层将拥有上亿个参数（$290400\times364 = 105,705,600 $个），难以实际应用。</p>
+<p>通过参数共享，同一滤波器被应用于每个空间位置，从而使每个深度切片中的所有神经元共享同一组权重和偏差。这样，卷积层只需学习每个深度切片中的 34,944 (<span class="arithmatex">\(96\times11\times11\times3 = 34,848\)</span>)个参数（包括偏差），大大减少了参数的数量。这不仅降低了模型的计算复杂度，还减轻了过拟合的风险。</p>
+<p>注意，如果在一个深度切片中的所有权重都使用同一个权重向量，那么卷积层的前向传播在每个深度切片中可以看做是在计算神经元权重和输入数据体的 <strong>卷积</strong>（这就是 "卷积层" 名字由来）。这也是为什么总是将这些权重集合称为 <strong>滤波器（filter）</strong>（或 <strong>卷积核（kernel）</strong>），因为它们和输入进行了卷积。</p>
+<p><strong><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408221713484.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408221713484.jpeg" /></a></strong></p>
+<p><strong>Numpy 例子</strong>：为了让讨论更加的具体，我们用代码来展示上述思路。假设输入数据体是 numpy 数组 <strong>X</strong>。那么：</p>
+<ul>
+<li>一个位于 <strong>(x, y)</strong> 的深度列（或纤维）将会是 <strong><span class="arithmatex">\(X [x, y,:]\)</span></strong>。</li>
+<li>
+<p>在深度为 <strong>d</strong> 处的深度切片，或激活图应该是 <strong><span class="arithmatex">\(X [:,:, d]\)</span></strong>。</p>
+</li>
+<li>
+<p>输入和参数说明</p>
+</li>
+</ul>
+<p>假设我们有一个三维输入数据 <code>X</code>，其尺寸为 <code>(11, 11, 4)</code>，即输入数据的高度为 11，宽度为 11，深度为 4。我们还假设有两个卷积滤波器（或权重矩阵），<code>W0</code> 和 <code>W1</code>，它们的尺寸为 <code>(5, 5, 4)</code>，表示每个滤波器在高度和宽度方向覆盖 5x5 区域，深度与输入数据相同（即 4）。此外，每个滤波器还有一个偏差 <code>b0</code> 和 <code>b1</code>。</p>
+<ol>
+<li>卷积输出的计算</li>
+</ol>
+<p>根据输入数据 <code>X</code> 的尺寸 <code>(11, 11, 4)</code>、滤波器尺寸 <code>(5, 5, 4)</code>、步长 <code>S = 2</code>，以及零填充 <code>P = 0</code>，输出数据 <code>V</code> 的空间尺寸为：</p>
+<p>$$
+   \text{Output size} = \left( \frac{11 - 5}{2} + 1 \right) \times \left( \frac{11 - 5}{2} + 1 \right) = 4 \times 4
+   $$</p>
+<p>因此，输出数据体 <code>V</code> 的尺寸为 <code>(4, 4, 2)</code>，其中深度为 2 表示有两个激活图。</p>
+<ol>
+<li>
+<p>逐步理解卷积操作</p>
+</li>
+<li>
+<p><strong>第一层的第一个位置 <code>(0,0,0)</code>：</strong></p>
+<p>公式：<code>V[0, 0, 0] = np.sum(X[:5, :5, :] * W0) + b0</code></p>
+<p>解释：取输入数据 <code>X</code> 的前 5 行和前 5 列，以及所有深度的切片，与滤波器 <code>W0</code> 对应元素相乘，然后求和，加上偏差 <code>b0</code>。</p>
+</li>
+<li>
+<p><strong>第一层的第二个位置 <code>(1,0,0)</code>：</strong></p>
+<p>公式：<code>V[1, 0, 0] = np.sum(X[2:7, :5, :] * W0) + b0</code></p>
+<p>解释：由于步长为 2，因此在 x 方向上移动 2 个像素，对新的区域 <code>[2:7, :5, :]</code> 进行相同操作。</p>
+</li>
+<li>
+<p><strong>第二层的第一个位置（0，0，1）</strong></p>
+<p><strong><code>V[0, 0, 1] = np.sum(X[:5, :5, :] * W1) + b1</code></strong></p>
+<ul>
+<li>输入的窗口 <code>X[:5, :5, :]</code> 代表从输入 <code>X</code> 中选取 <code>[0:5]</code> 行、<code>[0:5]</code> 列的区域及其全部深度。</li>
+<li>与滤波器 <code>W1</code> 执行逐元素相乘，然后求和，并加上偏差 <code>b1</code>，得到输出激活图 <code>V</code> 在位置 <code>[0, 0]</code> 的值。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>V[2, 3, 1] = np.sum(X[4:9, 6:11, :] * W1) + b1</code></strong></p>
+<ul>
+<li>同时在行和列方向上各滑动 2 个位置，输入窗口为 <code>[4:9]</code> 行和 <code>[6:11]</code> 列。</li>
+<li>计算得到 <code>V</code> 在位置 <code>[2, 3]</code> 的值。</li>
+</ul>
+</li>
+<li>
+<p>Numpy 实现</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># 初始化输入数据 X 和滤波器 W0, W1</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># 输入数据</span>
+<span class="n">W0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>   <span class="c1"># 第一个滤波器</span>
+<span class="n">W1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>   <span class="c1"># 第二个滤波器</span>
+<span class="n">b0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>          <span class="c1"># 第一个滤波器的偏差</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>          <span class="c1"># 第二个滤波器的偏差</span>
+
+<span class="c1"># 初始化输出数据 V</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># 输出数据，(4, 4, 2) 尺寸</span>
+
+<span class="c1"># 计算卷积层的输出 V</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="p">:</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">W0</span><span class="p">)</span> <span class="o">+</span> <span class="n">b0</span>  <span class="c1"># 第一个激活图</span>
+        <span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="p">:</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">W1</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span>  <span class="c1"># 第二个激活图</span>
+
+<span class="c1"># 激活函数（ReLU）</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>  <span class="c1"># ReLU 激活</span>
+</code></pre></div>
+<p><strong>卷积层的性质总结</strong></p>
+<p>在卷积神经网络（CNN）中，卷积层具有以下几个关键性质和超参数配置：</p>
+<ol>
+<li>
+<p><strong>输入数据体的尺寸</strong>：</p>
+<ul>
+<li>记为 <span class="arithmatex">\(W_1 \times H_1 \times D_1\)</span> ：<ul>
+<li><span class="arithmatex">\(W_1\)</span> 是输入数据的宽度。</li>
+<li><span class="arithmatex">\(H_1\)</span> 是输入数据的高度。</li>
+<li><span class="arithmatex">\(D_1\)</span> 是输入数据的深度（通常是通道数，例如 RGB 图像的深度为 3）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>四个超参数</strong>：</p>
+<ul>
+<li><strong>滤波器的数量 K </strong>：<ul>
+<li>K 表示卷积层使用的滤波器（或卷积核）的数量，决定输出数据体的深度。</li>
+</ul>
+</li>
+<li><strong>滤波器的空间尺寸 F </strong>：<ul>
+<li>F 表示滤波器的宽度和高度，通常是正方形，例如 F = 3 代表 <span class="arithmatex">\(3 \times 3\)</span> 的滤波器。</li>
+</ul>
+</li>
+<li><strong>步长 S </strong>：<ul>
+<li>S 表示滤波器在输入数据体上滑动的步幅。较小的步长会产生更大的输出数据体。</li>
+</ul>
+</li>
+<li><strong>零填充数量 P </strong>：<ul>
+<li>P 表示在输入数据体的边缘进行零填充的数量，以控制输出数据的空间尺寸。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>输出数据体的尺寸</strong>：</p>
+<ul>
+<li>记为 <span class="arithmatex">\(W_2 \times H_2 \times D_2\)</span> ：<ul>
+<li>输出宽度 <span class="arithmatex">\(W_2 = \frac{W_1 - F + 2P}{S} + 1\)</span></li>
+<li>输出高度 <span class="arithmatex">\(H_2 = \frac{H_1 - F + 2P}{S} + 1\)</span></li>
+<li>输出深度 <span class="arithmatex">\(D_2 = K\)</span> （由滤波器的数量决定）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>参数共享</strong>：</p>
+<ul>
+<li>每个滤波器包含 <span class="arithmatex">\(F \times F \times D_1\)</span> 个权重和一个偏差。因此卷积层一共具有 <span class="arithmatex">\(F \times F \times D_1 \times K\)</span> 个权重和 K 个偏置。</li>
+</ul>
+</li>
+<li>
+<p><strong>输出数据的生成</strong>：</p>
+<ul>
+<li>在输出数据体中，第 d 个深度切片（即 <span class="arithmatex">\(W_2 \times H_2\)</span> 的二维矩阵）是通过将第 d 个滤波器在输入数据上进行有效卷积运算并加上对应的偏差得到的。</li>
+</ul>
+</li>
+</ol>
+<p><strong>用矩阵乘法实现</strong>：卷积运算本质上就是在滤波器和输入数据的局部区域间做点积。卷积层的常用实现方式就是利用这一点，将卷积层的前向传播变成一个巨大的矩阵乘法：</p>
+<ol>
+<li>
+<p><strong>输入数据展开（im2col 操作）</strong>：</p>
+</li>
+<li>
+<p>假设输入图像尺寸为 <code>[227x227x3]</code>，滤波器尺寸为 <code>[11x11x3]</code>，步长为 <code>4</code>。</p>
+</li>
+<li>
+<p>im2col 操作将输入中的每个感受野拉伸为列向量。例如，尺寸为 <code>[11x11x3]</code> 的感受野会被拉伸为一个长度为 <code>11x11x3 = 363</code> 的列向量。</p>
+</li>
+<li>
+<p>对整个输入图像进行该操作，得到一个矩阵 <code>X_col</code>，其中每列是一个感受野的展开。因为步长为 <code>4</code>，输出宽高为 <code>(227-11)/4+1 = 55</code>，所以 <code>X_col</code> 的尺寸为 <code>[363x3025]</code>，即有 <code>55x55=3025</code> 列。</p>
+</li>
+<li>
+<p><strong>滤波器展开</strong>：</p>
+</li>
+<li>
+<p>假设有 <code>96</code> 个尺寸为 <code>[11x11x3]</code> 的滤波器。</p>
+</li>
+<li>
+<p>滤波器被展开成行向量，组成矩阵 <code>W_row</code>，尺寸为 <code>[96x363]</code>。</p>
+</li>
+<li>
+<p><strong>矩阵乘法</strong>：</p>
+</li>
+<li>
+<p>卷积运算变为矩阵乘法 <code>np.dot(W_row, X_col)</code>，输出矩阵尺寸为 <code>[96x3025]</code>，即每个滤波器在每个感受野位置的点积结果。</p>
+</li>
+<li>
+<p><strong>结果重整</strong>：</p>
+</li>
+<li>将矩阵乘法的结果重新整形为合理的输出尺寸 <code>[55x55x96]</code>。</li>
+</ol>
+<blockquote>
+<p><strong>缺点</strong>：im2col 操作可能导致内存消耗增加，因为输入数据的某些值会被重复存储在不同列中。</p>
+</blockquote>
+<h3 id="池化层">池化层<a class="headerlink" href="#池化层" title="Permanent link">&para;</a></h3>
+<p>通常，在连续的卷积层之间会周期性地插入一个<strong>池化层</strong>。<strong><code>它的作用是逐渐降低数据体的空间尺寸，这样的话就能减少网络中参数的数量，使得计算资源耗费变少，也能有效控制过拟合。</code></strong></p>
+<p>池化层的操作本质上是对输入特征图的每个深度切片进行独立的降采样。最常用的是最大池化（Max Pooling），它在每个 2x2 区域内选择最大值作为输出。深度保持不变。池化层的一些公式：</p>
+<ul>
+<li>池化层的输出尺寸 <span class="arithmatex">\(H_{out} \times W_{out}\)</span> 可以通过以下公式计算：</li>
+</ul>
+<div class="arithmatex">\[
+H_{out} = \frac{H_{in} - F + 2P}{S} + 1
+\]</div>
+<div class="arithmatex">\[
+W_{out} = \frac{W_{in} - F + 2P}{S} + 1
+\]</div>
+<p>其中：</p>
+<ul>
+<li><span class="arithmatex">\(H_{in}\)</span> 和 <span class="arithmatex">\(W_{in}\)</span> 分别是输入特征图的高度和宽度。</li>
+<li><span class="arithmatex">\(F\)</span> 是池化窗口的尺寸（通常是 2x2 的大小，表示 F=2）。</li>
+<li><span class="arithmatex">\(P\)</span> 是填充（padding）的大小，一般情况下为 0。</li>
+<li>
+<p><span class="arithmatex">\(S\)</span> 是池化的步长（stride），通常为 2。</p>
+</li>
+<li>
+<p>在池化层中很少使用零填充</p>
+</li>
+<li>
+<p>对于每个深度切片中的 <span class="arithmatex">\(2 \times 2\)</span> 区域，池化操作如下：</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+M_{ij} = \max \{ x_{i,j}, x_{i,j+1}, x_{i+1,j}, x_{i+1,j+1} \}
+\]</div>
+<ul>
+<li>
+<p><span class="arithmatex">\(x_{i,j}\)</span> 是输入特征图在位置 <span class="arithmatex">\((i, j)\)</span> 的像素值。</p>
+</li>
+<li>
+<p>池化层的一个关键作用是减少后续层的参数数量。假设输入特征图的大小为 <span class="arithmatex">\(H_{in} \times W_{in} \times D\)</span>（高度、高度和深度），池化后输出的大小为 <span class="arithmatex">\(H_{out} \times W_{out} \times D\)</span>，那么参数数量减少的比率可以通过以下公式估算：</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+\text{Reduction Ratio} = \frac{H_{in} \times W_{in}}{H_{out} \times W_{out}}
+\]</div>
+<blockquote>
+<p><strong>池化的不同形式与选择</strong></p>
+</blockquote>
+<p>池化操作不仅限于最大池化。还有<strong>平均池化（Average Pooling）</strong>和 <strong>L2 范式池化（L2-norm Pooling）</strong>。然而，实践表明最大池化通常效果更好，因为它能够提取特征图中更具辨识度的信息。</p>
+<ul>
+<li>
+<p><strong>重叠池化（Overlapping Pooling）</strong>：这种池化方式使用较大的滤波器尺寸和较小的步长（如 <code>F=3, S=2</code>），保留更多的特征信息，但计算复杂度更高。</p>
+</li>
+<li>
+<p><strong>常用池化形式</strong>：更常见的配置是 <code>F=2, S=2</code>，以平衡计算效率与信息保留。</p>
+</li>
+</ul>
+<blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408231106655.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="img" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408231106655.jpeg" /></a></p>
+<p><strong>池化层在输入数据体的每个深度切片上，独立地对其进行空间上的降采样。左边：本例中，输入数据体尺寸$ [224\times224\times64] <span class="arithmatex">\(被降采样到了\)</span> [112\times112\times64]$，采取的滤波器尺寸是 2，步长为 2，而深度不变。右边：最常用的降采样操作是取最大值，也就是最大池化，这里步长为 2，每个取最大值操作是从 4 个数字中选取（即 2x2 的方块区域中)。</strong></p>
+</blockquote>
+<p><strong>反向传播：</strong> 在反向传播时，<strong><code>池化层只将梯度传递给池化区域内的最大值元素</code></strong>。为了实现这一点，在前向传播时，<strong><code>网络会记录下最大值元素的索引（即“道岔”）</code></strong>，从而在反向传播中高效地回传梯度。</p>
+<p><strong>不使用池化层</strong>：尽管池化层是卷积神经网络中的常见组件，但近年来有研究尝试完全去除池化层，采用更大的卷积步长来达到同样的降采样效果。例如在 All Convolutional Net 中，通过仅使用卷积操作来减少特征图的空间尺寸。对于生成模型如 变化自编码器（<code>VAEs：variational autoencoders</code>） 和 <code>GANs：generative adversarial networks</code>，不使用池化层也有其独特的优势。</p>
+<h3 id="归一化层">归一化层<a class="headerlink" href="#归一化层" title="Permanent link">&para;</a></h3>
+<p>归一化方式的作用，<strong><code>其目的是使网络更容易训练，加速模型的收敛，并提高模型的稳定性和性能</code></strong>。（或者说可以使得输出具有零均值和单位方差），常见的方式称为<strong><code>批量归一化</code></strong>，即 <strong><code>Batch Normalization</code></strong></p>
+<p>批量归一化的核心思想是在每个批次中对网络中的中间激活值进行归一化。具体来说，它通过对每个小批量（batch）的激活值进行均值和方差的标准化，使其具有零均值和单位方差。公式如下：</p>
+<div class="arithmatex">\[
+\hat{x} = \frac{x - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}
+\]</div>
+<p>其中：</p>
+<ul>
+<li><span class="arithmatex">\(x\)</span> 是输入的激活值。</li>
+<li><span class="arithmatex">\(\mu_B\)</span> 和 <span class="arithmatex">\(\sigma_B^2\)</span> 分别是当前批次激活值的均值和方差。</li>
+<li><span class="arithmatex">\(\epsilon\)</span> 是一个小的正数，用于避免除零错误。</li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408231127428.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="87" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408231127428.jpeg" /></a></p>
+<blockquote>
+<p><strong><code>使网络更容易训练，加速模型的收敛，并提高模型的稳定性和性能</code></strong></p>
+<ul>
+<li><strong><code>内部协变量偏移（Internal Covariate Shift</code></strong>）: 内部协变量偏移指的是，由于上一层参数的变化导致当前层输入分布的变化，进而使得模型的训练更加困难。批量归一化通过标准化输入数据，减少了这种偏移，<strong>使得网络每一层的输入保持稳定</strong>，从而提高了优化效率。</li>
+<li>通过引入批量归一化，网络的<strong>每一层能够处理稳定且归一化的输入</strong>，<strong><code>减少了训练中的梯度消失和梯度爆炸问题</code></strong>。正如图示所示，批量归一化加速了网络的收敛，使得训练更为高效。</li>
+</ul>
+</blockquote>
+<h3 id="全连接层">全连接层<a class="headerlink" href="#全连接层" title="Permanent link">&para;</a></h3>
+<p>在全连接层中，神经元对于前一层中的所有激活数据是全部连接的，这个常规神经网络中一样。它们的激活可以先用矩阵乘法，再加上偏差。更多细节请查看<em>神经网络</em>章节。</p>
+<h2 id="把全连接层转化成卷积层">把全连接层转化成卷积层<a class="headerlink" href="#把全连接层转化成卷积层" title="Permanent link">&para;</a></h2>
+<p>全连接层和卷积层之间<strong>唯一的不同就是卷积层中的神经元只与输入数据中的一个局部区域连接</strong>，并且在卷积列中的神经元共享参数。但其本质都是通过权重与输入计算点积。因此，可以在理论上和实践中将二者相互转化。</p>
+<ul>
+<li><strong>卷积层转化为全连接层</strong></li>
+</ul>
+<p>卷积层可以被转化为等效的全连接层。这种转化的权重矩阵通常是巨大的、稀疏的，并且具有块结构。其中的大部分块中元素相等，反映了卷积层的局部连接和参数共享特性。除了某些特定块（这是因为有局部连接），其余部分都是零。</p>
+<ul>
+<li><strong>全连接层转化为卷积层</strong></li>
+</ul>
+<p>相比之下，将全连接层转化为卷积层在实际应用中更加有用，尤其在处理不同输入尺寸的情况下。一个典型的全连接层可以被视为一个卷积层，<strong><code>其中滤波器的尺寸与输入数据的空间尺寸相同</code></strong>，这样卷积操作仅产生一个单一的输出。</p>
+<blockquote>
+<p><strong>我们以 AlexNet 为例，假设网络的输入是一张尺寸为 <code>224x224x3</code> 的图像，经过多层卷积和池化操作后，最终输出的激活数据体的尺寸为 <code>7x7x512</code>(通过使用 5 个池化层来对输入数据进行空间上的降采样，每次尺寸下降一半，所以最终空间尺寸为 <span class="arithmatex">\(224/2/2/2/2/2 = 7\)</span>)。接下来是三层全连接层：</strong></p>
+</blockquote>
+<p><strong>第一个全连接层</strong>：4096 个神经元，接收 <code>7x7x512</code> 的输入。</p>
+<p><strong>第二个全连接层</strong>：4096 个神经元，接收第一个全连接层的输出。</p>
+<p><strong>第三个全连接层</strong>：1000 个神经元，输出类别概率。</p>
+<ol>
+<li>
+<p><strong>将第一个全连接层转化为卷积层</strong></p>
+</li>
+<li>
+<p><strong>原始全连接层</strong>：输入尺寸为 <code>7x7x512</code>，输出为 <code>4096</code> 个神经元。</p>
+</li>
+<li>
+<p><strong>转化后的卷积层</strong>：卷积核大小设置为 <code>F=7</code>，步长为 <code>1</code>，不使用填充（padding）。卷积核的深度与输入的深度一致，即 <code>512</code>。</p>
+<p>由于卷积核覆盖了整个输入平面（即 <code>7x7</code> 的区域），卷积操作只会产生一个输出，因此输出的空间尺寸为 <code>1x1</code>，深度为 <code>4096</code>，即 <code>1x1x4096</code>。</p>
+</li>
+<li>
+<p><strong>将第二个全连接层转化为卷积层</strong></p>
+</li>
+<li>
+<p><strong>原始全连接层</strong>：输入为第一个全连接层的 <code>4096</code> 个神经元，输出也是 <code>4096</code> 个神经元。</p>
+</li>
+<li>
+<p><strong>转化后的卷积层</strong>：卷积核大小设置为 <code>F=1</code>，步长为 <code>1</code>，输入深度为 <code>4096</code>，输出深度为 <code>4096</code>。</p>
+<p>由于卷积核的大小为 <code>1x1</code>，输出的空间尺寸仍为 <code>1x1</code>，深度为 <code>4096</code>，即 <code>1x1x4096</code>。</p>
+</li>
+<li>
+<p><strong>将第三个全连接层转化为卷积层</strong></p>
+</li>
+<li>
+<p><strong>原始全连接层</strong>：输入为第二个全连接层的 <code>4096</code> 个神经元，输出为 <code>1000</code> 个神经元（用于分类）。</p>
+</li>
+<li>
+<p><strong>转化后的卷积层</strong>：卷积核大小设置为 <code>F=1</code>，步长为 <code>1</code>，输入深度为 <code>4096</code>，输出深度为 <code>1000</code>。</p>
+<p>输出的空间尺寸仍为 <code>1x1</code>，深度为 <code>1000</code>，即 <code>1x1x1000</code>。</p>
+</li>
+</ol>
+<blockquote>
+<p><strong><code>为什么要将全连接层转化为卷积层</code></strong></p>
+<ul>
+<li>
+<p><strong>假设一个卷积神经网络的输入为 <code>224x224x3</code> 的图像，经过多层卷积和池化操作后，输出尺寸为 <code>7x7x512</code>。如果使用全连接层进行分类，通常需要将这个 <code>7x7x512</code> 的激活数据展平成一维向量，然后进行分类。但这种展平操作损失了空间信息，同时计算效率低下。</strong></p>
+</li>
+<li>
+<p><strong>通过将全连接层转化为卷积层，可以避免展平操作，并且允许网络处理不同尺寸的输入图像。这种方法尤其适用于以下情况：希望在更大尺寸的图像上滑动较小的窗口（例如 <code>224x224</code>）进行分类，并在一次前向传播中获得多个位置的分类结果。</strong></p>
+</li>
+</ul>
+<p><strong><code>具体例子分析</code></strong></p>
+<p><strong>假设现在的输入图像尺寸为 <code>384x384x3</code>，我们希望使用 <code>224x224</code> 尺寸的滑动窗口以步长 <code>32</code> 在这张大图上滑动，并获得各个窗口的分类结果。基于之前提到的转换方法：</strong></p>
+<ol>
+<li><strong>转换前：传统方法需要对每个 <code>224x224</code> 的窗口分别进行前向传播计算，共需 36 次独立的计算（对应 <code>6x6</code> 个位置）。</strong></li>
+<li>
+<p><strong>转换后：将全连接层转化为卷积层后，可以直接对整个 <code>384x384</code> 的图像进行一次前向传播计算。如果 224x224 的输入图片经过卷积层和池化层之后得到了 [7x7x512] 的数组，那么，384x384 的大图片直接经过同样的卷积层和池化层之后会得到 [12x12x512] 的数组（因为途径 5 个池化层，尺寸变为 384/2/2/2/2/2 = 12）。通过卷积层替代全连接层后，可以得到 <code>6x6x1000</code>（<span class="arithmatex">\(\dfrac{12-7}{1} + 1 = 6\)</span>） 的输出，表示每个 <code>224x224</code> 窗口的分类得分。</strong></p>
+</li>
+<li>
+<p><strong><code>这种转化的最大优势在于计算效率。原本需要进行 36 次独立计算的操作，转化后只需一次前向传播即可完成。通过共享计算资源，避免了重复计算，大幅度提高了计算效率。</code></strong></p>
+</li>
+</ol>
+</blockquote>
+<h3 id="卷积神经网络的结构"><strong>卷积神经网络的结构</strong><a class="headerlink" href="#卷积神经网络的结构" title="Permanent link">&para;</a></h3>
+<p>卷积神经网络通常是由三种层构成：<strong><code>卷积层</code></strong>，<strong><code>池化层</code></strong>（除非特别说明，一般就是<strong><code>最大值池化</code></strong>）和<strong><code>全连接层</code></strong>（简称 <strong><code>FC</code></strong>）。ReLU 激活函数也应该算是是一层，它逐元素地进行激活函数操作。在本节中将讨论在卷积神经网络中这些层通常是如何组合在一起的。</p>
+<h4 id="层的排列规律">层的排列规律<a class="headerlink" href="#层的排列规律" title="Permanent link">&para;</a></h4>
+<p>卷积神经网络最常见的形式就是将<strong><code>一些卷积层和 ReLU 层放在一起，其后紧跟池化层，然后重复如此直到图像在空间上被缩小到一个足够小的尺寸</code></strong>，在某个地方过渡成成全连接层也较为常见。最后的全连接层得到输出，比如分类评分等。换句话说，最常见的卷积神经网络结构如下：</p>
+<p><strong>INPUT -&gt; [[CONV -&gt; RELU] _ N -&gt; POOL?] _ M -&gt; [FC -&gt; RELU] * K -&gt; FC</strong></p>
+<ul>
+<li>
+<p><strong>N</strong> 是卷积层和 ReLU 层组合的重复次数。</p>
+</li>
+<li>
+<p><strong>POOL?</strong> 表示是否使用池化层。</p>
+</li>
+<li>
+<p><strong>M</strong> 是卷积-池化组合的重复次数。</p>
+</li>
+<li>
+<p><strong>K</strong> 是全连接层的重复次数。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>常见的 CNN 结构实例</strong></p>
+</blockquote>
+<ul>
+<li><strong>INPUT -&gt; FC</strong>, 最简单的结构，实现一个线性分类器，此处 <strong>N = M = K = 0</strong>。</li>
+<li><strong>INPUT -&gt; CONV -&gt; RELU -&gt; FC</strong></li>
+<li><strong>INPUT -&gt; [CONV -&gt; RELU -&gt; POOL] *2 -&gt; FC -&gt; RELU -&gt; FC</strong>。此处在<strong>每个池化层之间有一个卷积层。</strong></li>
+<li><strong>INPUT -&gt; [CONV -&gt; RELU -&gt; CONV -&gt; RELU -&gt; POOL]<em> 3 -&gt; [FC -&gt; RELU] </em>2 -&gt; FC</strong>。此处<strong>每个池化层前有两个卷积层</strong>，这个思路适用于更大更深的网络，因为在执行具有破坏性的池化操作前，多重的卷积层可以从输入数据中学习到更多的复杂特征。</li>
+</ul>
+<blockquote>
+<p><strong><code>在卷积神经网络中，使用多个小滤波器（如 3x3）的卷积层组合比使用单个大滤波器（如 7x7）的卷积层有明显的优势。这种做法不仅提高了特征提取的能力，还能减少模型的参数数量。</code></strong></p>
+</blockquote>
+<ol>
+<li>感受野的扩展</li>
+</ol>
+<p>通过堆叠 3 个 3x3 的卷积层，逐层扩展感受野：</p>
+<ul>
+<li><strong>第一个卷积层</strong>：每个神经元的感受野为 3x3。</li>
+<li><strong>第二个卷积层</strong>：每个神经元的感受野扩大为 5x5（相对于输入数据体）。</li>
+<li><strong>第三个卷积层</strong>：每个神经元的感受野进一步扩大到 7x7。</li>
+</ul>
+<p>与此相比，直接使用一个 7x7 的卷积层，其感受野虽然也是 7x7，但无法充分利用多层卷积带来的非线性特征提取能</p>
+<ol>
+<li>特征提取能力</li>
+</ol>
+<p>多个小滤波器卷积层的组合由于在<strong><code>每一层后面都加入了非线性激活函数</code></strong>（如 ReLU），<strong><code>使得网络能够学习到更复杂、更深层的特征</code></strong>。单个大滤波器卷积层无法提供这种层次化的特征表达能力。</p>
+<ol>
+<li>参数数量减少</li>
+</ol>
+<p>在卷积神经网络中，使用多个小滤波器（如 3x3）的卷积层组合相比于使用单个大滤波器（如 7x7）的卷积层具有明显的参数量减少优势。以下是对这种参数减少的详细分析。</p>
+<blockquote>
+<p><strong>参数计算方式</strong></p>
+</blockquote>
+<p>对于一个卷积层，假设输入特征图的通道数为 <span class="arithmatex">\(C_{\text{in}}\)</span> ，输出特征图的通道数为 <span class="arithmatex">\(C_{\text{out}}\)</span> ，滤波器的尺寸为 <span class="arithmatex">\(F \times F\)</span> ：</p>
+<ul>
+<li>每个卷积核的参数数量为 <span class="arithmatex">\(F \times F \times C_{\text{in}}\)</span> 。</li>
+<li>卷积层的总参数数量为 $C<em _text_in="\text{in">{\text{out}} \times F \times F \times C</em>} $。</li>
+</ul>
+<blockquote>
+<p><strong>大滤波器 vs. 小滤波器</strong></p>
+</blockquote>
+<p>假设我们要设计一个卷积神经网络，其输入特征图的通道数为 $C_{\text{in}} $，输出特征图的通道数为  <span class="arithmatex">\(C_{\text{out}}\)</span> ，分别考虑使用单个 <span class="arithmatex">\(7\times7\)</span> 的大滤波器和三个 <span class="arithmatex">\(3\times3\)</span> 的小滤波器。</p>
+<ul>
+<li>
+<p><strong>单个 7x7 滤波器的参数量</strong></p>
+<ul>
+<li>
+<p><strong>滤波器大小</strong>：7x7</p>
+</li>
+<li>
+<p><strong>参数数量</strong>： $ C<em _text_in="\text{in">{\text{out}} \times 7 \times 7 \times C</em>} = C<em _text_in="\text{in">{\text{out}} \times 49 \times C</em>}$</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>三个 3x3 滤波器的参数量</strong></p>
+<p>如果使用三个 3x3 的卷积层，每个卷积层将从上一个卷积层的输出通道作为输入通道：</p>
+<ul>
+<li><strong>第一层</strong>：输入通道数为 <span class="arithmatex">\(C_{\text{in}}\)</span> ，输出通道数为 <span class="arithmatex">\(C_{\text{out}}\)</span></li>
+</ul>
+<p>参数数量： <span class="arithmatex">\(C_{\text{out}} \times 3 \times 3 \times C_{\text{in}} = C_{\text{out}} \times 9 \times C_{\text{in}}\)</span></p>
+<ul>
+<li><strong>第二层</strong>：输入通道数为 $ C*{\text{out}}$ ，输出通道数为 <span class="arithmatex">\(C*{\text{out}}\)</span></li>
+</ul>
+<p>参数数量： <span class="arithmatex">\(C_{\text{out}} \times 3 \times 3 \times C_{\text{out}} = C_{\text{out}}^2 \times 9\)</span></p>
+<ul>
+<li><strong>第三层</strong>：输入通道数为 <span class="arithmatex">\(C_{\text{out}}\)</span> ，输出通道数为 <span class="arithmatex">\(C_{\text{out}}\)</span></li>
+</ul>
+<p>参数数量： <span class="arithmatex">\(C_{\text{out}} \times 3 \times 3 \times C_{\text{out}} = C_{\text{out}}^2 \times 9\)</span></p>
+<p>三个 3x3 卷积层的总参数数量为：
+ [ <span class="arithmatex">\(9 \times C_{\text{in}} \times C_{\text{out}} + 9 \times C_{\text{out}}^2 + 9 \times C_{\text{out}}^2 = 9 \times C_{\text{in}} \times C_{\text{out}} + 18 \times C_{\text{out}}^2\)</span> ]</p>
+</li>
+</ul>
+<h4 id="层的尺寸设置规律">层的尺寸设置规律<a class="headerlink" href="#层的尺寸设置规律" title="Permanent link">&para;</a></h4>
+<p>卷积神经网络（CNN）中的层的尺寸设置是设计网络架构时的关键因素，直接影响模型的表现和计算效率。以下是对这些设置规律的详细分析：</p>
+<blockquote>
+<ol>
+<li><strong>输入层的尺寸</strong></li>
+</ol>
+</blockquote>
+<p>输入层的尺寸通常设置为 32、64、96、224 等，这些尺寸的<strong><code>共同特点是能被 2 多次整除</code></strong>。原因在于，在 CNN 中，经过<strong><code>多次池化操作</code></strong>后，图像的空间尺寸逐渐减小，因此初始尺寸能被 2 整除可以使网络结构更容易设计，并保持对称性。例如，典型的 ImageNet 数据集使用 224x224 的输入尺寸，这样的尺寸可以通过多次 2x2 池化操作对图像进行下采样，并最终在全连接层之前获得合理的小尺寸特征图。</p>
+<blockquote>
+<ol>
+<li><strong>卷积层的滤波器尺寸和步长</strong>:<strong><code>小尺寸滤波器与零填充</code></strong></li>
+</ol>
+</blockquote>
+<ul>
+<li><strong>滤波器尺寸</strong>：卷积层通常使用 3x3 或最多 5x5 的小滤波器。较小的滤波器在提取局部特征时具有较高的空间分辨率，并且可以通过堆叠多层卷积来增加网络的感受野，而不显著增加参数量。</li>
+<li><strong>步长与零填充</strong>：<strong><code>步长通常设置为 1</code></strong>，这样可以保证卷积操作不会跳过任何像素，从而保留更多的空间信息。为了在<strong><code>卷积后保持输入和输出的空间尺寸相同</code></strong>，通常会在输入数据周围进行零填充（padding）。当滤波器尺寸为 <span class="arithmatex">\(F\)</span> 时，使用 <span class="arithmatex">\(P = \dfrac{F-1}{2}\)</span> 的零填充，可以保证输出的空间尺寸不变(<strong><code>保留边缘信息</code></strong>)。</li>
+</ul>
+<blockquote>
+<ol>
+<li><strong>池化层的设置</strong></li>
+</ol>
+</blockquote>
+<p>池化层通常用来进行空间维度的降采样，从而减少数据的空间尺寸和计算量。常见的设置是使用 2x2 的最大池化（Max Pooling），步长为 2，<strong><code>这样每次池化操作都会将输入的宽度和高度减半</code></strong>。这种设置可以有效减少输入数据的尺寸，并保留重要的特征信息。</p>
+<p>更大的池化滤波器（如 3x3）和步长也偶尔使用，但通常<strong><code>更大的池化操作会导致过多的信息损失，不利于网络性能</code></strong>。因此，在实践中，更大的池化滤波器很少使用。</p>
+<p>在设计 CNN 时，内存使用和计算开销往往是必须考虑的因素，尤其是在网络的初始层。由于初始层的输入通常为高分辨率图像，其特征图的空间维度较大，因此会<strong><code>占用大量内存</code></strong>。为了应对这一挑战，可以<strong><code>在初始层使用较大的步长或更大的滤波器尺寸，从而减少特征图的尺寸和内存占用。</code></strong></p>
+<ul>
+<li><strong>ZFNet</strong>：在第一层使用 7x7 的滤波器，步长为 2，减少了空间尺寸和内存消耗。</li>
+<li><strong>AlexNet</strong>：使用 11x11 的滤波器，步长为 4，以进一步降低初始层的计算量。</li>
+</ul>
+<h2 id="计算上的考量">计算上的考量<a class="headerlink" href="#计算上的考量" title="Permanent link">&para;</a></h2>
+<p>在构建和训练卷积神经网络（CNN）时，内存瓶颈是一个关键的计算考虑因素，尤其在使用现代 GPU 时更为显著。要优化内存使用，需要理解和管理以下几个主要的内存消耗来源：</p>
+<ol>
+<li>
+<p><strong>中间数据体尺寸（激活数据和梯度）</strong></p>
+</li>
+<li>
+<p><strong>激活数据的存储</strong>：在前向传播过程中，每一层的激活数据（feature map）需要存储在内存中，因为这些数据在反向传播阶段需要用来计算梯度。通常，靠近输入层的卷积层会生成更大的激活数据体，这些数据的尺寸决定了内存使用的主要部分。在训练过程中，由于反向传播的需要，不能轻易丢弃这些数据。</p>
+</li>
+<li>
+<p><strong>测试优化</strong>：在测试时，网络的激活数据不再需要进行反向传播，因此可以在每层计算完后，丢弃不再需要的前层激活数据，从而显著降低内存占用。</p>
+</li>
+<li>
+<p>来自参数尺寸</p>
+</li>
+<li>
+<p><strong>参数及其梯度</strong>：每个卷积层和全连接层都包含参数（权重和偏置），这些参数在训练时需要存储其梯度信息。通常来说，存储参数时需要额外的内存来保存这些梯度，以及在使用如动量（momentum）、Adagrad、RMSProp 等优化算法时的历史计算缓存。一般情况下，这些需求会使内存使用达到原始参数量的 3 倍甚至更多。</p>
+</li>
+<li>
+<p><strong>优化技巧</strong>：通过减少网络的参数数量，例如使用较小的卷积核、更少的通道数、或移除全连接层（如 GoogLeNet 所做的），可以减少内存需求。</p>
+</li>
+<li>
+<p><strong>其他内存占用</strong></p>
+</li>
+<li><strong>批量数据</strong>：训练时，整个批次的数据都要同时加载到内存中进行处理。随着批量大小（batch size）的增加，内存需求会显著增加。</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
