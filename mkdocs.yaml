@@ -113,7 +113,9 @@ nav:
           - CV/Lecture2_Image_Classification.md
           - CV/Lecture3_Linear_Classifiers.md
           - CV/Lecture4_Optimization.md
-
+          - CV/Lecture5_Neural_Networks.md
+          - CV/Lecture6_Backpropagation.md
+          - CV/Lecture7_ConvolutionalNetworks.md
   # - "Appendix":
 # ======================================== <<<
 
