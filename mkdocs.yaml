@@ -70,6 +70,8 @@ extra_css:
   - supports/css/base.css
   - supports/css/theme.css
   - supports/css/admonitions.css
+  # - supports/css/vue.css
+  # - supports/css/phycat-mint.css
   # 如果公式渲染样式出现问题，请检查如下脚本
   - https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css
 
@@ -117,6 +119,7 @@ nav:
           - CV/Lecture6_Backpropagation.md
           - CV/Lecture7_ConvolutionalNetworks.md
           - CV/Lecture8_CNN_Architectures.md
+          - CV/Lecture9_Hardware_and_Software.md
   # - "Appendix":
 # ======================================== <<<
 

@@ -1,0 +1,108 @@
+@import "vue/fonts.css";
+
+/* 使用CSS变量来管理颜色和字体 */
+:root {
+  --side-bar-bg-color: #fff;
+  --control-text-color: #777;
+  --font-sans-serif: "Ubuntu", "Source Sans Pro", sans-serif !important;
+  --font-monospace: "Fira Code", "Roboto Mono", monospace !important;
+  --base-line-height: 1.6rem;
+  --base-padding: 20px 30px 100px;
+  --highlight-color: #42b983;
+  --font-primary-color: #34495e;
+}
+
+html {
+  font-size: 20px;
+}
+
+body {
+  font-family: var(--font-sans-serif);
+  color: var(--font-primary-color);
+  -webkit-font-smoothing: antialiased;
+  line-height: var(--base-line-height);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+#write {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: var(--base-padding);
+}
+
+p, #write p, #write ol li {
+  line-height: var(--base-line-height);
+}
+
+a {
+  color: var(--font-primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* 标题样式优化 */
+h1, h2, h3, h4, h5, h6 {
+  margin: 1rem 0;
+  font-weight: bold;
+  line-height: 1.4;
+  cursor: text;
+}
+
+h1 {
+  padding-bottom: 0.4rem;
+  font-size: 2.2rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  line-height: 1.225;
+  margin: 35px 0 15px;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #ddd;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
+blockquote {
+  border-left: 4px solid var(--highlight-color);
+  padding: 10px 15px;
+  background-color: rgba(66, 185, 131, 0.1);
+  color: var(--control-text-color);
+}
+
+/* 代码块样式优化 */
+pre, code, tt {
+  font-family: var(--font-monospace);
+  font-size: 0.92rem;
+  background-color: #f8f8f8;
+  border-radius: 2px;
+}
+
+/* 响应式优化 */
+@media print {
+  html {
+    font-size: 13px;
+  }
+
+  table, pre {
+    page-break-inside: avoid;
+  }
+
+  pre {
+    word-wrap: break-word;
+  }
+}
+
+/* 其他常用样式 */
+hr {
+  margin: 16px 0;
+  background-color: #e7e7e7;
+}
+
+ul, ol {
+  padding-left: 30px;
+  margin: 0.8em 0;
+}
