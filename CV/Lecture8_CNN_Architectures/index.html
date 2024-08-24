@@ -1,0 +1,1457 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+        <link rel="prev" href="../Lecture7_ConvolutionalNetworks/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>CNN Architecture - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cnn-architecture" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CNN Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ADS/Readme/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Lecture1_Introduction/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/Blog" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/Blog
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/Readme/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Readme
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/1.%20AVL_tree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AVL Tree &amp; Splay Tree
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture2_Image_Classification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture5_Neural_Networks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Neural Network
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture6_Backpropagation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Backpropagation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Lecture7_ConvolutionalNetworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convolutional Neural Networks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    CNN Architecture
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    CNN Architecture
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cnn-历史imagenet-挑战赛的发展" class="md-nav__link">
+    <span class="md-ellipsis">
+      CNN 历史：ImageNet 挑战赛的发展
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lenet" class="md-nav__link">
+    <span class="md-ellipsis">
+      LeNet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alexnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      AlexNet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zf-net" class="md-nav__link">
+    <span class="md-ellipsis">
+      ZF Net
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vgg-网络" class="md-nav__link">
+    <span class="md-ellipsis">
+      VGG 网络
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nin网络中的网络" class="md-nav__link">
+    <span class="md-ellipsis">
+      NiN：网络中的网络
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#googlelenet" class="md-nav__link">
+    <span class="md-ellipsis">
+      GoogleLeNet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#批量归一化" class="md-nav__link">
+    <span class="md-ellipsis">
+      批量归一化
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      ResNet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mobilenet" class="md-nav__link">
+    <span class="md-ellipsis">
+      MobileNet
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cnn-历史imagenet-挑战赛的发展" class="md-nav__link">
+    <span class="md-ellipsis">
+      CNN 历史：ImageNet 挑战赛的发展
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lenet" class="md-nav__link">
+    <span class="md-ellipsis">
+      LeNet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alexnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      AlexNet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zf-net" class="md-nav__link">
+    <span class="md-ellipsis">
+      ZF Net
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vgg-网络" class="md-nav__link">
+    <span class="md-ellipsis">
+      VGG 网络
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nin网络中的网络" class="md-nav__link">
+    <span class="md-ellipsis">
+      NiN：网络中的网络
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#googlelenet" class="md-nav__link">
+    <span class="md-ellipsis">
+      GoogleLeNet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#批量归一化" class="md-nav__link">
+    <span class="md-ellipsis">
+      批量归一化
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      ResNet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mobilenet" class="md-nav__link">
+    <span class="md-ellipsis">
+      MobileNet
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/Blog/blob/main/docs/CV/Lecture8_CNN_Architectures.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/Blog/raw/main/docs/CV/Lecture8_CNN_Architectures.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="cnn-architecture">CNN Architecture<a class="headerlink" href="#cnn-architecture" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 3400 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 95 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 18 分钟</p>
+</div>
+<p>这节课的内容就是构建了一整个卷积神经网络来实现图像分类，并且介绍了 CNN 发展的历史（2012-2019）并且分析了不同的 CNN 架构</p>
+<h2 id="cnn-历史imagenet-挑战赛的发展">CNN 历史：ImageNet 挑战赛的发展<a class="headerlink" href="#cnn-历史imagenet-挑战赛的发展" title="Permanent link">&para;</a></h2>
+<h2 id="lenet">LeNet<a class="headerlink" href="#lenet" title="Permanent link">&para;</a></h2>
+<p>是第一个真正意义上的卷积神经网络。由于当时的计算能力有限，LeNet 的结构相对简单，训练的数据集也很小。<strong><code>它主要应用于邮局的手写数字识别，即MNIST数据集</code></strong>。这一限制使得 LeNet 在更复杂的图像任务上应用面较窄，但它为后续 CNN 的发展奠定了基础。</p>
+<h2 id="alexnet">AlexNet<a class="headerlink" href="#alexnet" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>重要性</strong>: AlexNet 是 2012 年由 Alex Krizhevsky 等人提出的，<strong>是深度学习在计算机视觉领域的重要突破</strong>。AlexNet 在 ImageNet 挑战赛中的出色表现，使得深度学习在计算机视觉领域迅速普及，并且标志着大规模深度神经网络在实际应用中的成功。</li>
+</ul>
+<p>AlexNet 的架构如下，当初为了在两个 GPU 上计算，使用了两个通道，这也是一种工程技巧，后面随着 GPU 的发展和深度学习框架的出现，我们无需完成那么多的工作量即可轻松复现网络</p>
+<p><a class="glightbox" href="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/AlexNet-Fig_03.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/AlexNet-Fig_03.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408241347838.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="EECS498_L8_28" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408241347838.png" /></a></p>
+<p>AlexNet 的第一层是一个卷积层，使用了 11x11 的卷积核，输出 64 个特征通道，步长为 4，填充为 2。这些设计参数是为了在有限的计算能力下尽可能保留图像的特征信息，并减少计算量。</p>
+<div class="arithmatex">\[
+width = height =\dfrac{(227−11+2×2)}{4}+1 =\dfrac{220}{4}+1 = 56
+\]</div>
+<p>因此第一层的卷积层输出为 <span class="arithmatex">\(56 \times 56 \times 64\)</span></p>
+<p>第二层是一个池化层，Max Pooling，<span class="arithmatex">\(3 \times 3\)</span>，步长为 2</p>
+<div class="arithmatex">\[
+width = height =\dfrac{(56-3)}{2}+1 =\dfrac{53}{2}+1 = 27
+\]</div>
+<p>Max Pooling 并不改变特征图的通道数，因此第二层池化层的输出为 <span class="arithmatex">\(27 \times 27 \times 64\)</span></p>
+<p>…………</p>
+<p><strong>Flatten 操作</strong>：将池化层输出的 <code>6×6×256</code> 张量展平为长度为 <code>6×6×256 = 9216</code> 的向量。</p>
+<p><strong>全连接层</strong>: FC1、FC2、FC3，分别输出 4096、4096 和 1000 个特征。</p>
+<p><strong>Softmax 层</strong>: 将最后的 1000 个特征转化为概率分布，输出分类结果。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408241347502.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="EECS498_L8_31" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408241347502.png" /></a></p>
+<blockquote>
+<p><strong>内存开销和计算复杂度</strong></p>
+</blockquote>
+<ul>
+<li><strong>卷积层</strong>：卷积层的内存开销与计算复杂度主要由卷积核的数量、大小、输入特征图的大小和通道数决定。卷积操作的本质是计算密集型的，尤其是在输入图像分辨率较高时，早期层需要处理大量的像素点。因此，卷积层在计算过程中会消耗较多的浮点数计算量。</li>
+<li><strong>全连接层</strong>：全连接层占据了网络中绝大部分的参数。这是因为全连接层将前一层的所有特征图展开成一个长向量，然后与权重矩阵相乘。由于这些向量和权重矩阵通常非常大，导致全连接层的参数数量庞大。例如，AlexNet 中第一个全连接层从 <code>6×6×256</code> 的输入生成 4096 个输出，这需要 <code>6×6×256×4096</code> 个参数。</li>
+</ul>
+<blockquote>
+<p><strong>为什么需要三层全连接层</strong></p>
+</blockquote>
+<p><strong>非线性表达能力</strong>：每一层全连接层后面通常跟随一个非线性激活函数（如 ReLU），这大大增加了网络的非线性表达能力。多层全连接层通过不断组合前面层的输出，可以形成更复杂的特征表示。</p>
+<p>AlexNet 的 PyTorch 代码实现如下</p>
+<div class="highlight"><pre><span></span><code><span class="n">导入</span> <span class="n">pytorch</span> <span class="n">库</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="c1"># 导入 torch.nn 模块</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="c1"># nn.functional：(一般引入后改名为 F)有各种功能组件的函数实现，如：F.conv2d</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+
+<span class="c1"># 定义 AlexNet 网络模型，继承于父类 nn.Module</span>
+<span class="k">class</span> <span class="nc">AlexNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="c1"># 子类继承中重新定义 Module 类的 __init__()和 forward()函数</span>
+    <span class="c1"># init()：进行初始化，申明模型中各层的定义</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># super：引入父类的初始化方法给子类进行初始化</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AlexNet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 二维卷积层，输入大小为 224 *224，输出大小为 55* 55，输入通道为 3，输出为 96，卷积核为 11，步长为 4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># 使用 ReLU 作为激活函数，当然也可以使用 Sigmoid 函数等</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ReLU</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+        <span class="c1"># MaxPool2d：最大池化操作</span>
+        <span class="c1"># 二维最大池化层，输入大小为 55 *55，输出大小为 27* 27，输入通道为 96，输出为 96，池化核为 3，步长为 2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># 卷积层，输入大小为 27 *27，输出大小为 27* 27，输入通道为 96，输出为 256，卷积核为 5，扩充边缘为 2，步长为 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># 最大池化层，输入大小为 27 *27，输出大小为 13* 13，输入通道为 256，输出为 256，池化核为 3，步长为 2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># 卷积层，输入大小为 13 *13，输出大小为 13* 13，输入通道为 256，输出为 384，卷积核为 3，扩充边缘为 1，步长为 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">384</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 卷积层，输入大小为 13 *13，输出大小为 13* 13，输入通道为 384，输出为 384，卷积核为 3，扩充边缘为 1，步长为 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c4</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">384</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">384</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 卷积层，输入大小为 13 *13，输出大小为 13* 13，输入通道为 384，输出为 256，卷积核为 3，扩充边缘为 1，步长为 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c5</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">384</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 最大池化层，输入大小为 13 *13，输出大小为 6* 6，输入通道为 256，输出为 256，池化核为 3，步长为 2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s5</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># Flatten()：将张量（多维数组）平坦化处理，神经网络中第 0 维表示的是 batch_size，所以 Flatten()默认从第二维开始平坦化</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()</span>
+        <span class="c1"># 全连接层</span>
+        <span class="c1"># Linear（in_features，out_features）</span>
+        <span class="c1"># in_features 指的是 [batch_size, size] 中的 size, 即样本的大小</span>
+        <span class="c1"># out_features 指的是 [batch_size，output_size] 中的 output_size，样本输出的维度大小，也代表了该全连接层的神经元个数</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f6</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="mi">6</span><span class="o">*</span><span class="mi">256</span><span class="p">,</span> <span class="mi">4096</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f7</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4096</span><span class="p">,</span> <span class="mi">4096</span><span class="p">)</span>
+        <span class="c1"># 全连接层&amp;softmax</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f8</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4096</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f9</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># forward()：定义前向传播过程, 描述了各层之间的连接关系</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c3</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c4</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c5</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s5</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f6</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+         <span class="c1"># Dropout：随机地将输入中 50%的神经元激活设为 0，即去掉了一些神经节点，防止过拟合</span>
+        <span class="c1"># “失活的”神经元不再进行前向传播并且不参与反向传播，这个技术减少了复杂的神经元之间的相互影响</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f7</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f8</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f9</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># 每个 python 模块（python 文件）都包含内置的变量 __name__，当该模块被直接执行的时候，__name__ 等于文件名（包含后缀 .py ）</span>
+<span class="c1"># 如果该模块 import 到其他模块中，则该模块的 __name__ 等于模块名称（不包含后缀.py）</span>
+<span class="c1"># “__main__” 始终指当前执行模块的名称（包含后缀.py）</span>
+<span class="c1"># if 确保只有单独运行该模块时，此表达式才成立，才可以进入此判断语法，执行其中的测试代码，反之不行</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># rand：返回一个张量，包含了从区间[0, 1)的均匀分布中抽取的一组随机数，此处为四维张量</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">([</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">])</span>
+    <span class="c1"># 模型实例化</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">MyAlexNet</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<p>这是第一个真正意义上的现代神经网络，并且使用了大量的工程技巧，如对图片进行翻转、裁剪，Dropout 正则化等等</p>
+<p><a class="glightbox" href="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/YSAI_ImageClassification_L2_19.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L2_19" src="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/YSAI_ImageClassification_L2_19.png" /></a></p>
+<p><a class="glightbox" href="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/YSAI_ImageClassification_L2_21.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="YSAI_ImageClassification_L2_21" src="https://raw.githubusercontent.com/Michael-Jetson/Images/main/UpGit_Auto_UpLoad/YSAI_ImageClassification_L2_21.png" /></a></p>
+<h2 id="zf-net">ZF Net<a class="headerlink" href="#zf-net" title="Permanent link">&para;</a></h2>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408241411592.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240824141107531" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408241411592.png" /></a></p>
+<p>ZFNet (Zeiler and Fergus Net) 是在 AlexNet 基础上优化的网络，通过对超参数的调整提升了性能。主要改进包括：</p>
+<ol>
+<li><strong>第一层卷积核与步长调整</strong>：ZFNet 将第一层卷积核尺寸从 AlexNet 的 11x11 缩小到 7x7，同时减小步长为 2（而非 AlexNet 的 4）。这使得网络能够保留更高的空间分辨率，捕捉到更多的细节信息。</li>
+<li><strong>总体架构调整</strong>：ZFNet 在保持 AlexNet 的基本结构的同时，优化了卷积层的设置，使得特征提取的精度得到了提升。这表明在当时的计算资源允许范围内，适当增大网络规模可以带来性能提升。</li>
+</ol>
+<h2 id="vgg-网络">VGG 网络<a class="headerlink" href="#vgg-网络" title="Permanent link">&para;</a></h2>
+<p>VGG 网络通过 <strong><code>使用更小的卷积核（如3x3）代替较大的卷积核（如5x5）</code></strong> 带来了新的设计理念，核心思想是通过堆叠多个较小的卷积核实现更深的网络，同时在相同计算开销下提高模型的表现。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408241413084.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240824141347048" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408241413084.png" /></a></p>
+<p><strong>更深更窄的网络效果更佳</strong>：在相同计算成本的情况下，使用多个小卷积核（例如两次 3x3 卷积）可以实现比一次大卷积核（如 5x5 卷积）更好的效果。更深的网络可以捕捉到更复杂的特征。</p>
+<p><strong>规则化设计</strong>：VGG 的设计相比于 AlexNet 更加规则化，所有卷积层的卷积核大小均为 3x3，步幅为 1，填充为 1，池化层均为 2x2 最大池化且步幅为 2。这种统一的设计使网络结构更加简洁、可复用。</p>
+<p><strong>卷积块的使用</strong>：VGG 不是简单地堆叠卷积层，而是通过堆叠多个“卷积块”来构建网络。每个卷积块由几个卷积层和一个池化层组成，这些卷积块堆叠后连接全连接层。这种模块化设计使得 VGG 网络易于扩展和调整。</p>
+<p>以下是基于李沐老师的《动手学深度学习》中的 VGG 卷积块代码：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">d2l</span> <span class="kn">import</span> <span class="n">torch</span> <span class="k">as</span> <span class="n">d2l</span>
+
+
+<span class="k">def</span> <span class="nf">vgg_block</span><span class="p">(</span><span class="n">num_convs</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
+    <span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_convs</span><span class="p">):</span>
+        <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span>
+                                <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">())</span>
+        <span class="n">in_channels</span> <span class="o">=</span> <span class="n">out_channels</span>
+    <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
+<span class="c1"># 示例：构建一个 VGG 块，包含 2 个卷积层，输入通道数为 3，输出通道数为 64</span>
+<span class="n">vgg_block_example</span> <span class="o">=</span> <span class="n">vgg_block</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vgg_block_example</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="nin网络中的网络">NiN：网络中的网络<a class="headerlink" href="#nin网络中的网络" title="Permanent link">&para;</a></h2>
+<p>NiN（Network in Network）通过创新性地引入 1x1 卷积核和全局平均池化层，显著提升了卷积神经网络的非线性建模能力和特征表达能力。这种设计在当时引领了卷积神经网络结构的进步，并为后续的深度学习模型提供了新的思路。NiN 的核心思想之一是用 1x1 卷积核替代部分传统卷积层，使得网络不仅在空间维度上进行特征提取，还可以在通道维度上进行更深层次的特征组合。此外，全局平均池化层的引入，有效减少了参数数量和计算复杂度，降低了过拟合风险，同时提供了更紧凑的网络设计。</p>
+<p>在实际应用中，NiN 展示了其在图像分类、目标检测和语义分割等任务中的优越性能。其提出的 1x1 卷积核的设计理念也被后续诸多模型广泛采用，如 Inception 系列网络，进一步推动了深度学习的研究和应用。</p>
+<h2 id="googlelenet">GoogleLeNet<a class="headerlink" href="#googlelenet" title="Permanent link">&para;</a></h2>
+<p>GoogleLeNet 是 2014 年谷歌团队为提高神经网络效率、减少复杂性并使其在移动设备上运行而提出的网络模型。它得名于向 Yann LeCun 和他的 LeNet 致敬。GoogleLeNet 的主要贡献之一是引入了 Inception 模块，这种模块结构使网络在保持计算复杂度和参数数量较低的同时，能够显著增加深度。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408241418367.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="EECS498_L8_52" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408241418367.png" /></a></p>
+<p><strong>Inception 模块</strong>：</p>
+<ul>
+<li>Inception 模块是一种复合结构，通过多个不同的卷积核和池化层并行处理输入信息，再在通道维度上合并输出。这种设计避免了传统卷积层的局限性，使网络能够从多个尺度提取特征，增加模型表达能力的同时减少参数量。</li>
+<li>每个 Inception 模块都包括 1x1、3x3、5x5 的卷积层和 3x3 的最大池化层，并且通过 1x1 卷积进行通道数的压缩以减少计算量。</li>
+</ul>
+<p><strong>网络结构</strong>：</p>
+<ul>
+<li>GoogleLeNet 的深度超过 100 层，是当时深度最大的网络之一。这种深度极大提升了模型的表达能力，尽管当时还没有使用批量归一化（Batch Normalization）技术。</li>
+</ul>
+<p><strong>全局平均池化</strong>：</p>
+<ul>
+<li>在网络的最后，GoogleLeNet 使用了全局平均池化层来替代全连接层，这减少了模型参数并降低了过拟合风险。</li>
+</ul>
+<h2 id="批量归一化">批量归一化<a class="headerlink" href="#批量归一化" title="Permanent link">&para;</a></h2>
+<p>批量归一化（Batch Normalization，BN）是一种广泛用于加速神经网络训练收敛的技术。它通过在训练过程中对每个批量数据进行归一化处理，<strong><code>使得网络在各层的输入分布更加稳定，有助于解决深度神经网络训练过程中出现的梯度消失和梯度爆炸问题，从而加速收敛</code></strong>。</p>
+<p>我们知道，损失是在网络最后，当进行反向传播的时候，上流的梯度较大，但是下层的梯度会很小，这是因为每一层的梯度可能都不大，反向传播过程中不断累乘会导致梯度越来越小，也就是说，越靠近数据层，梯度更新的越慢，学习的也就越慢，这就导致了每一层更新下层之后，上层也要重新开始训练，所以批量归一化要解决的问题就是在学习底部层的时候避免变化顶部层</p>
+<blockquote>
+<p><strong>批量归一化的原理和作用</strong></p>
+</blockquote>
+<ul>
+<li>
+<p><strong>均值和方差的归一化</strong>：
+批量归一化的核心思想是对每个批量的数据进行均值和方差的归一化处理，使得每个特征的 <strong><code>分布稳定在0均值和单位方差附近</code></strong>。这样可以减少不同批次数据分布带来的影响，有利于提高网络的泛化能力和加快训练速度。</p>
+</li>
+<li>
+<p><strong>归一化公式</strong>：</p>
+</li>
+</ul>
+<p>对于一个批量数据集合 <span class="arithmatex">\(B\)</span>，批量归一化的数学表达式如下： </p>
+<div class="arithmatex">\[
+\mu_B = \frac{1}{|B|}\sum_{i\in B}x_i\\
+\sigma_B^2 = \frac{1}{|B|}\sum_{i\in B}(x_i - \mu_B)^2 + \epsilon
+\]</div>
+<p>其中，<span class="arithmatex">\(\mu_B\)</span> 是批量数据的均值，<span class="arithmatex">\(\sigma_B^2\)</span> 是批量数据的方差（加上小的常数 <span class="arithmatex">\(\epsilon\)</span> 来防止除以零），<span class="arithmatex">\(x_i\)</span> 是批量中的每个样本。</p>
+<ul>
+<li><strong>归一化后的变换</strong>：</li>
+</ul>
+<p>归一化后，每个样本 <span class="arithmatex">\(x_i\)</span> 被转换为：</p>
+<div class="arithmatex">\[
+\hat{x}_i = \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}
+\]</div>
+<p>然后通过可学习的拉伸参数 <span class="arithmatex">\(\gamma\)</span> 和偏移参数 <span class="arithmatex">\(\beta\)</span> 来调整归一化后的结果： </p>
+<div class="arithmatex">\[
+y_i = \gamma \hat{x}_i + \beta
+\]</div>
+<p>这里 <span class="arithmatex">\(\gamma\)</span> 和 <span class="arithmatex">\(\beta\)</span> 是可以通过反向传播进行优化的参数，用来学习最佳的数据分布。</p>
+<ul>
+<li><strong>作用于全连接层和卷积层</strong>：</li>
+</ul>
+<p>批量归一化通常 <strong><code>应用在每层的激活函数之前，即作用于全连接层和卷积层的输出</code></strong>。这种方式有助于使得每层输入的分布更稳定，提高了网络训练时的梯度流动性，加速了模型的收敛速度。</p>
+<h2 id="resnet">ResNet<a class="headerlink" href="#resnet" title="Permanent link">&para;</a></h2>
+<p>ResNet（Residual Network，残差网络），它通过引入 <strong>残差学习</strong> 的思想，<strong>成功解决了深层神经网络训练中的梯度消失问题</strong>，使得网络深度能够大幅度增加，推动了深度学习的发展。</p>
+<p><strong>残差学习（Residual Learning）</strong>：</p>
+<ul>
+<li>ResNet 的核心思想是引入“<strong>残差块</strong>”（Residual Block），通过 <strong>跳跃连接（skip connection）直接将输入信息传递到更深的层，这样可以避免网络在层数增加时出现的退化问题。</strong> 残差块的结构如下：<span class="arithmatex">\(y = F(x, \{W_i\}) + x\)</span></li>
+<li>其中，<span class="arithmatex">\(x\)</span> 是输入，<span class="arithmatex">\(F(x, {W_i})\)</span> 是卷积层的输出，残差块直接将输入 <span class="arithmatex">\(x\)</span> 加到输出上。这样，即使 <span class="arithmatex">\(F(x)\)</span> 趋近于 0，网络也可以通过跳跃连接保持信息的流动。</li>
+</ul>
+<p><strong>解决梯度消失问题</strong>：</p>
+<ul>
+<li>随着网络深度的增加，梯度消失和梯度爆炸问题会变得更加严重，导致训练困难。通过引入残差学习，ResNet 可以确保梯度能够顺畅地从网络后层传播到前层，从而缓解了梯度消失的问题，<strong>使得网络可以轻松地增加到数百层深</strong>。</li>
+</ul>
+<p><strong>深层网络的优势</strong>：</p>
+<ul>
+<li>在 ResNet 之前，网络深度的增加并不总是带来更好的性能，甚至可能导致模型退化，出现训练误差增大的现象。ResNet 通过残差块使得非常深的网络也能够有效训练，从而显著提高了模型的表现。在 ImageNet 挑战赛中，ResNet-152 显著超越了之前的网络结构，获得了冠军。</li>
+</ul>
+<h2 id="mobilenet">MobileNet<a class="headerlink" href="#mobilenet" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>MobileNet 的优势</strong></p>
+</blockquote>
+<ul>
+<li><strong>高效性</strong>：通过深度可分离卷积、宽度乘子和分辨率乘子的结合，MobileNet 大幅度减少了模型的计算量和参数量，使其在资源受限的设备上能够高效运行。</li>
+<li><strong>可定制性</strong>：用户可以根据计算资源和应用需求，通过调整宽度乘子和分辨率乘子来灵活控制模型的复杂度，达到准确率与效率的平衡。</li>
+<li><strong>广泛应用</strong>：MobileNet 广泛应用于各种移动和嵌入式设备上的任务，如图像分类、目标检测、人脸识别等。</li>
+</ul>
+<blockquote>
+<p><strong>MobileNet 的局限性</strong></p>
+</blockquote>
+<p>尽管 MobileNet 在轻量化设计上取得了成功，但由于其计算量和参数量的减少，其在某些任务上的准确率可能不如更复杂的大型网络。为了应对这一挑战，后续提出了 MobileNetV2 和 MobileNetV3，这些改进版本进一步优化了网络结构，提升了准确率和性能。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
