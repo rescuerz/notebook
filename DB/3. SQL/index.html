@@ -2367,13 +2367,13 @@
 <h2 id="31-data-definition">3.1 Data Definition<a class="headerlink" href="#31-data-definition" title="Permanent link">&para;</a></h2>
 <h3 id="311-domain-types-in-sql">3.1.1 Domain Types in SQL<a class="headerlink" href="#311-domain-types-in-sql" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>char(n).</code> Fixed length character string, with user-specified length n.   </li>
-</ul>
+<li>
+<p><code>char(n).</code> Fixed length character string, with user-specified length n.   </p>
 <p><strong>定长</strong>字符串. C 语言里字符串结尾有 <code>\0</code>, 但数据库里没有，长度由定义而得。  </p>
-<ul>
+</li>
 <li>
 <p><code>varchar(n).</code> Variable length character strings, with user-specified <strong>maximum</strong> length n. 
-  <strong>不定长</strong>字符串。不同的数据类型比较可能有问题（比如定长和不定长的字符串）</p>
+    <strong>不定长</strong>字符串。不同的数据类型比较可能有问题（比如定长和不定长的字符串）</p>
 <p>设定一个<strong>最长</strong>的长度，小于则按真实长度存储</p>
 </li>
 <li>
