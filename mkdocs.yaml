@@ -74,6 +74,7 @@ extra_css:
   # - supports/css/phycat-mint.css
   # 如果公式渲染样式出现问题，请检查如下脚本
   - https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css
+  
 
 extra_javascript:
   # 自动令所有第三方链接在新标签页中打开
@@ -81,6 +82,9 @@ extra_javascript:
   # 如果公式渲染出现问题，请检查如下脚本
   - supports/js/katex.js
   - https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js
+  # - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 # ======================================== >>>
 # TODO: 请修改本项配置，本节是导航配置项，一般只需要在下面增加新的章节对应的文件即可，支持结构化配置
@@ -92,25 +96,26 @@ nav:
       - 友链: link.md
   - Computer Science:
       - 高级数据结构与算法分析:
-          - ADS/Readme.md
+          - ADS/index.md
           - ADS/1. AVL_tree.md
-          # - ADS/2. Red Black Tree & B+ Tree.md
-          # - ADS/3. Inverted File Index.md
-          # - ADS/4. Leftist Heaps and Skew Heaps.md
-          # - ADS/5. Binomial Queue.md
-          # - ADS/6. backtracking.md
-          # - ADS/7. Divide & Conquer.md
-          # - ADS/8. Dynamic Programming.md
-          # - ADS/9. Greedy Algorithms.md
-          # - ADS/10. NP-Completeness.md
-          # - ADS/11. Approximation.md
-          # - ADS/12. Local Search.md
-          # - ADS/13. Randomized Algorithms.md
-          # - ADS/14. Parallel Algorithm.md
-          # - ADS/15. External Sorting.md
+          - ADS/2. Red Black Tree & B+ Tree.md
+          - ADS/3. Inverted File Index.md
+          - ADS/4. Leftist Heaps and Skew Heaps.md
+          - ADS/5. Binomial Queue.md
+          - ADS/6. backtracking.md
+          - ADS/7. Divide & Conquer.md
+          - ADS/8. Dynamic Programming.md
+          - ADS/9. Greedy Algorithms.md
+          - ADS/10. NP-Completeness.md
+          - ADS/11. Approximation.md
+          - ADS/12. Local Search.md
+          - ADS/13. Randomized Algorithms.md
+          - ADS/14. Parallel Algorithm.md
+          - ADS/15. External Sorting.md
 
   - Artificial Intelligence:
       - Computer Vision:
+          - CV/index.md
           - CV/Lecture1_Introduction.md
           - CV/Lecture2_Image_Classification.md
           - CV/Lecture3_Linear_Classifiers.md
