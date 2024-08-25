@@ -1,0 +1,2629 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+        <link rel="prev" href="../1.%20Introduction/">
+      
+      
+        <link rel="next" href="../3.%20SQL/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>2. Relational Model - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2-relational-model" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2. Relational Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/notebook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ADS/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+    
+  
+  System
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CV/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/notebook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../ADS/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/1.%20AVL_tree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. AVL Tree &amp; Splay Tree
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/2.%20Red%20Black%20Tree%20%26%20B%2B%20Tree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Red Black Tree &amp; B+ Tree
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/3.%20Inverted%20File%20Index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Inverted File Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/4.%20Leftist%20Heaps%20and%20Skew%20Heaps/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Leftist Heap &amp; Skew Heap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/5.%20Binomial%20Queue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Binomial Queue
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/6.%20backtracking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Backtracking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/7.%20Divide%20%26%20Conquer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7. Divide &amp; Conquer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/8.%20Dynamic%20Programming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8. Dynamic Programming
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/9.%20Greedy%20Algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9. Greedy Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/10.%20NP-Completeness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10. NP-Completeness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/11.%20Approximation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11. Approximation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/12.%20Local%20Search/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12. Local Search
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/13.%20Randomized%20Algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13. Randomized Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/14.%20Parallel%20Algorithm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14. Parallel Algorithm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/15.%20External%20Sorting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15. External Sorting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    System
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    数据库系统
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            数据库系统
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    2. Relational Model
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    2. Relational Model
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-structure-of-relational-databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Structure of Relational Databases
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Structure of Relational Databases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.1 Concepts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.2 Attributes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-database-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Database Schema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Keys
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-relational-algebrarelational-query-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Relational Algebra——relational query language
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Relational Algebra——relational query language">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-select" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.1 Select
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.2 Project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-union" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.3 Union
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#245-set-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.5 Set Difference
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#246-cartesian-product-笛卡尔积" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.6 Cartesian-Product 笛卡尔积
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#246-renamen" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.6 Rename=n
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#247-additional-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7 Additional Operations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4.7 Additional Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2471-set-intersection" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7.1 Set-Intersection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2472-natural-join-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7.2 Natural-Join Operation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2473-outer-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7.3 Outer Join
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2474-semijoin-半连接" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7.4 Semijoin 半连接
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2475-division" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7.5 Division
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#248-extended-relational-algebra-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.8 Extended Relational-Algebra-Operation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4.8 Extended Relational-Algebra-Operation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2481-generalized-projection" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.8.1 Generalized Projection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2482-aggregate-functions-and-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.8.2 Aggregate Functions and Operations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#249-multiset-relational-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.9 Multiset Relational Algebra
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-sql-and-relational-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 SQL and Relational Algebra
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20SQL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. SQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%20Entity-Relationship%20Model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    六.Entity-Relationship Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7.%20Relational%20Database%20Design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    七. Relational Database Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8.%20Physical%20Storage%20Systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    八. Physical Storage Systems
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9.%20Data%20Storage%20Structures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    九. Data Storage Structures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10.%20Indexing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    十. Indexing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11.%20Query%20Processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    十一. Query Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12.%20Query%20Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    十二. Query Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13.%20Transaction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    十三. Transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14.%20Concurrency%20Control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    十四. Concurrency Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15.%20Recovery%20System/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    十五. Recovery System
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../CV/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture2_Image_Classification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture5_Neural_Networks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Neural Network
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture6_Backpropagation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Backpropagation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture7_ConvolutionalNetworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convolutional Neural Networks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture8_CNN_Architectures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CNN Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture9_Hardware_and_Software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardware and Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-structure-of-relational-databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Structure of Relational Databases
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Structure of Relational Databases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.1 Concepts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.2 Attributes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-database-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Database Schema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Keys
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-relational-algebrarelational-query-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Relational Algebra——relational query language
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Relational Algebra——relational query language">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-select" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.1 Select
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.2 Project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-union" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.3 Union
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#245-set-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.5 Set Difference
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#246-cartesian-product-笛卡尔积" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.6 Cartesian-Product 笛卡尔积
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#246-renamen" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.6 Rename=n
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#247-additional-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7 Additional Operations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4.7 Additional Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2471-set-intersection" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7.1 Set-Intersection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2472-natural-join-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7.2 Natural-Join Operation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2473-outer-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7.3 Outer Join
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2474-semijoin-半连接" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7.4 Semijoin 半连接
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2475-division" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7.5 Division
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#248-extended-relational-algebra-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.8 Extended Relational-Algebra-Operation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4.8 Extended Relational-Algebra-Operation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2481-generalized-projection" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.8.1 Generalized Projection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2482-aggregate-functions-and-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.8.2 Aggregate Functions and Operations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#249-multiset-relational-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.9 Multiset Relational Algebra
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-sql-and-relational-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 SQL and Relational Algebra
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/notebook/blob/main/docs/DB/2. Relational Model.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/notebook/raw/main/docs/DB/2. Relational Model.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="2-relational-model">2. Relational Model<a class="headerlink" href="#2-relational-model" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 2519 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 13 分钟</p>
+</div>
+<h2 id="21-structure-of-relational-databases">2.1 Structure of Relational Databases<a class="headerlink" href="#21-structure-of-relational-databases" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>example of a relation</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329405.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240304132751848" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329405.png" /></a></p>
+<h3 id="211-concepts">2.1.1 Concepts<a class="headerlink" href="#211-concepts" title="Permanent link">&para;</a></h3>
+<p>Formally, given set<span class="arithmatex">\(D_1, D_2, \ldots, D_n\)</span>a <strong>relation</strong><span class="arithmatex">\(r\)</span>is a subset of<span class="arithmatex">\(D_1\times D_2\times \ldots D_n\)</span>.  Thus a relation is <code>a set of n-tuple</code><span class="arithmatex">\((a_1,a_2,\ldots,a_n)\)</span>where each<span class="arithmatex">\(a_i\in D_i\)</span>.  </p>
+<p>给定集合<span class="arithmatex">\(D_1, D_2, \ldots, D_n\)</span>的关系<span class="arithmatex">\(r\)</span>是<span class="arithmatex">\(D_1\times D_2\times \ldots D_n\)</span>的子集</p>
+<p><span class="arithmatex">\(A_1,A_2,\ldots,A_n\)</span>are <strong>attributes</strong>.</p>
+<blockquote>
+<p><strong><span class="arithmatex">\(R=(A_1,A_2,\ldots,A_n)\)</span>is a relation schema.</strong>  </p>
+<p><strong><em>e.g.</em> instructor = (ID, name, dept_name, salary).</strong>  </p>
+</blockquote>
+<p>A <strong>relation instance</strong><span class="arithmatex">\(r\)</span>defined over schema R is denoted by<span class="arithmatex">\(r(R)\)</span>. </p>
+<p>在架构 R 上定义的关系实例<span class="arithmatex">\(R\)</span>用<span class="arithmatex">\(r(R)\)</span>表示</p>
+<p>因为关系是一个集合，所以关系都是无序的。</p>
+<h3 id="212-attributes">2.1.2 Attributes<a class="headerlink" href="#212-attributes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>The set of <code>allowed values</code> for each attribute is called the <code>domain (域)</code>of the attribute</p>
+</li>
+<li>
+<p>Attribute <code>values</code> are (normally) required to be <strong><code>atomic (原子的)</code></strong>; that is, indivisible</p>
+</li>
+</ul>
+<p>属性值要求是原子的，不可分割的，也就是说不能是数组、链表……</p>
+<ul>
+<li>The special value <strong>null</strong> (空值) is a member of every domain</li>
+</ul>
+<p>特殊值 null （空值） 是每个域的成员</p>
+<blockquote>
+<p><strong>元组的顺序是没有关联的，也就是元组的存放是任意的</strong></p>
+</blockquote>
+<h2 id="22-database-schema">2.2 Database Schema<a class="headerlink" href="#22-database-schema" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Database schema</strong> -- is the logical structure of the database.</li>
+<li><strong>Database instance</strong> -- is a <strong>snapshot</strong> of the data in the database at a given instant in time. </li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329310.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240304133948136" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329310.png" /></a></p>
+<p>schema 是抽象的定义, instructor = (ID, name, dept_name, salary).
+instance 是具体的实例。上述table</p>
+</div>
+<h2 id="23-keys">2.3 Keys<a class="headerlink" href="#23-keys" title="Permanent link">&para;</a></h2>
+<p>Let<span class="arithmatex">\(K\subsetneqq R\)</span>  </p>
+<p><em><span class="arithmatex">\(K\)</span>is a </em><em>superkey (超键)</em><em> of<span class="arithmatex">\(R\)</span>if values for K are sufficient to identify (唯一确定) a unique tuple of each possible relation<span class="arithmatex">\(r(R)\)</span> 
+  </em><strong>e.g.</strong>*<span class="arithmatex">\(\{ID\}\)</span>or<span class="arithmatex">\(\{ID, name\}\)</span></p>
+<p><strong><code>superkey确定，对应的元组唯一确定</code></strong></p>
+<ul>
+<li>
+<p><strong>Superkey</strong><span class="arithmatex">\(K\)</span>is a <strong>candidate key (候选键)</strong> if<span class="arithmatex">\(K\)</span>is <strong>minimal</strong>.<br />
+    即<span class="arithmatex">\(K\)</span>中没有冗余属性  </p>
+<p><strong>e.g. </strong><span class="arithmatex">\(\{ID\}\)</span></p>
+</li>
+<li>
+<p>One of the <code>candidate keys</code> is selected to be the <strong>primary key (主键)</strong>.</p>
+<p><strong>primary key 的值不能为空，且不能重复</strong></p>
+</li>
+<li>
+<p><strong>Foreign key</strong> (外键) Relation<span class="arithmatex">\(r_1\)</span>may include among its attributes the primary key of another relation<span class="arithmatex">\(r_2\)</span>. This attribute is called a <strong>foreign key</strong> from<span class="arithmatex">\(r_1\)</span>, referencing<span class="arithmatex">\(r_2\)</span>.  </p>
+<p>外键限制就是关系<span class="arithmatex">\(r_1\)</span>引用的<strong>主键</strong>必须在关系<span class="arithmatex">\(r_2\)</span>中出现。（在任何数据库实例上，<span class="arithmatex">\(r1\)</span>中每个元组的 A 值也必须是<span class="arithmatex">\(r2\)</span>中某个元组的 B 值。）    <br />
+<a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329307.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329307.png"></a></p>
+<p>左侧表的老师 ID 必须出现在右侧表中。</p>
+<details class="info">
+<summary>Why we need foreign key constraint?</summary>
+<p>数据库是支持由完整约束条件定义出来的，并维护完整性约束条件。则当我们定义外键后，上述例子中黄色条目是不会出现的。</p>
+</details>
+</li>
+<li>
+<p>Referential integrity (参照完整性)  </p>
+<p>类似于外键限制，但不局限于主键。  下图中的time-slot_id并不是Referenced relation的主键</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329317.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329317.png"  ></a></p>
+<p>这里<span class="arithmatex">\(time_slot_id\)</span>并不是关系<span class="arithmatex">\(r_2\)</span>的主键，所以这里不是外键限制。</p>
+</li>
+</ul>
+<p>​    <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329323.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329323.png" ></a> </p>
+<p>course_id 引用 course中course_id(primary key)</p>
+<ul>
+<li>course 指课程信息，无论是否开课，都会有其定义。</li>
+<li>section 表示教学班，真正开课时就有相应的实例。（类比于高铁的列车号，和每天对应的班次）</li>
+<li>teachers 具体教哪个教学班的老师</li>
+<li>takes 表示学生注册课程</li>
+<li>time_slot 表示一门课的具体上课时间段，如数据库在周一 3, 4, 5 节; 周一 7, 8 节。</li>
+<li>上图中红线表示引用完整性的约束（可以不是主键）；黑线表示外键约束。</li>
+</ul>
+<h2 id="24-relational-algebrarelational-query-language">2.4 Relational Algebra——relational query language<a class="headerlink" href="#24-relational-algebrarelational-query-language" title="Permanent link">&para;</a></h2>
+<p>Six basic operators</p>
+<ul>
+<li>select:<span class="arithmatex">\(\sigma\)</span> </li>
+<li>project:<span class="arithmatex">\(\Pi\)</span></li>
+<li>union:<span class="arithmatex">\(\cup\)</span></li>
+<li>set difference:<span class="arithmatex">\(-\)</span></li>
+<li>Cartesian product(笛卡尔积):<span class="arithmatex">\(\times\)</span></li>
+<li>rename:<span class="arithmatex">\(\rho\)</span></li>
+</ul>
+<h3 id="241-select">2.4.1 Select<a class="headerlink" href="#241-select" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(\sigma_p(r)=\{t|t\in r\ and\ p(t)\}\)</span> , where<span class="arithmatex">\(p\)</span>is called <strong>selection predicate</strong>.  </p>
+<p><span class="arithmatex">\(p(t)\)</span>称为选择谓词。</p>
+<p><center>
+    <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403041322236.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403041322236.png" width = 40%></a>
+    <img src = "https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403041421800.png" width = 40%>
+</center></p>
+<h3 id="242-project">2.4.2 Project<a class="headerlink" href="#242-project" title="Permanent link">&para;</a></h3>
+<p>The <strong>project</strong> operation is a unary operation that returns its argument relation, with certain attributes left out.    项目操作是一个一元操作，它返回其参数关系，省略了某些属性</p>
+<p><span class="arithmatex">\(\prod_{A_1,A_2,\ldots, A_k}(r)\)</span>where<span class="arithmatex">\(A_i\)</span>are attribute names and<span class="arithmatex">\(r\)</span>is a relation name.   </p>
+<p>The result is defined as the relation of k columns obtained by <strong>erasing the columns that are not listed</strong>. <strong><code>会对结果进行去重</code></strong>。  </p>
+<p><center>
+    <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403041322259.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403041322259.png" width = 40%/></a>
+</center></p>
+<h3 id="243-union">2.4.3 Union<a class="headerlink" href="#243-union" title="Permanent link">&para;</a></h3>
+<p>The <strong>union</strong> operation allows us to combine two relations.  </p>
+<p><span class="arithmatex">\(r\cup s = \{t| t\in r \ or \ t\in s\}\)</span> </p>
+<p><em><span class="arithmatex">\(r\)</span>and<span class="arithmatex">\(s\)</span>must have the same </em><em>arity (元数)</em><em> (same number of attributes </em><em>相同数量的属性值</em><em>)<br />
+</em> The attribute domains must be <strong>compatible</strong> .属性域必须兼容
+* 当属性有关联类型时，对于每个输入<span class="arithmatex">\(i\)</span>, 两个输入关系的第<span class="arithmatex">\(i\)</span>个属性的类型必须相同。<br />
+  <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329383.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329383.png" width = 40%/></a></p>
+<blockquote>
+<p><strong>会对结果进行去重</strong></p>
+</blockquote>
+<p><span class="arithmatex">\(\prod _{course_{id}} (\sigma_{semester = "Fall" \wedge year = 2023}(Section))\)</span></p>
+<h3 id="245-set-difference">2.4.5 Set Difference<a class="headerlink" href="#245-set-difference" title="Permanent link">&para;</a></h3>
+<p>The <strong>set-difference</strong> operation allows us to find tuples that are in one relation but are not in another.   </p>
+<p><span class="arithmatex">\(r-s=\{t|t\in r\ and\ t\notin s\}\)</span> 我有你没有</p>
+<p><span class="arithmatex">\(r \cap s = r - (r - s)\)</span></p>
+<p>Set differences must be taken between <strong>compatible</strong> relations.
+ <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329003.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329003.png" width = 40%/></a></p>
+<h3 id="246-cartesian-product-笛卡尔积">2.4.6 Cartesian-Product 笛卡尔积<a class="headerlink" href="#246-cartesian-product-笛卡尔积" title="Permanent link">&para;</a></h3>
+<p>The <strong>Cartesian-product</strong> operation (denoted by<span class="arithmatex">\(\times\)</span>)  allows us to combine information from any two relations.    </p>
+<p><span class="arithmatex">\(r\times s  =\{t\ q|t\in r\ and\ q\in s\}\)</span> </p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329973.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329973.png" width = 60%/></a></p>
+<h3 id="246-renamen">2.4.6 Rename=n<a class="headerlink" href="#246-renamen" title="Permanent link">&para;</a></h3>
+<p>Allows us to refer to a relation by more than one name. <span class="arithmatex">\(\rho_X(E)\)</span></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329961.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240304143604816" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329961.png" /></a></p>
+<p>返回名称为 X 的表达式 E 的结果，并将属性重命名为<span class="arithmatex">\(A_1、A_2、...、A_n\)</span>。</p>
+<blockquote>
+<p><strong><code>Find the names of all instructors in the Physics department, along with the course_id of all courses they have taught.</code></strong></p>
+<p><strong>查找物理系所有教师的姓名，以及他们教授的所有课程的course_id。</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329011.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240304143842872" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329011.png" /></a></p>
+<div class="highlight"><pre><span></span><code> 这两条语句含义一样，但第二条我们先进行了一次 select, 条目少了更高效。
+</code></pre></div>
+<p>Find the largest salary in the university.  </p>
+<ul>
+<li>
+<p>find instructor salaries that are less than some other instructor salary (<strong>i.e.</strong> not maximum)<br />
+  using a copy of instructor under a new name<span class="arithmatex">\(d\)</span>.   </p>
+<p><span class="arithmatex">\(\prod_{instructor.salary}(\sigma_{instructor.salary&lt;d.salary}(instructor \times \rho_d(instructor)))\)</span> </p>
+<p><strong><code>先列出所有存在小于关系的工资（最高工资不存在小于），进行去重后唯一</code></strong></p>
+</li>
+<li>
+<p>find the largest salary  </p>
+<p><span class="arithmatex">\(\prod_{instructor}-\prod_{instructor.salary}(\sigma_{instructor.salary&lt;d.salary}(instructor\times \rho_d(instructor)))\)</span> </p>
+<p><strong><code>再利用set difference，找到最高工资</code></strong></p>
+</li>
+</ul>
+<p>我们第一步将两个关系拼起来之后，限定 instructor 的工资小于 d, 随后投影我们就可以获得所有不是最大值的薪水。（因为任何不是最大值的薪水都会在笛卡尔积 select 后至少存在一个元组，这样投影之后仍会存在。但最大值就不会有元组存在），最后用全集减掉即可。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329054.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240304182221601" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329054.png" /></a> </p>
+<blockquote>
+<p><strong><span class="arithmatex">\(E_1 \cup E_2\)</span></strong></p>
+<p><strong><span class="arithmatex">\(E_1 - E_2\)</span></strong></p>
+<p><strong><span class="arithmatex">\(E_1 \times E2\)</span></strong></p>
+<p><strong><span class="arithmatex">\(\sigma_p(E1)\)</span>: P is a predicate on attributes in E1</strong></p>
+<p><strong><span class="arithmatex">\(\prod _S(E1)\)</span>: S is a list consisting of some of attributes in E1</strong></p>
+<p><strong><span class="arithmatex">\(\rho _X(E_1)\)</span>: X is the new name for the result of E1</strong></p>
+</blockquote>
+<h3 id="247-additional-operations">2.4.7 Additional Operations<a class="headerlink" href="#247-additional-operations" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set intersection:<span class="arithmatex">\(r \cap s\)</span> <code>r \cap s</code></li>
+<li>Natural join: <span class="arithmatex">\(r\bowtie s\)</span> <code>r \bowtie s</code></li>
+<li>Assignment:<span class="arithmatex">\(\leftarrow\)</span><code>leftarrow</code></li>
+<li>Outer join :<span class="arithmatex">\(r \rtimes       s\)</span>, <span class="arithmatex">\(r  \ltimes    s\)</span>,<span class="arithmatex">\(r\)</span>⟗<span class="arithmatex">\(s\)</span> <code>\rtimes \ltimes</code></li>
+<li>Division Operator:<span class="arithmatex">\(r \div s\)</span><span class="arithmatex">\(r ➗ s\)</span></li>
+</ul>
+<h4 id="2471-set-intersection">2.4.7.1 Set-Intersection<a class="headerlink" href="#2471-set-intersection" title="Permanent link">&para;</a></h4>
+<p>The <strong>set-intersection</strong> operation allows us to find tuples that are in <strong>both</strong> the input relations.<br />
+<span class="arithmatex">\(r\cap s=\{t| t\in r\ and\ t\in s\}\)</span> </p>
+<p>*<span class="arithmatex">\(r, s\)</span>have the same arity 
+* attributes of<span class="arithmatex">\(r\)</span>and s are compatible</p>
+<details class="example">
+<summary>Set-Intersection Operation Example</summary>
+<p><div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329130.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329130.png" width = 40%/></a> </div> </p>
+</details>
+<h4 id="2472-natural-join-operation">2.4.7.2 Natural-Join Operation<a class="headerlink" href="#2472-natural-join-operation" title="Permanent link">&para;</a></h4>
+<p>Let r and s be relations on schemas R and S respectively.  Then, <span class="arithmatex">\(r\bowtie     s\)</span>is a relation on schema<span class="arithmatex">\(R \cup S\)</span>obtained as follows:</p>
+<ul>
+<li>Consider each pair of tuples<span class="arithmatex">\(t_r\)</span>from<span class="arithmatex">\(r\)</span>and<span class="arithmatex">\(t_s\)</span>from<span class="arithmatex">\(s\)</span>.  </li>
+<li>If<span class="arithmatex">\(t_r\)</span>and<span class="arithmatex">\(t_s\)</span>have the <strong>same value on each of the attributes</strong> in<span class="arithmatex">\(R \cap S\)</span>, add a tuple<span class="arithmatex">\(t\)</span>to the result, where
+  <em><span class="arithmatex">\(t\)</span>has the same value as<span class="arithmatex">\(t_r\)</span>on<span class="arithmatex">\(r\)</span>
+  </em><span class="arithmatex">\(t\)</span>has the same value as<span class="arithmatex">\(t_s\)</span>on<span class="arithmatex">\(s\)</span></li>
+</ul>
+<p>即共同属性要有相同的值，才能在拼接后的结果中保留。  </p>
+<p>对乘法的扩展，相当于先<span class="arithmatex">\(\times\)</span>再 select, 最后 project. </p>
+<div class="arithmatex">\[
+assiciative: (instructor \bowtie teaches)\bowtie course = instructor \bowtie(teaches \bowtie course)
+\]</div>
+<div class="arithmatex">\[
+communitative: instructor \bowtie course = course \bowtie instructor
+\]</div>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329546.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329546.png" width = 80%/></a></p>
+<div class="arithmatex">\[
+\begin{aligned}
+R &amp;= (A, B, C, D)\\
+S &amp;= (E, B, D)\\
+result \ schema &amp;= (A,B,C,D,E)\\
+r \bowtie s &amp;= \prod_{r_A,r_B,r_C,r_D,s_E}(\sigma_{r.B = s.B \wedge r.D = s.D}(r \times s))\\
+优先保证R和S共有的属性&amp;，具有相同的值，之后再插入s.E
+\end{aligned}
+\]</div>
+<ul>
+<li><strong>Theta Join</strong> <span class="arithmatex">\(r\bowtie_\theta s=\sigma_\theta (r\times s)\)</span> 条件连接</li>
+</ul>
+<h4 id="2473-outer-join">2.4.7.3 Outer Join<a class="headerlink" href="#2473-outer-join" title="Permanent link">&para;</a></h4>
+<p>Computes the join and then adds tuples form one relation that does not match tuples in the other relation to the result of the join.   </p>
+<p>Uses <em>null values</em>:  </p>
+<ul>
+<li><strong>null</strong> signifies that the value is unknown or does not exist  <strong><code>null 表示该值未知或不存在</code></strong></li>
+<li>
+<p>All comparisons involving null are (roughly speaking) false by definition</p>
+</li>
+<li></li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329603.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329603.png" ></a></p>
+<blockquote>
+<p><strong>普通的join就是natural join，选择共有属性的共有tuple联结</strong></p>
+<p><strong>left outer join，左边的table为全集，非共有tuple，value未知补NULL</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329884.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329884.png"></a></p>
+<blockquote>
+<p><strong>right outer join，右边为全集，非共有tuple，value未知补NULL</strong></p>
+<p><strong>Full outer join，两个table先进行<span class="arithmatex">\(\cup\)</span>,未知的value补NULL</strong></p>
+</blockquote>
+<p>Outer join can be expressed using basic operations.  </p>
+<ul>
+<li>
+<p><span class="arithmatex">\(r\rtimes s=(r\bowtie s)\cup (r-\cap_R(r\bowtie s)\times \{null,\ldots,null\})\)</span><code>右边补NULL</code></p>
+</li>
+<li>
+<p><span class="arithmatex">\(r\ltimes s=(r\bowtie s)\cup \{null,\ldots,null\}\times (s-\cap_R(r\bowtie s))\)</span><code>左边补NULL</code></p>
+</li>
+<li>
+<p><span class="arithmatex">\(r\)</span>⟗<span class="arithmatex">\(s\)</span><span class="arithmatex">\(=(r\bowtie s)\cup (r-\cap_R(r\bowtie  s))\times \{(null, \ldots)\}\cup\{(null,\ldots,null)\}\times (s-\cap_s(r\bowtie s))\)</span></p>
+</li>
+</ul>
+<p>相当于<span class="arithmatex">\(r⟗s=r \ltimes s \cup r \rtimes s\)</span></p>
+<h4 id="2474-semijoin-半连接">2.4.7.4 Semijoin 半连接<a class="headerlink" href="#2474-semijoin-半连接" title="Permanent link">&para;</a></h4>
+<p><span class="arithmatex">\(r\ltimes_\theta s\)</span>  Is a subset of r, in which every tuple<span class="arithmatex">\(r_i\)</span>matches at least one tuple<span class="arithmatex">\(s_i\)</span>in s under
+the condition<span class="arithmatex">\(\theta\)</span>.</p>
+<p>保留<span class="arithmatex">\(r\)</span>中能与<span class="arithmatex">\(s\)</span>相连的元组。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329669.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329669.png" alt="image-20240304232437288"  /></a>
+$$
+r \ltimes_{\theta} s = \prod_R(r \bowtie _{\theta} s)
+$$</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329733.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329733.png" ></a> </p>
+<h4 id="2475-division">2.4.7.5 Division<a class="headerlink" href="#2475-division" title="Permanent link">&para;</a></h4>
+<p>Given relations<span class="arithmatex">\(r(R)\)</span>and<span class="arithmatex">\(s(S)\)</span>, such that<span class="arithmatex">\(S \subset R\)</span>,<span class="arithmatex">\(r\div s\)</span>is the largest relation<span class="arithmatex">\(t(R-S)\)</span>such that<span class="arithmatex">\(t\times s \subsetneqq  r\)</span> </p>
+<p>We can write<span class="arithmatex">\(r\div s\)</span>as  </p>
+<div class="arithmatex">\[
+\begin{align*}
+    temp1 &amp; \leftarrow \Pi_{R-S}(r)\\
+    temp2 &amp; \leftarrow \Pi_{R-S}((temp1 \times s)- \Pi_{R-S,S}(r))\\
+    result &amp; = temp1 - temp2
+\end{align*}
+\]</div>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329730.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240305104028294" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329730.png" /></a>
+    <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403041322522.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403041322522.png" width = 40%/></a> </div> 
+    <div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202303072217774.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202303072217774.png" width = 50%/></a> </div> </p>
+<h3 id="248-extended-relational-algebra-operation">2.4.8 Extended Relational-Algebra-Operation<a class="headerlink" href="#248-extended-relational-algebra-operation" title="Permanent link">&para;</a></h3>
+<h4 id="2481-generalized-projection">2.4.8.1 Generalized Projection<a class="headerlink" href="#2481-generalized-projection" title="Permanent link">&para;</a></h4>
+<p>广义投影: 允许在投影列表使用<strong>算术函数</strong>来扩展投影操作
+$$
+\prod_{F_1, F_2,\cdots,F_n}(E)
+$$
+<a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329421.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240305104910914" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329421.png" /></a></p>
+<h4 id="2482-aggregate-functions-and-operations">2.4.8.2 Aggregate Functions and Operations<a class="headerlink" href="#2482-aggregate-functions-and-operations" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Aggregation function</strong>（聚合函数）takes a collection of values and returns a single value as a result.  </p>
+<ul>
+<li><em>avg</em>: average value</li>
+<li><em>min</em>: minimum value</li>
+<li><em>max</em>: maximum value</li>
+<li><em>sum</em>: sum of values</li>
+<li><em>count</em>: number of values</li>
+</ul>
+</li>
+<li>
+<p><strong>Aggregate operation</strong> in relational algebra<span class="arithmatex">\(G_1,G_2,\ldots,G_n \mathcal{G}_{F_1(A_1),\ldots F_n(A_n)}(E)\)</span>  </p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329419.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240305105004160" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329419.png" /></a></p>
+<p>-<span class="arithmatex">\(G_1,G_2,\cdots,G_n\)</span>是<strong>目标table的属性，可以为空，</strong>
+-<span class="arithmatex">\(F_i\)</span>是聚合函数，<span class="arithmatex">\(A_i\)</span>是属性名</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329636.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011329636.png" ></a></p>
+</li>
+</ul>
+<p>分组结果没有名字，可以用 rename 或者 as 进行改名。<br />
+<strong><em>e.g.</em></strong> <code>dept_name G_ {avg(salary) as avg_sal} (instructor)</code></p>
+<h3 id="249-multiset-relational-algebra">2.4.9 Multiset Relational Algebra<a class="headerlink" href="#249-multiset-relational-algebra" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在纯关系代数中，会删除all duplicates（project 投影）</li>
+<li>多重集关系代数会保留重复项<ul>
+<li>对于select： 如果元组符合要求，那么元组的重复次数于输入的重复次数相同（也就是全部输出）</li>
+<li>对于project：即使是重复项，仍然满足元组重复数和输入重复数相等</li>
+<li>对于笛卡尔积：<code>If there are m copies of t1 in r, and n copies of t2 in s, there are m x n copies of t1.t2 in r x s</code></li>
+<li>对于集合操作<ul>
+<li>union： m + n copies</li>
+<li>intersection： min{m，n}copies</li>
+<li>difference： min{0，m-n} copies</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>但实际数据库中并不是，而是一个多重集，允许有重复元素存在。  </p>
+<p>因为一些操作的中间结果会带来重复元素，要保持集合特性开销很大，因此实际操作中不会去重 。 </p>
+</blockquote>
+<h2 id="25-sql-and-relational-algebra">2.5 SQL and Relational Algebra<a class="headerlink" href="#25-sql-and-relational-algebra" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><code>select A1, A2, ... An from r1, r2, ... rm where P</code> is equivalent to<span class="arithmatex">\(\Pi_{A_1,\ldots, A_n}(\sigma_P(r_1\times r_2\ldots r_m))\)</span></p>
+</li>
+<li>
+<p><code>select A1, A2, sum(A3) from r1, r2, ... rm where P group by A1, A2</code> is equivalent to<span class="arithmatex">\(A_1, A_2 \mathcal{G} sum(A_3)(\sigma_P(r_1\times r_2\times\ldots r_m))\)</span> </p>
+</li>
+</ul>
+<p>这里按<span class="arithmatex">\(A_1,A_2\)</span>分组，那么结果的表中会有<span class="arithmatex">\(A_1,A_2,sum(A_3)\)</span>三列（分组依据+分组后的聚合结果），这里我们需要的就是这三列，所以分组即可。但是假设我们只需要<span class="arithmatex">\(A_1, sumA3\)</span>那么最后还需要投影。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
