@@ -1,8 +1,8 @@
 /* Highlight title settings. */
 
-h2::before, h3::before, h4::before {
+/* h2::before, h3::before, h4::before {
     content: "# ";
-}
+} */
 
 .md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4, .md-typeset h5 {
     font-weight: 600;
