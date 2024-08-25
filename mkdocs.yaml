@@ -112,6 +112,22 @@ nav:
           - ADS/13. Randomized Algorithms.md
           - ADS/14. Parallel Algorithm.md
           - ADS/15. External Sorting.md
+  - System:
+      - 数据库系统:
+          - DB/index.md
+          - DB/1. Introduction.md
+          - DB/2. Relational Model.md
+          - DB/3. SQL.md
+          - DB/6. Entity-Relationship Model.md
+          - DB/7. Relational Database Design.md
+          - DB/8. Physical Storage Systems.md
+          - DB/9. Data Storage Structures.md
+          - DB/10. Indexing.md
+          - DB/11. Query Processing.md
+          - DB/12. Query Optimization.md
+          - DB/13. Transaction.md
+          - DB/14. Concurrency Control.md
+          - DB/15. Recovery System.md
 
   - Artificial Intelligence:
       - Computer Vision:
