@@ -3,3 +3,8 @@
         - newpage:
             text: Artificial Intelligence > Computer Vision
             href: /CV
+
+    - "2024-8-26":
+        - newpage:
+            text: Systems > Database
+            href: /DB
