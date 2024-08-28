@@ -22,7 +22,7 @@
     
     
       
-        <title>十一. Query Processing - rescuerz's notebook</title>
+        <title>11. Query Processing - rescuerz's notebook</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#十一-query-processing" class="md-skip">
+        <a href="#11-query-processing" class="md-skip">
           跳转至
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              十一. Query Processing
+              11. Query Processing
             
           </span>
         </div>
@@ -1126,7 +1126,7 @@
         
   
   <span class="md-ellipsis">
-    六.Entity-Relationship Model
+    6. Entity-Relationship Model
   </span>
   
 
@@ -1147,7 +1147,7 @@
         
   
   <span class="md-ellipsis">
-    七. Relational Database Design
+    7. Relational Database Design
   </span>
   
 
@@ -1168,7 +1168,7 @@
         
   
   <span class="md-ellipsis">
-    八. Physical Storage Systems
+    8. Physical Storage Systems
   </span>
   
 
@@ -1189,7 +1189,7 @@
         
   
   <span class="md-ellipsis">
-    九. Data Storage Structures
+    9. Data Storage Structures
   </span>
   
 
@@ -1210,7 +1210,7 @@
         
   
   <span class="md-ellipsis">
-    十. Indexing
+    10. Indexing
   </span>
   
 
@@ -1240,7 +1240,7 @@
           
   
   <span class="md-ellipsis">
-    十一. Query Processing
+    11. Query Processing
   </span>
   
 
@@ -1251,7 +1251,7 @@
         
   
   <span class="md-ellipsis">
-    十一. Query Processing
+    11. Query Processing
   </span>
   
 
@@ -1523,7 +1523,7 @@
         
   
   <span class="md-ellipsis">
-    十二. Query Optimization
+    12. Query Optimization
   </span>
   
 
@@ -1544,7 +1544,7 @@
         
   
   <span class="md-ellipsis">
-    十三. Transactions
+    13. Transactions
   </span>
   
 
@@ -1565,7 +1565,7 @@
         
   
   <span class="md-ellipsis">
-    十四. Concurrency Control
+    14. Concurrency Control
   </span>
   
 
@@ -1586,7 +1586,7 @@
         
   
   <span class="md-ellipsis">
-    十五. Recovery System
+    15. Recovery System
   </span>
   
 
@@ -2221,25 +2221,29 @@
   
 
 
-<h1 id="十一-query-processing">十一. Query Processing<a class="headerlink" href="#十一-query-processing" title="Permanent link">&para;</a></h1>
+<h1 id="11-query-processing">11. Query Processing<a class="headerlink" href="#11-query-processing" title="Permanent link">&para;</a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 10046 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 50 分钟</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 10045 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 50 分钟</p>
 </div>
-<div class="highlight"><pre><span></span><code>    * Basic Steps in Query Processing
-    * Measures of Query Cost
-    * Selection Operation  
-    * Sorting 
-    * Join Operation 
-    * Other Operations
-    * Evaluation of Expressions
-</code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<ul>
+<li>Basic Steps in Query Processing</li>
+<li>Measures of Query Cost</li>
+<li>Selection Operation  </li>
+<li>Sorting </li>
+<li>Join Operation </li>
+<li>Other Operations</li>
+<li>Evaluation of Expressions</li>
+</ul>
+</div>
 <h2 id="111-basic-steps-in-query-processing">11.1 Basic Steps in Query Processing<a class="headerlink" href="#111-basic-steps-in-query-processing" title="Permanent link">&para;</a></h2>
 <div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305151000735.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305151000735.png" width = 60%/></a> </div>
 
 <ul>
 <li>
 <p>Parsing and translation <strong><code>语法检查</code></strong></p>
-</li>
+<ul>
 <li>
 <p>translate the query into its internal form. This is then translated into relational algebra.</p>
 <p>将查询转换为其内部形式。然后将其转换为关系代数。</p>
@@ -2250,18 +2254,22 @@
 <li>
 <p>解析器检查语法，验证关系</p>
 </li>
-<li>
-<p>Optimization</p>
+</ul>
 </li>
 <li>
-<p>Amongst all equivalent evaluation plans choose the one with lowest cost. </p>
+<p>Optimization</p>
+<ul>
+<li>Amongst all equivalent evaluation plans choose the one with lowest cost. </li>
+</ul>
 </li>
 <li>
 <p>Evaluation</p>
-</li>
+<ul>
 <li>
 <p>The query-execution engine takes a query-evaluation plan, executes that plan, and returns the answers to the query.</p>
 <p>查询执行引擎采用查询评估计划，执行该计划，并返回查询的答案。</p>
+</li>
+</ul>
 </li>
 </ul>
 <p>经过语法分析、语义检查翻译成关系表达式，经过查询优化转化成执行计划（目标代码），由求值引擎得到输出。</p>
@@ -2295,11 +2303,9 @@
 </ul>
 <p><strong><code>通常write所需的时间大于read的时间，因为执行write操作后需要重新读取数据确保写入没有问题（多了验证环节）</code></strong></p>
 <p>For simplicity we just use the number of <strong><em>block transfers</em></strong> from disk and the number of seeks as the cost measures。<strong><code>block transfer就表示block的read和write操作</code></strong></p>
-<ul>
-<li><span class="arithmatex">\(t_T\)</span> – time to transfer one block</li>
-<li><span class="arithmatex">\(t_S\)</span> – time for one seek</li>
-<li>Cost for b block transfers plus S seeks <span class="arithmatex">\(b * t_T + S * t_S\)</span> </li>
-</ul>
+<p><em><span class="arithmatex">\(t_T\)</span>– time to transfer one block
+</em><span class="arithmatex">\(t_S\)</span>– time for one seek
+* Cost for b block transfers plus S seeks<span class="arithmatex">\(b * t_T + S * t_S\)</span></p>
 <p><span class="arithmatex">\(t_T\)</span>和<span class="arithmatex">\(t_S\)</span>之间关系：seek花费的时间更长。在磁盘中，<span class="arithmatex">\(t_S / t_T \approx 40\)</span>,在固态硬盘中，<span class="arithmatex">\(t_S / t_T \approx 10\)</span>。因为seek寻道是机械运动，比传输花费的时间更多.</p>
 <blockquote>
 <p>约定：</p>
@@ -2309,30 +2315,33 @@
 </li>
 <li>
 <p>衡量算法的代价，存在硬件条件的差异，假设内存足够大，可以把整个数据库都装到内存中，那么就只需要一次磁盘的seek操作，然后全部读进内存中就好。但在实际中，<strong>我们考虑的是最坏的情况</strong>，可用的缓冲区实际内存量取决于其他并发查询和操作系统进程，只有在执行过程中我们才知道有多少缓冲区的大小可以用。</p>
-</li>
-</ol>
 <p><strong>因此最坏情况估计，按照操作最少需要的buffer数量进行计算</strong>。（例如，关系R和S的join，最少需要3个buffer，一个存放R的数据，一个存放S，剩下一个放结果）</p>
-<ol>
-<li><strong>并且，我们假设所有需要的数据都必须在磁盘中去读，并没有在内存（缓冲区）中命中。</strong></li>
+</li>
+<li>
+<p><strong>并且，我们假设所有需要的数据都必须在磁盘中去读，并没有在内存（缓冲区）中命中。</strong></p>
+</li>
 </ol>
 </blockquote>
 <h2 id="113-selection-operation">11.3 Selection Operation<a class="headerlink" href="#113-selection-operation" title="Permanent link">&para;</a></h2>
 <h3 id="1131-file-scan">11.3.1 File scan<a class="headerlink" href="#1131-file-scan" title="Permanent link">&para;</a></h3>
 <p>Algorithm <strong><em>A1 (linear search</em></strong>). Scan each file block and test all records to see whether they satisfy the selection condition.  <strong>（<code>假定数据块都是连续存放的</code>）</strong></p>
 <ul>
-<li>worst cost = <span class="arithmatex">\(b_r*t_T+t_S\)</span>  </li>
+<li>worst cost =<span class="arithmatex">\(b_r*t_T+t_S\)</span> </li>
 </ul>
-<p><span class="arithmatex">\(b_r\)</span> denotes number of blocks containing records from relation r</p>
-<p>只需要进行一次seek，相应的有关的block都需要进行read</p>
+<p><span class="arithmatex">\(b_r\)</span>denotes number of blocks containing records from relation r</p>
+<div class="highlight"><pre><span></span><code>只需要进行一次seek，相应的有关的block都需要进行read
+</code></pre></div>
 <ul>
-<li>average cost = <span class="arithmatex">\(b_r/2*t_T+t_S\)</span>  </li>
-</ul>
+<li>
+<p>average cost =<span class="arithmatex">\(b_r/2*t_T+t_S\)</span> </p>
 <p>这里如果搜索的是 key attribute（每一个数值都唯一）, 那我们扫到这个记录就可以停止。</p>
+</li>
+</ul>
 <h3 id="1132-index-scan">11.3.2 Index scan<a class="headerlink" href="#1132-index-scan" title="Permanent link">&para;</a></h3>
 <p><strong>Index scan –</strong> <code>search algorithms that use an index。selection condition must be on search-key of index.</code></p>
 <p><strong><em>A2 (primary B+-tree index / clustering B+-tree index, equality on key)</em></strong>. </p>
 <p>主B+树索引/聚类B+树索引，在主键上等值查找</p>
-<p>cost = <span class="arithmatex">\((h_i+1)* (t_T+t_S)\)</span>。</p>
+<p>cost =<span class="arithmatex">\((h_i+1)* (t_T+t_S)\)</span>。</p>
 <blockquote>
 <p>B+树的每一个结点就是一个block，并且每一个block在磁盘中是不连续分布的。因此对于B+树上的结点，都需要进行一次seek+transfer。</p>
 <p>这里的高度从 1 开始（+1 表示最后到叶子节点，指针指向最终数据，需要从磁盘中读）</p>
@@ -2344,7 +2353,7 @@
 <p><strong><code>此时索引的值不是主键. 可能存在多条record，在最后一次，从叶子结点出发找到最终结果的过程中，会引发传输的block数发生变化</code></strong>。</p>
 <p>Records will be on consecutive blocks  （<strong>此为seek数保持为1的前提</strong>）</p>
 <p>b表示，匹配的记录所占块的个数。下方的例子中，<strong>文件中的块已经按照查询的条件排好序，连续存放，而匹配的记录一共四条，占用两个块</strong>，因此b = 2。</p>
-<p>cost = <span class="arithmatex">\(h_i *(t_T+t_S) + t_S + t_T *b\)</span></p>
+<p>cost =<span class="arithmatex">\(h_i *(t_T+t_S) + t_S + t_T *b\)</span></p>
 <blockquote>
 <p>Example "主索引, nonkey 上的等值查找"</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405061354188.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240506135436591" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405061354188.png" /></a></p>
@@ -2352,7 +2361,7 @@
 <p><strong><em>A4 (secondary B+-tree index , equality on key)</em></strong>.    </p>
 <p><strong><code>辅助索引和主索引相比，主索引要求文件的存储排序根据的属性和index建立根据的属性相同，辅助索引并无这个要求。用一个例子表示辅助索引B+数，equality on key，我们要查找的是key是学号，但是文件存储上，是按照dept_name进行排序的</code></strong></p>
 <p>但是，如果此时是Key上相等，而由于Key对应的记录是唯一的，因此，查找Key时，辅助索引与主索引是没有区别的。</p>
-<p>cost = <span class="arithmatex">\((h_i + 1) * (t_T + t_S)\)</span></p>
+<p>cost =<span class="arithmatex">\((h_i + 1) * (t_T + t_S)\)</span></p>
 <blockquote>
 <p>Example "辅助索引, key 上的等值查找"</p>
 <p><center>
@@ -2361,11 +2370,11 @@
 </blockquote>
 <p><strong><em>A4’ (secondary B+-index on nonkey, equality).</em></strong></p>
 <p>此时是辅助索引，并且搜索的还是非key，说明我们搜索的record在文件既不是排好序的，也不是唯一的。</p>
-<p>Cost = $(h_i + m+ n) * (t_T + t_S) $  </p>
+<p>Cost =<span class="arithmatex">\((h_i + m+ n) * (t_T + t_S)\)</span> </p>
 <p>这里 m 表示放指针的块的数量, n 表示对应磁盘里的记录所在的块的数量。</p>
 <p>我们按照搜索条件，搜索到一些符合条件的、放着指针的block。假设放指向实际数据记录的指针的block有m个，并且实际的数据都分散在不同的block中，一共存在于n个块中。</p>
 <p><span class="arithmatex">\(h_i(t_T+t_S)\)</span>不变，一直找到leaf。接下来搜索m个放置实际记录指针的数据块，对这m个block需要个进行一次seek和transfer（分散的block），知道指针后，对记录进行查找，所有的记录分散在n个block中，那么就需要<span class="arithmatex">\(n(t_T+t_S)\)</span></p>
-<p>所以最终结果为Cost = $(h_i + m+ n) * (t_T + t_S) $  </p>
+<p>所以最终结果为Cost =<span class="arithmatex">\((h_i + m+ n) * (t_T + t_S)\)</span> </p>
 <blockquote>
 <p>Example "辅助索引, nonkey 上的等值查找"</p>
 <p><div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405061327395.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405061327395.png" width = 60%/></a> </div></p>
@@ -2374,12 +2383,12 @@
 <blockquote>
 <p><strong>涉及到比较的查询</strong></p>
 </blockquote>
-<p>查询 <span class="arithmatex">\(\sigma_{A\leq V}(r)\)</span> (or <span class="arithmatex">\(\sigma_{A\geq V}(r)\)</span>)</p>
+<p>查询<span class="arithmatex">\(\sigma_{A\leq V}(r)\)</span>(or<span class="arithmatex">\(\sigma_{A\geq V}(r)\)</span>)</p>
 <p><strong><em>A5 (primary B+-index / clustering B+-index index, comparison). (Relation is sorted on A)</em></strong>  </p>
 <ul>
 <li><strong>查找该属性大于等于A的记录</strong>，可以在B+树中找到大于等于A的第一个块，然后对剩下的进行连续的扫描。<strong>（因为这个属性在文件中是主索引，因此是记录是按照该属性排好序连续存放的）</strong></li>
 <li><strong><code>需要进行树高次读写头重定位操作与块传输操作，与一次读写头重定位操作找到大于等于A的第一个块，然后b次块传输操作，进行连续的扫描。</code></strong></li>
-<li>Cost = <span class="arithmatex">\(h_i * (t_T + t_S) + t_S + t_T * b\)</span> (同情况 3 primary b+ tree，nonkey)</li>
+<li>Cost =<span class="arithmatex">\(h_i * (t_T + t_S) + t_S + t_T * b\)</span>(同情况 3 primary b+ tree，nonkey)</li>
 </ul>
 <blockquote>
 <p>对于查找该属性小于A的记录，不需要利用B+树索引，只需要对放置记录的文件，从头开始扫描，直到第一个该属性大于等于A的记录。</p>
@@ -2393,7 +2402,7 @@
 <ol>
 <li>查找第一个属性大于等于A的记录。使用索引找到第一个大于等于A的记录的叶结点，<strong>接下来一次的该叶结点右侧的叶结点进行扫描，这样就能得到所有的符合条件的、放着指针的block</strong></li>
 <li>然后类比A4，只需要知道放着指针的block的数量m，和符合条件的记录分在block的块数m即可</li>
-<li>Cost = $(h_i + m+ n) * (t_T + t_S) $  </li>
+<li>Cost =<span class="arithmatex">\((h_i + m+ n) * (t_T + t_S)\)</span> </li>
 </ol>
 <blockquote>
 <p>查找该属性小于A的记录，直接从头开始扫描该属性的B+树的叶结点，直到第一个该属性大于等于A的地方，找到这之间的所有的指向记录的指针</p>
@@ -2404,18 +2413,18 @@
 </center></p>
 </blockquote>
 <h3 id="1134-implementation-of-complex-selectionsand">11.3.4 Implementation of Complex Selections（AND）<a class="headerlink" href="#1134-implementation-of-complex-selectionsand" title="Permanent link">&para;</a></h3>
-<p>Conjunction <span class="arithmatex">\(\sigma_{\theta_1} \wedge \ldots \wedge_{\theta_n}(r)\)</span>  </p>
+<p>Conjunction<span class="arithmatex">\(\sigma_{\theta_1} \wedge \ldots \wedge_{\theta_n}(r)\)</span> </p>
 <p>可以线性扫描，或者利用某个属性的 index 先查询，把符合的读到内存中，再检查其他属性。  如果有很多个属性都有索引，我们选择中间结果少的。</p>
 <p><strong><em>A7 (conjunctive selection using one index).</em></strong>  </p>
 <ul>
 <li>
-<p>Select a combination of <span class="arithmatex">\(\theta_i\)</span> and algorithms A1 through A6 that results in the least cost for <span class="arithmatex">\(\sigma_{\theta_i}(r)\)</span>.</p>
+<p>Select a combination of<span class="arithmatex">\(\theta_i\)</span>and algorithms A1 through A6 that results in the least cost for<span class="arithmatex">\(\sigma_{\theta_i}(r)\)</span>.</p>
 </li>
 <li>
 <p>Test other conditions on tuple after fetching it into memory buffer.</p>
+<p>把这个限制条件选择后的这些记录读取到内存（buffer）中去，然后在内存中去测试其他条件。</p>
 </li>
 </ul>
-<p>把这个限制条件选择后的这些记录读取到内存（buffer）中去，然后在内存中去测试其他条件。</p>
 <blockquote>
 <p>先对其中一个选择条件进行选择，要求能够过滤尽可能多的记录。</p>
 </blockquote>
@@ -2426,21 +2435,28 @@
 <p>对每个索引都进行查询，将结果拼起来（取交集）</p>
 <h3 id="1135-algorithms-for-complex-selectionsor">11.3.5 Algorithms for Complex Selections（OR）<a class="headerlink" href="#1135-algorithms-for-complex-selectionsor" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Disjunction: <span class="arithmatex">\(\sigma_{\theta_1} \vee \ldots \vee_{\theta_n}(r)\)</span>  </li>
-</ul>
+<li>
+<p>Disjunction:<span class="arithmatex">\(\sigma_{\theta_1} \vee \ldots \vee_{\theta_n}(r)\)</span> </p>
 <p><strong><em>A10 (disjunctive selection by union of identifiers).</em></strong> </p>
-<div class="highlight"><pre><span></span><code>* Applicable if all conditions have available indices.  
-* Otherwise use linear scan.
-* Use corresponding index for each condition, and take union of all the obtained sets of record pointers. 
-* Then fetch records from file
-* &gt; 请确保所有限制条件对应的属性，都有建立相应的索引，否则，要利用线性扫描来进行上述查询。
-  &gt;
-  &gt; 对每一个条件，都利用前面说到的A1到A6算法，找到相应符合的记录集合，然后再取并集。
-</code></pre></div>
 <ul>
-<li>Negation: <span class="arithmatex">\(\sigma_{\neg \theta}(r)\)</span><ul>
+<li>Applicable if all conditions have available indices.  </li>
+<li>Otherwise use linear scan.</li>
+<li>Use corresponding index for each condition, and take union of all the obtained sets of record pointers. </li>
+<li>Then fetch records from file</li>
+<li>
+<blockquote>
+<p>请确保所有限制条件对应的属性，都有建立相应的索引，否则，要利用线性扫描来进行上述查询。</p>
+<div class="highlight"><pre><span></span><code>&gt; 对每一个条件，都利用前面说到的A1到A6算法，找到相应符合的记录集合，然后再取并集。
+</code></pre></div>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>Negation:<span class="arithmatex">\(\sigma_{\neg \theta}(r)\)</span></p>
+<ul>
 <li>Use linear scan on file   </li>
-<li>If very few records satisfy <span class="arithmatex">\(\neg \theta\)</span>, and an index is applicable to <span class="arithmatex">\(\theta\)</span> 
+<li>If very few records satisfy<span class="arithmatex">\(\neg \theta\)</span>, and an index is applicable to<span class="arithmatex">\(\theta\)</span>
 Find satisfying records using index and fetch from file</li>
 </ul>
 </li>
@@ -2461,24 +2477,27 @@ Find satisfying records using index and fetch from file</li>
     <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405061327336.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405061327336.png" width = 60%/></a> </div>
 </center></p>
 </blockquote>
-<p>初始内存放不下，只能放 <span class="arithmatex">\(M\)</span> pages. 一次性读 <span class="arithmatex">\(M\)</span> 块，在内存内排序，排好后先写回，形成一个归并段。再读入第二段到内存中，排序后再写回，得到若干归并段(<span class="arithmatex">\(\dfrac{b_r}{M}\)</span>) 会有 <span class="arithmatex">\(2*\dfrac{b_r}{M}\)</span> 次 seek, <span class="arithmatex">\(2*b_r\)</span> 次 transfer. </p>
+<p>初始内存放不下，只能放<span class="arithmatex">\(M\)</span>pages. 一次性读<span class="arithmatex">\(M\)</span>块，在内存内排序，排好后先写回，形成一个归并段。再读入第二段到内存中，排序后再写回，得到若干归并段(<span class="arithmatex">\(\dfrac{b_r}{M}\)</span>) 会有<span class="arithmatex">\(2*\dfrac{b_r}{M}\)</span>次 seek,<span class="arithmatex">\(2*b_r\)</span>次 transfer. </p>
 <blockquote>
 <p>首先假设存储这个关系的文件一共有<span class="arithmatex">\(b_r\)</span>个block，但是内存一次最多放入m块。因此我们要将<span class="arithmatex">\(b_r\)</span>个块分成<span class="arithmatex">\(\lceil \dfrac{b_r}{m} \rceil\)</span>个段，每一段都最多m块，然后一段一段地放进内存中进行排序。<strong><code>在这一过程中，文件中每一个block都会进入到内存中一次。接下来，在内存中完成内部排序后，每一个block又会写出来一次。</code></strong>因此block transfer的次数为<span class="arithmatex">\(2 * b_r\)</span></p>
 <p>接下来是磁盘读写头的重定向操作。<strong><code>将所有的block分成$\lceil \dfrac{b_r}{m} \rceil$后，需要读入到内存中，此时每一段需要一次磁盘读写头重定向操作。因为每次把一段放入内存中排好序后，需要重新定位到下一个段。</code></strong>对于每一段，在内存中排好序之后需要写出来，所以seek的总次数为<span class="arithmatex">\(2\lceil \dfrac{b_r}{m} \rceil\)</span></p>
 </blockquote>
 <h3 id="1141-procedure">11.4.1 Procedure<a class="headerlink" href="#1141-procedure" title="Permanent link">&para;</a></h3>
-<p>Let <span class="arithmatex">\(M\)</span> denote memory size (in pages). </p>
+<p>Let<span class="arithmatex">\(M\)</span>denote memory size (in pages). </p>
 <ul>
-<li><strong>Create sorted runs(归并段)</strong>  </li>
-</ul>
+<li>
+<p><strong>Create sorted runs(归并段)</strong>  </p>
 <p>Repeatedly do the following till the end of the relation:</p>
-<div class="highlight"><pre><span></span><code>* Read M blocks of relation into memory     
-* Sort the in-memory blocks
-* Write sorted data to run $R_i$; increment i.
-* 假设生成了 $N$ 个归并段
-</code></pre></div>
 <ul>
-<li><strong>Merge the runs</strong>  </li>
+<li>Read M blocks of relation into memory     </li>
+<li>Sort the in-memory blocks</li>
+<li>Write sorted data to run<span class="arithmatex">\(R_i\)</span>; increment i.</li>
+<li>假设生成了<span class="arithmatex">\(N\)</span>个归并段</li>
+</ul>
+</li>
+<li>
+<p><strong>Merge the runs</strong>  </p>
+</li>
 </ul>
 <blockquote>
 <ol>
@@ -2487,15 +2506,13 @@ Find satisfying records using index and fetch from file</li>
 </blockquote>
 <p>假设生成的小的归并段的数量是N，内存中最大块的数量是M，假设<span class="arithmatex">\(N &lt;= M-1\)</span>,<strong><code>那么只需要单次合并，就可以解决。</code></strong></p>
 <p>此时<strong>在内存中使用N个块作为输入缓冲区，使用一个块作为输出缓冲块。</strong></p>
-<p>最初，将每一个归并段的第一个块（即属性值最小的块）放入内存中（一共N个，<span class="arithmatex">\(<span class="arithmatex">\(N = \lceil \dfrac{b_r}{m} \rceil\)</span>\)</span> ）,在内存中保留一个块作为输出缓冲块。然后进行归并，把归并的结果写到输出缓冲块中。一旦某<strong>一条记录</strong>被归并掉，那么这条记录就会从它所属的内存的那个输入缓冲块中删除。如果内存中某个<strong>输入缓冲块</strong>的内容被删除空了，那么就将<strong>对应的归并段</strong>的<strong>下一个块</strong>拿上来。</p>
+<p>最初，将每一个归并段的第一个块（即属性值最小的块）放入内存中（一共N个，<span class="arithmatex">\(<span class="arithmatex">\(N = \lceil \dfrac{b_r}{m} \rceil\)</span>\)</span>）,在内存中保留一个块作为输出缓冲块。然后进行归并，把归并的结果写到输出缓冲块中。一旦某<strong>一条记录</strong>被归并掉，那么这条记录就会从它所属的内存的那个输入缓冲块中删除。如果内存中某个<strong>输入缓冲块</strong>的内容被删除空了，那么就将<strong>对应的归并段</strong>的<strong>下一个块</strong>拿上来。</p>
 <p>对于<strong>输出缓冲块</strong>，每当它被写满了，就将其写出来，写到磁盘中。</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405102347096.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240510234740971" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405102347096.png" /></a></p>
 <p>例如：上图中，生成了两个归并段，其中每一个段都有4块。<strong>这说明内存中最多存放4个block，这个关系一共有8个block</strong></p>
 <p>由于<span class="arithmatex">\(2 &lt; 4(N &lt; M)\)</span>,所以一次归并就可以解决问题。首先将两个归并段的第一个块放入到内存中（输入缓冲块buffer），（1，3，5）（2，4，6）。现在输出缓冲块中先写入1，对应的删除（1，3，5）的1。直到输出缓冲块写满，当下一个元素4写入时，需要先把输出缓冲块中的内容写道磁盘中。接着，输出缓冲块要写入5，此时有一个<strong>输入缓冲块</strong>变空了。这个<strong>输入缓冲块</strong>的内容就要被(7,9,11)来代替。</p>
 <blockquote>
-<ol>
-<li><strong>归并段的数量大于等于内存最大容量的块数</strong></li>
-</ol>
+<p>2.<strong>归并段的数量大于等于内存最大容量的块数</strong></p>
 </blockquote>
 <p>需要多轮次的合并。在每一个轮次中，<strong>M-1个归并段被归并起来</strong>。</p>
 <p>例如，假设M为11，原本有90个归并段。那么每次放入10个归并段，合为1个。最后会产生9个较大的归并段。将这9个较大的归并段放入内存中，再进行一次归并，就会最终得到一个归并结果。（<strong><code>为什么能够将较大的归并段放入内存中呢？本质上还是可以理解为，每一次都是将归并段的第一个block写入到输入缓冲快中，后面的block不会占内存能容纳的块数，不产生影响</code></strong>）</p>
@@ -2513,9 +2530,9 @@ Find satisfying records using index and fetch from file</li>
 </li>
 <li>
 <p><strong><code>在生成初始归并段的时候，就需要2br次的传输和2*br/m次的seek。然后最后一轮我们忽略将生成的归并结果写入到磁盘的开销。（因为可能流水线会直接把结果交给下一步操作）</code></strong>
-  $$
+ $$
   total  number  = 2 b_r + \lceil log_{m-1}\dfrac{b_r}{m}\rceil \times 2b_r - b_r =  b_r + 2b_r\lceil log_{m-1}(b_r/m)\rceil
-  $$</p>
+ $$</p>
 </li>
 </ul>
 <blockquote>
@@ -2524,19 +2541,21 @@ Find satisfying records using index and fetch from file</li>
 <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111130649.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111130649.png" width = 60%/></a> </div>
 
 <ul>
-<li><strong>生成归并段的阶段（将归并段内部排好序）</strong>：<strong>需要一次seek读取每一个归并段</strong>，由于归并段是由连续的block组成，只需要进行一次seek，后续顺序查找即可，全部读入到输入缓冲快中，<strong>排好序后，写回时需要一次seek</strong>，后续顺序填补即可</li>
-</ul>
+<li>
+<p><strong>生成归并段的阶段（将归并段内部排好序）</strong>：<strong>需要一次seek读取每一个归并段</strong>，由于归并段是由连续的block组成，只需要进行一次seek，后续顺序查找即可，全部读入到输入缓冲快中，<strong>排好序后，写回时需要一次seek</strong>，后续顺序填补即可</p>
 <p>对于一个归并段需要两次seek，那么总数为<span class="arithmatex">\(2\lceil b_r/m \rceil\)</span>, <code>2 * the number of runs</code></p>
-<ul>
-<li><strong>merger阶段</strong>：在对初始的归并段进行归并操作的每一轮，<strong>每一个块的读写，都需要一个单独的读写头重定位seek</strong>，<strong><code>这是因为读写操作是不知道顺序，你根本不知道哪个块的记录会被率先删除完</code></strong>，<strong>输出缓冲块写回磁盘的时候也需要重定向一次</strong>，<strong><code>因为可以原本的读写头还在输入的归并段那里</code></strong>。所以每一轮seek操作的次数是<span class="arithmatex">\(2b_r\)</span></li>
-</ul>
+</li>
+<li>
+<p><strong>merger阶段</strong>：在对初始的归并段进行归并操作的每一轮，<strong>每一个块的读写，都需要一个单独的读写头重定位seek</strong>，<strong><code>这是因为读写操作是不知道顺序，你根本不知道哪个块的记录会被率先删除完</code></strong>，<strong>输出缓冲块写回磁盘的时候也需要重定向一次</strong>，<strong><code>因为可以原本的读写头还在输入的归并段那里</code></strong>。所以每一轮seek操作的次数是<span class="arithmatex">\(2b_r\)</span></p>
 <p><mark>需要注意的是，最后一轮生成的归并结果不写回到磁盘中，所以少了br次seek操作</mark>
-  $$
+ $$
   \begin{aligned}
   total  number &amp;= 2\lceil b_r/m \rceil + \lceil log_{m-1}\dfrac{b_r}{m}\rceil \times 2b_r - b_r \
   &amp;= 2\lceil b_r/m \rceil + b_r(2\lceil log_{m-1}(b_r/m)\rceil - 1 )
   \end{aligned}
-  $$</p>
+ $$</p>
+</li>
+</ul>
 <h3 id="1143-advanced-version">11.4.3 Advanced version<a class="headerlink" href="#1143-advanced-version" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><strong>每一次读进去都要 seek, 可以改进。为每一个归并段分配多个输入缓冲块。这样我们定位一次之后可以读入多块进入输入缓冲区。</strong>  </p>
@@ -2560,14 +2579,16 @@ $$</p>
 </blockquote>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111404614.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240511140441573" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111404614.png" /></a></p>
 <ul>
-<li><strong>生成归并段的阶段（将归并段内部排好序）</strong>：<strong>需要一次seek读取每一个归并段</strong>，由于归并段是由连续的block组成，只需要进行一次seek，后续顺序查找即可，全部读入到输入缓冲快中，<strong>排好序后，写回时需要一次seek</strong>，后续顺序填补即可。</li>
-</ul>
+<li>
+<p><strong>生成归并段的阶段（将归并段内部排好序）</strong>：<strong>需要一次seek读取每一个归并段</strong>，由于归并段是由连续的block组成，只需要进行一次seek，后续顺序查找即可，全部读入到输入缓冲快中，<strong>排好序后，写回时需要一次seek</strong>，后续顺序填补即可。</p>
 <p><strong><code>保持不变，次数仍为 2*br/m</code></strong></p>
-<ul>
-<li><strong>归并阶段：由于一次读写头的重定向将读取<span class="arithmatex">\(b_b\)</span>个block，所以seek的次数将为减少，转化为<span class="arithmatex">\(2\lceil b_r/b_b \rceil\)</span></strong>.那么总的block seek的次数变为
-  $$
+</li>
+<li>
+<p><strong>归并阶段：由于一次读写头的重定向将读取<span class="arithmatex">\(b_b\)</span>个block，所以seek的次数将为减少，转化为<span class="arithmatex">\(2\lceil b_r/b_b \rceil\)</span></strong>.那么总的block seek的次数变为
+ $$
   2\lceil b_r/m \rceil + [b_r/b_b]\lceil (2log_{\lfloor{m}/{b_b}\rfloor -1}(b_r / m)\rceil - 1)
-  $$</li>
+ $$</p>
+</li>
 </ul>
 <blockquote>
 <p><strong><span class="arithmatex">\(b_b\)</span></strong> <strong>的增加，虽然会减少每一轮运行时的读写头重定位次数，从br次到br/bb次，但是会增加轮数，因此还会增加数据传输的次数。<code>本质是同block transfer时间较短的操作选项弥补时间较长的block seek</code></strong></p>
@@ -2586,9 +2607,7 @@ $$</p>
 
 <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111408139.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111408139.png" width = 60%/></a> </div>
 
-<ul>
-<li><span class="arithmatex">\(r\)</span> is called the <strong>outer relation</strong>外循环，对应的块数是<span class="arithmatex">\(b_r\)</span>，and <span class="arithmatex">\(s\)</span> the <strong>inner relation</strong> of the join.内循环，对应的块数是<span class="arithmatex">\(b_s\)</span>  </li>
-</ul>
+<p><em><span class="arithmatex">\(r\)</span>is called the </em><em>outer relation</em><em>外循环，对应的块数是<span class="arithmatex">\(b_r\)</span>，and<span class="arithmatex">\(s\)</span>the </em><em>inner relation</em>* of the join.内循环，对应的块数是<span class="arithmatex">\(b_s\)</span> </p>
 <blockquote>
 <p><strong>block transfer</strong></p>
 </blockquote>
@@ -2661,15 +2680,17 @@ $$</p>
 $$
 total  number of seek = 2\lceil b_r / (m-2) \rceil
 $$
-<strong>Cost = <span class="arithmatex">\(\lceil b_r  / (M-2) \rceil * b_s + b_r\)</span> block transfers + <span class="arithmatex">\(2 \lceil b_r  / (M-2)\rceil\)</span> seeks</strong></p>
+<strong>Cost =<span class="arithmatex">\(\lceil b_r  / (M-2) \rceil * b_s + b_r\)</span>block transfers +<span class="arithmatex">\(2 \lceil b_r  / (M-2)\rceil\)</span>seeks</strong></p>
 <ul>
-<li>If equi-join attribute forms a key on the inner relation, stop inner loop on first match  </li>
-</ul>
+<li>
+<p>If equi-join attribute forms a key on the inner relation, stop inner loop on first match  </p>
 <p>如果连接的属性是 key, 那么当我们匹配上之后就可以停止内循环。</p>
-<ul>
-<li>Scan inner loop forward and backward alternately, to make use of the blocks remaining in buffer (with LRU replacement)  </li>
-</ul>
+</li>
+<li>
+<p>Scan inner loop forward and backward alternately, to make use of the blocks remaining in buffer (with LRU replacement)  </p>
 <p>利用 LRU 策略的特点，inner 正向扫描后再反过来，这样最近的块很可能还在内存中，提高缓冲命中率。</p>
+</li>
+</ul>
 <h3 id="1153-indexed-nested-loop-join">11.5.3 Indexed Nested-Loop Join<a class="headerlink" href="#1153-indexed-nested-loop-join" title="Permanent link">&para;</a></h3>
 <p><strong>需要连接的属性上，内循环关系针对该属性有一个B+树索引。那么，就没必要每次去遍历内循环的每一个元组。我们只要根据外循环该条记录对应的属性值，在内循环的B+树索引中查找即可。</strong></p>
 <p>Index lookups can replace file scans if</p>
@@ -2679,18 +2700,22 @@ $$
 </li>
 <li>
 <p>an index is available on the inner relation’s join attribute  </p>
+<p>连接属性有索引</p>
 </li>
 </ul>
-<p>连接属性有索引</p>
 <blockquote>
 <p><strong>假设外关系在内存中分配一个输入缓冲区</strong></p>
 </blockquote>
 <ol>
-<li><strong><code>block transfer</code></strong></li>
+<li><strong><code>block transfer</code></strong><ul>
 <li>对于外关系，每一个块都会传输进入内存中，因此需要这需要<span class="arithmatex">\(b_r\)</span>次Transfer操作。</li>
 <li><strong>对于内关系，不用将它读入内存中，直接利用B+树查找即可。内关系不需要传输操作。</strong></li>
-<li><strong><code>block seek</code></strong></li>
+</ul>
+</li>
+<li><strong><code>block seek</code></strong><ul>
 <li>对于外关系，每一次退出内循环，接着外循环进行时，都要进行一次读写头重定位。因此，需要<span class="arithmatex">\(b_r\)</span>次Seek操作。</li>
+</ul>
+</li>
 </ol>
 <blockquote>
 <p><strong>假设外关系在内存中分配M-2个输入缓冲块</strong></p>
@@ -2698,20 +2723,20 @@ $$
 <ol>
 <li>
 <p><strong><code>block transfer</code></strong></p>
-</li>
-<li>
-<p>对于外关系，每一个块都会传输进入内存中，因此需要<span class="arithmatex">\(b_r\)</span>次Transfer操作。</p>
+<ul>
+<li>对于外关系，每一个块都会传输进入内存中，因此需要<span class="arithmatex">\(b_r\)</span>次Transfer操作。</li>
+</ul>
 </li>
 <li>
 <p><strong><code>block seek</code></strong></p>
-</li>
-<li>
-<p>对于外关系，每一次退出内循环，接着外循环进行时，都要进行一次读写头重定位，因此，读写头重定位的次数与循环的轮数相等。</p>
+<ul>
+<li>对于外关系，每一次退出内循环，接着外循环进行时，都要进行一次读写头重定位，因此，读写头重定位的次数与循环的轮数相等。</li>
+</ul>
 <p>因此需要<strong><span class="arithmatex">\(\lceil br/M-2 \rceil\)</span></strong>次Seek操作。</p>
 </li>
 </ol>
-<p>这里假定给外关系一块内存. <span class="arithmatex">\(c\)</span> 表示遍历索引并取出所有匹配的元组的时间。</p>
-<p>Cost of the join: <span class="arithmatex">\(b_r (t_T + t_S) + n_r * c\)</span>  </p>
+<p>这里假定给外关系一块内存.<span class="arithmatex">\(c\)</span>表示遍历索引并取出所有匹配的元组的时间。</p>
+<p>Cost of the join:<span class="arithmatex">\(b_r (t_T + t_S) + n_r * c\)</span> </p>
 <p><strong><code>因此选择具有较少record的关系作为外循环</code></strong></p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111507740.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240511150734661" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111507740.png" /></a></p>
 <blockquote>
@@ -2740,24 +2765,26 @@ $$
 <p><strong>假设每一个关系，在内存中只分配一个输入缓冲块</strong></p>
 </blockquote>
 <ol>
-<li><strong><code>block transfer</code></strong></li>
-</ol>
+<li>
+<p><strong><code>block transfer</code></strong></p>
 <p>由于两个关系的每一个块一定会进入内存一次，因此，代价为<span class="arithmatex">\(b_r+b_s\)</span>。</p>
-<ol>
-<li><strong><code>block seek</code></strong></li>
-</ol>
+</li>
+<li>
+<p><strong><code>block seek</code></strong></p>
 <p>Merge操作中，<strong><code>两个关系中的块进入内存的顺序是不固定的，因此，最坏情况每一个块进去内存都要进行读写头重定位</code></strong>。因此代价为<span class="arithmatex">\(b_r+b_s\)</span>。</p>
+</li>
+</ol>
 <blockquote>
 <p><strong>假设每一个关系，在内存中分配<span class="arithmatex">\(b_b\)</span>个输入缓冲区</strong></p>
 </blockquote>
-<p><span class="arithmatex">\(b_r + b_s\)</span> block transfers + <span class="arithmatex">\(\lceil b_r / b_b\rceil + \lceil b_s / b_b\rceil\)</span> seeks  </p>
+<p><span class="arithmatex">\(b_r + b_s\)</span>block transfers +<span class="arithmatex">\(\lceil b_r / b_b\rceil + \lceil b_s / b_b\rceil\)</span>seeks  </p>
 <div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305241940953.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305241940953.png" width = 60%/></a> </div>
 
 <blockquote>
 <p><strong>If the buffer memory size is M pages, in order to minimize the cost of merge join, how to assign M blocks to r and s respectively?</strong> </p>
 <p><strong>假设内存上限为M块，怎么分配输入缓冲区的块数（s关系分配k块，r关系分配M-k块），从而使得Seek的代价最少？</strong></p>
 </blockquote>
-<p>The estimated cost is <span class="arithmatex">\(b_r + b_s\)</span> block transfers + <span class="arithmatex">\(\lceil b_r / x_r\rceil + \lceil b_s / x_s\rceil\)</span> seeks (<span class="arithmatex">\(x_r+x_s=M\)</span>)  </p>
+<p>The estimated cost is<span class="arithmatex">\(b_r + b_s\)</span>block transfers +<span class="arithmatex">\(\lceil b_r / x_r\rceil + \lceil b_s / x_s\rceil\)</span>seeks (<span class="arithmatex">\(x_r+x_s=M\)</span>)  </p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111516658.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240511151603604" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111516658.png" /></a></p>
 <p>如果两个表都无序，我们可以先排序再 Merge-join, 这时还要算上排序的代价。</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111645099.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240511164537044" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405111645099.png" /></a></p>
@@ -2795,11 +2822,13 @@ n \geq \lceil b_s/m \rceil
 <p><strong>还有问题：假如表S很大，M相对来说很小。此时利用hash函数，将关系s进行分片，分的片数就需要很多。那么假如内存不够大，一次无法分配出来这么多的分片，应当如何处理？</strong></p>
 </blockquote>
 <ul>
-<li>首先理解，为什么内存不够大，就无法一次分配这么多的分片？</li>
-</ul>
+<li>
+<p>首先理解，为什么内存不够大，就无法一次分配这么多的分片？</p>
 <p><strong><code>这是因为假如我们把关系s分为N个分片，那么每一个分片在内存中都要具有一个block大小的输入缓冲区。第i个缓冲区的作用就是接受hash值为i的record。当第i个输入缓冲区写满了，就要写出去。因此N&gt;M,内存中块的数量不够N，无法将关系s分为N个分片</code></strong></p>
-<ul>
-<li>解决方法：多次分片。<strong>假设第一次分片，我们把关系r和关系s分为了4个分片，但这些分片大小还太大，放不进去内存中。此时需要再次进行细分，递归地分割。</strong></li>
+</li>
+<li>
+<p>解决方法：多次分片。<strong>假设第一次分片，我们把关系r和关系s分为了4个分片，但这些分片大小还太大，放不进去内存中。此时需要再次进行细分，递归地分割。</strong></p>
+</li>
 </ul>
 <p>【definition】</p>
 <ul>
@@ -2811,9 +2840,11 @@ n \geq \lceil b_s/m \rceil
 <ol>
 <li><strong>对于关系r，使用一个哈希函数h，进行分片。对于每一个分片，内存中都需要一个输入缓冲块。</strong></li>
 <li><strong>对于关系s，使用相同哈希函数h，进行分片。对于每一个分片，内存中都需要一个输入缓冲块。<code>这也就说明为什么有的分片无法执行（内存太小）</code></strong></li>
-<li><strong>对每一个hash值i</strong></li>
+<li><strong>对每一个hash值i</strong><ul>
 <li><strong>将<span class="arithmatex">\(si\)</span>加载到内存中去，然后针对<span class="arithmatex">\(si\)</span>的等值连接属性，构建一个内存<code>哈希索引</code>。这个内存哈希索引，使用与刚刚分片时不同的哈希函数h’。</strong></li>
 <li>从磁盘中一次读入<span class="arithmatex">\(r_i\)</span>的每一个元组<span class="arithmatex">\(t_j\)</span>(<strong><code>本质上是将ri的每一个block都读入要内存中，对block内的record进行操作</code></strong>)，<strong>在内存中与<span class="arithmatex">\(s_i\)</span>进行匹配连接。对于元组tj，利用刚刚在分片si中构建好的hash索引，在si中匹配对应的属性上的等值元组tk，将tj和tk进行来连接得到结果</strong></li>
+</ul>
+</li>
 </ol>
 <blockquote>
 <p><strong>但是实际上，利用hash函数进行分片，其分出来的片不一定是均匀的。为了保证build input的每一个分片都能够放入到内存中。需要添加一个修正因子f，让分片的数量n大于标准值</strong></p>
@@ -2823,32 +2854,31 @@ n \geq \lceil b_s/m \rceil
 <p><strong>Recursive partitioning</strong> required if number of partitions n is greater than number of pages M of memory.</p>
 <p><strong><code>递归的分割用于：内存大小不够大，需要分割出来的最小片数n，大于了内存的最大块数M，因此需要分割出来的片数n不能每一片都在内存中有一个输入缓冲区</code></strong></p>
 <ul>
-<li>不需要分割的情况：</li>
-</ul>
+<li>
+<p>不需要分割的情况：</p>
 <p>要让关系S的每一分片都能放进内存所需的最小n，小于内存中最大存放的块的数量M，即每一个片都可以在内存中获得输入缓冲区
-  $$
+$$
   \begin{aligned}
     &amp;M &gt; n+1\
   \Rightarrow   &amp;n \geq \lceil b_s/M \rceil \
   \Rightarrow   &amp; M &gt; (b_s / M) + 1\
   \Rightarrow   &amp; M &gt; \sqrt{b_s}
   \end{aligned}
-  $$</p>
-<p><strong>A relation does not need recursive partitioning if <span class="arithmatex">\(M &gt; n_h + 1\)</span>, or equivalently <span class="arithmatex">\(M &gt; (b_s/M) + 1\)</span>, which simplifies (approximately) to <span class="arithmatex">\(M &gt; \sqrt{b_s}\)</span>.</strong> </p>
-<div>
+$$</p>
+<p><strong>A relation does not need recursive partitioning if<span class="arithmatex">\(M &gt; n_h + 1\)</span>, or equivalently<span class="arithmatex">\(M &gt; (b_s/M) + 1\)</span>, which simplifies (approximately) to<span class="arithmatex">\(M &gt; \sqrt{b_s}\)</span>.</strong> </p>
+<p><div>
     <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405061327398.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405061327398.png" width = 80%/></a> </div>
-</div>
-
-<ul>
+</div></p>
+</li>
 <li>
 <p>已知信息：内存为12M，一个block有4K byte。那么内存中的最大容量是3K 个block</p>
 </li>
 <li>
 <p><strong>如果有一个关系，希望不用递归的分割，求这个关系最大有多少block</strong></p>
+<p>利用数学关系式，可以得到<span class="arithmatex">\(M &gt; \sqrt{b_r}\)</span></p>
+<p>所以<span class="arithmatex">\(b_r &lt; M^2\)</span>,<strong>因此这个关系最多具有3K<span class="arithmatex">\(\times\)</span>3K个block，对应的byte数量就是3K<span class="arithmatex">\(\times\)</span>3K<span class="arithmatex">\(\times\)</span>4K</strong></p>
 </li>
 </ul>
-<p>利用数学关系式，可以得到<span class="arithmatex">\(M &gt; \sqrt{b_r}\)</span></p>
-<p>所以<span class="arithmatex">\(b_r &lt; M^2\)</span>,<strong>因此这个关系最多具有3K <span class="arithmatex">\(\times\)</span> 3K个block，对应的byte数量就是3K <span class="arithmatex">\(\times\)</span> 3K <span class="arithmatex">\(\times\)</span> 4K</strong></p>
 <h4 id="11552-cost-of-hash-join">11.5.5.2 Cost of Hash-Join<a class="headerlink" href="#11552-cost-of-hash-join" title="Permanent link">&para;</a></h4>
 <div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305242316753.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305242316753.png" width = 80%/></a> </div>
 
@@ -2861,7 +2891,7 @@ b_b = \lfloor M / (b_s / M + 1) \rfloor
 <ol>
 <li>
 <p><strong>block transfer</strong></p>
-</li>
+<ul>
 <li>
 <p><strong>利用hash函数分割时，关系r和关系s的每一个块都要读入到内存的输入缓冲块一次，然后再写出来</strong>。这样就消耗了<span class="arithmatex">\(2(b_s+b_r)\)</span>次的block transfer</p>
 </li>
@@ -2870,14 +2900,16 @@ b_b = \lfloor M / (b_s / M + 1) \rfloor
 <p>这样就消耗了<span class="arithmatex">\(b_r+b_s\)</span>次block transfer</p>
 </li>
 <li>
-<p>由于部分填充块的存在，hash分割占用的块数可能略多于 <span class="arithmatex">\(br +bs\)</span>。 访问此类部分填充的块最多可为每个关系增加 <span class="arithmatex">\(2nh\)</span> 的开销，因为每个 <span class="arithmatex">\(nh\)</span> 分区都可能具有必须写入和读回的部分填充的块。</p>
+<p>由于部分填充块的存在，hash分割占用的块数可能略多于<span class="arithmatex">\(br +bs\)</span>。 访问此类部分填充的块最多可为每个关系增加<span class="arithmatex">\(2nh\)</span>的开销，因为每个<span class="arithmatex">\(nh\)</span>分区都可能具有必须写入和读回的部分填充的块。</p>
 </li>
 <li>
 <p><code>总的transfer的数量为：</code><span class="arithmatex">\(3(b_r+b_s) + 4n_h\)</span></p>
 </li>
+</ul>
+</li>
 <li>
 <p><strong>block seek</strong></p>
-</li>
+<ul>
 <li>
 <p>假设我们对关系r与关系s的每一个分片，在内存中分有<span class="arithmatex">\(b_b\)</span>块输入缓冲区</p>
 </li>
@@ -2891,6 +2923,8 @@ b_b = \lfloor M / (b_s / M + 1) \rfloor
 <li>
 <p><code>总的seek数量为：</code><span class="arithmatex">\(2(b_r/b_b + b_s/b_b) + 2n_h\)</span></p>
 </li>
+</ul>
+</li>
 </ol>
 <blockquote>
 <p><strong>2. 如果使用了递归的分割</strong></p>
@@ -2898,25 +2932,23 @@ b_b = \lfloor M / (b_s / M + 1) \rfloor
 <div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305242320879.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305242320879.png" width =80%/></a> </div>
 
 <ul>
-<li><strong>假设每次分片，对于每一个关系（r或者s）的每一个分片，内存中都分配bb块作为输入缓冲区，同时内存中还留有一个bb块大小的输出缓冲区。</strong></li>
-</ul>
+<li>
+<p><strong>假设每次分片，对于每一个关系（r或者s）的每一个分片，内存中都分配bb块作为输入缓冲区，同时内存中还留有一个bb块大小的输出缓冲区。</strong></p>
 <p><strong><code>那么一次分片就能得到</code><span class="arithmatex">\(\lfloor M/b_b \rfloor - 1\)</span>个分片</strong></p>
 <p>于是我们能够计算出分片的轮数：<span class="arithmatex">\(\lceil log_{\lfloor M/b_b \rfloor - 1}(b_s/M) \rceil\)</span></p>
 <p>每一次分片，都让分片的大小变为之前的<span class="arithmatex">\(1/\lfloor M/b_b \rfloor - 1\)</span></p>
-<ol>
+</li>
 <li>
 <p><strong>block transfer</strong></p>
-</li>
-<li>
-<p><strong>每一轮分片，都需要将r关系的所有块读到内存中一次，再从输出缓冲块中输出来一次；s关系也一样。因此，对于有递归的分割的过程，数据传输的总次数为：<span class="arithmatex">\(2(b_r+b_s)\lceil log_{\lfloor M/b_b \rfloor - 1}(b_s/M) \rceil\)</span></strong></p>
-</li>
+<ul>
+<li><strong>每一轮分片，都需要将r关系的所有块读到内存中一次，再从输出缓冲块中输出来一次；s关系也一样。因此，对于有递归的分割的过程，数据传输的总次数为：<span class="arithmatex">\(2(b_r+b_s)\lceil log_{\lfloor M/b_b \rfloor - 1}(b_s/M) \rceil\)</span></strong></li>
 <li>后续的连接操作，<strong>对于每一个分片i，我们将build input的si读入到内存中。对于这个si，我们将ri中一块一块读到内存来。这样最终的结果是，关系r与关系s的每一块都读到了内存中一次。</strong></li>
-<li>
-<p><code>总的传输次数为：</code><span class="arithmatex">\(2(b_r+b_s)\lceil log_{\lfloor M/b_b \rfloor - 1}(b_s/M) \rceil + (b_r + b_s)\)</span></p>
+<li><code>总的传输次数为：</code><span class="arithmatex">\(2(b_r+b_s)\lceil log_{\lfloor M/b_b \rfloor - 1}(b_s/M) \rceil + (b_r + b_s)\)</span></li>
+</ul>
 </li>
 <li>
 <p><strong>block seek</strong></p>
-</li>
+<ul>
 <li>
 <p><strong>对于r关系读到内存中的过程，由于对于每一个分片，输入缓冲区一共有bb块，因此一次读写头重定位就可以读进去bb块。并且对于每一个分片，由于输出缓冲区也有bb块，因此一次读写头重定位就可以输出bb块。</strong></p>
 <p><strong>因此，每一轮对s与r的分片，其读写头重定位的总次数为：<span class="arithmatex">\(2(\lceil b_r/b_b \rceil + \lceil b_s/b_b \rceil)\)</span></strong></p>
@@ -2924,7 +2956,9 @@ b_b = \lfloor M / (b_s / M + 1) \rfloor
 <li>
 <p><strong>再乘以分片的轮数，得到Seek操作的总次数：<span class="arithmatex">\(2(\lceil b_r/b_b \rceil + \lceil b_s/b_b \rceil)\lceil log_{\lfloor M/b_b \rfloor - 1}(b_s/M) \rceil\)</span></strong></p>
 </li>
-</ol>
+</ul>
+</li>
+</ul>
 <h2 id="116-other-operations">11.6 Other Operations<a class="headerlink" href="#116-other-operations" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Duplicate elimination</strong> can be implemented via hashing or sorting. <br />

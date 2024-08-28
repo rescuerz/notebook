@@ -22,7 +22,7 @@
     
     
       
-        <title>十五. Recovery System - rescuerz's notebook</title>
+        <title>15. Recovery System - rescuerz's notebook</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#十五-recovery-system" class="md-skip">
+        <a href="#15-recovery-system" class="md-skip">
           跳转至
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              十五. Recovery System
+              15. Recovery System
             
           </span>
         </div>
@@ -1126,7 +1126,7 @@
         
   
   <span class="md-ellipsis">
-    六.Entity-Relationship Model
+    6. Entity-Relationship Model
   </span>
   
 
@@ -1147,7 +1147,7 @@
         
   
   <span class="md-ellipsis">
-    七. Relational Database Design
+    7. Relational Database Design
   </span>
   
 
@@ -1168,7 +1168,7 @@
         
   
   <span class="md-ellipsis">
-    八. Physical Storage Systems
+    8. Physical Storage Systems
   </span>
   
 
@@ -1189,7 +1189,7 @@
         
   
   <span class="md-ellipsis">
-    九. Data Storage Structures
+    9. Data Storage Structures
   </span>
   
 
@@ -1210,7 +1210,7 @@
         
   
   <span class="md-ellipsis">
-    十. Indexing
+    10. Indexing
   </span>
   
 
@@ -1231,7 +1231,7 @@
         
   
   <span class="md-ellipsis">
-    十一. Query Processing
+    11. Query Processing
   </span>
   
 
@@ -1252,7 +1252,7 @@
         
   
   <span class="md-ellipsis">
-    十二. Query Optimization
+    12. Query Optimization
   </span>
   
 
@@ -1273,7 +1273,7 @@
         
   
   <span class="md-ellipsis">
-    十三. Transactions
+    13. Transactions
   </span>
   
 
@@ -1294,7 +1294,7 @@
         
   
   <span class="md-ellipsis">
-    十四. Concurrency Control
+    14. Concurrency Control
   </span>
   
 
@@ -1324,7 +1324,7 @@
           
   
   <span class="md-ellipsis">
-    十五. Recovery System
+    15. Recovery System
   </span>
   
 
@@ -1335,7 +1335,7 @@
         
   
   <span class="md-ellipsis">
-    十五. Recovery System
+    15. Recovery System
   </span>
   
 
@@ -2197,55 +2197,59 @@
   
 
 
-<h1 id="十五-recovery-system">十五. Recovery System<a class="headerlink" href="#十五-recovery-system" title="Permanent link">&para;</a></h1>
+<h1 id="15-recovery-system">15. Recovery System<a class="headerlink" href="#15-recovery-system" title="Permanent link">&para;</a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 6772 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 34 分钟</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 6771 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 34 分钟</p>
 </div>
-<div class="highlight"><pre><span></span><code>Failure Classification
-Storage Structure
-Data Access
-Recovery and Atomicity
-Log-Based Recovery
-Remote Backup Systems
-Recovery with Early Lock Release and Logical Undo Operations
-ARIES Recovery Algorithm
-</code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<ul>
+<li>Failure Classification</li>
+<li>Storage Structure</li>
+<li>Data Access</li>
+<li>Recovery and Atomicity</li>
+<li>Log-Based Recovery</li>
+<li>Remote Backup Systems</li>
+<li>Recovery with Early Lock Release and Logical Undo Operations</li>
+<li>ARIES Recovery Algorithm</li>
+</ul>
+</div>
 <h2 id="151-failure-classification">15.1 Failure Classification<a class="headerlink" href="#151-failure-classification" title="Permanent link">&para;</a></h2>
 <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202406031330839.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202406031330839.png" width = 60%/></a> </div>
 
 <ul>
 <li>
 <p>Database application  —— <strong>transaction failure</strong></p>
-</li>
+<ul>
 <li>
 <p>逻辑错误：比如不满足数据库约束条件（主键）</p>
 </li>
 <li>
 <p>系统错误：死锁。</p>
+</li>
+</ul>
 <p><strong>常用方法是撤销 undo, 把这个事件抹掉。（基于日志，在产生修改之前先记日志，故障后可以根据日志进行撤销）</strong>  </p>
 </li>
 <li>
 <p>DBMS  </p>
-</li>
-<li>
-<p>掉电</p>
-</li>
+<ul>
+<li>掉电</li>
 <li>硬件故障</li>
 <li>软件故障  </li>
 </ul>
 <p><strong>system crash 是全局性的，所有运行的程序都会受到影响。分为两类：一类是事务已经提交（但是数据还在缓冲区），另一类是正在执行的事务（还没有提交）。</strong>  </p>
 <p><strong><code>已经提交的事务要 redo(数据可能没写回去), 没有完成的事务要 undo.</code></strong> </p>
 <p>先记日志，现在的数据库采用 repeating history 的方法。</p>
-<ul>
+</li>
 <li>
 <p>Database  </p>
-</li>
-<li>
-<p>介质故障   head crash</p>
-</li>
+<ul>
+<li>介质故障   head crash</li>
 <li>other disk failure</li>
 </ul>
 <p><strong>要防止介质故障，需要做备份（拷贝或者远程）</strong>  </p>
+</li>
+</ul>
 <h2 id="152-storage-structure">15.2 Storage Structure<a class="headerlink" href="#152-storage-structure" title="Permanent link">&para;</a></h2>
 <p>日志可能也会出故障？我们假设日志存储在 Stable storage 里。</p>
 <ul>
@@ -2255,20 +2259,20 @@ ARIES Recovery Algorithm
 </li>
 <li>
 <p>Nonvolatile storage   <strong><code>非易失性存储：disk, tape, flash memory，battery backed up RAM</code></strong></p>
-</li>
-</ul>
 <p><strong>survives system crashes，但仍然存在丢失数据的可能</strong></p>
-<ul>
+</li>
 <li>
 <p>Stable storage:</p>
 <ul>
-<li>a <strong><code>mythical(虚拟的)</code></strong> form of storage that <strong><code>survives all failures</code></strong></li>
-</ul>
+<li>
+<p>a <strong><code>mythical(虚拟的)</code></strong> form of storage that <strong><code>survives all failures</code></strong></p>
 <p>能在所有故障中幸存下来</p>
-<ul>
-<li>approximated by maintaining multiple copies on distinct nonvolatile media  </li>
-</ul>
+</li>
+<li>
+<p>approximated by maintaining multiple copies on distinct nonvolatile media  </p>
 <p>通过在不同的<strong>非易失性介质</strong>上<strong>维护多个拷贝</strong>来近似</p>
+</li>
+</ul>
 <blockquote>
 <p><strong><code>这里，我们假设日志都会记录到stable storage中，不会发生丢失</code></strong></p>
 </blockquote>
@@ -2276,17 +2280,19 @@ ARIES Recovery Algorithm
 </ul>
 <h3 id="1521-implementation">15.2.1 Implementation<a class="headerlink" href="#1521-implementation" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Maintain multiple copies of each block on separate disks</li>
-</ul>
+<li>
+<p>Maintain multiple copies of each block on separate disks</p>
 <p>在单独的磁盘上维护每个块的多个副本</p>
-<ul>
-<li>Failure during data transfer can still result in inconsistent copies  </li>
-</ul>
+</li>
+<li>
+<p>Failure during data transfer can still result in inconsistent copies  </p>
 <p>数据传输过程中的失败仍可能导致副本不一致</p>
-<ul>
-<li>Protecting storage media from failure during data transfer </li>
-</ul>
+</li>
+<li>
+<p>Protecting storage media from failure during data transfer </p>
 <p>保护存储介质在数据传输过程中不会出现故障</p>
+</li>
+</ul>
 <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202406031645468.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202406031645468.png" width = 60%/></a> </div>
 
 <blockquote>
@@ -2300,16 +2306,16 @@ ARIES Recovery Algorithm
 <p>恢复算法是在发生故障时<strong><code>确保数据库一致性以及事务原子性和持久性</code></strong>的技术</p>
 <p>Recovery algorithms have two parts</p>
 <ul>
-<li>Actions taken during normal transaction processing to ensure enough information exists to recover from failures  </li>
-</ul>
+<li>
+<p>Actions taken during normal transaction processing to ensure enough information exists to recover from failures  </p>
 <p>在正常事务处理期间为<strong><code>确保存在足够的信息以从故障中恢复(写日志)</code></strong>而采取的操作</p>
 <p>存在tradeoff，事务处理和故障恢复性能之间的权衡</p>
 <p><strong>理想的算法：恢复得很快，对事务正常操作没有影响（记录信息的时候不能消耗太多性能），即兼顾上面两个部分。</strong></p>
-<ul>
-<li>Actions taken after a failure to recover the database contents to a state that ensures atomicity, consistency and durability </li>
-</ul>
+</li>
+<li>
+<p>Actions taken after a failure to recover the database contents to a state that ensures atomicity, consistency and durability </p>
 <p><strong>出现failure之后，采取措施使数据库的内容恢复到某状态以确保原子性、一致性、持久性</strong></p>
-<ul>
+</li>
 <li>
 <blockquote>
 <p><strong><code>恢复算法包含两部分：一部分是在事务执行时保存信息，用于日后的恢复。一部分是在故障发生之后，采取措施使得数据库恢复到原来的一致性原子性持久性状态</code></strong></p>
@@ -2331,16 +2337,16 @@ ARIES Recovery Algorithm
 <p><strong>A log is kept on stable storage(稳定存储器).</strong>   </p>
 <p>The log is a sequence of <strong>log records</strong>, and maintains a record of update activities on the database.</p>
 <ul>
-<li>When transaction <span class="arithmatex">\(Ti\)</span> starts, it registers itself by writing a <strong>“start”</strong> log record: <span class="arithmatex">\(&lt;T_i\  start&gt;\)</span>  </li>
-</ul>
+<li>
+<p>When transaction <span class="arithmatex">\(Ti\)</span> starts, it registers itself by writing a <strong>“start”</strong> log record: <span class="arithmatex">\(&lt;T_i\  start&gt;\)</span>  </p>
 <p><strong>事务开始. <span class="arithmatex">\(Ti\)</span> 表示事务的 id.</strong> </p>
-<ul>
-<li>Before <span class="arithmatex">\(Ti\)</span> executes write(X), writing <strong>“update</strong>” log record <span class="arithmatex">\(&lt;T_i, X,  V_1,  V_2&gt;\)</span>   </li>
-</ul>
+</li>
+<li>
+<p>Before <span class="arithmatex">\(Ti\)</span> executes write(X), writing <strong>“update</strong>” log record <span class="arithmatex">\(&lt;T_i, X,  V_1,  V_2&gt;\)</span>   </p>
 <p><strong><code>事务把 X 数据项的值从 V1(old value) 改为 V2(new value).</code></strong>  </p>
 <p><strong>这个就是恢复的基础. undo 得到 old value, redo 得到 new value.</strong>  </p>
 <p><strong><code>Insert 就是 old 为空, Delete 就是 new 为空。</code></strong></p>
-<ul>
+</li>
 <li>
 <p>When <span class="arithmatex">\(Ti\)</span> finishes it last statement, writing <strong>“commit”</strong> log record: <span class="arithmatex">\(&lt;T_i\  commit&gt;\)</span> </p>
 </li>
@@ -2374,31 +2380,39 @@ ARIES Recovery Algorithm
 <blockquote>
 <p><strong><code>Concurrency Control and Recover</code></strong></p>
 <ul>
-<li><strong>对于并发事务，所有的事务共享一个 disk buffer 和 log buffer</strong></li>
+<li><strong>对于并发事务，所有的事务共享一个 disk buffer 和 log buffer</strong><ul>
 <li><strong>缓冲区块内能够包含一个或者多个事务更新的数据项</strong></li>
-<li><strong>我们假定，如果事务 $Ti $修改了某个项，则在 $Ti $提交或中止之前，其他事务都不能修改同一个项。即未提交事务的更新对其他事务不可见，确保隔离性</strong></li>
+</ul>
+</li>
+<li><strong>我们假定，如果事务 $Ti $修改了某个项，则在 $Ti $提交或中止之前，其他事务都不能修改同一个项。即未提交事务的更新对其他事务不可见，确保隔离性</strong><ul>
 <li><strong>可以使用X锁，一直到事务即将提交才解锁（严格两阶段封锁协议）</strong></li>
+</ul>
+</li>
 </ul>
 <p><strong><code>Database Modification</code></strong></p>
 <ul>
-<li><strong><code>immediate-modification scheme(立即修改方案)</code></strong> 允许在事务提交之前对缓冲区或磁盘本身进行未提交事务的更新</li>
+<li><strong><code>immediate-modification scheme(立即修改方案)</code></strong> 允许在事务提交之前对缓冲区或磁盘本身进行未提交事务的更新<ul>
 <li><strong>写入数据库项之前必须先写入更新日志记录</strong></li>
+</ul>
+</li>
 <li><strong><code>deferred-modification schema（延迟修改方案）</code></strong>仅在事务提交时对缓冲区/磁盘执行更新</li>
 </ul>
 </blockquote>
 <h3 id="1533-transaction-commit">15.3.3 Transaction Commit<a class="headerlink" href="#1533-transaction-commit" title="Permanent link">&para;</a></h3>
 <ul>
-<li>A transaction is said to have committed when its <em>commit log record</em> is output to <em>stable storage</em>  </li>
-</ul>
+<li>
+<p>A transaction is said to have committed when its <em>commit log record</em> is output to <em>stable storage</em>  </p>
 <p><strong><code>commit 日志经由log buffer写入到log file（stable storage）表示该事务已经完成提交</code></strong> </p>
-<ul>
-<li>all previous log records of the transaction must have been output already </li>
-</ul>
+</li>
+<li>
+<p>all previous log records of the transaction must have been output already </p>
 <p><strong><code>commit是当前事务的最后一条，显然前面的log records已经写入到log file</code></strong></p>
-<ul>
-<li>Writes performed by a transaction may still be in the buffer when the transaction commits, and may be output later.    </li>
-</ul>
+</li>
+<li>
+<p>Writes performed by a transaction may still be in the buffer when the transaction commits, and may be output later.    </p>
 <p><strong><code>但此时修改的数据项不一定已经写回到数据库里 。如果立刻将 block 写回磁盘可能引起大量 I/O 操作</code></strong></p>
+</li>
+</ul>
 <h3 id="1534-undo撤销-and-redo重做-operations">15.3.4 Undo(撤销) and Redo（重做） Operations<a class="headerlink" href="#1534-undo撤销-and-redo重做-operations" title="Permanent link">&para;</a></h3>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202406031852611.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240603185220572" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202406031852611.png" /></a></p>
 <p><strong><code>特别需要注意的就是执行undo时，需要写补偿日志，&lt;T,X,V&gt;,在完成undo之后，需要一条log record &lt;T abort&gt;</code></strong></p>
@@ -2414,21 +2428,23 @@ ARIES Recovery Algorithm
 <p><strong>Streamline recovery procedure by periodically performing checkpointing.</strong>  </p>
 <p><strong><code>重演历史可能很长。checkpoint 是确认之前的操作都已经反映到数据库里去了，这样重演的时候就可以直接从 checkpoint 开始。</code></strong></p>
 <ul>
-<li>Output all log records currently residing in <strong>main memory onto stable storage</strong>.  </li>
-</ul>
+<li>
+<p>Output all log records currently residing in <strong>main memory onto stable storage</strong>.  </p>
 <p><strong>日志不是生成就往内存写，而是有一个日志缓冲区(stable storage)。</strong>  </p>
-<ul>
-<li>Output all modified buffer blocks to the disk.  </li>
-</ul>
+</li>
+<li>
+<p>Output all modified buffer blocks to the disk.  </p>
 <p><strong>把所有修改过的内存块写回到磁盘中</strong></p>
-<ul>
-<li>Write a log record <span class="arithmatex">\(&lt;checkpoint\ L&gt;\)</span> onto stable storage where L is a list of all transactions active at the time of checkpoint.   </li>
-</ul>
+</li>
+<li>
+<p>Write a log record <span class="arithmatex">\(&lt;checkpoint\ L&gt;\)</span> onto stable storage where L is a list of all transactions active at the time of checkpoint.   </p>
 <p>写一个日志的标记（新的日志类型）. <strong>L 是当前正在工作的事务的表</strong>。（用来做 undo list 的初始化列表）</p>
-<ul>
-<li><strong>All updates are stopped while doing checkpointing!!!</strong></li>
-</ul>
+</li>
+<li>
+<p><strong>All updates are stopped while doing checkpointing!!!</strong></p>
 <p><strong><code>做 checkpoint 的时候其他活跃事务都要停下来.这时候就存在一个tradeoff，性能会收到影响。</code></strong></p>
+</li>
+</ul>
 <blockquote>
 <p><strong>设置检查点时，有以下三个步骤：</strong></p>
 <p><strong>1.</strong> <strong>将所有日志中的记录存储到稳定存储器中。</strong></p>
@@ -2462,16 +2478,18 @@ ARIES Recovery Algorithm
 <p><strong><code>如果事务commit写到log buffer，还不算是commit，所以发生掉电故障，log buffer丢失也没有关系。事务提交只能是commit写入到log file</code></strong></p>
 </blockquote>
 <ul>
-<li>The recovery algorithm supports the <strong>no-force policy(非强制)</strong>: </li>
-</ul>
+<li>
+<p>The recovery algorithm supports the <strong>no-force policy(非强制)</strong>: </p>
 <p><strong>i.e.</strong>, updated blocks need not be written to disk when transaction commits.  </p>
 <p><strong>事务commit后，不要求内存中的数据立即写入到磁盘中。（较好的方式）</strong></p>
-<ul>
-<li>The recovery algorithm supports the <strong>steal policy(窃取策略)</strong>:</li>
-</ul>
+</li>
+<li>
+<p>The recovery algorithm supports the <strong>steal policy(窃取策略)</strong>:</p>
 <p><strong>i.e.</strong>, blocks containing updates of uncommitted transactions can be written to disk, even before the transaction commits. </p>
 <p><strong>即使在事务提交之前，也可以将包含未提交事务更新的块写入磁盘</strong></p>
 <p><strong><code>事务提交之前脏数据能不能被写到磁盘里去？（同样地需要先把日志写出去）</code></strong></p>
+</li>
+</ul>
 <h3 id="1537-fuzzy-checkpointing">15.3.7 Fuzzy Checkpointing<a class="headerlink" href="#1537-fuzzy-checkpointing" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><strong>Fuzzy 模糊</strong></p>
@@ -2566,18 +2584,20 @@ ARIES Recovery Algorithm
 </li>
 <li>
 <p><strong>Page LSN</strong>  </p>
-</li>
-<li>
-<p><strong>每一个内存页中，都有一个Page LSN，用来标记这个页最近反映的是哪一个日志项修改的结果。</strong></p>
+<ul>
+<li><strong>每一个内存页中，都有一个Page LSN，用来标记这个页最近反映的是哪一个日志项修改的结果。</strong></li>
+</ul>
 </li>
 <li>
 <p><strong>Log records of several different types</strong></p>
 </li>
 <li>
 <p><strong>Dirty page table</strong>  </p>
-</li>
+<ul>
 <li><strong>脏页表记录在日志当中，在设定CheckPoint的时候，当前的内存中脏页的表，需要记录下来。</strong></li>
 <li><strong>每一个脏页表中的页，都有一个Page LSN，反映当前页是哪一个日志项最后修改了它；</strong></li>
+</ul>
+</li>
 </ul>
 <h4 id="page-lsn">Page LSN<a class="headerlink" href="#page-lsn" title="Permanent link">&para;</a></h4>
 <p><strong>每一个内存页中，都有一个Page LSN，用来标记这个页最近反映的是哪一个日志项修改的结果。</strong></p>
@@ -2603,11 +2623,11 @@ ARIES Recovery Algorithm
 </li>
 <li>
 <p><code>UndoNextLSN</code>表示，如果要Undo这一个事务，<strong>下一个需要Undo的日志项</strong>是什么<strong>。把所有相同事务的Undo项串起来，方便Undo的加速。</strong></p>
-</li>
-</ul>
 <p><strong><code>例如undo某一个特定的transaction时，把该transaction的操作串行起来，一次性undo</code></strong></p>
-<ul>
-<li><code>RedoInfo</code>表示重复历史的相关信息。</li>
+</li>
+<li>
+<p><code>RedoInfo</code>表示重复历史的相关信息。</p>
+</li>
 </ul>
 <blockquote>
 <p><strong>上面，日志项一项一项地记下来，4’为4 Undo的结果，也就是4的补偿日志。4’指向3表示，记录完补偿日志4’，下一个需要Undo的日志项是3。</strong></p>
@@ -2623,9 +2643,9 @@ ARIES Recovery Algorithm
 </li>
 <li>
 <p><code>RecLSN</code> is an LSN such that log records before this LSN have already been applied to the page version on disk</p>
+<p><strong>每一个页还会记录一个Rec LSN，反映这个数据页到达了磁盘之前，是哪一个日志项最后修改了它。</strong></p>
 </li>
 </ul>
-<p><strong>每一个页还会记录一个Rec LSN，反映这个数据页到达了磁盘之前，是哪一个日志项最后修改了它。</strong></p>
 <div class="admonition example">
 <p class="admonition-title">ARIES Data Structures</p>
 </div>
@@ -2654,12 +2674,10 @@ ARIES Recovery Algorithm
 </li>
 <li>
 <p>For each active transaction, Last LSN, the LSN of the last log record written by the transaction  </p>
+<p>要记最近的事务项（从哪里开始恢复）</p>
+<p><strong><code>做check point时，需要记录以下内容：1. 当前活动事务表 2. 脏页表 3. 对于每一个当前活动的事务，需要记录修改该事务最近的一个日志项Last LSN</code></strong></p>
 </li>
 </ul>
-<p>要记最近的事务项（从哪里开始恢复）</p>
-<blockquote>
-<p><strong><code>做check point时，需要记录以下内容：1. 当前活动事务表 2. 脏页表 3. 对于每一个当前活动的事务，需要记录修改该事务最近的一个日志项Last LSN</code></strong></p>
-</blockquote>
 </li>
 <li>
 <p>Fixed position on disk notes LSN of last completed checkpoint log record</p>
@@ -2668,13 +2686,13 @@ ARIES Recovery Algorithm
 </li>
 <li>
 <p>Dirty pages are not written out at checkpoint time  </p>
-</li>
-</ul>
 <p>Instead, they are flushed out continuously, in the background  </p>
 <p>脏页不会在 check 的时候写出去。</p>
-<ul>
-<li>Checkpoint is thus very low overhead
-can be done frequently</li>
+</li>
+<li>
+<p>Checkpoint is thus very low overhead
+can be done frequently</p>
+</li>
 </ul>
 <h3 id="1552-aries-recovery-algorithm">15.5.2 ARIES Recovery Algorithm<a class="headerlink" href="#1552-aries-recovery-algorithm" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2695,15 +2713,15 @@ can be done frequently</li>
 </li>
 <li>
 <p>Redo pass  </p>
-</li>
-</ul>
 <p><strong>RecLSN</strong> and <strong>PageLSNs</strong> are used to avoid redoing actions already reflected on page.  </p>
 <p>用来优化，有些日志不用 redo(没有意义)</p>
 <p><strong>从所有脏页表中Rec LSN中最小的那个日志项（Redo LSN）开始，repeat history。</strong></p>
-<ul>
-<li>Undo pass  </li>
-</ul>
+</li>
+<li>
+<p>Undo pass  </p>
 <p><strong>和前面的原理相同，利用Undo List，直到Undo 到Undo List中所有事务到达开始（begin）的地方。</strong></p>
+</li>
+</ul>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 </div>
@@ -2720,25 +2738,27 @@ can be done frequently</li>
 <p>check point中记录了什么？</p>
 <ol>
 <li>活动事务表：T145，并且最后对事务T145进行修改的是Last LSN是7567</li>
-<li>脏页表：</li>
-<li>最新的对数据页4894进行修改的日志项时7567，正确反应到磁盘中的最后一个对4894页进行修改的日志项时7564</li>
 <li>
-<p><strong>最新对页号7200的页产生更改的是日志项7565，而正确反映到磁盘中的最后一个对7200页产生更改的日志项是7565；</strong></p>
+<p>脏页表：</p>
+<ul>
+<li>最新的对数据页4894进行修改的日志项时7567，正确反应到磁盘中的最后一个对4894页进行修改的日志项时7564</li>
+<li><strong>最新对页号7200的页产生更改的是日志项7565，而正确反映到磁盘中的最后一个对7200页产生更改的日志项是7565；</strong></li>
+</ul>
 </li>
 <li>
 <p>Analysis：从最近的check point开始，分析到发生crash的地方，这一过程中需要更新脏页表，并得到Undo List，以及Redo LSN</p>
-</li>
-</ol>
 <p><strong><code>这是因为check point处的脏页表不是最新的发生在crash处的脏页表，需要先继续执行</code></strong></p>
 <p><strong>例如，首先碰到T146 begin, 因此在活动事务表中记录一项T146；然后碰到T146的修改操作，然后在脏页表中记录一项T146。 2390 7570 ？</strong></p>
-<ol>
-<li>Redo 阶段</li>
-</ol>
+</li>
+<li>
+<p>Redo 阶段</p>
 <p><strong><code>Redo的起点，是更新过后的脏页表张，Rec LSN的最小值</code></strong></p>
-<ol>
-<li>Undo 阶段</li>
-</ol>
+</li>
+<li>
+<p>Undo 阶段</p>
 <p>Undo的结束点，<strong>在Undo List中开始最早的事务的开始点（此处undo的事务是T145，到begin位置）。并且对于每一事务的undo，由于各事务的日志项存在undonextLSN，所以undo的时候不是一条一条的undo，而是跳跃性的。</strong></p>
+</li>
+</ol>
 <blockquote>
 <p><strong>总结来说：</strong>在生成Check Point的时候，Check Point中会记录<strong>当前活动事务表，和脏页表</strong></p>
 <p>在<strong>当前活动事务表</strong>中，记录了<strong>活动事务</strong>，以及<strong>最后一次对该事务的更改，处于哪一个日志项</strong>当中。在<strong>脏页表</strong>中，记录了<strong>页号</strong>，以及Page LSN（<strong>表示这个页最后被更改，处于哪一个日志项）</strong>、Rec LSN（<strong>表示这个页最后被存储，处于哪一个日志项）。</strong></p>

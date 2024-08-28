@@ -22,7 +22,7 @@
     
     
       
-        <title>十二. Query Optimization - rescuerz's notebook</title>
+        <title>12. Query Optimization - rescuerz's notebook</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#十二-query-optimization" class="md-skip">
+        <a href="#12-query-optimization" class="md-skip">
           跳转至
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              十二. Query Optimization
+              12. Query Optimization
             
           </span>
         </div>
@@ -1126,7 +1126,7 @@
         
   
   <span class="md-ellipsis">
-    六.Entity-Relationship Model
+    6. Entity-Relationship Model
   </span>
   
 
@@ -1147,7 +1147,7 @@
         
   
   <span class="md-ellipsis">
-    七. Relational Database Design
+    7. Relational Database Design
   </span>
   
 
@@ -1168,7 +1168,7 @@
         
   
   <span class="md-ellipsis">
-    八. Physical Storage Systems
+    8. Physical Storage Systems
   </span>
   
 
@@ -1189,7 +1189,7 @@
         
   
   <span class="md-ellipsis">
-    九. Data Storage Structures
+    9. Data Storage Structures
   </span>
   
 
@@ -1210,7 +1210,7 @@
         
   
   <span class="md-ellipsis">
-    十. Indexing
+    10. Indexing
   </span>
   
 
@@ -1231,7 +1231,7 @@
         
   
   <span class="md-ellipsis">
-    十一. Query Processing
+    11. Query Processing
   </span>
   
 
@@ -1261,7 +1261,7 @@
           
   
   <span class="md-ellipsis">
-    十二. Query Optimization
+    12. Query Optimization
   </span>
   
 
@@ -1272,7 +1272,7 @@
         
   
   <span class="md-ellipsis">
-    十二. Query Optimization
+    12. Query Optimization
   </span>
   
 
@@ -1505,7 +1505,7 @@
         
   
   <span class="md-ellipsis">
-    十三. Transactions
+    13. Transactions
   </span>
   
 
@@ -1526,7 +1526,7 @@
         
   
   <span class="md-ellipsis">
-    十四. Concurrency Control
+    14. Concurrency Control
   </span>
   
 
@@ -1547,7 +1547,7 @@
         
   
   <span class="md-ellipsis">
-    十五. Recovery System
+    15. Recovery System
   </span>
   
 
@@ -2143,51 +2143,57 @@
   
 
 
-<h1 id="十二-query-optimization">十二. Query Optimization<a class="headerlink" href="#十二-query-optimization" title="Permanent link">&para;</a></h1>
+<h1 id="12-query-optimization">12. Query Optimization<a class="headerlink" href="#12-query-optimization" title="Permanent link">&para;</a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 5089 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 10 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 26 分钟</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 5087 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 10 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 26 分钟</p>
 </div>
-<div class="highlight"><pre><span></span><code>Abstract
-    * Introduction 
-    * Transformation of Relational Expressions
-    * Statistical Information for Cost Estimation
-    * Cost-based Optimization
-    * Dynamic Programming for Choosing Evaluation Plans
-    * Nested Subqueries
-    * Materialized Views 
-    * Advanced Topics in Query Optimization
-</code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<ul>
+<li>Introduction </li>
+<li>Transformation of Relational Expressions</li>
+<li>Statistical Information for Cost Estimation</li>
+<li>Cost-based Optimization</li>
+<li>Dynamic Programming for Choosing Evaluation Plans</li>
+<li>Nested Subqueries</li>
+<li>Materialized Views </li>
+<li>Advanced Topics in Query Optimization</li>
+</ul>
+</div>
 <h2 id="121-introduction">12.1 Introduction<a class="headerlink" href="#121-introduction" title="Permanent link">&para;</a></h2>
 <div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305241431386.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305241431386.png" width = 60%/></a> </div>
 
 <p>Alternative ways of evaluating a given query</p>
 <ul>
-<li>Equivalent expressions  </li>
-</ul>
+<li>
+<p>Equivalent expressions  </p>
 <p>逻辑优化：<strong>关系代数表达式（尽量先做选择，投影）<code>Transformation Base Optimization</code></strong></p>
-<ul>
-<li>Different algorithms for each operation  </li>
-</ul>
+</li>
+<li>
+<p>Different algorithms for each operation  </p>
 <p>物理层面：<strong>每个算子选择不同的算法 <code>Cost Based Optimization</code></strong></p>
-<div class="highlight"><pre><span></span><code>&lt;div align=center&gt; &lt;img src=&quot;https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131327156.png&quot; width = 60%/&gt; &lt;/div&gt;
-&lt;div align=center&gt; &lt;img src=&quot;http://cdn.hobbitqia.cc/202305271119807.png&quot; width = 100%/&gt; &lt;/div&gt;
-</code></pre></div>
+<p><div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131327156.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131327156.png" width = 60%/></a> </div>
+  <div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305271119807.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305271119807.png" width = 100%/></a> </div></p>
+</li>
+</ul>
 <p><strong>Estimation of plan cost based on: 计划成本估算</strong></p>
 <ul>
-<li><em><code>Statistical information about relations</code></em>. Examples:
-  number of tuples, number of distinct values for an attribute</li>
-</ul>
+<li>
+<p><em><code>Statistical information about relations</code></em>. Examples:
+  number of tuples, number of distinct values for an attribute</p>
 <p><strong>有关关系的统计信息</strong>。示例：元组数、属性的非重复值数</p>
-<ul>
-<li><em><code>Statistics estimation for intermediate results</code></em>（Cardinality Estimation）
-  to compute cost of complex expressions  </li>
-</ul>
+</li>
+<li>
+<p><em><code>Statistics estimation for intermediate results</code></em>（Cardinality Estimation）
+  to compute cost of complex expressions  </p>
 <p><strong>中间结果的统计估计</strong>（基数估计）用于计算复杂表达式的成本</p>
 <p>估计中间结果的大小  现在有基于深度学习的估计方法</p>
-<ul>
-<li><em><code>Cost formulae for algorithms</code></em>, computed using statistics</li>
-</ul>
+</li>
+<li>
+<p><em><code>Cost formulae for algorithms</code></em>, computed using statistics</p>
 <p><strong>算法的成本公式</strong>，使用统计数据计算</p>
+</li>
+</ul>
 <p>关系数据库里可以用查看执行计划。（view query evaluation plan）</p>
 <div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305271131380.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305271131380.png" width = 80%/></a> </div>
 
@@ -2207,11 +2213,11 @@
 <p>selection
     <div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305271134503.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305271134503.png" width = 80%/></a> </div></p>
 <ol>
-<li>可以把算子拆分  </li>
-</ol>
+<li>
+<p>可以把算子拆分  </p>
 <p><strong>如果某些属性有索引</strong>，那么可以先拆分，在索引 select 之后再执行其他算子.</p>
 <p><strong>如果有复合索引，可以逆向进行</strong></p>
-<ol>
+</li>
 <li>
 <p>算子可交换  先执行有索引的算子。  </p>
 </li>
@@ -2280,13 +2286,15 @@ $$
 <li>
 <p>Repeat</p>
 <ul>
-<li>apply all applicable <em>equivalence rules</em> on every subexpression of every equivalent expression found so far</li>
-</ul>
+<li>
+<p>apply all applicable <em>equivalence rules</em> on every subexpression of every equivalent expression found so far</p>
 <p>对目前找到的每个等价表达式的每个子表达式应用所有适用的“等价规则”</p>
-<ul>
-<li>add newly generated expressions to the set of equivalent expressions </li>
-</ul>
+</li>
+<li>
+<p>add newly generated expressions to the set of equivalent expressions </p>
 <p>将新生成的表达式添加到等效表达式集中</p>
+</li>
+</ul>
 </li>
 <li>
 <p>Until no new equivalent expressions are generated above</p>
@@ -2296,36 +2304,38 @@ $$
 <p>但是实际中我们基于一些经验规则进行启发式的优化</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405160944683.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240516094442590" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405160944683.png" /></a></p>
 <ul>
-<li>减少空间需求：共享相同的子表达式</li>
-</ul>
+<li>
+<p>减少空间需求：共享相同的子表达式</p>
 <p>例如：连接的交换律</p>
-<ul>
-<li>减少时间需求：使用动态规划</li>
-</ul>
+</li>
+<li>
+<p>减少时间需求：使用动态规划</p>
 <p>每一次只考虑最优子序列的组合（长序列分为两个子序列）</p>
+</li>
+</ul>
 <h2 id="123-statistics-for-cost-estimation">12.3 Statistics for Cost Estimation<a class="headerlink" href="#123-statistics-for-cost-estimation" title="Permanent link">&para;</a></h2>
 <p>代价估算需要统计信息</p>
 <ul>
-<li><span class="arithmatex">\(n_r\)</span>: number of tuples in a relation r. </li>
-</ul>
+<li>
+<p><span class="arithmatex">\(n_r\)</span>: number of tuples in a relation r. </p>
 <p>关系 r 中的元组数</p>
-<ul>
-<li><span class="arithmatex">\(b_r\)</span>: number of blocks containing tuples of r. </li>
-</ul>
+</li>
+<li>
+<p><span class="arithmatex">\(b_r\)</span>: number of blocks containing tuples of r. </p>
 <p>关系r的block块数</p>
-<ul>
-<li><span class="arithmatex">\(l_r\)</span>: size of a tuple of r. </li>
-</ul>
+</li>
+<li>
+<p><span class="arithmatex">\(l_r\)</span>: size of a tuple of r. </p>
 <p>关系r一个元组的大小</p>
-<ul>
-<li><span class="arithmatex">\(f_r\)</span>: blocking factor of r — i.e., the number of tuples of r that fit into one block.  </li>
-</ul>
+</li>
+<li>
+<p><span class="arithmatex">\(f_r\)</span>: blocking factor of r — i.e., the number of tuples of r that fit into one block.  </p>
 <p>一个块可以放多少个元组</p>
-<ul>
-<li><span class="arithmatex">\(V(A, r)\)</span>: number of <em>distinct</em> values that appear in r for attribute A; same as the size of <span class="arithmatex">\(\Pi(r)\)</span>.</li>
-</ul>
+</li>
+<li>
+<p><span class="arithmatex">\(V(A, r)\)</span>: number of <em>distinct</em> values that appear in r for attribute A; same as the size of <span class="arithmatex">\(\Pi(r)\)</span>.</p>
 <p>关系 r 中某个属性A不同的值的个数。<strong>这也等价于对关系r中属性A进行投影，得到的结果集合大小。</strong></p>
-<ul>
+</li>
 <li>
 <p>If tuples of r are <strong>stored together physically（<code>存放是连续的</code>）</strong> in a file, then: <span class="arithmatex">\(b_r = \lceil \dfrac{n_r}{f_r}\rceil\)</span></p>
 </li>
@@ -2400,22 +2410,21 @@ $$</p>
 </li>
 <li>
 <p>If <span class="arithmatex">\(R \cap S = \{A\}\)</span> is not a key for R or S.  </p>
-</li>
-</ul>
 <blockquote>
 <p><strong><code>假如连接的属性不是某一个表的key</code></strong></p>
 </blockquote>
 <p><span class="arithmatex">\(n_r * \dfrac{n_s}{V(A,s)}, n_s * \dfrac{n_r}{V(A,r)}\)</span>.   </p>
 <p>以第二个为例子，站在 s 的角度，<span class="arithmatex">\(\dfrac{n_r}{V(A,r)}\)</span>表示关系 r 中属性A的每一个值对应有多少各记录，每一个 s 可以和属性A中每一个value对应的记录的平均值连接。  </p>
 <p><strong>因为有时候关系r中的一个元组对应属性值在s中没有出现，就会导致连接不上的情况，会导致<code>估算结果偏大</code>，所以通常我们取二者中的较小值。</strong>  </p>
-<div class="highlight"><pre><span></span><code>&lt;div align=center&gt; &lt;img src=&quot;https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131327267.png&quot; width = 80%/&gt; &lt;/div&gt;
-</code></pre></div>
+<p><div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131327267.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131327267.png" width = 80%/></a> </div></p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405152318146.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240515231853077" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405152318146.png" /></a></p>
 <blockquote>
 <p><strong><code>此处V(ID,takes) = 2500， 表示在take关系中ID不同的value值的数量为2500，同时takes关系表中一共有10000个元组，说明上课的同学中平均每个同学上四门课</code></strong></p>
 <p><strong><code>ID是student关系中的primary key，所以student关系表中有多少元组，ID的value数量就有多少。因此V(ID,student) = n_student = 5000</code></strong></p>
 </blockquote>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405152320307.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240515232058264" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405152320307.png" /></a></p>
+</li>
+</ul>
 <h3 id="1223-size-estimation-for-other-operations">12.2.3 Size Estimation for Other Operations<a class="headerlink" href="#1223-size-estimation-for-other-operations" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
@@ -2423,22 +2432,21 @@ $$</p>
 </li>
 <li>
 <p>分组：<strong><code>在选定分组的基础上执行聚合函数，显然聚合函数根据输入的值只能得到一个结果，所以最优元组的数量为属性A中value的数量</code></strong></p>
-</li>
-</ol>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405152100620.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405152100620.png" style="zoom: 67%;" /></a></p>
-<ol>
-<li>对集合大小上下限的估算</li>
-</ol>
+</li>
+<li>
+<p>对集合大小上下限的估算</p>
 <p><strong>虽然不够精确，但是提供了上界。对于 - 操作，r - s 表示选取的是 r 有但是 s 没有的value，显然最大的size 为r</strong></p>
-<div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305272344670.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305272344670.png" width = 80%/></a> </div>
-
-<ol>
-<li>对于外部自然连接的代价估算</li>
-</ol>
+<p><div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305272344670.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305272344670.png" width = 80%/></a> </div></p>
+</li>
+<li>
+<p>对于外部自然连接的代价估算</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405152105154.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240515210506125" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405152105154.png" /></a></p>
 <blockquote>
 <p><strong>外部连接比自然连接多出的是：假如是左外部连接，那么左边的关系没有连接上的部分，也要放入到结果集合中。因此结果集合的上限估算，就再加上r的元组个数。</strong></p>
 </blockquote>
+</li>
+</ol>
 <h3 id="1224-estimation-of-number-of-distinct-values">12.2.4 Estimation of Number of Distinct Values<a class="headerlink" href="#1224-estimation-of-number-of-distinct-values" title="Permanent link">&para;</a></h3>
 <p>对于中间结果，在某个属性上不同值的个数</p>
 <blockquote>
@@ -2446,21 +2454,23 @@ $$</p>
 </blockquote>
 <p>Selections <span class="arithmatex">\(\sigma_\theta(r)\)</span>, estimate <span class="arithmatex">\(V(A,\sigma_\theta(r))\)</span> ****</p>
 <ul>
-<li>If <span class="arithmatex">\(\theta\)</span> forces A to take <strong><code>a specified value</code></strong>, <span class="arithmatex">\(V(A,\sigma_\theta(r))=1\)</span>  </li>
-</ul>
+<li>
+<p>If <span class="arithmatex">\(\theta\)</span> forces A to take <strong><code>a specified value</code></strong>, <span class="arithmatex">\(V(A,\sigma_\theta(r))=1\)</span>  </p>
 <p><strong><em>e.g.</em></strong>, A = 3</p>
-<ul>
-<li>If <span class="arithmatex">\(\theta\)</span> forces A to take on one of <strong><code>a specified set of values</code></strong>: <span class="arithmatex">\(V(A,\sigma_\theta(r))=\)</span> number of specified values  </li>
-</ul>
+</li>
+<li>
+<p>If <span class="arithmatex">\(\theta\)</span> forces A to take on one of <strong><code>a specified set of values</code></strong>: <span class="arithmatex">\(V(A,\sigma_\theta(r))=\)</span> number of specified values  </p>
 <p><strong><em>e.g.</em></strong>, (A = 1 V A = 3 V A = 4)</p>
-<ul>
-<li>If the selection condition <span class="arithmatex">\(\theta\)</span> is of the form A op v, <span class="arithmatex">\(V(A,\sigma_\theta(r))=V(A,r)*s\)</span>  </li>
-</ul>
+</li>
+<li>
+<p>If the selection condition <span class="arithmatex">\(\theta\)</span> is of the form A op v, <span class="arithmatex">\(V(A,\sigma_\theta(r))=V(A,r)*s\)</span>  </p>
 <p>利用选择率 s 计算</p>
-<ul>
-<li>In all the other cases, use approx1imate estimate: <span class="arithmatex">\(V(A,\sigma_\theta(r))=\min(V(A,r), n_{\sigma_\theta(r)})\)</span></li>
-</ul>
+</li>
+<li>
+<p>In all the other cases, use approx1imate estimate: <span class="arithmatex">\(V(A,\sigma_\theta(r))=\min(V(A,r), n_{\sigma_\theta(r)})\)</span></p>
 <p><strong>原来未筛选的表在A属性上不同值的个数，和选择出来的结果条目的个数取最小值。</strong></p>
+</li>
+</ul>
 <blockquote>
 <p><strong>估算下面这个连接操作中间结果在A属性（可能是组合属性）上不同值的个数：</strong></p>
 </blockquote>
@@ -2533,21 +2543,23 @@ $$</p>
 <p><strong><code>Heuristic optimization</code></strong> transforms the query-tree by using a set of rules that typically (but not in all cases) improve execution performance:</p>
 <p>启发式优化通过使用一组规则来转换查询树，这些规则通常（但不是在所有情况下）都会提高执行性能：</p>
 <ul>
-<li>Perform <em>selection</em> early (reduces the number of tuples)</li>
-</ul>
+<li>
+<p>Perform <em>selection</em> early (reduces the number of tuples)</p>
 <p><strong>尽早进行选择操作。</strong>（减少中间结果元组个数）</p>
-<ul>
-<li>Perform <em>projection</em> early (reduces the number of attributes)</li>
-</ul>
+</li>
+<li>
+<p>Perform <em>projection</em> early (reduces the number of attributes)</p>
 <p><strong>尽早进行投影操作。</strong>（减少中间结果属性个数）</p>
-<ul>
-<li>Perform most restrictive selection and join operations (<strong>i.e</strong>. with smallest result size) before other similar operations.</li>
-</ul>
+</li>
+<li>
+<p>Perform most restrictive selection and join operations (<strong>i.e</strong>. with smallest result size) before other similar operations.</p>
 <p>在其他类似操作之前执行<strong>限制性最强的<code>选择（select）</code>和<code>连接（join）</code>操作</strong>（减少中间结果规模）。</p>
-<ul>
-<li>Perform left-deep join order</li>
-</ul>
+</li>
+<li>
+<p>Perform left-deep join order</p>
 <p><strong>利用左深连接树进行连接。即在为连接操作序列选择最优方案的时候，每次将序列S分为S-r与r，对这两个表选择最优连接方案。</strong>(减少时间复杂度)</p>
+</li>
+</ul>
 <h2 id="125-additional-optimization-techniques">12.5 Additional Optimization Techniques<a class="headerlink" href="#125-additional-optimization-techniques" title="Permanent link">&para;</a></h2>
 <h3 id="1251-nested-subqueries">12.5.1 Nested Subqueries<a class="headerlink" href="#1251-nested-subqueries" title="Permanent link">&para;</a></h3>
 <blockquote>
@@ -2655,20 +2667,22 @@ where ID in (select teaches.ID
 </li>
 <li>
 <p>projection:  </p>
+<p>For each tuple in a projection <span class="arithmatex">\(\Pi_A(r)\)</span>, we will keep a count of how many times it was derived.  </p>
+<ul>
+<li>
+<p>On <em>insert</em> of a tuple to r, if the resultant tuple is already in <span class="arithmatex">\(\Pi_A(r)\)</span> we increment its count, else we add a new tuple with count = 1</p>
+</li>
+<li>
+<p>On <em>delete</em> of a tuple from r, we decrement the count of the corresponding tuple in <span class="arithmatex">\(\Pi_A(r)\)</span> </p>
+<ul>
+<li>if the count becomes 0, we delete the tuple from <span class="arithmatex">\(\Pi_A(r)\)</span></li>
+</ul>
+<p><center>
+      <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131327847.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131327847.png" width = 80%/></a> </div>
+</center></p>
 </li>
 </ul>
-<p>For each tuple in a projection <span class="arithmatex">\(\Pi_A(r)\)</span>, we will keep a count of how many times it was derived.  </p>
-<div class="highlight"><pre><span></span><code>* On *insert* of a tuple to r, if the resultant tuple is already in $\Pi_A(r)$ we increment its count, else we add a new tuple with count = 1
-
-* On *delete* of a tuple from r, we decrement the count of the corresponding tuple in $\Pi_A(r)$
-
-  * if the count becomes 0, we delete the tuple from $\Pi_A(r)$
-
-  &lt;center&gt;
-         &lt;div align=center&gt; &lt;img src=&quot;https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405131327847.png&quot; width = 80%/&gt; &lt;/div&gt;
-  &lt;/center&gt;
-</code></pre></div>
-<ul>
+</li>
 <li>
 <p>count <span class="arithmatex">\(v= _Ag_{count(B)}\)</span></p>
 <ul>

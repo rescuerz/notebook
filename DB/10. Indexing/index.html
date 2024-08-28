@@ -22,7 +22,7 @@
     
     
       
-        <title>十. Indexing - rescuerz's notebook</title>
+        <title>10. Indexing - rescuerz's notebook</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#十-indexing" class="md-skip">
+        <a href="#10-indexing" class="md-skip">
           跳转至
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              十. Indexing
+              10. Indexing
             
           </span>
         </div>
@@ -1126,7 +1126,7 @@
         
   
   <span class="md-ellipsis">
-    六.Entity-Relationship Model
+    6. Entity-Relationship Model
   </span>
   
 
@@ -1147,7 +1147,7 @@
         
   
   <span class="md-ellipsis">
-    七. Relational Database Design
+    7. Relational Database Design
   </span>
   
 
@@ -1168,7 +1168,7 @@
         
   
   <span class="md-ellipsis">
-    八. Physical Storage Systems
+    8. Physical Storage Systems
   </span>
   
 
@@ -1189,7 +1189,7 @@
         
   
   <span class="md-ellipsis">
-    九. Data Storage Structures
+    9. Data Storage Structures
   </span>
   
 
@@ -1219,7 +1219,7 @@
           
   
   <span class="md-ellipsis">
-    十. Indexing
+    10. Indexing
   </span>
   
 
@@ -1230,7 +1230,7 @@
         
   
   <span class="md-ellipsis">
-    十. Indexing
+    10. Indexing
   </span>
   
 
@@ -1478,7 +1478,7 @@
         
   
   <span class="md-ellipsis">
-    十一. Query Processing
+    11. Query Processing
   </span>
   
 
@@ -1499,7 +1499,7 @@
         
   
   <span class="md-ellipsis">
-    十二. Query Optimization
+    12. Query Optimization
   </span>
   
 
@@ -1520,7 +1520,7 @@
         
   
   <span class="md-ellipsis">
-    十三. Transactions
+    13. Transactions
   </span>
   
 
@@ -1541,7 +1541,7 @@
         
   
   <span class="md-ellipsis">
-    十四. Concurrency Control
+    14. Concurrency Control
   </span>
   
 
@@ -1562,7 +1562,7 @@
         
   
   <span class="md-ellipsis">
-    十五. Recovery System
+    15. Recovery System
   </span>
   
 
@@ -2173,23 +2173,27 @@
   
 
 
-<h1 id="十-indexing">十. Indexing<a class="headerlink" href="#十-indexing" title="Permanent link">&para;</a></h1>
+<h1 id="10-indexing">10. Indexing<a class="headerlink" href="#10-indexing" title="Permanent link">&para;</a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 4731 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 24 分钟</p>
 </div>
-<div class="highlight"><pre><span></span><code>Basic Concepts
-Ordered Indices 
-B+-Tree Index
-B+-Tree File Organization 
-B-Tree Index Files
-Indices on Multiple Keys
-Indexing on Flash
-Indexing in Main Memory
-Write Optimized Indices
-Log Structured Merge (LSM) Tree
-Buffer Tree
-Bitmap Indices
-</code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<ul>
+<li>Basic Concepts</li>
+<li>Ordered Indices </li>
+<li>B+-Tree Index</li>
+<li>B+-Tree File Organization </li>
+<li>B-Tree Index Files</li>
+<li>Indices on Multiple Keys</li>
+<li>Indexing on Flash</li>
+<li>Indexing in Main Memory</li>
+<li>Write Optimized Indices</li>
+<li>Log Structured Merge (LSM) Tree</li>
+<li>Buffer Tree</li>
+<li>Bitmap Indices</li>
+</ul>
+</div>
 <h2 id="101-basic-concepts">10.1 Basic Concepts<a class="headerlink" href="#101-basic-concepts" title="Permanent link">&para;</a></h2>
 <p><strong>Indexing</strong> mechanisms used to <em><code>speed up access</code></em> to desired data.    </p>
 <p><strong>Search Key</strong> - attribute to set of attributes used to look up records in a file.  </p>
@@ -2257,25 +2261,26 @@ Bitmap Indices
 </center></p>
 <p>Primary index 是很宝贵的，只能有一个，其他都是辅助索引。    </p>
 <ul>
-<li><strong>Dense index(稠密索引)</strong> — Index record appears for every search-key value in the file.   </li>
-</ul>
+<li>
+<p><strong>Dense index(稠密索引)</strong> — Index record appears for every search-key value in the file.   </p>
 <p>每一个数据文件中的索引值，都要出现在索引文件里面。</p>
+</li>
+</ul>
 <p><strong><code>根据搜索结果，每一个搜索键值都有一个索引</code></strong></p>
 <p><center>
       <center>
       <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404291342716.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404291342716.png" width = 80%/></a> </div>
-<br />
-<div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404291342865.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404291342865.png" width = 80%/></a> </div></p>
-<p></center>
+      <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404291342865.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404291342865.png" width = 80%/></a> </div>
+      </center>
   </center></p>
 <ul>
-<li><strong>Sparse Index（稀疏索引）</strong>:  contains index records for only some search-key values.</li>
-</ul>
+<li>
+<p><strong>Sparse Index（稀疏索引）</strong>:  contains index records for only some search-key values.</p>
 <p>稀疏索引（稀疏索引）：<strong>仅包含某些搜索键值</strong>的索引记录。</p>
 <p><center>
       <center>
       <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404291343335.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404291343335.png" width = 80%/></a> </div>
-  </center>
+      </center>
   </center></p>
 <ul>
 <li>
@@ -2285,6 +2290,8 @@ Bitmap Indices
 <li>
 <p>Generally slower than dense index for locating records.</p>
 <p>用于查找记录，通常比密集索引慢，</p>
+</li>
+</ul>
 </li>
 </ul>
 <p>Good tradeoff: sparse index with an index entry for every block in file, corresponding to least search-key value in the block.</p>
@@ -2351,29 +2358,31 @@ Bitmap Indices
 </li>
 <li>
 <p>Leaf nodes must have between 3 and 5 <strong>values</strong> </p>
-</li>
-</ul>
 <p><strong><mark>between <span class="arithmatex">\(\lceil (n–1)/2\rceil\)</span> and <span class="arithmatex">\(n–1\)</span> values</mark></strong></p>
-<ul>
-<li>Non-leaf nodes <strong>other than root</strong> must have between 3 and 6 <strong>children</strong></li>
-</ul>
+</li>
+<li>
+<p>Non-leaf nodes <strong>other than root</strong> must have between 3 and 6 <strong>children</strong></p>
 <p><strong><mark>between <span class="arithmatex">\(\lceil n/2\rceil\)</span>  or <span class="arithmatex">\(\lfloor (n+1)/2 \rfloor\)</span>and <span class="arithmatex">\(n\)</span> children.</mark></strong></p>
 <p>相应的value的数量为between<span class="arithmatex">\(\lceil n/2\rceil - 1\)</span> and <span class="arithmatex">\(n–1\)</span></p>
-<ul>
-<li>Root must have at least 2 children.</li>
+</li>
+<li>
+<p>Root must have at least 2 children.</p>
+</li>
 </ul>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405032215662.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240503221526619" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405032215662.png" /></a></p>
 <h3 id="1031-observations-about-b-trees">10.3.1 Observations about B+-trees<a class="headerlink" href="#1031-observations-about-b-trees" title="Permanent link">&para;</a></h3>
 <p>如果有很多文件一次性建立 B+ 树，我们可以从叶子节点开始建立。</p>
 <ul>
-<li>Level below root has at least <span class="arithmatex">\(2 \times \lceil n/2\rceil\)</span> 指针</li>
-</ul>
+<li>
+<p>Level below root has at least <span class="arithmatex">\(2 \times \lceil n/2\rceil\)</span> 指针</p>
 <p><strong><code>每一个inner node 最少具有</code><span class="arithmatex">\(\lfloor (n+1)/2 \rfloor\)</span>个指针</strong></p>
 <p><strong>根结点至少有两个孩子</strong></p>
-<ul>
-<li>Next level has at least <span class="arithmatex">\(2 \times \lceil n/2\rceil \times \lceil n/2\rceil\)</span>指针s</li>
-</ul>
+</li>
+<li>
+<p>Next level has at least <span class="arithmatex">\(2 \times \lceil n/2\rceil \times \lceil n/2\rceil\)</span>指针s</p>
 <p>如果有 K 个索引项（K个根结点），则树高度不会超过 <span class="arithmatex">\(\lceil \log_{\lceil n/2 \rceil}(K/2)\rceil + 1\)</span>.  高度最小为 <span class="arithmatex">\(\log_n(K)\)</span></p>
+</li>
+</ul>
 <h3 id="1032-find--insert--delete">10.3.2 Find &amp; Insert &amp; Delete<a class="headerlink" href="#1032-find--insert--delete" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><strong>Example “Query on B+ Tree”</strong></p>
@@ -2394,10 +2403,8 @@ Bitmap Indices
 <blockquote>
 <p><strong>Example "Examples of Delete on B+-Tree"</strong></p>
 </blockquote>
-<p><center>
-    <div align=center> &lt;img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404291313693.png" width = 100% </div>
-</center>
-当一个blcok中的记录被删除时，判断此时这个叶结点中value的数量是否大于等于<span class="arithmatex">\(\lfloor n/2 \rfloor\)</span>。如果小于了，就要寻求与兄弟结点合并。</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408282155988.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240828215504786" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202408282155988.png" /></a></p>
+<p>当一个blcok中的记录被删除时，判断此时这个叶结点中value的数量是否大于等于<span class="arithmatex">\(\lfloor n/2 \rfloor\)</span>。如果小于了，就要寻求与兄弟结点合并。</p>
 <ul>
 <li>如果可以与兄弟结点合并，就要在合并之后，检查父亲结点的指针数目是否大于等于<span class="arithmatex">\(\lfloor (n+1)/2 \rfloor\)</span>,依次类推</li>
 <li>如果不能合并，兄弟节点的value已经满了。那么就从兄弟结点中借一条记录，补充到当前结点</li>
@@ -2418,13 +2425,15 @@ Bitmap Indices
 <p>两层太少，四层太多，可以判断出，表示1000000个person，需要这样的B+树恰好是三层。</p>
 <p><strong>求出用三层的n为187的B+树来表示1000000个person，所需结点数目的最小值和最大值</strong></p>
 <ul>
-<li>最大值：对于叶结点，让叶结点保留最少的value，也就是93，此时所需的叶结点数量最多,需要<span class="arithmatex">\(1000000 / 93 = 10752.69\)</span>,<strong><code>注意这里需要向下取整，否则会有叶结点的value小于93</code></strong>。第二层的计算和根结点的计算都是用最少的指针数94，需要<span class="arithmatex">\(\lfloor 10752/94 \rfloor = 114\)</span>,最后还需要一个根结点。</li>
-</ul>
+<li>
+<p>最大值：对于叶结点，让叶结点保留最少的value，也就是93，此时所需的叶结点数量最多,需要<span class="arithmatex">\(1000000 / 93 = 10752.69\)</span>,<strong><code>注意这里需要向下取整，否则会有叶结点的value小于93</code></strong>。第二层的计算和根结点的计算都是用最少的指针数94，需要<span class="arithmatex">\(\lfloor 10752/94 \rfloor = 114\)</span>,最后还需要一个根结点。</p>
 <p>最终需要<span class="arithmatex">\(10752 + 114 + 1 = 10867\)</span>个结点</p>
-<ul>
-<li>对于叶节点，最多有186个值，因此叶节点最少个数可以用<span class="arithmatex">\(1000000/186\)</span>，得到5736.344，<strong><code>注意这里要进行上取整，否则将至少有一个叶结点包含的值大于186个</code></strong>。其余第二层与根节点的计算以此类推，由于第二层的孩子个数最多为187个，因此第二层将5377除以187，并且向上取整。</li>
-</ul>
+</li>
+<li>
+<p>对于叶节点，最多有186个值，因此叶节点最少个数可以用<span class="arithmatex">\(1000000/186\)</span>，得到5736.344，<strong><code>注意这里要进行上取整，否则将至少有一个叶结点包含的值大于186个</code></strong>。其余第二层与根节点的计算以此类推，由于第二层的孩子个数最多为187个，因此第二层将5377除以187，并且向上取整。</p>
 <p>最终需要<span class="arithmatex">\(5377 + 29 + 1 = 5407\)</span>个结点</p>
+</li>
+</ul>
 <div>
     <div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202305081105237.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202305081105237.png" width = 80%/></a> </div>
 </div>
@@ -2435,18 +2444,20 @@ Bitmap Indices
 </blockquote>
 <p>文件组织  B+-Tree File Organization:</p>
 <ul>
-<li>Leaf nodes in a B+-tree file organization store records, instead of pointers  </li>
-</ul>
+<li>
+<p>Leaf nodes in a B+-tree file organization store records, instead of pointers  </p>
 <p>叶子节点不再放索引项，放记录本身。 </p>
-<ul>
-<li>Helps keep data records clustered even when there are insertions/deletions/updates  </li>
+</li>
+<li>
+<p>Helps keep data records clustered even when there are insertions/deletions/updates  </p>
+</li>
 </ul>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405041437502.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240504143702441" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405041437502.png" /></a></p>
 <p>我们可以改变<strong>半满</strong>的要求以提高空间利用率。</p>
 <h3 id="1041-other-issues-in-indexing">10.4.1 Other Issues in Indexing<a class="headerlink" href="#1041-other-issues-in-indexing" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Record relocation and secondary indices</strong></li>
-</ul>
+<li>
+<p><strong>Record relocation and secondary indices</strong></p>
 <p><strong>记录搬迁和辅助索引</strong>  </p>
 <p>If a record moves, all secondary indices that store record pointers have to be updated   </p>
 <p>如果记录移动，则必须更新存储记录指针的所有辅助索引</p>
@@ -2457,29 +2468,31 @@ Bitmap Indices
 <p><strong>例如：利用学生的名字找到primary key（辅助索引），再利用primary key对应物理地址（主索引），一旦地址改变，只需要修改主索引中的primary key即可</strong></p>
 <p><code>好处是：地址改变时只需要修改局部，坏处是：查找时需要先找到primary key，再通过primary key找到对应的地址</code></p>
 </blockquote>
-<ul>
-<li><strong>Variable length strings as keys 变长字符串作为key</strong>  </li>
-</ul>
+</li>
+<li>
+<p><strong>Variable length strings as keys 变长字符串作为key</strong>  </p>
 <p><strong>Variable fanout  使用空间利用率（space utilization）作为拆分的标准，而不是指针数</strong></p>
-<ul>
-<li><strong>Prefix compression 前缀压缩</strong>  </li>
-</ul>
+</li>
+<li>
+<p><strong>Prefix compression 前缀压缩</strong>  </p>
 <p>Key values at internal nodes can be prefixes of full key  </p>
 <p>内部节点的键值可以是完整键的前缀</p>
 <p><strong>Keep enough characters to distinguish entries in the subtrees separated by the key value</strong></p>
 <p><strong>保留足够的字符来区分子树中由键值分隔的条目</strong></p>
 <p>Keys in leaf node can be compressed by sharing common prefixes</p>
 <p>叶节点中的键可以通过共享公共前缀来压缩</p>
+</li>
+</ul>
 <h2 id="105-bulk-loading-and-bottom-up-build">10.5 Bulk Loading and Bottom-Up Build<a class="headerlink" href="#105-bulk-loading-and-bottom-up-build" title="Permanent link">&para;</a></h2>
 <h3 id="1051-bottom-up-build">10.5.1 Bottom-Up Build<a class="headerlink" href="#1051-bottom-up-build" title="Permanent link">&para;</a></h3>
 <p>Inserting entries one-at-a-time into a B+-tree requires <span class="arithmatex">\(\geq 1\)</span> IO per entry   </p>
 <p><strong>给定一大批的数据，需要建立B+树索引，相当于要一次性插入很多索引项</strong></p>
 <ul>
-<li><code>Efficient alternative 1: Insert in sorted order</code></li>
-</ul>
+<li>
+<p><code>Efficient alternative 1: Insert in sorted order</code></p>
 <p>先排序再插入，局部性较好，减少 I/O. </p>
 <p>缺点：大多数叶节点是半满的，B+树效率较低。</p>
-<ul>
+</li>
 <li>
 <p><code>Efficient alternative 2: Bottom-up B+-tree construction</code></p>
 <ul>
@@ -2488,13 +2501,13 @@ Bitmap Indices
 </li>
 <li>
 <p>Then create B+-tree layer-by-layer, starting with leaf level</p>
+<p>然后逐层创建 B+-tree，从叶级别开始</p>
+</li>
+<li>
+<p>The built B+-tree is written to disk using <strong>sequential I/O</strong> operations</p>
+<p>使用顺序 I/O 操作将构建的 B+ 树写入磁盘</p>
 </li>
 </ul>
-<p>然后逐层创建 B+-tree，从叶级别开始</p>
-<ul>
-<li>The built B+-tree is written to disk using <strong>sequential I/O</strong> operations</li>
-</ul>
-<p>使用顺序 I/O 操作将构建的 B+ 树写入磁盘</p>
 </li>
 </ul>
 <p><center>
@@ -2551,13 +2564,13 @@ Bitmap Indices
 </li>
 <li>
 <p>Binary search for a key value within a large B+-tree node results in many cache misses  </p>
+<p>二分查找可能带来很多 cache miss.  </p>
+</li>
+<li>
+<p>Data structures that make best use of cache preferable – <strong>cache conscious</strong>  </p>
+<p>最好利用cache的数据结构 - <strong>缓存意识</strong></p>
 </li>
 </ul>
-<p>二分查找可能带来很多 cache miss.  </p>
-<ul>
-<li>Data structures that make best use of cache preferable – <strong>cache conscious</strong>  </li>
-</ul>
-<p>最好利用cache的数据结构 - <strong>缓存意识</strong></p>
 </li>
 </ul>
 <p><strong>B+- trees with <em>small nodes</em> that fit in cache line are preferable to reduce cache misses  最好使用具有适合缓存行的 <em>小节点</em> 的 B+- 树来减少缓存miss</strong></p>
@@ -2577,10 +2590,10 @@ Bitmap Indices
 <h2 id="108-indexing-on-flash">10.8 Indexing on Flash<a class="headerlink" href="#108-indexing-on-flash" title="Permanent link">&para;</a></h2>
 <p>Flash 里不是即时修改，而是先擦掉再写。同时擦的次数是有限制的。因此最好的方法是从底构建，然后顺序写入。</p>
 <ul>
-<li>Random I/O cost much lower on flash  </li>
-</ul>
+<li>
+<p>Random I/O cost much lower on flash  </p>
 <p>20 to 100 microseconds for read/write</p>
-<ul>
+</li>
 <li>
 <p>Writes are not in-place, and (eventually) require a more expensive erase <strong>写入不是就地的，并且（最终）需要更昂贵的擦除</strong></p>
 </li>
@@ -2589,11 +2602,11 @@ Bitmap Indices
 </li>
 <li>
 <p>Bulk-loading still useful since it minimizes page erases</p>
-</li>
-</ul>
 <p><strong>批量加载仍然有用，因为它可以最大限度地减少页面擦除</strong></p>
-<ul>
-<li>Write-optimized tree structures (i.e., LSM-tree) have been adapted to minimize page writes for flash-optimized search trees  </li>
+</li>
+<li>
+<p>Write-optimized tree structures (i.e., LSM-tree) have been adapted to minimize page writes for flash-optimized search trees  </p>
+</li>
 </ul>
 <p>写优化索引结构 </p>
 <blockquote>
@@ -2624,29 +2637,33 @@ Bitmap Indices
 <li>
 <p>Benefits of LSM approach</p>
 <ul>
-<li>Inserts are done using only <strong>sequential I/O</strong> operations</li>
-</ul>
+<li>
+<p>Inserts are done using only <strong>sequential I/O</strong> operations</p>
 <p>仅使用<strong>顺序 I/O 操作</strong>完成插入</p>
-<ul>
-<li><strong>Leaves are full</strong>, avoiding space wastage</li>
-</ul>
+</li>
+<li>
+<p><strong>Leaves are full</strong>, avoiding space wastage</p>
 <p>叶子饱满，避免空间浪费</p>
-<ul>
-<li>Reduced number of I/O operations per record inserted as compared to normal B+-tree (up to some size)</li>
-</ul>
+</li>
+<li>
+<p>Reduced number of I/O operations per record inserted as compared to normal B+-tree (up to some size)</p>
 <p>与普通 B+ 树相比，<strong>每条记录插入的 I/O 操作数减少</strong>（最多一些大小）</p>
+</li>
+</ul>
 </li>
 <li>
 <p>Drawback of LSM approach</p>
 <ul>
-<li>Queries have to search multiple trees</li>
-</ul>
+<li>
+<p>Queries have to search multiple trees</p>
 <p><strong>假如我们要查找一个键值，本来我们只需要在一个B+树中查找，现在我们要在L0、L1、L2…这些B+树种，都要查找，查询代价增大。</strong></p>
-<ul>
-<li>Entire content of each level copied multiple times</li>
-</ul>
+</li>
+<li>
+<p>Entire content of each level copied multiple times</p>
 <p>每个level的全部内容被复制了多次</p>
 <p><strong>每次内存种的B+树满了以后都需要合并，合并次数太多。</strong></p>
+</li>
+</ul>
 </li>
 </ul>
 <blockquote>

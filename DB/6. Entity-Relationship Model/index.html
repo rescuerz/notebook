@@ -22,7 +22,7 @@
     
     
       
-        <title>六.Entity-Relationship Model - rescuerz's notebook</title>
+        <title>6. Entity-Relationship Model - rescuerz's notebook</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#六entity-relationship-model" class="md-skip">
+        <a href="#6-entity-relationship-model" class="md-skip">
           跳转至
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              六.Entity-Relationship Model
+              6. Entity-Relationship Model
             
           </span>
         </div>
@@ -1135,7 +1135,7 @@
         
   
   <span class="md-ellipsis">
-    六.Entity-Relationship Model
+    6. Entity-Relationship Model
   </span>
   
 
@@ -1157,7 +1157,7 @@
         
   
   <span class="md-ellipsis">
-    七. Relational Database Design
+    7. Relational Database Design
   </span>
   
 
@@ -1178,7 +1178,7 @@
         
   
   <span class="md-ellipsis">
-    八. Physical Storage Systems
+    8. Physical Storage Systems
   </span>
   
 
@@ -1199,7 +1199,7 @@
         
   
   <span class="md-ellipsis">
-    九. Data Storage Structures
+    9. Data Storage Structures
   </span>
   
 
@@ -1220,7 +1220,7 @@
         
   
   <span class="md-ellipsis">
-    十. Indexing
+    10. Indexing
   </span>
   
 
@@ -1241,7 +1241,7 @@
         
   
   <span class="md-ellipsis">
-    十一. Query Processing
+    11. Query Processing
   </span>
   
 
@@ -1262,7 +1262,7 @@
         
   
   <span class="md-ellipsis">
-    十二. Query Optimization
+    12. Query Optimization
   </span>
   
 
@@ -1283,7 +1283,7 @@
         
   
   <span class="md-ellipsis">
-    十三. Transactions
+    13. Transactions
   </span>
   
 
@@ -1304,7 +1304,7 @@
         
   
   <span class="md-ellipsis">
-    十四. Concurrency Control
+    14. Concurrency Control
   </span>
   
 
@@ -1325,7 +1325,7 @@
         
   
   <span class="md-ellipsis">
-    十五. Recovery System
+    15. Recovery System
   </span>
   
 
@@ -1721,28 +1721,26 @@
   
 
 
-<h1 id="六entity-relationship-model">六.Entity-Relationship Model<a class="headerlink" href="#六entity-relationship-model" title="Permanent link">&para;</a></h1>
+<h1 id="6-entity-relationship-model">6. Entity-Relationship Model<a class="headerlink" href="#6-entity-relationship-model" title="Permanent link">&para;</a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 4269 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 4 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 21 分钟</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 4272 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 4 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 21 分钟</p>
 </div>
 <h1 id="实体关系模型">实体关系模型<a class="headerlink" href="#实体关系模型" title="Permanent link">&para;</a></h1>
 <p><strong>Database Design Process</strong></p>
 <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011334484.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011334484.png" width = 80%/></a> </div>
 
-<blockquote>
-<p><strong>Example</strong></p>
-</blockquote>
+<div class="admonition example">
+<p class="admonition-title">Example of Entity-Relationship Model</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011336090.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240401133652021" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011336090.png" /></a></p>
+</div>
 <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011335015.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011335015.png" width = 100%/></a> </div>
 
 <ul>
 <li>一个方形框就是一个实体的集合，下面列出其属性。</li>
 <li>
 <p>实体与实体之间有关系，一个<strong>菱形框表示关系relationship</strong>。  </p>
-</li>
-<li>
-<p>至多一个(<span class="arithmatex">\(\leftarrow, \rightarrow\)</span>) 单向箭头，一个学生一定会有instructor，但是instructor不一定有学生<strong><code>被指的有多个指的</code></strong></p>
-</li>
+<ul>
+<li>至多一个(<span class="arithmatex">\(\leftarrow, \rightarrow\)</span>) 单向箭头，一个学生一定会有instructor，但是instructor不一定有学生<strong><code>被指的有多个指的</code></strong></li>
 <li>一对一（双向箭头）</li>
 <li>
 <p>多对多（直线）</p>
@@ -1760,6 +1758,8 @@
 <li>每一个section都有对应的sec_course，但是一个course能有多个section，也就是能有多个班级</li>
 <li>每一个section都有上课的时间，sec_time_slot,但是一个sec_time_slot能有多个section上课</li>
 <li>每一个section都有上课的班级，但是一个sec_class能有多个section</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -1796,15 +1796,17 @@
 <p>实体是存在且<strong>可与其他对象区分开来</strong>的对象。</p>
 <p><strong><em>e.g.</em></strong> specific person, company, event, plant</p>
 <ul>
-<li>Entities have <strong>attributes</strong>    </li>
-</ul>
+<li>
+<p>Entities have <strong>attributes</strong>    </p>
 <p>实体具有属性</p>
-<p><strong><em>e.g.</em></strong> people have names and addresses      </p>
-<ul>
-<li>An <strong>entity set</strong> is a set of entities of the same type that share the same properties.  </li>
-</ul>
+<p><strong><em>e.g.</em></strong> people have names and addresses    </p>
+</li>
+<li>
+<p>An <strong>entity set</strong> is a set of entities of the same type that share the same properties.  </p>
 <p><em>实体集是一组共享相同属性的相同类型的实体。</em></p>
 <p><strong><em>e.g.</em></strong> set of all persons, companies, trees, holidays</p>
+</li>
+</ul>
 <p>Entity sets can be represented graphically as follows:</p>
 <ul>
 <li>Rectangles represent entity sets.</li>
@@ -1863,16 +1865,16 @@
 </li>
 <li>
 <p><strong>Single-valued（单值）</strong> and <strong>multivalued（多值）</strong> attributes  </p>
-</li>
-</ul>
 <p><strong><em>e.g.</em></strong> multivalued attribute: <code>phone_numbers</code>  </p>
-<ul>
+</li>
 <li>
 <p><strong>Derived（派生）</strong> attributes</p>
 <ul>
-<li>Can be computed from other attributes  通过其他属性计算出来</li>
-</ul>
+<li>
+<p>Can be computed from other attributes  通过其他属性计算出来</p>
 <p><strong><em>e.g.</em></strong> <code>age</code>, given <code>date_of_birth</code></p>
+</li>
+</ul>
 <p><center>
     <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011333682.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011333682.png" width = 100%/></a> </div>
   <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011419814.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011419814.png" alt="image-20240401141926733" style="zoom:33%;" /></a></p>
@@ -1904,24 +1906,28 @@
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404071948999.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404071948999.png" /></a></p>
 <p>一个学生最多和一个老师关联，一个老师最多和一个学生关联</p>
 <ol>
-<li>一对多</li>
-</ol>
+<li>
+<p>一对多</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404071949186.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240407194947160" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404071949186.png" /></a></p>
 <p>一个学生最多有一个老师指导，一个老师可以指导多名学生</p>
-<ol>
-<li>多对多</li>
-</ol>
+</li>
+<li>
+<p>多对多</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404071950278.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240407195026252" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404071950278.png" /></a></p>
 <p>教师可以与多个（可能是 0 个）学生相关联 ， 一个学生可以与多个（可能是 0 个）教师相关联</p>
+</li>
+</ol>
 <h3 id="615-total-and-partial-participation">6.1.5 Total and Partial Participation<a class="headerlink" href="#615-total-and-partial-participation" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Total participation</strong> (indicated by double line): every entity in the entity set participates in at least one relationship in the relationship set  </li>
-</ul>
+<li>
+<p><strong>Total participation</strong> (indicated by double line): every entity in the entity set participates in at least one relationship in the relationship set    </p>
 <p>所有元素都要参与关系</p>
-<ul>
-<li><strong>Partial participation</strong>: some entities may not participate in any relationship in the relationship set</li>
-</ul>
+</li>
+<li>
+<p><strong>Partial participation</strong>: some entities may not participate in any relationship in the relationship set</p>
 <p>部分参与：某些实体可能不参与关系集中的任何关系</p>
+</li>
+</ul>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404071952903.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240407195233870" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404071952903.png" /></a></p>
 <blockquote>
 <p><strong>双横线和单横线的区别</strong></p>
@@ -2000,41 +2006,40 @@
 <h2 id="62-reduction-to-relational-schemas">6.2 Reduction to Relational Schemas<a class="headerlink" href="#62-reduction-to-relational-schemas" title="Permanent link">&para;</a></h2>
 <p>一个 ER 图可以转换成多种模式（图数据库、面向对象、关系模式等）</p>
 <ul>
-<li>A <strong>strong entity set</strong> reduces to a schema with the same attributes <code>course(course_id, title, credits)</code></li>
-</ul>
+<li>
+<p>A <strong>strong entity set</strong> reduces to a schema with the same attributes <code>course(course_id, title, credits)</code></p>
 <p>普通的entity直接转化为关系模式即可。强实体集简化为具有相同属性的架构</p>
-<ul>
-<li>A <strong>weak entity set</strong> becomes a table that includes a column for the primary key of the identifying strong entity set.    </li>
-</ul>
+</li>
+<li>
+<p>A <strong>weak entity set</strong> becomes a table that includes a column for the primary key of the identifying strong entity set.    </p>
 <p>Primary key of the table is the union of the discriminator of the weak entity set and  the primary key of the identifying strong entity set.   </p>
 <p><strong>表的主键是弱实体集的discriminator（partial key）和标识强实体集的主键的并集</strong></p>
-<div class="highlight"><pre><span></span><code>`section(course_id, sec_id, semester, year)`
-</code></pre></div>
-<ul>
+<p><code>section(course_id, sec_id, semester, year)</code></p>
+</li>
 <li>
 <p>A <strong>many-to-many relationship set</strong> is represented as a schema with attributes for the primary keys of the two participating entity sets, and <em>any descriptive attributes</em> of the relationship set. 
   <strong>即两个集合的主键拼起来，加上关系的附带属性。</strong>  </p>
 <p><center>
         <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011333039.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011333039.png" width = 80%/></a> </div>
- </center></p>
+ </center>
+  <code>advisor = (s_id, i_id)</code></p>
 </li>
-</ul>
-<p>​    <code>advisor = (s_id, i_id)</code></p>
-<ul>
-<li><strong>Many-to-one and one-to-many</strong> relationship sets that are total on the many-side can be represented by adding an extra attribute to the “many” side, containing the primary key of the “one” side.  </li>
-</ul>
+<li>
+<p><strong>Many-to-one and one-to-many</strong> relationship sets that are total on the many-side can be represented by adding an extra attribute to the “many” side, containing the primary key of the “one” side.  </p>
 <p><strong>多对一可以不转换为单独的关系模式，直接在“多“那个表上添加”一“的主键即可</strong>。</p>
 <p><center>
-        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404072030619.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404072030619.png" width = 80%/></a> </div>
-  </center></p>
+      <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404072030619.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404072030619.png" width = 80%/></a> </div>
+</center></p>
 <p><code>inst_dept</code> 本质就是将 <code>instructor</code> 和 <code>department</code> 合并，在 <code>instrutor</code> 的属性上添加 <code>dept_name</code>.   </p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011452918.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240401145224840" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011452918.png" /></a></p>
 <p><strong>primary key (含义)相同的表可以合并， instructor 和 inst_dept可以合并</strong></p>
 <blockquote>
 <p><strong>各有利弊，第一种写法表可能会太多，第二种写法合在一起表可能太大，不利于管理。</strong></p>
 </blockquote>
-<ul>
-<li>一对一关系，任选一方的primary key 作为主键</li>
+</li>
+<li>
+<p>一对一关系，任选一方的primary key 作为主键</p>
+</li>
 </ul>
 <h3 id="621-composite-and-multivalued-attributes">6.2.1 Composite and Multivalued Attributes<a class="headerlink" href="#621-composite-and-multivalued-attributes" title="Permanent link">&para;</a></h3>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404072037220.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404072037220.png" alt="image-20240407203744172" style="zoom:33%;" /></a></p>
@@ -2067,44 +2072,51 @@
 <p><strong>利用一对多的性质，把many的主键拿过来，最终的section(course_id, sec_id, semester, year, building, room_number, time_slot_id)</strong></p>
 <blockquote>
 <ol>
-<li><strong>在把ER图转化为关系模式时，entity的哪种属性必须单独转化为一个关系模式？</strong></li>
+<li>
+<p><strong>在把ER图转化为关系模式时，entity的哪种属性必须单独转化为一个关系模式？</strong></p>
+<ul>
 <li><strong>组合属性：平铺即可</strong></li>
 <li><strong>多值属性：必须转化</strong></li>
-<li>
-<p><strong>导出属性（derived attribute）：未知</strong></p>
+<li><strong>导出属性（derived attribute）：未知</strong></li>
+</ul>
 </li>
 <li>
 <p><strong>在把ER图转化为关系模式时，哪种relationship set必须单独转化为一个关系模式</strong></p>
-</li>
+<ul>
 <li><strong>一对一：特殊版的一对多</strong></li>
 <li><strong>一对多/多对一：把主键添加到另一个entity即可，非强制</strong></li>
 <li><strong>多对多：强制，两个entity的主键的组合</strong></li>
+</ul>
+</li>
 </ol>
 </blockquote>
 <h2 id="63-design-issues">6.3 Design Issues<a class="headerlink" href="#63-design-issues" title="Permanent link">&para;</a></h2>
 <h3 id="631-common-mistakes-in-e-r-diagrams">6.3.1 Common Mistakes in E-R Diagrams<a class="headerlink" href="#631-common-mistakes-in-e-r-diagrams" title="Permanent link">&para;</a></h3>
 <ul>
-<li>信息冗余  </li>
-</ul>
+<li>
+<p>信息冗余  </p>
 <p>student 的 <code>dept_name</code> 应该去掉</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011520868.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240401152055792" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011520868.png" /></a></p>
 <p>不然转化为关系模型之后，dept_name会出现两次</p>
-<ul>
-<li>关系属性使用不当  </li>
-</ul>
+</li>
+<li>
+<p>关系属性使用不当  </p>
 <p>这里一门课可能有很多次作业，不能只用一个实体。</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011522412.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240401152200340" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011522412.png" /></a></p>
-<div class="highlight"><pre><span></span><code>解决方法：
-</code></pre></div>
+<p>解决方法：</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011522668.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240401152242599" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011522668.png" /></a></p>
 <p>把assignment新拉出来，section有作业assignment，作业对每个学生来说有成绩mark_in</p>
+</li>
+</ul>
 <h3 id="632-use-of-entity-sets-vs-attributes">6.3.2 Use of entity sets vs. attributes<a class="headerlink" href="#632-use-of-entity-sets-vs-attributes" title="Permanent link">&para;</a></h3>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011525908.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240401152517850" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011525908.png" /></a></p>
 <p><strong><code>phone_number可以作为一个属性，也可以扩充作为一个实体entity</code></strong></p>
 <ul>
 <li>第一种方法，明确放一个电话号码。</li>
-<li>第二种方法，电话号码可以附属更多属性，一个电话号码可以由多人共享。（如办公室的公共电话）</li>
+<li>第二种方法，电话号码可以附属更多属性，一个电话号码可以由多人共享。（如办公室的公共电话）<ul>
 <li>好处：信息更多，可以共享； 坏处：表变多了</li>
+</ul>
+</li>
 </ul>
 <h3 id="633-use-of-entity-sets-vs-relationship-sets">6.3.3 Use of entity sets vs. relationship sets<a class="headerlink" href="#633-use-of-entity-sets-vs-relationship-sets" title="Permanent link">&para;</a></h3>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011528489.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240401152852386" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404011528489.png" /></a></p>

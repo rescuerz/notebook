@@ -22,7 +22,7 @@
     
     
       
-        <title>十四. Concurrency Control - rescuerz's notebook</title>
+        <title>14. Concurrency Control - rescuerz's notebook</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#十四-concurrency-control" class="md-skip">
+        <a href="#14-concurrency-control" class="md-skip">
           跳转至
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              十四. Concurrency Control
+              14. Concurrency Control
             
           </span>
         </div>
@@ -1126,7 +1126,7 @@
         
   
   <span class="md-ellipsis">
-    六.Entity-Relationship Model
+    6. Entity-Relationship Model
   </span>
   
 
@@ -1147,7 +1147,7 @@
         
   
   <span class="md-ellipsis">
-    七. Relational Database Design
+    7. Relational Database Design
   </span>
   
 
@@ -1168,7 +1168,7 @@
         
   
   <span class="md-ellipsis">
-    八. Physical Storage Systems
+    8. Physical Storage Systems
   </span>
   
 
@@ -1189,7 +1189,7 @@
         
   
   <span class="md-ellipsis">
-    九. Data Storage Structures
+    9. Data Storage Structures
   </span>
   
 
@@ -1210,7 +1210,7 @@
         
   
   <span class="md-ellipsis">
-    十. Indexing
+    10. Indexing
   </span>
   
 
@@ -1231,7 +1231,7 @@
         
   
   <span class="md-ellipsis">
-    十一. Query Processing
+    11. Query Processing
   </span>
   
 
@@ -1252,7 +1252,7 @@
         
   
   <span class="md-ellipsis">
-    十二. Query Optimization
+    12. Query Optimization
   </span>
   
 
@@ -1273,7 +1273,7 @@
         
   
   <span class="md-ellipsis">
-    十三. Transactions
+    13. Transactions
   </span>
   
 
@@ -1303,7 +1303,7 @@
           
   
   <span class="md-ellipsis">
-    十四. Concurrency Control
+    14. Concurrency Control
   </span>
   
 
@@ -1314,7 +1314,7 @@
         
   
   <span class="md-ellipsis">
-    十四. Concurrency Control
+    14. Concurrency Control
   </span>
   
 
@@ -1514,7 +1514,7 @@
         
   
   <span class="md-ellipsis">
-    十五. Recovery System
+    15. Recovery System
   </span>
   
 
@@ -2077,18 +2077,22 @@
   
 
 
-<h1 id="十四-concurrency-control">十四. Concurrency Control<a class="headerlink" href="#十四-concurrency-control" title="Permanent link">&para;</a></h1>
+<h1 id="14-concurrency-control">14. Concurrency Control<a class="headerlink" href="#14-concurrency-control" title="Permanent link">&para;</a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 6724 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 34 分钟</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 6723 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 34 分钟</p>
 </div>
-<div class="highlight"><pre><span></span><code>    * Lock-Based Protocols（基于锁的协议）
-    * Deadlock Handling （死锁处理）
-    * Multiple Granularity （多粒度）
-    * Insert and Delete Operations
-    * Multiversion Schemes （多版本机制）
-    * timestamp-Based Protocols （基于时间戳的协议）
-    * Validation-Based Protocols （基于有效性的协议）
-</code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<ul>
+<li>Lock-Based Protocols（基于锁的协议）</li>
+<li>Deadlock Handling （死锁处理）</li>
+<li>Multiple Granularity （多粒度）</li>
+<li>Insert and Delete Operations</li>
+<li>Multiversion Schemes （多版本机制）</li>
+<li>timestamp-Based Protocols （基于时间戳的协议）</li>
+<li>Validation-Based Protocols （基于有效性的协议）</li>
+</ul>
+</div>
 <h2 id="141-lock-based-protocols">14.1 Lock-Based Protocols<a class="headerlink" href="#141-lock-based-protocols" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>基于锁的并发控制</strong></p>
@@ -2096,13 +2100,15 @@
 <p>A lock is a mechanism to control concurrent access to a data item</p>
 <p>锁是一种控制对数据项的并发访问的机制</p>
 <ul>
-<li><strong><em>exclusive(X)</em></strong>   <strong>排他锁</strong></li>
-</ul>
+<li>
+<p><strong><em>exclusive(X)</em></strong>   <strong>排他锁</strong></p>
 <p>Data item can be both read as well as written. <strong><code>X-lock is requested using lock-X instruction</code></strong>.</p>
-<ul>
-<li><strong><em>shared(X)</em></strong>   <strong>共享锁</strong></li>
-</ul>
+</li>
+<li>
+<p><strong><em>shared(X)</em></strong>   <strong>共享锁</strong></p>
 <p>Data item can only be read. <strong><code>S-lock is requested using lock-S instruction</code></strong>.</p>
+</li>
+</ul>
 <p><strong>要写一个数据，先申请获得 X 锁；要读一个数据，先申请获得 S 锁。</strong>  </p>
 <p>访问结束后释放这个锁。</p>
 <p><strong><code>访问数据之前必须获得对应的锁，如果锁冲突了需要等待。</code></strong></p>
@@ -2161,8 +2167,8 @@
 <p><strong>Extensions to <code>basic two-phase locking</code>（基本两阶段封锁） needed to ensure recoverability of freedom from cascading roll-back</strong></p>
 <p><strong>扩展基本两阶段封锁，以确保从级联回滚中恢复自由</strong></p>
 <ul>
-<li><strong>Strict two-phase locking（严格两阶段封锁）</strong>: </li>
-</ul>
+<li>
+<p><strong>Strict two-phase locking（严格两阶段封锁）</strong>: </p>
 <p>a transaction must <strong>hold all its exclusive locks till it commits/aborts.</strong>  </p>
 <p><strong><code>所有的X锁需要在事务即将提交或者停止时才能解锁</code></strong></p>
 <p>Ensures recoverability and avoids cascading roll-backs.  </p>
@@ -2171,14 +2177,18 @@
 <p><strong>好处：保证可恢复性，防止读脏数据的问题。</strong></p>
 <p><strong><code>坏处：代价是X锁的时间更长，其他事务等待的时间变长，会降低并发度</code>。</strong></p>
 </blockquote>
-<ul>
-<li><strong>Rigorous two-phase locking（强两阶段封锁）</strong>: </li>
-</ul>
+</li>
+<li>
+<p><strong>Rigorous two-phase locking（强两阶段封锁）</strong>: </p>
 <p>a transaction must <strong>hold all locks till commit/abort.</strong>   </p>
 <p><strong><code>所有的锁（S锁和X锁）都需要在事务即将提交或者停止时才能释放</code></strong></p>
 <p>transactions can be serialized in the order in which they commit.  </p>
 <blockquote>
 <p><strong>所有锁都要到即将提交或者即将回滚的时候再放开。</strong></p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
 <p><strong><code>Two-phase locking is not a necessary condition for serializability.</code></strong></p>
 <p><strong>两阶段封锁协议是可串行化的充分条件</strong></p>
 <p><strong>两阶段封锁协议，不是可串行化的必要条件</strong></p>
@@ -2198,19 +2208,23 @@
 </blockquote>
 <h3 id="1412-2pl---proof">14.1.2 2PL - Proof<a class="headerlink" href="#1412-2pl---proof" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Proof by Contradiction  </li>
-</ul>
+<li>
+<p>Proof by Contradiction  </p>
 <p>如果有 <span class="arithmatex">\(T_i\)</span>-&gt;<span class="arithmatex">\(Tj\)</span> 的有向边，那 <span class="arithmatex">\(T_i\)</span> 的 lockpoint 一定小于 <span class="arithmatex">\(Tj\)</span>.  </p>
-<p><span class="arithmatex">\(T_i\)</span>-&gt;<span class="arithmatex">\(Tj\)</span> 肯定有一个冲突的访问（对同一个数据）那 <span class="arithmatex">\(Tj\)</span> 在获得锁的时候<span class="arithmatex">\(T_i\)</span>已经放锁了，得证。</p>
+<p><span class="arithmatex">\(T_i\)</span>-&gt;<span class="arithmatex">\(Tj\)</span> 肯定有一个冲突的访问（对同一个数据）那 <span class="arithmatex">\(Tj\)</span> 在获得锁的时候<span class="arithmatex">\(T_i\)</span>已经放锁了，得证。
+<br />
 <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271334556.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271334556.png" width = 80%/></a> </div>
-
-<ul>
-<li>Proof by Induction  </li>
-</ul>
+</p>
+</li>
+<li>
+<p>Proof by Induction  </p>
 <p>只需证明: Lock point 最小的事务，可以无障碍地交换到调度最前。 </p>
-<p>假如有事务拦住他了，证明这是不可能发生的。（与 lock point 最小矛盾）</p>
+<p>假如有事务拦住他了，证明这是不可能发生的。（与 lock point 最小矛盾）
+<br />
 <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271334521.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405271334521.png" width = 80%/></a> </div>
-
+</p>
+</li>
+</ul>
 <p><strong><span class="arithmatex">\(OP_j\)</span> block operation <span class="arithmatex">\(OP_i\)</span>， <span class="arithmatex">\(OP_j\)</span>先对D进行上锁，在<span class="arithmatex">\(OP_j\)</span>完成解锁之后，才能执行<span class="arithmatex">\(OP_i\)</span>的上锁操作，所以<span class="arithmatex">\(T_j\)</span>的lock point早于<span class="arithmatex">\(T_i\)</span>的lock point</strong></p>
 <h3 id="1413-lock-conversions">14.1.3 Lock Conversions<a class="headerlink" href="#1413-lock-conversions" title="Permanent link">&para;</a></h3>
 <blockquote>
@@ -2293,8 +2307,6 @@
 </li>
 <li>
 <p><strong>Impose partial ordering</strong> of all data items and require that a transaction can lock data items only in the order specified by the partial order (graph-based protocol).  </p>
-</li>
-</ul>
 <blockquote>
 <p><strong><code>对数据访问规定一种次序</code></strong>。比如规定必须先拿咖啡再拿咖啡伴侣。  </p>
 <p><strong>对数据的访问规定一种次序（偏序集）（有向无环图），那么就不会产生死锁（循环等待）。</strong></p>
@@ -2306,20 +2318,22 @@
 <p>T1: A-50 B+50</p>
 <p>T2: A+10 B-10</p>
 <p>这样，可以降低出现死锁的概率。<strong><code>规定先访问A，再访问B。T1事务先给A上锁，此时T2事务将无法执行，知道T1事务完成对B上锁，对A，B都解锁之后，才执行事务B</code></strong></p>
+</li>
+</ul>
 <p><strong>timeout-Based Schemes</strong>:  </p>
 <ul>
-<li><strong><code>a transaction waits for a lock only for a specified amount of time</code></strong>. After that, the wait times out and the transaction is rolled back.   </li>
-</ul>
+<li>
+<p><strong><code>a transaction waits for a lock only for a specified amount of time</code></strong>. After that, the wait times out and the transaction is rolled back.   </p>
 <p>事务仅在指定的时间内等待锁定。等待超时，事务将回滚。  </p>
-<ul>
+</li>
 <li>
 <p>thus deadlocks are not possible.  </p>
 </li>
 <li>
 <p>simple to implement; but starvation is possible. Also difficult to determine good value of the timeout interval.  </p>
+<p>时长不好规定。但可能有事务老是申请不到自己的锁。</p>
 </li>
 </ul>
-<p>时长不好规定。但可能有事务老是申请不到自己的锁。</p>
 <h3 id="1423-deadlock-detection">14.2.3 Deadlock Detection<a class="headerlink" href="#1423-deadlock-detection" title="Permanent link">&para;</a></h3>
 <p>定期检查数据库内是否有死锁，如果有就选择一个事务将其回滚。  </p>
 <p><strong>wait-for graph</strong></p>
@@ -2385,41 +2399,43 @@
 </li>
 <li>
 <p>The first lock by <span class="arithmatex">\(T_i\)</span> may be on any data item. Subsequently, a data Q can be locked by <span class="arithmatex">\(T_i\)</span> only if the parent of Q is currently locked by <span class="arithmatex">\(T_i\)</span>  </p>
-</li>
-</ul>
 <p><strong>第一个锁可以加在树结构的任意一个结点上。</strong> <strong>但是，后面要在某一个结点上加锁的前提是，<code>父节点</code>已经被锁住了。</strong></p>
-<ul>
-<li>Data items may be unlocked at any time. </li>
-</ul>
+</li>
+<li>
+<p>Data items may be unlocked at any time. </p>
 <p><strong>一个结点上的锁，在数据访问完毕后，可以在任何时候放掉。</strong></p>
-<ul>
-<li>A data item that has been locked and unlocked by <span class="arithmatex">\(T_i\)</span> cannot subsequently be relocked by <span class="arithmatex">\(T_i\)</span> </li>
-</ul>
+</li>
+<li>
+<p>A data item that has been locked and unlocked by <span class="arithmatex">\(T_i\)</span> cannot subsequently be relocked by <span class="arithmatex">\(T_i\)</span> </p>
 <p>放了之后不能再加锁了。  </p>
 <blockquote>
 <p><strong>The tree protocol ensures conflict serializability as well as freedom from deadlock.</strong></p>
 <p><strong>树协议的性质：虽然不是两阶段封锁协议，但是保证冲突可串行化的，同时，又是不存在死锁的。</strong></p>
 </blockquote>
+</li>
+</ul>
 <details class="example">
 <summary>Example</summary>
-</details>
 <p><center>
         <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405201530869.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405201530869.png" width = 50%/></a> </div>
 </center></p>
+</details>
 <p>比如这里我们先锁 D, 随后锁 G, 放掉, 锁 H, (<strong>但是不能锁J，因为父结点H还没有上锁</strong>)这时 D 已经没用了可以放掉。随后我们锁 J, H 也就没用了也可以放掉。最后放掉  J. </p>
 <p><strong><code>要访问G，J，需要先对最小公共祖先上锁</code></strong></p>
 <ul>
 <li>
 <p>Advantages</p>
 <ul>
-<li>Unlocking may occur earlier in the tree-locking protocol than in the two-phase locking protocol.  </li>
-</ul>
+<li>
+<p>Unlocking may occur earlier in the tree-locking protocol than in the two-phase locking protocol.  </p>
 <p>shorter waiting times, and increase in concurrency  </p>
 <p>锁可以更早释放，不用等待第二阶段。用完就可以放，提高了并发度。</p>
-<ul>
-<li>protocol is <strong>deadlock-free</strong>  <strong><code>树结构，显然不存在环</code></strong></li>
-</ul>
+</li>
+<li>
+<p>protocol is <strong>deadlock-free</strong>  <strong><code>树结构，显然不存在环</code></strong></p>
 <p>no rollbacks are required</p>
+</li>
+</ul>
 <blockquote>
 <p><strong>树协议的好处：一个数据的访问的锁，访问完毕就可以释放，因此可以提高并发度，降低锁上面的等待时间。并且，不会产生死锁。</strong></p>
 </blockquote>
@@ -2427,19 +2443,21 @@
 <li>
 <p>Disadvantages</p>
 <ul>
-<li><strong><code>Protocol does not guarantee recoverability or cascade freedom</code></strong>  </li>
-</ul>
+<li>
+<p><strong><code>Protocol does not guarantee recoverability or cascade freedom</code></strong>  </p>
 <p>Need to introduce commit dependencies to ensure recoverability  </p>
 <p>早放锁，意味着可能会读脏数据，不可恢复。这就对 commit 顺序有要求。</p>
-<ul>
+</li>
 <li>
 <p>transactions may have to <strong><code>lock more data items than needed.</code></strong></p>
 <ul>
-<li>increased locking overhead, and additional waiting time  </li>
-</ul>
+<li>
+<p>increased locking overhead, and additional waiting time  </p>
 <p><strong>比如刚刚的图中，我们访问 G, J, 需要从 D 开始访问。会锁上更多数据。</strong>  </p>
-<ul>
-<li>potential decrease in concurrency</li>
+</li>
+<li>
+<p>potential decrease in concurrency</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -2563,18 +2581,20 @@
 <p>刚刚的例子中, 10 不在范围内，但我们把这页都锁住了，仍然插不进去，影响了并发度。 </p>
 <p><strong>Next-key locking protocol: provides higher concurrency</strong></p>
 <ul>
-<li>Lock all values that satisfy index lookup (match lookup value, or fall in lookup range)</li>
-</ul>
+<li>
+<p>Lock all values that satisfy index lookup (match lookup value, or fall in lookup range)</p>
 <p><strong>锁定所有满足索引查找的值（匹配查找值，或落在查找范围内）</strong></p>
-<ul>
-<li>Also lock next key value in index  </li>
-</ul>
+</li>
+<li>
+<p>Also lock next key value in index  </p>
 <p><strong><code>同时锁定索引中的下一个键值</code></strong></p>
 <p>even for inserts/deletes</p>
-<ul>
-<li>Lock mode: S for lookups, X for insert/delete/update</li>
-</ul>
+</li>
+<li>
+<p>Lock mode: S for lookups, X for insert/delete/update</p>
 <p><strong>锁定模式：S 用于查找，X 用于插入/删除/更新</strong></p>
+</li>
+</ul>
 <div class="admonition example">
 <p class="admonition-title">Next-Key Locking</p>
 </div>
@@ -2609,18 +2629,20 @@
 </ul>
 </blockquote>
 <ol>
-<li>更新事务的操作：</li>
-</ol>
+<li>
+<p>更新事务的操作：</p>
 <p><strong>申请read and write锁，遵守强两阶段封锁协议，所有的S锁和X锁需要在事务即将commit或者abort的时候才能释放。每次成功写入后会创建一个新的版本号，对应的时间戳为正无穷（防止读取脏数据），知道commit的时候，时间戳变为最新版本号+1</strong></p>
 <p>Each version of a data item has a single timestamp whose value is obtained from a counter ts-counter that is incremented during commit processing.</p>
 <p>数据项的每个版本都有一个时间戳，其值是从在提交处理期间<strong><code>递增的计数器 ts</code></strong> 计数器中获取的。</p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405301603136.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240530160338079" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405301603136.png" /></a></p>
-<ol>
-<li>只读事务的操作</li>
-</ol>
+</li>
+<li>
+<p>只读事务的操作</p>
 <p><strong>在开始执行之前，通过读取 ts-counter 的当前值来分配时间戳。</strong></p>
 <p><strong>当只读事务 <span class="arithmatex">\(T_i\)</span> 发出 read（Q） 时，返回的值是时间戳为小于或等于 TS（<span class="arithmatex">\(T_i\)</span>） 的最大时间戳的版本的内容</strong></p>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405301604506.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240530160421467" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405301604506.png" /></a></p>
+</li>
+</ol>
 <blockquote>
 <p><strong>创建多个版本会增加存储开销</strong></p>
 <ul>

@@ -22,7 +22,7 @@
     
     
       
-        <title>十三. Transactions - rescuerz's notebook</title>
+        <title>13. Transactions - rescuerz's notebook</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#十三-transactions" class="md-skip">
+        <a href="#13-transactions" class="md-skip">
           跳转至
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              十三. Transactions
+              13. Transactions
             
           </span>
         </div>
@@ -1126,7 +1126,7 @@
         
   
   <span class="md-ellipsis">
-    六.Entity-Relationship Model
+    6. Entity-Relationship Model
   </span>
   
 
@@ -1147,7 +1147,7 @@
         
   
   <span class="md-ellipsis">
-    七. Relational Database Design
+    7. Relational Database Design
   </span>
   
 
@@ -1168,7 +1168,7 @@
         
   
   <span class="md-ellipsis">
-    八. Physical Storage Systems
+    8. Physical Storage Systems
   </span>
   
 
@@ -1189,7 +1189,7 @@
         
   
   <span class="md-ellipsis">
-    九. Data Storage Structures
+    9. Data Storage Structures
   </span>
   
 
@@ -1210,7 +1210,7 @@
         
   
   <span class="md-ellipsis">
-    十. Indexing
+    10. Indexing
   </span>
   
 
@@ -1231,7 +1231,7 @@
         
   
   <span class="md-ellipsis">
-    十一. Query Processing
+    11. Query Processing
   </span>
   
 
@@ -1252,7 +1252,7 @@
         
   
   <span class="md-ellipsis">
-    十二. Query Optimization
+    12. Query Optimization
   </span>
   
 
@@ -1282,7 +1282,7 @@
           
   
   <span class="md-ellipsis">
-    十三. Transactions
+    13. Transactions
   </span>
   
 
@@ -1293,7 +1293,7 @@
         
   
   <span class="md-ellipsis">
-    十三. Transactions
+    13. Transactions
   </span>
   
 
@@ -1493,7 +1493,7 @@
         
   
   <span class="md-ellipsis">
-    十四. Concurrency Control
+    14. Concurrency Control
   </span>
   
 
@@ -1514,7 +1514,7 @@
         
   
   <span class="md-ellipsis">
-    十五. Recovery System
+    15. Recovery System
   </span>
   
 
@@ -2077,22 +2077,21 @@
   
 
 
-<h1 id="十三-transactions">十三. Transactions<a class="headerlink" href="#十三-transactions" title="Permanent link">&para;</a></h1>
+<h1 id="13-transactions">13. Transactions<a class="headerlink" href="#13-transactions" title="Permanent link">&para;</a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 5542 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 8 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 28 分钟</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 5538 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 8 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 28 分钟</p>
 </div>
-<blockquote>
-<p><strong>Abstract</strong></p>
-</blockquote>
-<div class="highlight"><pre><span></span><code>Transaction Concept
-
-* A Simple Transaction Model
-  * Concurrent Executions
-  * Serializability
-  * Recoverability
-  * Transaction Isolation Levels 
-  * Transaction Definition in SQL
-</code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<ul>
+<li>A Simple Transaction Model</li>
+<li>Concurrent Executions</li>
+<li>Serializability</li>
+<li>Recoverability</li>
+<li>Transaction Isolation Levels </li>
+<li>Transaction Definition in SQL</li>
+</ul>
+</div>
 <h2 id="131-transaction-concept">13.1 Transaction Concept<a class="headerlink" href="#131-transaction-concept" title="Permanent link">&para;</a></h2>
 <p>A <strong>transaction</strong> is a unit of program execution that accesses and  possibly updates various data items.  事务是程序执行的单元，用于访问并可能更新各种数据项。（<strong><code>原子性的操作</code></strong>）</p>
 <p><strong><em>e.g.</em></strong> transaction to transfer $50 from account A to account B  </p>
@@ -2106,49 +2105,55 @@
 <span class="k">commit</span><span class="p">;</span>
 </code></pre></div>
 <ul>
-<li>Failures of various kinds, such as hardware failures and system crashes</li>
-</ul>
+<li>
+<p>Failures of various kinds, such as hardware failures and system crashes</p>
 <p>各种故障，如硬件故障和系统崩溃</p>
-<ul>
-<li>Concurrent execution of multiple transactions</li>
-</ul>
+</li>
+<li>
+<p>Concurrent execution of multiple transactions</p>
 <p>并发执行多个事务</p>
+</li>
+</ul>
 <blockquote>
 <p><strong><code>ACID Properties</code></strong></p>
 </blockquote>
 <ul>
-<li><strong>Atomicity（原子性）：要么事务的所有操作都正确反映在数据库中，要么没有（全有或者全无）</strong></li>
-</ul>
+<li>
+<p><strong>Atomicity（原子性）：要么事务的所有操作都正确反映在数据库中，要么没有（全有或者全无）</strong></p>
 <p>由数据库恢复功能保证</p>
-<ul>
-<li><strong>Consistency（一致性）</strong>  </li>
-</ul>
+</li>
+<li>
+<p><strong>Consistency（一致性）</strong>  </p>
 <p>保证数据库内的内容正确性，与实际业务相符。如转账是一个人余额减少一个人增加。  </p>
 <p><strong>在隔离状态下执行事务，可以保证数据库的信息一致性。保证数据库内容的正确性。</strong></p>
-<ul>
-<li><strong>Isolation（隔离性）</strong>  </li>
-</ul>
+</li>
+<li>
+<p><strong>Isolation（隔离性）</strong>  </p>
 <p>尽管有多个事务同时执行，但每个事务必须不知道其他同时执行的任务。必须对其他并发执行的事务隐藏中间的事务结果。<strong>即一个事务不会被另一个事务所影响。</strong></p>
 <blockquote>
 <p><strong>满足隔离性，最理想的情况就是一个事务执行完毕后再执行下一个事务。但是出于性能上的考虑，往往实际上是多个事务并发执行。这就要求事务执行的过程中，不受并行执行的事务影响。例如，不能读取到另一个还没有commit的事务写入的值。</strong></p>
 </blockquote>
-<ul>
-<li><strong>Durability（持久性）</strong>  </li>
-</ul>
+</li>
+<li>
+<p><strong>Durability（持久性）</strong>  </p>
 <p>事务提交后被缓存，掉电不能失去 buffer 里的内容。  </p>
 <p><strong>事务成功完成后，即使系统出现故障，事务对数据库的影响也应当永久存在。</strong></p>
+</li>
+</ul>
 <h2 id="132-a-simple-transaction-model">13.2 A Simple Transaction Model<a class="headerlink" href="#132-a-simple-transaction-model" title="Permanent link">&para;</a></h2>
 <p>这个模型中，把<strong>事务对数据库的修改简化为读写(不考虑insert和delete)两种操作。</strong>  </p>
 <p><strong><code>Transactions access data using two operations:(事务通过两种操作访问数据)</code></strong>  </p>
 <ul>
-<li><strong>read(X)</strong>, which transfers the data item X from the database to a variable, also called X， in  a <strong><code>work area</code></strong>  in  main  memory  belonging to the transaction that  executed the read  operation.  </li>
-</ul>
+<li>
+<p><strong>read(X)</strong>, which transfers the data item X from the database to a variable, also called X， in  a <strong><code>work area</code></strong>  in  main  memory  belonging to the transaction that  executed the read  operation.  </p>
 <p>它将<strong><code>数据项 X 从数据库传输到主内存</code></strong>中属于执行读取操作的事务的<strong>工作区中的变量</strong>（也称为 X）。</p>
 <p>如果数据在buffer中，通过read操作将数据读取到work area，如果数据不在buffer中，先通过input将数据从disk读取到buffer，再执行将数据从buffer 读取到work area</p>
-<ul>
-<li><strong>write(X)</strong>, which transfers the value in the variable X  in the main memory <strong><code>work area</code></strong> of the transaction that executed the write operation to the data item X in database.   </li>
-</ul>
+</li>
+<li>
+<p><strong>write(X)</strong>, which transfers the value in the variable X  in the main memory <strong><code>work area</code></strong> of the transaction that executed the write operation to the data item X in database.   </p>
 <p>它将执行写入操作的事务的<strong><code>主内存工作区中变量 X 中的值传输到数据库中的数据项 X</code></strong>。</p>
+</li>
+</ul>
 <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405181654026.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405181654026.png" width = 80%/></a> </div>
 
 <blockquote>
@@ -2159,12 +2164,12 @@
         <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405181640975.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405181640975.png" width = 80%/></a> </div>
 </center></p>
 <ul>
-<li>Atomicity requirement   </li>
-</ul>
+<li>
+<p>Atomicity requirement   </p>
 <p>如果事务在步骤 3 之后和步骤 6 之前失败，则资金将“丢失”，从而导致数据库状态不一致
-  故障可能是由于软件或硬件造成的
-  系统应确保部分执行的事务的更新不会反映在数据库中（如果执行结束之后出现了问题，数据库应该要撤销之前的操作）</p>
-<ul>
+故障可能是由于软件或硬件造成的
+系统应确保部分执行的事务的更新不会反映在数据库中（如果执行结束之后出现了问题，数据库应该要撤销之前的操作）</p>
+</li>
 <li>
 <p>Durability requirement  </p>
 <p>如果事务结束了，我们就把更新同步</p>
@@ -2172,14 +2177,16 @@
 <li>
 <p>Consistency requirement  </p>
 <ul>
-<li>Explicitly（显式） specified integrity constraints </li>
-</ul>
+<li>
+<p>Explicitly（显式） specified integrity constraints </p>
 <p><strong><em>e.g.</em></strong> primary keys , foreign keys  </p>
 <p>数据库把这个定义放在内部，会自己维护</p>
-<ul>
-<li>Implicit （隐式） integrity constraints </li>
-</ul>
+</li>
+<li>
+<p>Implicit （隐式） integrity constraints </p>
 <p><strong><em>e.g.</em></strong> sum of balances of all accounts minus sum of loan amounts must equal value of cash-in-hand</p>
+</li>
+</ul>
 <blockquote>
 <p><strong>在事务执行期间，数据库可能会暂时不一致。</strong>
 <strong>当事务成功完成时，数据库必须保持一致。错误的事务逻辑可能导致不一致</strong></p>
@@ -2187,13 +2194,13 @@
 </li>
 <li>
 <p>Isolation requirement  </p>
-</li>
-</ul>
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405201341730.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240520134100497" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405201341730.png" /></a></p>
 <p>在 step 3 6 之间，另一个事务如果可以访问这个被部分更新的数据库，那么A+B 会小于正确答案。<strong>这是因为破坏了隔离性。</strong></p>
 <blockquote>
 <p><strong>隔离性要求：执行事务串行（one after another）</strong></p>
 </blockquote>
+</li>
+</ul>
 <h3 id="1321-transaction-state">13.2.1 Transaction State<a class="headerlink" href="#1321-transaction-state" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
@@ -2202,14 +2209,12 @@
 </li>
 <li>
 <p><strong>Partially committed</strong> – after the final statement has been executed.  </p>
-</li>
-</ul>
 <p>如果事务的操作，已经执行了最后一条语句，就进入准备提交阶段。能否提交取决于具体的执行。</p>
-<ul>
-<li><strong>Failed</strong> -- after the discovery that normal execution can no longer proceed.  </li>
-</ul>
+</li>
+<li>
+<p><strong>Failed</strong> -- after the discovery that normal execution can no longer proceed.  </p>
 <p>不能正常提交。或者是执行过程中发现问题。</p>
-<ul>
+</li>
 <li>
 <p><strong>Aborted（中止）</strong> – after the transaction has been rolled back and the database restored to its state prior to the start of the transaction.  Two options after it has been aborted:、</p>
 <p><strong>事务回滚并将数据库恢复到事务开始前的状态之后(要将该事务进行过的所有操作全部清空)</strong></p>
@@ -2229,14 +2234,16 @@
 <p><strong><code>允许多个事务在系统中同时运行的优点是：</code></strong></p>
 </blockquote>
 <ul>
-<li><strong>increased processor and disk utilization，leading to better transaction <em>throughput</em></strong></li>
-</ul>
+<li>
+<p><strong>increased processor and disk utilization，leading to better transaction <em>throughput</em></strong></p>
 <p><strong>提高处理器和磁盘利用率，从而提高事务吞吐量</strong></p>
 <p>E.g. one transaction can be using the CPU while another is reading from or writing to the disk</p>
-<ul>
-<li><strong>reduced average response time for transactions: short transactions need not wait behind long ones.</strong> </li>
-</ul>
+</li>
+<li>
+<p><strong>reduced average response time for transactions: short transactions need not wait behind long ones.</strong> </p>
 <p><strong>减少事务响应时间</strong></p>
+</li>
+</ul>
 <p>事务是并发执行的，如果不加以控制可能会有以下问题  </p>
 <p><strong>Anomalies in Concurrent Executions 并发执行中的异常</strong></p>
 <ul>
@@ -2389,11 +2396,13 @@
 <p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405201430362.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202405201430362.png" alt="image-20240520143001280" style="zoom:33%;" /></a></p>
 <blockquote>
 <ol>
-<li><strong>A schedule is conflict serializable if and only if its precedence graph is acyclic.</strong></li>
-</ol>
+<li>
+<p><strong>A schedule is conflict serializable if and only if its precedence graph is acyclic.</strong></p>
 <p><strong>调度是冲突可串行化的当且仅当前驱图是无环图</strong></p>
-<ol>
-<li><strong>如果有向图不存在环，那么这些事务将是冲突可串行化的，并且串行化以后这些事务的执行顺序是对有向图进行<code>拓扑排序</code>的顺序。</strong></li>
+</li>
+<li>
+<p><strong>如果有向图不存在环，那么这些事务将是冲突可串行化的，并且串行化以后这些事务的执行顺序是对有向图进行<code>拓扑排序</code>的顺序。</strong></p>
+</li>
 </ol>
 </blockquote>
 <div class="admonition example">
@@ -2405,11 +2414,13 @@
 <ul>
 <li>T1 的 readY 和 T2 的 writeY 冲突，由于T1的readY靠前，所以画一条从T1指向T2的线段</li>
 <li>T1 的 readZ 和 T3 的 writeZ 冲突，需要一条从T1指向T3的边</li>
-<li>……</li>
-</ul>
+<li>
+<p>……</p>
 <p>进行拓扑排序（<strong><code>选择入度为0的点</code></strong>），先选择T1，然后将T1出发的边都删除，可以发现T2和T3的入度都是0，此时存在两种情况。</p>
-<ul>
-<li>T1，T2，T3，T4</li>
+</li>
+<li>
+<p>T1，T2，T3，T4</p>
+</li>
 <li>T1，T3，T2，T4</li>
 <li>T5可以随机放置，五种情况。最后有 10 种调度方式。</li>
 </ul>
@@ -2514,37 +2525,41 @@
 <h2 id="135-transaction-isolation-levels">13.5 Transaction Isolation Levels<a class="headerlink" href="#135-transaction-isolation-levels" title="Permanent link">&para;</a></h2>
 <p>A database must provide a mechanism that will ensure that all possible schedules are </p>
 <ul>
-<li>either <em>conflict or view serializable</em>, and   </li>
-</ul>
+<li>
+<p>either <em>conflict or view serializable</em>, and   </p>
 <p>保证可串行的</p>
-<ul>
-<li>are <em>recoverable</em> and preferably cascadeless  </li>
-</ul>
+</li>
+<li>
+<p>are <em>recoverable</em> and preferably cascadeless  </p>
 <p>保证可恢复的（最好是非级联）</p>
+</li>
+</ul>
 <p>数据库里提供一种协议，每个事务要遵从协议，遵从协议下产生的调度一定是可串行、可恢复的。  这是完全的隔离，代价比较高。</p>
 <p>In SQL <strong><code>set transaction isolation level serializable</code></strong></p>
 <p>我们可以设置数据库的隔离级别。</p>
 <ul>
-<li><strong>Serializable</strong> — default  </li>
-</ul>
+<li>
+<p><strong>Serializable</strong> — default  </p>
 <p><strong>意味着四种问题（幽灵问题、不可重复度、读脏数据、丢失修改）都不能存在。</strong></p>
-<ul>
-<li><strong>Repeatable read</strong> — only committed records to be read, repeated reads of same record must return same value.  </li>
-</ul>
+</li>
+<li>
+<p><strong>Repeatable read</strong> — only committed records to be read, repeated reads of same record must return same value.  </p>
 <p><strong>However, a transaction may not be serializable – it may find some records inserted by a transaction but not find others.</strong>  <strong><code>不管幽灵问题。</code></strong></p>
-<ul>
-<li><strong>Read committed</strong> — only committed records can be read, but successive reads of record may return different (but committed) values.  </li>
-</ul>
+</li>
+<li>
+<p><strong>Read committed</strong> — only committed records can be read, but successive reads of record may return different (but committed) values.  </p>
 <blockquote>
 <p><strong>只读别的事务已经提交的数据</strong></p>
 </blockquote>
 <p><strong>（不关心幽灵问题，也不关心不可重复读问题，但要保证不读脏数据）</strong></p>
-<ul>
-<li><strong>Read uncommitted</strong> — even uncommitted records may be read.  </li>
-</ul>
+</li>
+<li>
+<p><strong>Read uncommitted</strong> — even uncommitted records may be read.  </p>
 <blockquote>
 <p><strong>别的事务未提交的更改过的数据也可以读（连脏数据也允许读）。</strong></p>
 </blockquote>
+</li>
+</ul>
 <p>Lower degrees of consistency useful for gathering approximate information about the database </p>
 <h2 id="136-concurrency-control-protocols">13.6 Concurrency Control Protocols<a class="headerlink" href="#136-concurrency-control-protocols" title="Permanent link">&para;</a></h2>
 <blockquote>
@@ -2555,19 +2570,21 @@
 <li>
 <p>Lock-Based Protocols <strong>基于锁的协议</strong></p>
 <ul>
-<li>Lock on whole database vs lock on items  </li>
-</ul>
+<li>
+<p>Lock on whole database vs lock on items  </p>
 <p>读之前要访问一个共享锁，写之前要访问一个排他锁，冲突了就要等待。通过锁就规定了一个执行的次序。</p>
 <p><strong>共享锁（读锁）（S锁）</strong></p>
 <p><strong>独占锁（写锁）（X锁）</strong></p>
 </li>
+</ul>
+</li>
 <li>
 <p>Timestamp-Based  Protocols <strong>基于时间戳的协议</strong></p>
 <ul>
-<li>Transaction timestamp assigned <strong><em>e.g.</em></strong> when a transaction begins   </li>
-</ul>
+<li>
+<p>Transaction timestamp assigned <strong><em>e.g.</em></strong> when a transaction begins   </p>
 <p><strong><code>事务执行时分配一个时间戳。执行次序按照时间戳排序。</code></strong></p>
-<ul>
+</li>
 <li>
 <p>Data items store two timestamps</p>
 <ul>
