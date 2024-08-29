@@ -1,0 +1,3984 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="rescuerz's notebook">
+      
+      
+      
+      
+        <link rel="prev" href="../1.%20Introduce/">
+      
+      
+        <link rel="next" href="../3.%20Arithmetic%20for%20Computer/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>二. Instructions: Language of the Computer - rescuerz's notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+      <link rel="stylesheet" href="../../supports/css/base.css">
+    
+      <link rel="stylesheet" href="../../supports/css/theme.css">
+    
+      <link rel="stylesheet" href="../../supports/css/admonitions.css">
+    
+      <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#二-instructions-language-of-the-computer" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-header__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            rescuerz's notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              二. Instructions: Language of the Computer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rescuerz/notebook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/notebook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ADS/" class="md-tabs__link">
+          
+  
+    
+  
+  Computer Science
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../DB/" class="md-tabs__link">
+          
+  
+    
+  
+  System
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../CV/" class="md-tabs__link">
+          
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="rescuerz&#39;s notebook" class="md-nav__button md-logo" aria-label="rescuerz's notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    rescuerz's notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rescuerz/notebook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rescuerz/notebook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更新记录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    友链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Computer Science
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../ADS/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    高级数据结构与算法分析
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            高级数据结构与算法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/1.%20AVL_tree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. AVL Tree &amp; Splay Tree
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/2.%20Red%20Black%20Tree%20%26%20B%2B%20Tree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Red Black Tree &amp; B+ Tree
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/3.%20Inverted%20File%20Index/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Inverted File Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/4.%20Leftist%20Heaps%20and%20Skew%20Heaps/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Leftist Heap &amp; Skew Heap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/5.%20Binomial%20Queue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Binomial Queue
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/6.%20backtracking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Backtracking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/7.%20Divide%20%26%20Conquer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7. Divide &amp; Conquer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/8.%20Dynamic%20Programming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8. Dynamic Programming
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/9.%20Greedy%20Algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9. Greedy Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/10.%20NP-Completeness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10. NP-Completeness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/11.%20Approximation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11. Approximation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/12.%20Local%20Search/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12. Local Search
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/13.%20Randomized%20Algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13. Randomized Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/14.%20Parallel%20Algorithm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14. Parallel Algorithm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ADS/15.%20External%20Sorting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15. External Sorting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    System
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../DB/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    数据库系统
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            数据库系统
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/1.%20Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/2.%20Relational%20Model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Relational Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/3.%20SQL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. SQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/6.%20Entity-Relationship%20Model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Entity-Relationship Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/7.%20Relational%20Database%20Design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7. Relational Database Design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/8.%20Physical%20Storage%20Systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8. Physical Storage Systems
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/9.%20Data%20Storage%20Structures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9. Data Storage Structures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/10.%20Indexing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10. Indexing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/11.%20Query%20Processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11. Query Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/12.%20Query%20Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12. Query Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/13.%20Transaction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13. Transactions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/14.%20Concurrency%20Control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14. Concurrency Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DB/15.%20Recovery%20System/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15. Recovery System
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    计算机组成与设计
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算机组成与设计
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20Introduce/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    一. Introduce
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    二. Instructions: Language of the Computer
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    二. Instructions: Language of the Computer
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Operation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-operands-of-the-computer-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Operands of the Computer Hardware
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Operands of the Computer Hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-register-operands" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.1 Register Operands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-memory-operands" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.2 Memory Operands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-registers-vs-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.3 Registers vs. Memory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#234-constant-or-immediate-operands" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.4 Constant or Immediate Operands
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-signed-and-unsigned-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Signed and Unsigned Number
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-representing-instructions-in-the-computer" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 Representing Instructions in the Computer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 Representing Instructions in the Computer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251-r-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.1 R-format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252-i-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.2 I-format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#253-s-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.3 S-format
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-logical-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6 Logical Operations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.6 Logical Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#261-shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.1 Shift
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#262-and" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.2 AND
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#263-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.3 OR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#264-xor" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.4 XOR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-instructions-for-making-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7 Instructions for making decisions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7 Instructions for making decisions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#271-branc-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7.1 Branc instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#272-slt-instruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7.2 slt instruction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#273-signed-vs-unsigned" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7.3 Signed vs. Unsigned
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#274-caseswitch" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7.4 Case/Switch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-supporting-procedures-in-computer-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.8 Supporting Procedures in Computer Hardware
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.8 Supporting Procedures in Computer Hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#281-procedure-call-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.8.1 Procedure Call Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#282-using-more-registers" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.8.2 Using More Registers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#283-nested-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.8.3 Nested Procedure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-communicating-with-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.9 Communicating with People
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#210-risc-v-addressing-for-32-bit-immediate-and-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.10 RISC-V Addressing for 32-Bit Immediate and Addresses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.10 RISC-V Addressing for 32-Bit Immediate and Addresses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2101-wide-bit-immediate-addressing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.10.1 Wide Bit Immediate addressing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2102-branch-addressing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.10.2 Branch Addressing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2103-jump-addressing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.10.3 Jump Addressing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2104-risc-v-addressing-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.10.4 RISC-V Addressing Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#211-synchronization-in-risc-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.11 Synchronization in RISC-V
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-translating-and-starting-a-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.12 Translating and starting a program
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213--a-c-sort-example-to-put-it-all-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.13  A C Sort Example To Put it All Together
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#214-arrays-versus-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.14 Arrays versus Pointers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#215-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.15 Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20Arithmetic%20for%20Computer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    三. Arithmetic for Computer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%20The%20Processor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    四. The Processor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.%20Large%20and%20Fast%20Exploiting%20Memory%20Hierarchy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    五. Large and Fast: Exploiting Memory Hierarchy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%20Storage%2C%20Networks%20and%20Other%20Peripherals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    六. Storage, Networks and Other Peripherals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Artificial Intelligence
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Artificial Intelligence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../CV/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Computer Vision
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Vision
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture1_Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture2_Image_Classification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image_Classification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture3_Linear_Classifiers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear_Classifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture4_Optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture5_Neural_Networks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Neural Network
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture6_Backpropagation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Backpropagation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture7_ConvolutionalNetworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convolutional Neural Networks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture8_CNN_Architectures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CNN Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Lecture9_Hardware_and_Software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardware and Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Operation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-operands-of-the-computer-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Operands of the Computer Hardware
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Operands of the Computer Hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-register-operands" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.1 Register Operands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-memory-operands" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.2 Memory Operands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-registers-vs-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.3 Registers vs. Memory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#234-constant-or-immediate-operands" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.4 Constant or Immediate Operands
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-signed-and-unsigned-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Signed and Unsigned Number
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-representing-instructions-in-the-computer" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 Representing Instructions in the Computer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 Representing Instructions in the Computer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251-r-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.1 R-format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252-i-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.2 I-format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#253-s-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.3 S-format
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-logical-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6 Logical Operations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.6 Logical Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#261-shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.1 Shift
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#262-and" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.2 AND
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#263-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.3 OR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#264-xor" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.4 XOR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-instructions-for-making-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7 Instructions for making decisions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7 Instructions for making decisions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#271-branc-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7.1 Branc instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#272-slt-instruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7.2 slt instruction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#273-signed-vs-unsigned" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7.3 Signed vs. Unsigned
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#274-caseswitch" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7.4 Case/Switch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-supporting-procedures-in-computer-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.8 Supporting Procedures in Computer Hardware
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.8 Supporting Procedures in Computer Hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#281-procedure-call-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.8.1 Procedure Call Instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#282-using-more-registers" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.8.2 Using More Registers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#283-nested-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.8.3 Nested Procedure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-communicating-with-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.9 Communicating with People
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#210-risc-v-addressing-for-32-bit-immediate-and-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.10 RISC-V Addressing for 32-Bit Immediate and Addresses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.10 RISC-V Addressing for 32-Bit Immediate and Addresses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2101-wide-bit-immediate-addressing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.10.1 Wide Bit Immediate addressing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2102-branch-addressing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.10.2 Branch Addressing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2103-jump-addressing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.10.3 Jump Addressing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2104-risc-v-addressing-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.10.4 RISC-V Addressing Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#211-synchronization-in-risc-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.11 Synchronization in RISC-V
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-translating-and-starting-a-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.12 Translating and starting a program
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213--a-c-sort-example-to-put-it-all-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.13  A C Sort Example To Put it All Together
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#214-arrays-versus-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.14 Arrays versus Pointers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#215-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.15 Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/rescuerz/notebook/blob/main/docs/CO/2. Instructions Language of the Computer.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/rescuerz/notebook/raw/main/docs/CO/2. Instructions Language of the Computer.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="二-instructions-language-of-the-computer">二. Instructions: Language of the Computer<a class="headerlink" href="#二-instructions-language-of-the-computer" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 5185 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 66 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 27 分钟</p>
+</div>
+<h2 id="21-introduction">2.1 Introduction<a class="headerlink" href="#21-introduction" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<ul>
+<li>
+<p>Language of the machine</p>
+<ul>
+<li>Instructions (Statement)</li>
+<li>Instruction Set (Syntax)</li>
+</ul>
+</li>
+<li>
+<p>Design goal</p>
+<ul>
+<li>
+<p>Maximize performance  </p>
+<p>同样资源的情况下性能大</p>
+</li>
+<li>
+<p>Minimize cost  </p>
+<p>同样性能的情况下成本低</p>
+</li>
+<li>
+<p>Reduce design time </p>
+<p>指令集简单，易于理解</p>
+</li>
+</ul>
+</li>
+<li>
+<p>我们使用的是 RISC-V 架构</p>
+</li>
+</ul>
+</div>
+<p>Instruction Characteristics</p>
+<div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202303151112148.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202303151112148.png" width = 50%/></a> </div>
+
+<p>指令集基本的结构：Operation 操作; Operand 操作数</p>
+<ul>
+<li>不同指令集，指令的编码可以不同。如 000 表示加法，这也叫指令的 <strong>Encoding</strong>.  </li>
+<li>操作数位宽可以不同，可以是立即数/寄存器/内存。 </li>
+</ul>
+<p>通用存储器：</p>
+<ul>
+<li>register-register</li>
+<li>memory-register</li>
+</ul>
+<h2 id="22-operation">2.2 Operation<a class="headerlink" href="#22-operation" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Every computer must be able to perform <em>arithmetic</em>.    </p>
+<ul>
+<li>Only one operation per instruction  </li>
+<li>Exactly <strong><em>3</em></strong> variables <strong><em>e.g.</em></strong> <code>add a, b, c</code> 即 <span class="arithmatex">\(a\leftarrow b+c\)</span><br />
+    注意结果放在第一个位置，这样易于解码  </li>
+</ul>
+</li>
+<li>
+<p><strong>Design Principle 1 - Simplicity favors regularity.</strong>  （<strong>简单源自规整，指令包含三个操作数</strong>）</p>
+<ul>
+<li>
+<p>C code
+  <div class="highlight"><pre><span></span><code><span class="w">   </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">);</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>RISC-V code
+  <div class="highlight"><pre><span></span><code>add t0, g, h
+add t1, i, j
+sub f, t0, t1
+</code></pre></div></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="23-operands-of-the-computer-hardware">2.3 Operands of the Computer Hardware<a class="headerlink" href="#23-operands-of-the-computer-hardware" title="Permanent link">&para;</a></h2>
+<h3 id="231-register-operands">2.3.1 Register Operands<a class="headerlink" href="#231-register-operands" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Arithmetic instructions use register operands.</p>
+</li>
+<li>
+<p>RISC-V has a <span class="arithmatex">\(32\times 64\)</span>-bit register file</p>
+<ul>
+<li>Use for frequently accessed data</li>
+<li><strong><code>32-bit data is called a **word**. 64-bit is called a double word.</code></strong></li>
+<li>we call them <code>x0</code> to <code>x31</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Design Principle 2 - Smaller is faster.</strong>   </p>
+<p><strong>寄存器不是越多越好，多了之后访问慢。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th>Register Name</th>
+<th>Usage</th>
+<th>Preserved on call?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">x0</td>
+<td>0</td>
+<td>The constant value 0</td>
+<td>n.a.</td>
+</tr>
+<tr>
+<td style="text-align: left;">x1(ra)</td>
+<td>1</td>
+<td>Return address(link register)</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x2(sp)</td>
+<td>2</td>
+<td>Stack pointer</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x3(gp)</td>
+<td>3</td>
+<td>Global pointer</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x4(tp)</td>
+<td>4</td>
+<td>Thread pointer</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x5-x7</td>
+<td>5-7</td>
+<td>Temporaries</td>
+<td>no</td>
+</tr>
+<tr>
+<td style="text-align: left;">x8-x9</td>
+<td>8-9</td>
+<td>Saved</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x10-x17</td>
+<td>10-17</td>
+<td>Arguments/results</td>
+<td>no</td>
+</tr>
+<tr>
+<td style="text-align: left;">x18-x27</td>
+<td>18-27</td>
+<td>Saved</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x28-x31</td>
+<td>28-31</td>
+<td>Temporaries</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>"为什么寄存器 <code>x0</code> 一直为 0 ? "</strong>      </p>
+<p><strong>Make the common fast. 因为经常有 0 参与计算，将其存在一个寄存器中，便于计算。</strong></p>
+<p><strong>preserved on call 表示在使用之前需要保存原先数值</strong></p>
+</blockquote>
+<p>x8-x9 saved:用之前有数据，需要先将数据存入stack，运算结束之后，恢复原先的数据</p>
+<p>x10-x17 argument/result：传递结果</p>
+</li>
+</ul>
+<h3 id="232-memory-operands">2.3.2 Memory Operands<a class="headerlink" href="#232-memory-operands" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Data transfer instructions</p>
+<ul>
+<li><code>Load</code>: Load values from memory to register; <strong>load doubleword(ld)</strong></li>
+<li><code>Store</code>: Store result from register to memory; <strong>store doubleword(sd)</strong></li>
+</ul>
+<blockquote>
+<p><strong><code>只有load和store指令能够访问内存</code></strong></p>
+</blockquote>
+</li>
+<li>
+<p><strong>Memory is <em>byte addressed</em>.   字节寻址</strong></p>
+<p>RISC-V architecture 的地址是 64 位的，地址为字节地址，因此总共可以寻址 $2^{64} $个字节，即 <span class="arithmatex">\(2^{61}\)</span> 个 double word </p>
+</li>
+<li>
+<p>RISC-V is <strong>Little Endian</strong>  </p>
+<blockquote>
+<p><strong>Example "Little vs Big Endian"</strong></p>
+</blockquote>
+<ul>
+<li><strong>小端：数据的高字节（most significant bit）存放在高地址；数据的低字节(least significant bit)存放在低地址</strong></li>
+<li>大端相反   </li>
+</ul>
+<p><strong>eg: 32位机器上存放 0x12345678 ，大小端模式存储如下：</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161537626.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416153752569" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161537626.png" /></a>     </p>
+</li>
+<li>
+<p><strong>RISC-V dose not require words to be aligned in memory</strong>   </p>
+<p><strong><code>RISC-V 不要求内存对齐</code></strong></p>
+<ul>
+<li><strong>words align: 一个字是 4 字节，我们要求字的起始地址一定要是 4 的倍数。</strong></li>
+</ul>
+<p>"Memory Alignment"
+<a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151634.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151634.png" width /></a>
+    <strong>第一个是对齐的，第二个是不对齐的。</strong></p>
+<ul>
+<li><strong>不对齐的好处是省空间, 缺点是有的变量无法一次性取出</strong></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Example "Memory Operand Example"</strong></p>
+</blockquote>
+<p>A[12] = h + A[8];</p>
+<p>(默认数组是双字的, h in <code>x21</code>, base address of A in <code>x22</code>)  </p>
+<p>翻译为 RISC-V 代码得到</p>
+<div class="highlight"><pre><span></span><code>ld x9, 64(x22)          // temporary register x9 get A[8]
+add x9, x21, x9
+sd x9, 96(x22)          // store
+</code></pre></div>
+<p>地址是以 byte 为单位，所以要偏移 <span class="arithmatex">\(8\times 8=64\)</span> bytes.  </p>
+<p><u><code>load</code> 和 <code>store</code> 是唯二可以访问存储器的指令。</u>  </p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161541010.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416154124966" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161541010.png" /></a></p>
+<p><strong>先计算偏移量，<span class="arithmatex">\(8 \times i\)</span>, 可以对<span class="arithmatex">\(i\)</span>直接左移三位</strong></p>
+<h3 id="233-registers-vs-memory">2.3.3 Registers vs. Memory<a class="headerlink" href="#233-registers-vs-memory" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Registers are faster to access than memory  寄存器更快</p>
+</li>
+<li>
+<p>Operating on memory data requires loads and stores   </p>
+<p><strong>对内存的操作需要store和load指令（）唯二能够访问内存</strong></p>
+</li>
+<li>
+<p>Compiler must use registers for variables as much as possible  </p>
+<p>编译器尽量使用寄存器存变量。只有在寄存器不够用时，才会把不太用的值放回内存。  </p>
+</li>
+</ul>
+<h3 id="234-constant-or-immediate-operands">2.3.4 Constant or Immediate Operands<a class="headerlink" href="#234-constant-or-immediate-operands" title="Permanent link">&para;</a></h3>
+<p><strong>Immediate</strong>: Other method for adding constant  </p>
+<ul>
+<li>
+<p>Avoids the load instruction  </p>
+</li>
+<li>
+<p>Offer versions of the instruction   </p>
+<p><strong><em>e.g.</em></strong> <code>addi x22, x22, 4</code>    </p>
+</li>
+<li>
+<p><strong><code>Design Principle 3 - Make the common case fast.</code></strong>    </p>
+</li>
+<li>
+<p>为什么内存是 <span class="arithmatex">\(2^{61}\)</span> 个 doublewords?  </p>
+<p>可以表示的地址有这么多，因为我们以 64 位寄存器为基址，可以表示的双字就是 <span class="arithmatex">\(2^{64}/2^3=2^{61}\)</span> (这里 <span class="arithmatex">\(2^3\)</span> 表示 8 个字节，即双字). 即我们的 <code>load</code> 指令可以访问的范围有这么大。   </p>
+</li>
+</ul>
+<h2 id="24-signed-and-unsigned-number">2.4 Signed and Unsigned Number<a class="headerlink" href="#24-signed-and-unsigned-number" title="Permanent link">&para;</a></h2>
+<p><center>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161544376.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161544376.png" width = 100%/></a> </div>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161544953.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161544953.png" width = 100%/></a> </div>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161544658.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161544658.png" width = 100%/></a> </div>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161544694.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161544694.png" width = 100%/></a> </div>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161545048.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161545048.png" width = 100%/></a> </div>
+   </center></p>
+<h2 id="25-representing-instructions-in-the-computer">2.5 Representing Instructions in the Computer<a class="headerlink" href="#25-representing-instructions-in-the-computer" title="Permanent link">&para;</a></h2>
+<p><center>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151409.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151409.png" width = 100%/></a> </div>
+   </center></p>
+<ul>
+<li>
+<p>All information in computer consists of binary bits.</p>
+</li>
+<li>
+<p>Instructions are encoded in binary  called <strong>machine code (机器码)</strong>  </p>
+</li>
+<li>
+<p>Mapping registers into numbers  </p>
+<p>0 for register <code>x0</code>, 31 for register <code>x31</code>. <strong>e.t.c.</strong>  </p>
+</li>
+<li>
+<p>RISC-V instructions   </p>
+<p>32 位指令编码。所有指令都是规则化的，即一部分是 opcode, 一部分是 operands 等等。  </p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161545337.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416154546296" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161545337.png" /></a></p>
+<p><strong><code>从右往左依次是： opcode rd fun3 rs1 rs2 fun7</code></strong></p>
+<blockquote>
+<p><strong>寄存器从右往左看 9 -&gt; 20 -&gt; 21</strong></p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><strong>"Summary of RISC-V architecture"</strong></p>
+</blockquote>
+<p><center>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151409.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151409.png" width = 100%/></a> </div>
+   </center></p>
+<h3 id="251-r-format">2.5.1 R-format<a class="headerlink" href="#251-r-format" title="Permanent link">&para;</a></h3>
+<div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202303181012740.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202303181012740.png" width = 75%/></a> </div>
+
+<ul>
+<li><em>opcode</em>: operaion code</li>
+<li><em>rd</em>: destination register number</li>
+<li><strong><em>funct3</em>: 3-bit function code(additional opcode)   **
+  </strong><code>例如，我们加法减法可以做成一个 opcode, 然后利用 funct3 进行选择。</code>**</li>
+<li><em>rs1/rs2</em>: the first/second source register number</li>
+<li><em>funct7</em>: 7-bit function code(additional opcode)  </li>
+</ul>
+<p>All instructions in RISC-V have the same length  </p>
+<p><u><strong>Design Principle 4 - Good design demands good compromises</strong></u></p>
+<h3 id="252-i-format">2.5.2 I-format<a class="headerlink" href="#252-i-format" title="Permanent link">&para;</a></h3>
+<div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202303181023683.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202303181023683.png" width = 75%/></a> </div>
+
+<ul>
+<li>
+<p>Immediate arithmetic and load instructions<br />
+<strong><em>e.g.</em></strong> <code>addi</code>, <code>ld</code>  </p>
+</li>
+<li>
+<p><em>rs1</em>: source or base address register number</p>
+</li>
+<li>
+<p><strong><em>immediate</em>: constant operand, or offset added to base address</strong>  </p>
+<p><strong>将 rs2, funct7 合并了，得到 12 位立即数</strong></p>
+</li>
+</ul>
+<h3 id="253-s-format">2.5.3 S-format<a class="headerlink" href="#253-s-format" title="Permanent link">&para;</a></h3>
+<div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202303181028726.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202303181028726.png" width = 75%/></a> </div>
+
+<ul>
+<li>
+<p><em>rs1</em>: <strong>base</strong> address register number</p>
+</li>
+<li>
+<p><em>rs2</em>: <strong>source</strong> opearand register number</p>
+</li>
+</ul>
+<p><strong><code>这边特别注意一下基址寄存器和源寄存器的位置，从右往左：opcode，基址寄存器，源寄存器</code></strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161557189.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416155711151" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161557189.png" /></a></p>
+<ul>
+<li>
+<p>immediate:  Split so that <em>rs1</em> and <em>rs2</em> fields always in the same place.  </p>
+</li>
+<li>
+<blockquote>
+<p><strong>不再需要rd，rd被imm[4:0]取代，前者为imm[11:5] 为7 bits</strong></p>
+<p><span class="arithmatex">\(S\_imm = {{20{inst[31]}}, inst[31:25], inst[11:7]}\)</span></p>
+</blockquote>
+</li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312207052.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331220731015" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312207052.png" /></a></p>
+<div class="highlight"><pre><span></span><code>A[30] = h + A[30] + 1
+h 在 x21
+base address of A is x10
+
+ld      x9, 240(x10)    // temporary reg x9 gets A[30]
+add     x9, x21,x9      // temporary reg x9 gets h + A[30]
+addi    x9, x9, 1       // temporary reg x9 gets h + A[30] + 1
+sd      x9, 240(x10)    // stores h + A[30] + 1 back into A[30]
+</code></pre></div>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312212073.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331221210046" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312212073.png" /></a></p>
+<blockquote>
+<p><span class="arithmatex">\(240 = 7 \times 32 + 16 = 0000111 \_ 10000_2\)</span></p>
+</blockquote>
+<p>Stored-Program</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312216876.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331221625841" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312216876.png" /></a></p>
+<ul>
+<li>
+<p>Instructions represented in binary, like data.  </p>
+</li>
+<li>
+<p>Instructions and data stored in memory.  </p>
+<p>指令和数据存储在内存中</p>
+</li>
+<li>
+<p>Programs can operate on programs. <strong><em>e.g.</em></strong> compiplers, linkers. </p>
+<p>程序可以对程序进行操作。例如，编译器、链接器。</p>
+</li>
+<li>
+<p>Binary compatibility allows compiled programs to work on different computers</p>
+<p>二进制兼容性允许编译的程序在不同的计算机上工作</p>
+</li>
+</ul>
+<h2 id="26-logical-operations">2.6 Logical Operations<a class="headerlink" href="#26-logical-operations" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>逻辑移位不管符号位，全部添加0.算数移位添加符号位</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Operation</th>
+<th>C</th>
+<th>Java</th>
+<th>RISC-V</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Shift left</td>
+<td>&lt;&lt;</td>
+<td>&lt;&lt;</td>
+<td><code>slli</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Shift right</td>
+<td>&gt;&gt;</td>
+<td>&gt;&gt;&gt;</td>
+<td><code>srli</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Bit-by-bit AND</td>
+<td>&amp;</td>
+<td>&amp;</td>
+<td><code>and, andi</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Bit-by-bit OR</td>
+<td>|</td>
+<td>|</td>
+<td><code>or, ori</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Bit-by-bit XOR</td>
+<td>^</td>
+<td>^</td>
+<td><code>xor, xori</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Bit-by-bit NOT</td>
+<td>~</td>
+<td>~</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><strong>bitwise NOT 要用异或实现（与全 F 异或）</strong>  </p>
+<h3 id="261-shift">2.6.1 Shift<a class="headerlink" href="#261-shift" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312221370.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331222138325" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312221370.png" /></a></p>
+<ul>
+<li>
+<p>I 型指令（immediate）</p>
+</li>
+<li>
+<p>为什么还有 <code>funct6</code>     ？</p>
+<p><strong>寄存器本身也就64位，不需要移位超过64次，所以6bit就能实现<span class="arithmatex">\(2^6-1 = 63\)</span>次移位操作，移动64位，相当于直接置为0</strong></p>
+</li>
+<li>
+<p><strong>左移 i 位相当于乘 <span class="arithmatex">\(2^i\)</span>, 右移 i 位相当于除 <span class="arithmatex">\(2^i\)</span>.</strong>  </p>
+</li>
+</ul>
+<blockquote>
+<p><strong>对于sll， <code>sll rd， rs1， rs2</code>，移动的位数存放在rs2，被移动的数存放在rs1，结果存放在rd</strong></p>
+</blockquote>
+<h3 id="262-and">2.6.2 AND<a class="headerlink" href="#262-and" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312225413.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331222535384" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312225413.png" /></a></p>
+<p><strong>Select some bits, clear others to 0</strong></p>
+<p><strong>It is bit-by-bit (bitwise-AND)</strong></p>
+<ul>
+<li><strong>Result=1 : both bits of the operands are 1</strong></li>
+</ul>
+<h3 id="263-or">2.6.3 OR<a class="headerlink" href="#263-or" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312226865.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331222633832" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312226865.png" /></a></p>
+<p><strong>Set some bits to 1, leave others unchanged</strong></p>
+<h3 id="264-xor">2.6.4 XOR<a class="headerlink" href="#264-xor" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312228911.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331222846884" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312228911.png" /></a></p>
+<p><strong>Set some bits to 1, leave others unchanged</strong></p>
+<h2 id="27-instructions-for-making-decisions">2.7 Instructions for making decisions<a class="headerlink" href="#27-instructions-for-making-decisions" title="Permanent link">&para;</a></h2>
+<h3 id="271-branc-instructions">2.7.1 Branc instructions<a class="headerlink" href="#271-branc-instructions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><code>beq reg1, reg2, Label</code>  </p>
+<p>相等则跳转</p>
+</li>
+<li>
+<p><code>bne reg1, reg2, Label</code>  </p>
+<p>不相等则跳转</p>
+</li>
+</ul>
+<p><center>
+    <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151910.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151910.png" width = 80%/></a> </div>
+</center></p>
+<blockquote>
+<p><strong>sd      x9, 240(x10)    // stores h + A[30] + 1 back into A[30]</strong></p>
+</blockquote>
+<p><strong>store 的立即数是作为数据的地址, beq 的立即数是作为运算的地址（加到 PC 上）因此二者的指令类型不同。</strong></p>
+<p><strong>跳转的范围有限制，因为立即数只有 12 位。（PC 相对寻址，以当前程序位置为基准前后跳）</strong>  </p>
+<p><center>
+    <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151945.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151945.png" width = 80%/></a> </div>
+</center></p>
+<p><strong>i 存放在 x22， k 存放在 x24， save{]数组基地址存放在 x25</strong></p>
+<p><code>add x10, x10, x25</code>计算的是<strong>数组元素的地址</strong>，还不是数组元素的值</p>
+<p><strong>所以还需要<code>load指令</code>将值取出来放置在<code>临时寄存器x9</code>中</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312239174.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331223933140" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312239174.png" /></a></p>
+<p><strong><code>blt: branch less than</code></strong></p>
+<p><strong><code>bge: branch greater  equal</code></strong></p>
+<ul>
+<li>
+<p><code>blt rs1, rs2, L1</code>  </p>
+<p>若 <code>rs1&lt;rs2</code> 则跳到 L1</p>
+</li>
+<li>
+<p><code>bge rs1, rs2, L1</code>  </p>
+<p>若 <code>rs1&gt;=rs2</code> 则跳到 L1</p>
+</li>
+</ul>
+<h3 id="272-slt-instruction">2.7.2 slt instruction<a class="headerlink" href="#272-slt-instruction" title="Permanent link">&para;</a></h3>
+<p><strong>set on if less than.</strong>    </p>
+<p><code>slt x2, x3, x4 # x2=1 if x3 &lt; x4</code>  </p>
+<p>R 型指令</p>
+<p><center>
+     <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151037.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151037.png" width = 80%/></a> </div>
+</center></p>
+<blockquote>
+<p><strong>可以用 slt + bne 实现 blt的功能</strong></p>
+</blockquote>
+<h3 id="273-signed-vs-unsigned">2.7.3 Signed vs. Unsigned<a class="headerlink" href="#273-signed-vs-unsigned" title="Permanent link">&para;</a></h3>
+<p>默认是有符号数进行比较  </p>
+<ul>
+<li>Signed comparison: <code>blt</code>, <code>bge</code></li>
+<li>Unsigned comparison: <code>bltu</code>, <code>bgeu</code></li>
+</ul>
+<p><strong><code>set on less than immediate</code></strong></p>
+<p><strong>slti ：Set on less than immediate</strong></p>
+<p><strong>sltiu ：Set on less than unsigned immediate</strong></p>
+<p>与立即数immediate进行比较</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312250677.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331225026635" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312250677.png" /></a></p>
+<p>边界检查：</p>
+<blockquote>
+<p><strong>关于使用bgeu同时实现 x20&gt;=x11 &amp; x20 &lt; 0</strong></p>
+</blockquote>
+<ul>
+<li>
+<p><code>bgeu x20, x21, IndexOutofBound</code>根据题目的要求，<span class="arithmatex">\(x20 &lt; 0  \ \&amp; \ x20 &gt;= x11\)</span>说明<span class="arithmatex">\(x11,x20\)</span>都是负数，那么此时的比较，完全可以转化为无符号数</p>
+</li>
+<li>
+<p>对于无符号数111….111最大，转化为有符号数也是最大</p>
+<p>无符号数从100000开始递增，有符号数也是从100000开始递增</p>
+<p><strong><code>这也就说明无符号数的大小关系可以迁移到有符号数</code></strong></p>
+</li>
+</ul>
+<h3 id="274-caseswitch">2.7.4 Case/Switch<a class="headerlink" href="#274-caseswitch" title="Permanent link">&para;</a></h3>
+<p><center>
+    <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151040.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151040.png" width = 80%/></a> </div></p>
+<div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312301395.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312301395.png" width = 80%/></a> </div>
+<div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312301365.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312301365.png" width = 100%/></a> </div>
+<p></center></p>
+<p><span class="arithmatex">\(x_6\)</span> 是跳转表的基地址，<span class="arithmatex">\(x_7\leftarrow x_6+8*k\)</span>  </p>
+<p><span class="arithmatex">\(x7\)</span>存放的是具体跳转的指令块的地址</p>
+<p><strong><code>jalr x1, 0(x7)</code>   I 型指令 把下一条指令的地址 PC+4<code>放入</code>x1<code>寄存器，随后跳向</code>[x7] + 0<code>的地方。</code></strong> </p>
+<blockquote>
+<p><strong>执行完jalr之后，能够根据 x1保存的PC+4返回到主程序</strong></p>
+</blockquote>
+<p><strong>这里我们 <code>jalr x0, 0(x1)</code> 因为我们不能改变 <code>x0</code>寄存器，所以这里仅用作占位，并没有实际存储返回地址。</strong></p>
+<h2 id="28-supporting-procedures-in-computer-hardware">2.8 Supporting Procedures in Computer Hardware<a class="headerlink" href="#28-supporting-procedures-in-computer-hardware" title="Permanent link">&para;</a></h2>
+<p><strong>Procedure/function</strong> --- be used to structure programs  </p>
+<p>为了完成特定任务。易于理解，可以复用。</p>
+<p>调用函数的步骤</p>
+<ol>
+<li>
+<p>Place Parameters in a place where the procedure can access them (in registers <code>x10~x17</code>)  </p>
+<p>将参数放在过程可以访问它们的位置（在寄 <code>x10~x17</code> 存器中）</p>
+</li>
+<li>
+<p>Transfer control to the procedure  </p>
+<p>将控制权转移到子程序上</p>
+</li>
+<li>
+<p>Acquire the storage resources needed for the procedure</p>
+<p>获取过程所需的存储资源</p>
+</li>
+<li>
+<p>Perform the desired task</p>
+</li>
+<li>
+<p>Place the result value in a place where the calling program can access it  </p>
+<p><strong>将结果值放在调用程序可以访问它的位置</strong> <code>x10~x17</code></p>
+</li>
+<li>
+<p>Return control to the point of origin (address in <code>x1</code>)</p>
+<p><strong>将控制权返回到原先的主程序（地址在 <code>x1</code> ）</strong></p>
+</li>
+</ol>
+<h3 id="281-procedure-call-instructions">2.8.1 Procedure Call Instructions<a class="headerlink" href="#281-procedure-call-instructions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Procedure <em>call</em></strong>: <strong>jump and link</strong>  </p>
+<p><code>jal x1, ProcedureLabel</code></p>
+<ul>
+<li>
+<p>Address of following instruction put in <code>x1</code></p>
+<p><strong>将下一条指令存放到x1，也就是PC+4</strong></p>
+</li>
+<li>
+<p>Jumps to target address</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Procedure <em>return</em></strong>: jump and link register  </p>
+<p><code>jalr x0, 0(x1)</code></p>
+<ul>
+<li>
+<p>Like jal, but jumps to <code>0 + address in x1</code></p>
+<p><strong>像 jal 一样，但跳到 <code>0 + address in x1</code></strong></p>
+</li>
+<li>
+<p>Use <code>x0</code> as rd (<code>x0</code> cannot be changed)</p>
+<p><strong>x0在此处相当于占位符，并不能发生更改</strong></p>
+</li>
+<li>
+<p>Can also be used for computed jump</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>不能用 <code>jal</code> 跳回来，跳进函数的地址的是固定的, Label 一定。但是跳回来的地址不一定，要用 <code>x1</code> 存储才能跳回。  </p>
+<blockquote>
+<p><strong>jal 和 jalr的区别在于：</strong></p>
+<p><strong>有没有使用寄存器来协助跳转到procedural。且两者跳转的范围不同，前者依靠立即数imm，后者依靠寄存器和imm调整大小</strong></p>
+</blockquote>
+<h3 id="282-using-more-registers">2.8.2 Using More Registers<a class="headerlink" href="#282-using-more-registers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Registers for procedure calling</p>
+<ul>
+<li>
+<p><code>x10~x17</code>(<code>a0~a7</code>): eight argument registers to pass parameters or return values  </p>
+<p>8 个参数寄存器，用于传递参数或返回值（进入函数时，传参；函数结束，返回结果）</p>
+</li>
+<li>
+<p><code>x1</code>: one return address register to return to origin point  </p>
+<p>一个返回<strong>地址寄存器</strong>，用于返回原先的主程序</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Stack：Ideal data structure for spilling registers</p>
+<ul>
+<li>Push, pop</li>
+<li>Stack pointer (<code>sp</code>): <code>x2</code> 指向栈顶，即最后一个有效数据所在的位置</li>
+</ul>
+</li>
+<li>
+<p>Stack grow from higher address to lower address  </p>
+<blockquote>
+<p><strong>堆栈从较高地址增长到较低地址</strong></p>
+<ul>
+<li>Push: <code>sp = sp - 8</code>向下移</li>
+<li>Pop: <code>sp = sp + 8</code>  向上移</li>
+</ul>
+</blockquote>
+<p><center>
+      <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312318977.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312318977.png" width = 80%/></a> </div>
+  <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312319101.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312319101.png" width = 80%/></a> </div>
+</center></p>
+</li>
+<li>
+<p>进行栈指针减24，相当于push三次</p>
+</li>
+<li>执行完成目标操作之后，按照镜像顺序，依次恢复x20，x6，x5.最后恢复栈指针</li>
+<li>跳转回主程序</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th>Register Name</th>
+<th>Usage</th>
+<th>Preserved or call?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">x0(zero)</td>
+<td>0</td>
+<td>The constant value 0</td>
+<td>n.a.</td>
+</tr>
+<tr>
+<td style="text-align: left;">x1(ra)</td>
+<td>1</td>
+<td>Return address(link register)</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x2(sp)</td>
+<td>2</td>
+<td>Stack pointer</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x3(gp)</td>
+<td>3</td>
+<td>Global pointer</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x4(tp)</td>
+<td>4</td>
+<td>Thread pointer</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x5-x7(t0-t2)</td>
+<td>5-7</td>
+<td>Temporaries</td>
+<td>no</td>
+</tr>
+<tr>
+<td style="text-align: left;">x8(s0/fp)</td>
+<td>8</td>
+<td>Saved/frame pointer</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x9(s1)</td>
+<td>9</td>
+<td>Saved</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x10-x17(a0-a7)</td>
+<td>10-17</td>
+<td>Arguments/results</td>
+<td>no</td>
+</tr>
+<tr>
+<td style="text-align: left;">x18-x27(s2-s11)</td>
+<td>18-27</td>
+<td>Saved</td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">x28-x31(t3-t6)</td>
+<td>28-31</td>
+<td>Temporaries</td>
+<td>no</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC</td>
+<td>-</td>
+<td>Auipc(Add Upper Immediate to PC)</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p><code>t0~t6</code> 临时寄存器，不需要在函数中保存 </p>
+</li>
+<li>
+<p><code>s0~s11</code> saved registers  </p>
+</li>
+</ul>
+<p><strong>标有 Preserved 表明我们需要在函数开始时保存该寄存器的值，并在离开函数前恢复寄存器的值。</strong>  </p>
+<div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312324579.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312324579.png" width = 80%/></a> </div>
+
+<h3 id="283-nested-procedure">2.8.3 Nested Procedure<a class="headerlink" href="#283-nested-procedure" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>non-leaf procedure ：在procedure中调用procedure</strong></p>
+<p><strong>eg: nested procedure 递归</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312327375.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331232733339" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312327375.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312329196.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331232936133" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312329196.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312329539.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331232944505" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312329539.png" /></a></p>
+<ol>
+<li>
+<p>先对栈指针进行操作，push两个数，sp -16，一个是返回的地址x1，一个是参数n</p>
+</li>
+<li>
+<p><strong>执行x5 = x10 - 1 = n - 1操作之后，要判断n是否小于1，反过来只需要判断x5是否大于等于0</strong></p>
+</li>
+<li>
+<p>如果x5 = 0的话，此时n=1，就直接返回1，恢复栈指针，跳转回主程序。</p>
+<p>否则，进入递归调用</p>
+</li>
+</ol>
+<p>对于递归程序L1：</p>
+<ol>
+<li>先计算 x10 = x10 - 1,如此便能够计算fact(n-1)</li>
+<li><strong>计算完成后，由于原先的n值通过x10被压入栈中，我们先用x6承接fact(n-1),再利用x10取出n，最后计算n * frac(n-1)</strong></li>
+<li>最后跳转回到主程序</li>
+</ol>
+<blockquote>
+<p><strong>在过程调用中保留内容：寄存器（saved）、堆栈指针寄存器（ sp ）、返回地址寄存器（ x1 ），堆栈指针上方的堆栈</strong></p>
+<p><strong>在过程调用中未保留内容，临时寄存器、参数寄存器（x10~x17）、返回值寄存器（ x10 ~ x17），堆栈指针下方</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312343772.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331234310725" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312343772.png" /></a></p>
+<p>Local Data on the Stack</p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312344909.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331234443867" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312344909.png" /></a></p>
+<p><code>Procedure frame and frame pointer ( x8 or fp )</code></p>
+<p><code>Global pointer ( x3 or gp )</code></p>
+<p><strong>一旦调用procedure，fp就会出现当前procedure的栈顶(<code>以fp为基准相对寻址</code>)</strong></p>
+<p><strong>在过程调用中用到的指针（例如存放过程的数组）双重作用，sp不停的push和pop，fp仅仅在需要使用过程中的变量时移动（以fp为基址，相对访问）</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312347063.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240331234722026" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312347063.png" /></a></p>
+<p>编译完成之后的程序结果</p>
+<ul>
+<li>text: 程序代码</li>
+<li>栈：自动分配，从上往下</li>
+<li>堆heap：动态分配，从下往上</li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404061647022.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240406164745786" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404061647022.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404061648020.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240406164811957" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404061648020.png" /></a></p>
+<h2 id="29-communicating-with-people">2.9 Communicating with People<a class="headerlink" href="#29-communicating-with-people" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Byte-encoded character sets  </p>
+<p><strong><em>e.g.</em></strong> ASCII, Latin-1</p>
+</li>
+<li>
+<p>Unicode: 32-bit character set  </p>
+<p><strong><em>e.g.</em></strong> UTF-8, UTF-16 </p>
+<p>编码中有不同长度的数据，因此也需要有不同长度的 load 和 store.  </p>
+</li>
+<li>
+<p>Load byte/halfword/word: <em><code>Sign extend</code></em> to 64 bits in rd    </p>
+</li>
+</ul>
+<p><strong>加载字节/半字/字：符号扩展到 rd 中的 64 位</strong></p>
+<div class="highlight"><pre><span></span><code>* `lb rd, offset(rs1)`
+* `lh rd, offset(rs1)`
+* `lw rd, offset(rs1)` 
+* `ld rd, offset(rs1)`
+</code></pre></div>
+<p>​                          </p>
+<blockquote>
+<p><strong>同样是取 A[4] 的值，不同的数据类型 offset 不同。<code>char</code> 为 4, <code>short int</code> 为 8, <code>int</code> 为 16.</strong>  </p>
+</blockquote>
+<ul>
+<li>
+<p>Load byte/halfword/word unsigned: <em><code>0 extend</code></em> to 64 bits in rd</p>
+<p><strong>加载字节/半字/字无符号：0 扩展到 rd 中的 64 位</strong></p>
+<ul>
+<li><code>lbu rd, offset(rs1)</code></li>
+<li><code>lhu rd, offset(rs1)</code></li>
+<li><code>lwu rd, offset(rs1)</code></li>
+</ul>
+</li>
+<li>
+<p>Store byte/halfword/word: Store rightmost 8/16/32 bits  </p>
+<p><strong>存储字节/半字/字：存储最右边的 8/16/32 位</strong></p>
+<ul>
+<li>
+<p><code>sb rs2, offset(rs1)</code></p>
+</li>
+<li>
+<p><code>sh rs2, offset(rs1)</code></p>
+</li>
+<li>
+<p><code>sw rs2, offset(rs1)</code>
+  存储就不需要考虑扩充问题，我们不做运算，只是把对应部分放到对应位置。</p>
+<p>offset 可以是 3. 因为 <strong>RISC-V 是可以不对齐</strong>的。（实际上 sh offset 一般是 2 的倍数, sw 是 4 的倍数）  </p>
+</li>
+</ul>
+</li>
+</ul>
+<p>字符串</p>
+<p><center>
+    <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404061650447.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404061650447.png" width = 80%/></a> </div>
+    <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403271013704.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403271013704.png" width = 80%/></a> </div>
+</center></p>
+<p>i 不应该分配给 s19, 分配给一个<strong>临时寄存器</strong>，就可以不用堆栈保存 s19 了。  </p>
+<p>对于一个 leaf procedure(不再调用其他 procedure) 编译器要<strong>尽可能用完所有的临时寄存器</strong>，再去用其他的寄存器。  </p>
+<p>为什么强调 leaf procedure? - 因为对于非 leaf 的函数，可能临时变量会被调用后的函数改变，这样就不能继续用了。</p>
+<h2 id="210-risc-v-addressing-for-32-bit-immediate-and-addresses">2.10 RISC-V Addressing for 32-Bit Immediate and Addresses<a class="headerlink" href="#210-risc-v-addressing-for-32-bit-immediate-and-addresses" title="Permanent link">&para;</a></h2>
+<h3 id="2101-wide-bit-immediate-addressing">2.10.1 Wide Bit Immediate addressing<a class="headerlink" href="#2101-wide-bit-immediate-addressing" title="Permanent link">&para;</a></h3>
+<p>如何将一个寄存器初始化为一个任意的立即数。</p>
+<p><code>lui rd, constant</code> 可以把 <strong>20 位的常数</strong>放到寄存器中。(U-type)</p>
+<div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202303232024157.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202303232024157.png" width = 70%/></a> </div>
+<div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202303232029410.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202303232029410.png" width = 70%/></a> </div>
+
+<p><strong>注意这里，我们会把立即数放入寄存器rd的 [31:12] 位，低位会填充为 0.</strong>  </p>
+<blockquote>
+<p><strong>Example "Loading a 32-bit constant"</strong></p>
+</blockquote>
+<p><center>
+    <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800354.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800354.png" width = 80%/></a> </div>
+</center></p>
+<p>我们最终想放入寄存器的值是 32 位常数 <code>0x003D0</code>. 先利用 <code>lui</code> 将高 20 位 976 放入寄存器中，随后利用<strong>加法指令加上 低 12 位</strong>，即 2304.  </p>
+<blockquote>
+<p><strong>但是此处存在问题， addi存在符号扩充，对于负数会前置加1，导致加法影响最终结果</strong></p>
+<p><strong>可以使用OR或者XOR，前面填充0       ori s3, s3, 2304</strong></p>
+<p><strong>或者新的方法:</strong></p>
+<p><strong>在已知加一个负数的情况下，需要一个数来对冲addi时的FFFFF…, 所以我们可以在lui操作的时候额外加上一个1，此时 00001000+FFFFF000 = 1_0000_0000,也就不会产生影响了</strong></p>
+</blockquote>
+<h3 id="2102-branch-addressing">2.10.2 Branch Addressing<a class="headerlink" href="#2102-branch-addressing" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>SB-type</strong></p>
+</blockquote>
+<div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404061659740.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404061659740.png"/></a> </div>
+
+<hr />
+<p><strong>func3用于区分跳转指令的跳转条件</strong></p>
+<ul>
+<li>
+<p>PC-relative addressing  </p>
+<p><span class="arithmatex">\(Target\ address = PC + Branch\ offset = PC + immediate \times 2\)</span>  </p>
+<p><strong><code>由于此处没有imm[0],默认最低位为0，所以offset = immediate x 2,相当于向左移动一位</code></strong></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>跳转的范围： 12bit -&gt; <span class="arithmatex">\(+-2^{12}\)</span>byte</strong>   理解为<strong>有符号数</strong>，<strong>第一位符号位，后续12位表示范围<span class="arithmatex">\(2^{12}\)</span></strong></p>
+</blockquote>
+<h3 id="2103-jump-addressing">2.10.3 Jump Addressing<a class="headerlink" href="#2103-jump-addressing" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>UJ-type(只有 <code>jal</code> 指令)，Jalr指令是I型指令</strong>  </p>
+</blockquote>
+<p><strong><code>可以观察到， 存在imm[20]作为符号位，imm[0]不存在，默认为0</code></strong></p>
+<p><strong>20-bit immediate for larger range, 低位默认补 0, 故实际表示立即数为 [20:0] 共 21 位。</strong> </p>
+<p><span class="arithmatex">\(Target\ address = PC + Branch\ offset = PC + immediate \times 2\)</span>  </p>
+<div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403271037608.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403271037608.png" width/></a> </div>
+
+<blockquote>
+<p><strong>imm[20] 表示符号位 ，跳转范围： <span class="arithmatex">\(20bits -&gt;2^{20}bytes = 1M\)</span></strong> </p>
+<p><strong>跳转范围最大的是 Jalr，（jalr x1, 0(x5)), 在寄存器x5中存放地址。I型指令</strong> </p>
+</blockquote>
+<div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403271052932.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403271052932.png" width = 80%/></a> </div>
+<div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403271051087.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403271051087.png" width = 80%/></a> </div>
+
+<p><strong>RISC-V 直接用 PC 算 offset, 而非 PC+4.</strong>  </p>
+<p><strong><code>观赏上表，会发现rd/offset部分是01100，此处大有玄机，分别对应imm[4:1], imm[11]</code></strong></p>
+<p><strong>bne指令的offset 是 0 0 000000 0110_0, 也就是 6 * 2 = 12</strong></p>
+<p><strong>beq指令的offset 是 1 1 111111 0110_0, 也就是 -10 * 2 = -20</strong></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404061948235.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240406194804199" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404061948235.png" /></a></p>
+<ul>
+<li>All RISC-V instructions are 4 bytes long RISC-V 指令占4个字节</li>
+<li>
+<p>PC-relative addressing refers to the number of halfwords 采用PC相对寻址</p>
+<p>While branch target is far away  </p>
+</li>
+<li>
+<p>Inserts an unconditional jump to target  </p>
+<p><strong>无条件跳转语句 jal 能比 branch语句 跳转的范围更广,jal的imm有20位</strong></p>
+<p>Invert the condition so that the branch decides whether to skip the jump.  </p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Example "Branching far away"</strong></p>
+</blockquote>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161637694.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416163706649" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161637694.png" /></a></p>
+<h3 id="2104-risc-v-addressing-summary">2.10.4 RISC-V Addressing Summary<a class="headerlink" href="#2104-risc-v-addressing-summary" title="Permanent link">&para;</a></h3>
+<p>寻址方式是指令集的核心区别。</p>
+<ul>
+<li><strong>立即数寻址</strong> <code>addi x5, x6, 4</code></li>
+<li><strong>寄存器寻址</strong> <code>add x5, x6, x7</code></li>
+<li><strong>基址寻址</strong> <code>ld x5,100(x6)</code></li>
+<li><strong>PC 相对寻址</strong> <code>beq x5,x6,L1</code></li>
+</ul>
+<p><center>
+    <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800960.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800960.png" width = 80%/></a> </div>
+</center>
+<a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638370.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416163805329" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638370.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638054.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416163812012" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638054.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638631.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416163818587" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638631.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161644959.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416164420919" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161644959.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638711.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416163825664" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638711.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151379.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240327110735932" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151379.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151398.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240327111046777" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151398.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151501.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240327111057377" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151501.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151424.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240327111108350" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151424.png" /></a></p>
+<p>把机器码翻译为汇编指令。</p>
+<ul>
+<li>
+<p>opcode  </p>
+<p>先看 opcode, 确定是哪类指令，随后就可以进行具体划分了。</p>
+</li>
+<li>
+<p>fun3和fun7</p>
+<p>再看fun3和fun7，决定具体的指令职能</p>
+<p><center>
+      <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800300.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800300.png" width = 80%/></a> </div>
+</center></p>
+</li>
+</ul>
+<h2 id="211-synchronization-in-risc-v">2.11 Synchronization in RISC-V<a class="headerlink" href="#211-synchronization-in-risc-v" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Two processors sharing an area of memory 两个处理器共享一个内存区域</p>
+<ul>
+<li>P1 writes, then P2 reads P1写入，然后P2读取</li>
+<li>Data race if P1 and P2 don’t synchronize 如果 P1 和 P2 不同步，<strong>则发生数据争用</strong><ul>
+<li>Result depends of order of accesses 结果取决于访问顺序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Hardware support required</p>
+<ul>
+<li><strong><code>Atomic read/write memory operation 原子读/写内存操作</code></strong></li>
+<li>No other access to the location allowed between the read and 
+  write <strong>读和写之间不允许对该位置进行其他访问</strong></li>
+</ul>
+</li>
+<li>
+<p>Could be a single instruction</p>
+<ul>
+<li>
+<p><strong>e.g.</strong><em> </em><em>atomic swap</em>* of register ↔ memory</p>
+<p>寄存器↔存储器的原子交换*</p>
+</li>
+<li>
+<p>Or an atomic pair of instructions</p>
+<p>或一对原子指令</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161649023.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416164420919" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161649023.png" /></a></p>
+<p>Load reserved: <code>lr.d rd,(rs1)</code>  </p>
+<p>把地址 rs1 的值放到寄存器 rd 中</p>
+<p>Store conditional: <code>sc.d rd,(rs1),rs2</code></p>
+<p>把寄存器 rs2 的值放入地址 rs1.  <strong>如果成功那么 rd 里面是 0</strong>. 如果上条指令 load 后，这个地方的值被改变了，那么就失败了，返回 0. </p>
+<blockquote>
+<p><strong>Example "atomic swap"</strong></p>
+</blockquote>
+<p><center>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800462.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800462.png" width = 80%/></a> </div>
+   </center></p>
+<ul>
+<li>
+<p><strong>将x20对应地址的值存入x10，x10 = memory[x20]</strong></p>
+</li>
+<li>
+<p><strong>将x23的值放到x20对应的地址， x11表示状态是否store成果，memory[x20] = x23</strong></p>
+</li>
+<li>
+<p>如果x11 等于 0， 说明此时 store 成功， 执行下一条语句，x23 = x10</p>
+<p><strong><code>总体实现，memory[x20]与x23值的交换</code></strong></p>
+</li>
+<li>
+<p>如果x11 不等于0， 则这个地方的值发生了更改，重新返回lr.d</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Example "lock"</strong></p>
+</blockquote>
+<p><center>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800456.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800456.png" width = 80%/></a> </div>
+   </center></p>
+<ul>
+<li><strong>第一步实现 <span class="arithmatex">\(x12 = x0 + 1 = 1\)</span></strong></li>
+<li><strong>x10 = memory[x20]</strong></li>
+<li><strong>判断 x10 是否为0，如果不为0，表示当前memory[x20]处存放着数据，有锁的存在，不能store</strong></li>
+<li><strong>如果x10 = 0，表示当前的锁是free的状态，能够进行store， x12 = memory[x20],用x11表示store的状态</strong></li>
+<li><strong>如果x11 = 0表示store失败，重新会again。如果x11 = 1表示store成功</strong></li>
+<li><strong>解锁只需要x20对应地址存放的数据为0</strong></li>
+</ul>
+<p><strong>地址 x20 放的是锁，如果锁为 0, 说明我们现在可以存入数据，则我们获得锁随后存入，并释放锁（将锁的值置为0）。否则需要等锁释放了才能存。</strong></p>
+<h2 id="212-translating-and-starting-a-program">2.12 Translating and starting a program<a class="headerlink" href="#212-translating-and-starting-a-program" title="Permanent link">&para;</a></h2>
+<div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202303232334888.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202303232334888.png" width /></a> </div>
+
+<p>Linker 可以用于连接库函数，多文件编程</p>
+<blockquote>
+<p><strong>Producing an Object Module</strong></p>
+</blockquote>
+<p>Provides information for building a complete program from the pieces(Header).  </p>
+<div align=center> <a class="glightbox" href="http://cdn.hobbitqia.cc/202303232336810.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="http://cdn.hobbitqia.cc/202303232336810.png" width = 60%/></a> </div>
+
+<ul>
+<li>Text segment: translated instructions</li>
+<li>Static data segment: data allocated for the life of the program</li>
+<li>Relocation info: for contents that depend on absolute location of loaded program</li>
+<li>Symbol table: global definitions and external refs</li>
+<li>Debug info: for associating with source cod</li>
+</ul>
+<blockquote>
+<p><strong>Link</strong></p>
+</blockquote>
+<p>Object modules(including library routine) <span class="arithmatex">\(\rightarrow\)</span> executable program</p>
+<ul>
+<li>Place code and data modules symbolically in memory</li>
+<li>Determine the addresses of data and instruction labels</li>
+<li>Patch both the internal and external references (Address of invoke)</li>
+</ul>
+<blockquote>
+<p><strong>Loading a Program</strong></p>
+</blockquote>
+<p>Load from image file on disk into memory</p>
+<ol>
+<li>Read header to determine segment sizes</li>
+<li>Create virtual address space</li>
+<li>Copy text and initialized data into memory<br />
+   Or set page table entries so they can be faulted in</li>
+<li>Set up arguments on stack</li>
+<li>Initialize registers (including sp, fp, gp)</li>
+<li>Jump to startup routine<br />
+   Copies arguments to x10, … and calls main
+   pWhen main returns, do exit syscall</li>
+</ol>
+<blockquote>
+<p><strong>Dynamic Linking</strong></p>
+</blockquote>
+<p>Only link/load library procedure when it is called.  </p>
+<p>静态链接已经编入文件了，<strong>动态链接是在运行时链接，可以用到最新的代码</strong>  </p>
+<ul>
+<li>Requires procedure code to be relocatable</li>
+<li>Avoids image bloat caused by static linking of all 
+  (transitively) referenced libraries</li>
+<li>Automatically picks up new library versions 自动获取新的库版本</li>
+</ul>
+<h2 id="213--a-c-sort-example-to-put-it-all-together">2.13  A C Sort Example To Put it All Together<a class="headerlink" href="#213--a-c-sort-example-to-put-it-all-together" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">swap</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">v</span><span class="p">[],</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">    </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>转换成RISC-V指令</p>
+<div class="highlight"><pre><span></span><code>// register alloction for swap
+// v——x10，k——x11，temp——x5
+swap:   slli x6, x11, 3     // x6 = k * 8
+        add  x6, x10, x6        // x6 = v + (k * 8) 是 v[k]的地址
+        ld   x5, 0(x6)      // x5 = v[k]
+        ld   x7, 8(x6)      // x7 = v[k+1]
+        sd   x7, 0(x6)      // 将v[k+1]保存到x6对应的地址，也就是v[k] = v[k+1]
+        sd   x5, 8(x6)      // 将v[k]保存到x6+8对应的地址，也就是v[k+1] = v[k]
+        jalr x0, 0(x1)      // return to calling routine
+</code></pre></div>
+<p><center>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404062124890.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404062124890.png" width = 80%/></a> </div>
+ </center>
+<div class="highlight"><pre><span></span><code># v - x10   n-x11   i-x19   j-x20
+# saving registers
+sort:
+    addi    sp, sp, -40
+    sd      x1, 32(sp)          # return address
+    sd      x22, 24(sp)
+    sd      x21, 16(sp)
+    sd      x20, 8(sp)
+    sd      x19, 0(sp)
+
+# procedure body
+    mv      x21, x10            # x21 = x10 = v
+    mv      x22, x11            # x22 = x11 = n
+# outer loop
+    li      x19, 0              # x19 = i = 0
+for1test:
+    bge     x19, x22, exit1     # i 与 n 进行比较
+# inner loop
+    addi    x20, x19, -1        # j = i - 1
+for2test:
+    blt     x20, x0, exit2      # j 与 0 进行比较
+    slli    x5, x20, 3          # x5 = j * 8
+    add     x5, x21, x5         # x5 = v + j * 8 也就是v[j]的地址
+    ld      x6, 0(x5)           # x6 = v[j]
+    ld      x7, 8(x5)           # x6 = v[j+1]
+    blt     x6, x7, exit2       # 如果v[j] &lt; v[j+1],说明v[j+1]之前都有序
+    # v[j] &gt; v[j+1]
+    mv      x10,x21             # x10 = x21 = v
+    mv      x11,x20             # x11 = x20 = j
+    jal     x1, swap    
+    # inner loop
+    addi x20, x20, -1           # j = j -1
+    j for2test                  # 返回到循环2 for2test
+
+exit2:
+    addi    x19, x19, 1         # i = i + 1
+    j       for1test            # 返回到循环1 for1test
+
+exit1:
+    ld      x19, 0(sp)
+    ld      x20, 8(sp)
+    ld      x21, 16(sp)
+    ld      x22, 24(sp)
+    ld      x1, 32(sp)
+    addi    sp, sp, 40  
+    jalr    x0, 0(x1)           # return to calli
+</code></pre></div></p>
+<h2 id="214-arrays-versus-pointers">2.14 Arrays versus Pointers<a class="headerlink" href="#214-arrays-versus-pointers" title="Permanent link">&para;</a></h2>
+<p>指针是可以改变的，但是数组首地址不能改变，因此翻译成汇编的结果也有所不同。</p>
+<p>Example "Clearing an Array"
+ <center>
+        <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151505.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151505.png" width = 80%/></a> </div>
+ </center></p>
+<p>上述代码的实现要求size &gt;= 1,因为都是先进行运算，再进行边界检查</p>
+<p>遍历数组元素——索引（索引+1）或者指针（地址+8）</p>
+<p><strong><code>可以看到指针运算的效率更高</code></strong></p>
+<h2 id="215-summary">2.15 Summary<a class="headerlink" href="#215-summary" title="Permanent link">&para;</a></h2>
+<p>寻址方式是指令集的核心区别。</p>
+<ul>
+<li><strong>立即数寻址</strong> <code>addi x5, x6, 4</code></li>
+<li><strong>寄存器寻址</strong> <code>add x5, x6, x7</code></li>
+<li><strong>基址寻址</strong> <code>ld x5,100(x6)</code></li>
+<li><strong>PC 相对寻址</strong> <code>beq x5,x6,L1</code></li>
+</ul>
+<p><center>
+    <div align=center> <a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800960.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403180800960.png" width = 80%/></a> </div>
+</center></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638370.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416163805329" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638370.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638054.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416163812012" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638054.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638631.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416163818587" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638631.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638711.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240416163825664" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202404161638711.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151379.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240327110735932" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151379.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151398.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240327111046777" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151398.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151501.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240327111057377" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151501.png" /></a></p>
+<p><a class="glightbox" href="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151424.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20240327111108350" src="https://zn-typora-image.oss-cn-hangzhou.aliyuncs.com/typora_image/202403312151424.png" /></a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy 2024 rescuerz
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../supports/js/xlink.js"></script>
+      
+        <script src="../../supports/js/katex.js"></script>
+      
+        <script src="https://jsd.cdn.zzko.cn/npm/katex@0.16.4/dist/katex.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
