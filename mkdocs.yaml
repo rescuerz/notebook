@@ -129,6 +129,15 @@ nav:
           - DB/14. Concurrency Control.md
           - DB/15. Recovery System.md
 
+      - 计算机组成与设计:
+          - CO/index.md
+          - CO/1. Introduce.md
+          - CO/2. Instructions Language of the Computer.md
+          - CO/3. Arithmetic for Computer.md
+          - CO/4. The Processor.md
+          - CO/5. Large and Fast Exploiting Memory Hierarchy.md
+          - CO/6. Storage, Networks and Other Peripherals.md
+
   - Artificial Intelligence:
       - Computer Vision:
           - CV/index.md
