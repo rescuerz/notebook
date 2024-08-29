@@ -2,13 +2,13 @@
     - "2024-8-25":
         - newpage:
             text: Artificial Intelligence > Computer Vision
-            href: /CV
+            href: /notebook/CV
 
     - "2024-8-26":
         - newpage:
             text: Systems > Database
-            href: /DB
+            href: /notebook/DB
     - "2024-8-27":
         - newpage:
             text: Systems > Computer Organization
-            href: /CO
+            href: /notebook/CO
