@@ -8,3 +8,7 @@
         - newpage:
             text: Systems > Database
             href: /DB
+    - "2024-8-27":
+        - newpage:
+            text: Systems > Computer Organization
+            href: /CO
